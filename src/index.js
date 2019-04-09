@@ -1,6 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
+import ThreeDimensionTest from './show/ThreeDimensionTest';
 
 render(
-<div>iDea - steamhungary latest application</div>  
-, document.querySelector('#root') );
+  <ThreeDimensionTest />
+  , document.getElementById('root')
+);
