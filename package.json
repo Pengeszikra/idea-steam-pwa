@@ -3,7 +3,7 @@
   "description": "base pwa application setup",
   "version": "0.1.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --progress --hot --inline --mode none"

@@ -4,20 +4,57 @@ body, html {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 300;
     font-size: 12px;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    padding: 1em;
+    margin: 0;
+    padding: 0;
     display: block;
     position: relative;
 }
 
 button, .link {
     border: none;
-    background: yellowgreen;
+    background: rgb(173, 160, 83);
     color: black;
     border-radius: .3em;
     padding: 1em;
     margin: .3em;
     text-decoration: none;
+    flex: 1 0 auto;
+}
+
+.appFrame {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header, .buttonLine {
+    height: 4em;
+    line-height: 4em;
+    background: #444;
+    display: flex;
+
+    span {
+        flex: 1 0 auto;
+        text-align: center;
+    }
+}
+
+.contentFrame {
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+
+.markdownFrame {
+    margin: 1em;
 }

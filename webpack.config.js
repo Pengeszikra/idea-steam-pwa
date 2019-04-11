@@ -1,9 +1,22 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const WebpackModules = require("webpack-modules");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-// const WebpackPwaManifest = require('webpack-pwa-manifest');
-// const ZipFilesPlugin = require('webpack-zip-files-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ZipFilesPlugin = require('webpack-zip-files-plugin');
+
+const config = {
+  APP_NAME: 'iDea',
+  SHORT_NAME: 'iDea',
+  PWA_ICON: 'pwa-icon-idea.png',
+  projectDescription: 'Geometriai feladványokkal tűzdelt játékos applikáció a Platón barlangjában.',
+}
+
+const manifestData = {
+  background_color: "#030303",
+  display: "fullscreen",
+  orientation: "portrait",
+}
 	
 module.exports = {
   module: {
@@ -47,5 +60,26 @@ module.exports = {
       template: 'src/index.html',
     }),
     new WebpackModules(),
+    new WebpackPwaManifest({
+      filename: 'manifest.json',
+      fingerprints: true,
+      name: config.APP_NAME,
+      short_name: config.SHORT_NAME,
+      description: config.projectDescription,
+      background_color: manifestData.background_color,
+      display: manifestData.display,
+      orientation: manifestData.orientation,
+      theme_color: manifestData.background_color,
+      'theme-color': manifestData.background_color,
+      start_url: './index.html',
+      /*
+      icons: [
+        {
+          src: './img/_icons/' + config.PWA_ICON,
+          sizes: [96, 128, 192, 256, 384, 512],
+        }
+      ]
+      */
+    }),	
   ]
 };

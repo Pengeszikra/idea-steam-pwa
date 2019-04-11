@@ -8,11 +8,12 @@ import Cave from './caves/Cave';
 const rootRender = content => render(content, document.getElementById('root'));
 import Header from './layouts/Header'
 import ButtonLine from './layouts/ButtonLine'
+import Content from './layouts/Content'
 
 rootRender(
-  <main>
-    <Cave url="/document/idea.md" />
+  <main className="appFrame">
     <Header />
+    <Content />
     <ButtonLine />
   </main>  
 );
