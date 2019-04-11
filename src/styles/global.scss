@@ -1,0 +1,23 @@
+body, html {
+    background: #333;
+    color: #999;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+main {
+    padding: 1em;
+    display: block;
+    position: relative;
+}
+
+button, .link {
+    border: none;
+    background: yellowgreen;
+    color: black;
+    border-radius: .3em;
+    padding: 1em;
+    margin: .3em;
+    text-decoration: none;
+}
