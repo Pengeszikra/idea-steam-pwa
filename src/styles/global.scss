@@ -20,8 +20,8 @@ button, .link {
     background: rgb(173, 160, 83);
     color: black;
     border-radius: .3em;
-    padding: 1em;
-    margin: .3em;
+    padding: .7em;
+    margin: .5em;
     text-decoration: none;
     flex: 1 0 auto;
 }
@@ -47,6 +47,22 @@ button, .link {
         flex: 1 0 auto;
         text-align: center;
     }
+}
+
+.avatar {
+    margin-left: 5em;
+}
+
+.avatar:before {
+    content: "";
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 4px rgb(173, 160, 83);
+    background: #333;
+    width: 5em;
+    height: 5em;
+    position: absolute;
+    top: .3em;
+    left: 1em;
 }
 
 .contentFrame {

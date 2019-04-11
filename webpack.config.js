@@ -5,6 +5,7 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
 
+const path = require('path');
 const config = {
   APP_NAME: 'iDea',
   SHORT_NAME: 'iDea',
@@ -72,14 +73,12 @@ module.exports = {
       theme_color: manifestData.background_color,
       'theme-color': manifestData.background_color,
       start_url: './index.html',
-      /*
       icons: [
         {
-          src: './img/_icons/' + config.PWA_ICON,
+          src: path.resolve('./assets/img/icons/' + config.PWA_ICON),
           sizes: [96, 128, 192, 256, 384, 512],
         }
       ]
-      */
     }),	
   ]
 };
