@@ -1,21 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import Header from './Header';
 import ButtonLine from './ButtonLine';
 import Content from './Content';
-import useReducerObject from '../hooks/useReducerObject';
-import { scoreLookup } from '../flow/action';
+import { scoreReducer } from '../flow/action';
 
 export default () => {
   const [route, setRoute] = useState('intro');
-  const {dispatch, state:{score, saved}} = useReducerObject(scoreLookup, {
-    score: 0,
-    saved: 0,
-    level: 1,
-  });
-
+  const {dispatch, state} = useReducer(scoreReducer, {score: 0, saved: 0, level: 1});
+  
   return (
     <main className="appFrame">
-      <Header score={score} saved={saved}/>
+      <Header score={100} saved={1}/>
       <Content route={route} />
       <ButtonLine setRoute = {setRoute} />
     </main>  

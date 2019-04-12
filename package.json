@@ -1,6 +1,6 @@
 {
-  "name": "pwa-hook-frame",
-  "description": "base pwa application setup",
+  "name": "idea-pwa",
+  "description": "Geometrical quiz games inside of Platon cave",
   "version": "0.1.0",
   "main": "index.js",
   "license": "ISC",
