@@ -23,6 +23,7 @@ export default ({route}) => {
 
   return (
     <div className="contentFrame">
+      <CaveRoute path={'idea'} url={'/document/idea.md'} />
       <CaveRoute path={'intro'} url={'/document/intro.md'} />
       <CaveRoute path={'level'} url={'/document/levelSelector.md'} />
       {caveNumbers.map((path, key) => <CaveRoute key={key} path={path} url={`/document/cave.${path}.md`} />)}

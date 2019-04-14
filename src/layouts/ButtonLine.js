@@ -5,10 +5,10 @@ export default ({setRoute}) => {
 
   return (
     <div className="buttonLine">
-      <button className="map" onClick={handleRoute(2.2)}>Map</button>
-      <button className="saved" onClick={handleRoute(2.3)}>Saved</button>
-      <button className="inventory" onClick={handleRoute(2.4)}>Inventory</button>
-      <button className="history" onClick={handleRoute(2.11)}>History</button>
+      <button className="map" onClick={handleRoute('idea')}>Térkép</button>
+      <button className="saved" onClick={handleRoute(2.3)}>Megmentettek</button>
+      <button className="inventory" onClick={handleRoute(2.4)}>Felszerelés</button>
+      <button className="history" onClick={handleRoute('intro')}>Történet</button>
     </div>
   )
 }

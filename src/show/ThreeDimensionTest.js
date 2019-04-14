@@ -9,11 +9,12 @@ export default function ({canvasOpacity = true}) {
   useLayoutEffect(()=>{setData({isMounted:true})}, [mount]);
 
   function makeBox( w , h , d , color, opacity = 1 ) {
-    const geom = new THREE.BoxGeometry( w , h , d, 1, 1, 1 );
+    const geom = new THREE.BoxGeometry( w , h , d, 1, 1, 1 );    
       geom.translate( 0 , 0 , d/2 );
     const flatShading = THREE.FlatShading;
     const transparent = opacity < 1;
-    const mat = new THREE.MeshPhongMaterial( {color, flatShading, opacity , transparent } );
+    const mat = new THREE.MeshBasicMaterial( {color, flatShading, opacity , transparent } );
+    //const mat = new THREE.LineBasicMaterial({color: 0x4080ff })
     return new THREE.Mesh( geom, mat );
   }
 
@@ -31,6 +32,7 @@ export default function ({canvasOpacity = true}) {
       camera.updateProjectionMatrix()
     const renderer = new THREE.WebGLRenderer( { antialias: true, canvas: mount.current, alpha:true } );
       renderer.setSize(clientWidth, clientHeight);
+      renderer.setClearColor(0,0);
 
     if (!canvasOpacity) {
       const backgroundColor = 0x7799AA;
@@ -64,7 +66,7 @@ export default function ({canvasOpacity = true}) {
       hasPlay && requestAnimationFrame(animate);
     };
 
-    const boxMoving = setInterval( _ => box.rotateY( 3/RAD ) , 22 );
+    const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 30 );
 
     animate();
     
@@ -74,13 +76,21 @@ export default function ({canvasOpacity = true}) {
     };
   }, []);
 
+  const canvasStyle = {
+    position:'absolute', 
+    background:'transparent', 
+    width:'50vw', 
+    height:'50vh', 
+    top:'10vh', 
+    right:0 
+  };
 
   return (
     <div>
       <canvas 
-        class="nosel"
+        className="nosel"
         ref={mount} 
-        style={{position:'absolute', background:'#333', width:'100vw', height:'100vh'}}
+        style={canvasStyle}
         onContextMenu={event=>event.preventDefault()}
       />
     </div>    
