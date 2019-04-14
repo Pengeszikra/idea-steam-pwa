@@ -5,7 +5,7 @@ export default ({score, saved, avatarName = 'Adeimantosz'}) => {
   
   return (
     <div className="header">
-      <span className="avatar avatar-level-1">{avatarName}</span>
+      <span className="avatar avatar-level-1"></span>
       <span className="score"><b>pont:</b>{score}</span>
       <span className="saved"><b>megmentett:</b>{saved}</span>
       <span className="timer"><b>idő:</b>{time}</span>

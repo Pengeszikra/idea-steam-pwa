@@ -15,9 +15,9 @@ export default () => {
   return (
     <main className="appFrame">
       <Header score={100} saved={1}/>
-      <Content route={route} />
+      <Content route={route} setRoute={setRoute} />
       <ButtonLine setRoute = {setRoute} />
-      <ThreeDimensionTest />
+      {/* <ThreeDimensionTest /> */}
     </main>  
   );
 }
