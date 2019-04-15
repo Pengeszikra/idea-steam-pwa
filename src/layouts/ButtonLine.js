@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default ({setRoute}) => {
-  const handleRoute = path => setRoute(path);
+export default ({handleRoute}) => {  
 
   return (
     <div className="buttonLine">

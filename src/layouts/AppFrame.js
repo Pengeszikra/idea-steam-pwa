@@ -2,21 +2,21 @@ import React, {useState, useEffect, useReducer} from 'react';
 import Header from './Header';
 import ButtonLine from './ButtonLine';
 import Content from './Content';
-import { scoreReducer, changeRoute } from '../flow/action';
+import { changeRoute, scoreReducer, scoreInitial, achiveScore } from '../flow/action';
 import ThreeDimensionTest from '../show/ThreeDimensionTest';
 
 export default () => {
-  const [{route}, dispatch] = useReducer(scoreReducer, {score: 0, saved: 0, level: 1, route:2.8});
-  const setRoute = path => event => {
-    console.log(path)
+  const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);
+  const handleRoute = path => event => {
     dispatch(changeRoute(path))
+    dispatch(achiveScore(path * 100 || 0))
   };
 
   return (
     <main className="appFrame">
-      <Header score={100} saved={1}/>
-      <Content route={route} setRoute={setRoute} />
-      <ButtonLine setRoute = {setRoute} />
+      <Header score={score} saved={saved} />
+      <Content route={route} handleRoute={handleRoute} />
+      <ButtonLine handleRoute = {handleRoute} />
       {/* <ThreeDimensionTest /> */}
     </main>  
   );
