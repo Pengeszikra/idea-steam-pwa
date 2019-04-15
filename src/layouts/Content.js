@@ -5,10 +5,10 @@ import { useScoreReducer, achiveScore } from '../flow/action';
 const caveNumbers = [
   ['intro', 1.1],
   [1.1, 2.1],
-  [2.1, 2.2],  
-  [2.2, 2.3],
-  [2.3, 2.4],
-  [2.4, 2.5],
+  [2.1, 2.2, 2.3, 2.4],  
+  [2.2, 2.3, 2.4, 2.1, 2.5, 2.6, 2.7, 2.8],
+  [2.3, 2.4, 2.1, 2.2],
+  [2.4, 2.5, 2.6, 2.7, 2.8],
   [2.5, 2.6],
   [2.6, 2.7],
   [2.7, 2.8],
@@ -24,10 +24,10 @@ const caveNumbers = [
 
 export default ({route, handleRoute}) => {
   const CaveButton = ({to}) => <button className="map" onClick={handleRoute(to)}>{`cave: ${to}`}</button>
-  const CaveRoute = ({path, nextPath, ...props}) => route === path ? (
+  const CaveRoute = ({path, nextPath = [], ...props}) => route === path ? (
     <>
       <Cave {...props} />
-      <CaveButton to={nextPath} />
+      {nextPath.map(to => <CaveButton to={to} />)}
     </>
   ) : null;
   const Route = ({path, children}) => route === path ? <>{children}</> : null;    
@@ -43,7 +43,7 @@ export default ({route, handleRoute}) => {
       <CaveRoute path={'intro'} url={'/document/intro.md'} />
       <CaveRoute path={'level'} url={'/document/levelSelector.md'} />
       <CaveRoute path={'finale'} url={'/document/.md'} />
-      {caveNumbers.map((path, key) => <CaveRoute key={key} path={path[0]} nextPath={path[1]}  url={`/document/cave.${path[0]}.md`} />)}
+      {caveNumbers.map(([path, ...rest], key) => <CaveRoute key={key} path={path} nextPath={rest}  url={`/document/cave.${path}.md`} />)}
     </div>
   );
 }
