@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Cave from '../caves/Cave';  
 import { useScoreReducer, achiveScore } from '../flow/action';
+import Inventory from '../show/Inventory';
 
 const caveNumbers = [
   ['intro', 1.1],
@@ -27,7 +28,7 @@ export default ({route, handleRoute}) => {
   const CaveRoute = ({path, nextPath = [], ...props}) => route === path ? (
     <>
       <Cave {...props} />
-      {nextPath.map(to => <CaveButton to={to} />)}
+      {nextPath.map((to, key) => <CaveButton to={to} key={key} />)}
     </>
   ) : null;
   const Route = ({path, children}) => route === path ? <>{children}</> : null;    
@@ -43,6 +44,9 @@ export default ({route, handleRoute}) => {
       <CaveRoute path={'intro'} url={'/document/intro.md'} />
       <CaveRoute path={'level'} url={'/document/levelSelector.md'} />
       <CaveRoute path={'finale'} url={'/document/.md'} />
+      <Route path={'inventory'}>
+        <Inventory />
+      </Route>
       {caveNumbers.map(([path, ...rest], key) => <CaveRoute key={key} path={path} nextPath={rest}  url={`/document/cave.${path}.md`} />)}
     </div>
   );

@@ -1,0 +1,29 @@
+import React, {useState, useEffect, useRef} from 'react';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import DraggableCard from './DraggableCard';
+
+const targetAreaStyle = {
+  width: 200,
+  height: 200,
+  background: '#444',
+  margin: '1em',
+  display: 'inline-block',
+}
+
+const TargetArea = ({id}) => {
+  return <div style={targetAreaStyle} id={id} ></div>;
+};
+
+export default () => (
+  <DragDropContextProvider backend={HTML5Backend}>
+    <section style={{margin: '2em'}}>
+      <h1>Drag and Drop test page</h1>
+      <p>Veri important feauture for any application is drag and drop</p> 
+      <TargetArea id={1} />
+      <TargetArea id={2} />
+      <DraggableCard />
+      <DraggableCard />
+    </section>
+  </DragDropContextProvider>
+)
