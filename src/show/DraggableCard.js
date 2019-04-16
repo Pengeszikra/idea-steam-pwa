@@ -34,3 +34,5 @@ export default ({id, children}) => {
 // react-beautiful-dnd
 // maybe better alternative - or just doit myself
 // https://github.com/atlassian/react-beautiful-dnd
+
+// https://www.npmjs.com/package/react-drag-and-drop
