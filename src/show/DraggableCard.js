@@ -7,11 +7,12 @@ const cardStyle = {
   background: '#777',
   margin: '1em',
   display: 'inline-block',
+  color: '#444'
 }
 
-const draggedStyle = {...cardStyle, background:'#222' }
+const draggedStyle = {...cardStyle, background:'#222', color: 'transparent' }
 
-export const CARD = 'card';
+const CARD = 'card';
 
 const cardSource = {
   beginDrag({id}) {
@@ -36,9 +37,11 @@ const collect = (connect, monitor) => (
   }
 );
 
-const Card = ({id, isDragging, connectDragSource}) => connectDragSource(
-  <div style={isDragging ? draggedStyle : cardStyle} id={id} />
+const Card = ({id, isDragging, connectDragSource, children}) => connectDragSource(
+  <div style={isDragging ? draggedStyle : cardStyle} id={id}>{children}</div>
 )
 
 // Export the wrapped version
 export default DragSource(CARD, cardSource, collect)(Card);
+
+// 

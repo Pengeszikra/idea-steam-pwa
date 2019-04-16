@@ -9,11 +9,32 @@ const targetAreaStyle = {
   background: '#444',
   margin: '1em',
   display: 'inline-block',
+  position: 'relative',
 }
+
+const cardInfoStyle = { position:'absolute', margin:'1em' };
+const infoStyleDragged = {...cardInfoStyle};
+
+const CARD = 'card';
 
 const TargetArea = ({id}) => {
   return <div style={targetAreaStyle} id={id} ></div>;
 };
+
+const areaTarget = {  
+  drop(props, monitor) { console.log(props) },
+  canDrop(props) { return true },
+}
+
+const collect = (connect, monitor) => (
+  {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  }
+);
+
+const Info = ({children}) => <div style={cardInfoStyle}>{children}</div>;
 
 export default () => (
   <DragDropContextProvider backend={HTML5Backend}>
@@ -22,8 +43,10 @@ export default () => (
       <p>Veri important feauture for any application is drag and drop</p> 
       <TargetArea id={1} />
       <TargetArea id={2} />
-      <DraggableCard />
-      <DraggableCard />
+      <DraggableCard id={323}><Info>alfa</Info></DraggableCard>
+      <DraggableCard id={243}><Info>beta</Info></DraggableCard>
+      <DraggableCard id={673}><Info>gamma</Info></DraggableCard>
+      <DraggableCard id={924}><Info>delta</Info></DraggableCard>      
     </section>
   </DragDropContextProvider>
 )
