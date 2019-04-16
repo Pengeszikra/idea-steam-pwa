@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import DraggableCard from './DraggableCard';
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd';
+const { useDragLayer } = dnd;
 
 const targetAreaStyle = {
   width: 200,
@@ -37,7 +37,6 @@ const collect = (connect, monitor) => (
 const Info = ({children}) => <div style={cardInfoStyle}>{children}</div>;
 
 export default () => (
-  <DragDropContextProvider backend={HTML5Backend}>
     <section style={{margin: '2em'}}>
       <h1>Drag and Drop test page</h1>
       <p>Veri important feauture for any application is drag and drop</p> 
@@ -48,5 +47,4 @@ export default () => (
       <DraggableCard id={673}><Info>gamma</Info></DraggableCard>
       <DraggableCard id={924}><Info>delta</Info></DraggableCard>      
     </section>
-  </DragDropContextProvider>
 )

@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { DragSource } from 'react-dnd';
+import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd';
+const { useDrag } = dnd;
 
 const cardStyle = {
   width: 150,
@@ -7,41 +8,25 @@ const cardStyle = {
   background: '#777',
   margin: '1em',
   display: 'inline-block',
-  color: '#444'
+  color: '#222'  
 }
 
 const draggedStyle = {...cardStyle, background:'#222', color: 'transparent' }
 
-const CARD = 'card';
+const isDragging = false;
 
-const cardSource = {
-  beginDrag({id}) {
-    return { id }
-  },
 
-  endDrag(props, monitor, component) {
-    if (!monitor.didDrop()) return;
+export default ({id, children}) => {
+  const type = 'CARD';
+  const [collectedProps, drag] = useDrag({
+    item: { id, type },
+  })
 
-    // When dropped on a compatible target, do something
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
-    console.log(item, dropResult);
-    // CardActions.moveCardToList(item.id, dropResult.listId)
-  },
-}
+  return <div ref={drag} style={isDragging ? draggedStyle : cardStyle} id={id}>{children}</div>
+};
 
-const collect = (connect, monitor) => (
-  {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }
-);
+// Fun-Fun-Function with Dan Abranow
+// https://www.youtube.com/watch?v=G-aO5hzo1aw&list=PL0zVEGEvSaeEh5lzJx9f5B7RVs1FrHgNf
 
-const Card = ({id, isDragging, connectDragSource, children}) => connectDragSource(
-  <div style={isDragging ? draggedStyle : cardStyle} id={id}>{children}</div>
-)
-
-// Export the wrapped version
-export default DragSource(CARD, cardSource, collect)(Card);
-
-// 
+// DnD Hooks API
+// http://react-dnd.github.io/react-dnd/docs/api/use-drag-layer
