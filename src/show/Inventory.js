@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import DraggableCard from './DraggableCard';
 import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd';
-const { useDragLayer } = dnd;
+const { useDragLayer, useDrop } = dnd;
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -20,21 +20,13 @@ const infoStyleDragged = {...cardInfoStyle};
 const CARD = 'card';
 
 const TargetArea = ({id}) => {
-  return <div style={targetAreaStyle} id={id} ></div>;
+  const accept = 'CARD';
+  const [collectedProps, drop] = useDrop({
+    accept,
+  })  
+  // useEffect(()=>{console.log(collectedProps)},[collectedProps])
+  return <div ref={drop} style={targetAreaStyle} id={id} ></div>;
 };
-
-const areaTarget = {  
-  drop(props, monitor) { console.log(props) },
-  canDrop(props) { return true },
-}
-
-const collect = (connect, monitor) => (
-  {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }
-);
 
 const Info = ({children}) => <div style={cardInfoStyle}>{children}</div>;
 

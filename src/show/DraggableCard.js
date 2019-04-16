@@ -21,7 +21,7 @@ export default ({id, children}) => {
   const [collectedProps, drag] = useDrag({
     item: { id, type },
   })
-
+  // useEffect(()=>{console.log(collectedProps)},[collectedProps])
   return <div ref={drag} style={isDragging ? draggedStyle : cardStyle} id={id}>{children}</div>
 };
 
@@ -30,3 +30,7 @@ export default ({id, children}) => {
 
 // DnD Hooks API
 // http://react-dnd.github.io/react-dnd/docs/api/use-drag-layer
+
+// react-beautiful-dnd
+// maybe better alternative - or just doit myself
+// https://github.com/atlassian/react-beautiful-dnd
