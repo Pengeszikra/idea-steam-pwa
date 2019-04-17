@@ -1,46 +1,77 @@
 import React, {useState, useEffect, useRef} from 'react';
-import DraggableCard from './DraggableCard';
-import { __EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd } from 'react-dnd';
-const { useDragLayer, useDrop } = dnd;
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 const targetAreaStyle = {
-  width: 200,
-  height: 200,
+  width: '30vmin',
+  height: '30vmin',
   background: '#444',
   margin: '1em',
   display: 'inline-block',
-  position: 'relative',
 }
 
-const cardInfoStyle = { position:'absolute', margin:'1em' };
-const infoStyleDragged = {...cardInfoStyle};
+const targetDragOverStyle = {...targetAreaStyle, border: '1px solid #777', boxSizing:'border-box' }
+const targetDropStyle = {...targetAreaStyle, border: '2px solid #222', boxSizing:'border-box' }
 
-const CARD = 'card';
+const targetDragStyles = [
+  targetAreaStyle,
+  targetDragOverStyle,
+  targetDropStyle
+]
+
+const cardStyle = {
+  width: '25vmin',
+  height: '30vmin',
+  background: '#777',
+  margin: '1em',
+  display: 'inline-block',
+}
 
 const TargetArea = ({id}) => {
-  const accept = 'CARD';
-  const [collectedProps, drop] = useDrop({
-    accept,
-  })  
-  // useEffect(()=>{console.log(collectedProps)},[collectedProps])
-  return <div ref={drop} style={targetAreaStyle} id={id} ></div>;
+  const [dragState, setDragState] = useState(0);
+  const handleDragOver = event => {
+    event.preventDefault()
+    // console.log('hoover',event.target.id);
+    setDragState(1)
+  };
+  const handleDrop = event => {
+    event.preventDefault();
+    // console.log(event);
+    const data = event.dataTransfer.getData("text");
+    // console.log(data)
+    setDragState(2)
+  }
+  const handleDragLeave = event => {
+    event.preventDefault();
+    setDragState(0)
+  }
+  return (
+    <div 
+      style={targetDragStyles[dragState]} 
+      id={id} 
+      onDrop={handleDrop} 
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+    />
+  );
+};
+const Card = ({id, targets=[]}) => {
+  const cardRef = useRef();  
+  // const [hasDragging, setDragging] = useState(false);
+  
+  const handleDragStart = event => {
+    // console.log('-- dragstart ---', cardRef.current.id, event.target.id);
+    event.dataTransfer.setData("text", event.target.id);
+  };
+
+  return <div style={cardStyle} draggable={true} onDragStart={handleDragStart} id={id} ref={cardRef}></div>;
 };
 
-const Info = ({children}) => <div style={cardInfoStyle}>{children}</div>;
-
 export default () => (
-  <DragDropContextProvider backend={HTML5Backend}>
-    <section style={{margin: '2em'}}>
-      <h1>Drag and Drop test page</h1>
-      <p>Veri important feauture for any application is drag and drop</p> 
-      <TargetArea id={1} />
-      <TargetArea id={2} />
-      <DraggableCard id={323}><Info>alfa</Info></DraggableCard>
-      <DraggableCard id={243}><Info>beta</Info></DraggableCard>
-      <DraggableCard id={673}><Info>gamma</Info></DraggableCard>
-      <DraggableCard id={924}><Info>delta</Info></DraggableCard>      
-    </section>
-  </DragDropContextProvider>  
+  <section style={{margin: '2em'}}>
+    <h1>Drag and Drop test page</h1>
+    <p>Veri important feauture for any application is drag and drop</p>    
+    <TargetArea id={1} />
+    <TargetArea id={2} />
+    <Card id={3} targets={[1,2]}/>
+    <Card id={4} targets={[1,2]}/>
+  </section>
 )
