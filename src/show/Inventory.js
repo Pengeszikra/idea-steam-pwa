@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {mobs} from '../games/mobs';
 
 const targetAreaStyle = {
   width: '30vmin',
@@ -35,19 +34,22 @@ const contentStyle = {
   color: '#444',
 }
 
-const TargetArea = ({id}) => {
+const TargetArea = ({id, drag, setDrag, match}) => {
   const [dragState, setDragState] = useState(0);
   const [attached, setAttached] = useState(null);
+
   const handleDragOver = event => {
-    event.preventDefault()
-    // console.log('hoover',event.target.id);
+    event.preventDefault()    
     setDragState(1)
   };
   const handleDrop = event => {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    console.log(data)
+    event.preventDefault();    
     setDragState(2)
+    const isMatch = match(id, drag);
+    console.log(`drop is match: ${isMatch}`);
+    if (isMatch) {
+      console.log(drag.cardRef.current)      
+    }
   }
   const handleDragLeave = event => {
     event.preventDefault();
@@ -63,34 +65,45 @@ const TargetArea = ({id}) => {
     />
   );
 };
-const Card = ({targets=[], mob}) => {
+const Card = ({id, drag, setDrag}) => {
   const cardRef = useRef();  
-  const {name='knight', attack=7, skill='3', life='13'} = mob;
-  const id = name;
   const handleDragStart = event => {
-    // console.log('-- dragstart ---', cardRef.current.id, event.target.id);
-    event.dataTransfer.setData("text", event.target.id);
+    console.log(`'-- dragstart ---`);    
+    setDrag({start:id, cardRef})
   };
 
   return (
     <div style={cardStyle} draggable={true} onDragStart={handleDragStart} id={id} ref={cardRef}>
-      <div style={contentStyle}>{name}<br/>{attack} {skill} {life}</div>
     </div>
   );
 };
 
-export default () => (
-  <section style={{margin: '2em'}}>
-    <h1>Drag and Drop test page</h1>
-    <p>Veri important feauture for any application is drag and drop</p>    
-    <TargetArea id={1} />
-    <TargetArea id={2} />
-    <TargetArea id={3} />
-    <TargetArea id={4} />
-    <br/>
-    <Card targets={[1,2]} mob={mobs.knight}/>
-    <Card targets={[1,2]} mob={mobs.elf}/>
-    <Card targets={[1,2]} mob={mobs.paladin}/>
-    <Card targets={[1,2]} mob={mobs.lifestealer}/>
-  </section>
-)
+const match = (targetId, drag) => {
+  const {start} = drag;
+  const posibbleDrops = {
+    1: [11],
+    2: [11,13],
+    3: [11,12,13],
+    4: [14], 
+  }[targetId]
+  return posibbleDrops && posibbleDrops.indexOf(start) >= 0;
+}
+
+export default () => {
+  const [drag, setDrag] = useState({});
+  return (
+    <section style={{margin: '2em'}}>
+      <h1>Drag and Drop test page</h1>
+      <p>Veri important feauture for any application is drag and drop</p>    
+      <TargetArea id={1} drag={drag} setDrag={setDrag} match={match}/>
+      <TargetArea id={2} drag={drag} setDrag={setDrag} match={match}/>
+      <TargetArea id={3} drag={drag} setDrag={setDrag} match={match}/>
+      <TargetArea id={4} drag={drag} setDrag={setDrag} match={match}/>
+      <br/>
+      <Card id={11} drag={drag} setDrag={setDrag}/>
+      <Card id={12} drag={drag} setDrag={setDrag}/>
+      <Card id={13} drag={drag} setDrag={setDrag}/>
+      <Card id={14} drag={drag} setDrag={setDrag}/>
+    </section>
+  )
+}

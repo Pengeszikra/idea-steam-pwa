@@ -1,0 +1,48 @@
+@mixin bimage($image, $width:auto, $height:auto, $top:0, $left:0) {
+  width: $width;
+  height: $height;
+  top: $top;
+  left: $left;  
+  content: "";
+  background-image: url($image);
+  background-size: contain;      
+  display: block;
+  position: absolute;
+  transform-origin: top left;
+  background-repeat: no-repeat;
+}
+
+.graph-frame {
+  position: relative;
+  display: block;
+  height: 100vh;
+  width: 60.47vh;
+  overflow: hidden;
+}
+
+.play-blue-cave { @include bimage('/img/gui/blue-cave.png', 100vmin, 100vmin); }
+.play-red-cave { @include bimage('/img/gui/red-cave.png', 100vmin, 100vmin); }
+.play-city { @include bimage('/img/gui/city.png', 100vmin, 100vmin); }
+.small-logo { @include bimage('/img/gui/small-logo.png', 50vmin, 18vmin, 11vmin, 13vmin); }
+.socrates { 
+  @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); 
+  span {
+    color: #222;
+    display: block;
+    width: 50vmin;    
+    margin: 25vmin 4vmin;
+    font-weight: 700;
+    line-height: 1.4em;
+    font-size: 1.3em;
+  }  
+}
+
+.header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 13.5vmin); }
+.bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 18vmin, 84vmin); }
+  .bottom-map { @include bimage('/img/gui/map.png', 13vmin, 13vmin, 3vmin, 2vmin); }
+  .bottom-inventory { @include bimage('/img/gui/bag.png', 13vmin, 13vmin, 4vmin, 18vmin); }
+  .bottom-saved { @include bimage('/img/gui/saved.png', 13vmin, 13vmin, 5vmin, 32vmin); }
+  .bottom-history { @include bimage('/img/gui/pergamen.png', 13vmin, 13vmin, 4vmin, 48vmin); }
+
+  .lvl-1-char { @include bimage('/img/gui/lvl-1-char.png', 13vmin, 13vmin, 1vmin, 2vmin); }
+  

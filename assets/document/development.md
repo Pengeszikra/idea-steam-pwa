@@ -93,3 +93,20 @@ export default DropTarget(({drag, ...props}) => {
 > [bestOfJavascript](https://bestofjs.org/)
 
 > [react+three](https://github.com/drcmda/react-three-fiber)
+
+
+### drag and drop system with reducer
+
+jo kerdes hogy van-e ertelme reduceresre venni a figurat
+
+```jsx
+switch(state, {type, payload}) {
+  case START_DRAG: return {...state, dragged: payload};
+  case DROP: return {...state, hasValid: payload.target };
+  default return state;
+}
+
+startDrag (item) |> store.dragged = item
+hoverTarget (target, item) |> isValidTarget
+drop (target, item) |> changeView(drop)
+```

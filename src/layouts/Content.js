@@ -43,6 +43,7 @@ export default ({route, handleRoute}) => {
       <CaveRoute path={'idea'} url={'/document/idea.md'} />
       <CaveRoute path={'intro'} url={'/document/intro.md'} />
       <CaveRoute path={'level'} url={'/document/levelSelector.md'} />
+      <CaveRoute path={'history'} url={'/document/history.md'} />
       <CaveRoute path={'finale'} url={'/document/.md'} />
       <Route path={'inventory'}>
         <Inventory />
