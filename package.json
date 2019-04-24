@@ -34,6 +34,7 @@
     "webpack-zip-files-plugin": "^1.0.0"
   },
   "dependencies": {
+    "animejs": "^3.0.1",
     "callbag-basics": "^3.0.1",
     "callbag-sample": "^2.0.0",
     "paper": "^0.12.0",

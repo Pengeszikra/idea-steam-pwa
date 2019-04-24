@@ -2,26 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Cave from '../caves/Cave';  
 import { useScoreReducer, achiveScore } from '../flow/action';
 import Inventory from '../show/Inventory';
-
-const caveNumbers = [
-  ['intro', 1.1],
-  [1.1, 2.1],
-  [2.1, 2.2, 2.3, 2.4],  
-  [2.2, 2.3, 2.4, 2.1, 2.5, 2.6, 2.7, 2.8],
-  [2.3, 2.4, 2.1, 2.2],
-  [2.4, 2.5, 2.6, 2.7, 2.8],
-  [2.5, 2.6],
-  [2.6, 2.7],
-  [2.7, 2.8],
-  [2.8, 2.9],
-  [2.9, '2.10'],
-  ['2.10', 2.11],
-  [2.11, 2.12],
-  [2.12, '2.1.again'],
-  ['2.1.again', 3],
-  [3, 4],
-  [4,'intro'],
-]
+import RouteFactory from '../show/RouteFactory';
+import {caveNumbers} from '../caves/applicationData';
+import { EdgesGeometry } from 'three';
+import divFactory from '../show/divFactory';
 
 export default ({route, handleRoute}) => {
   const CaveButton = ({to}) => <button className="map" onClick={handleRoute(to)}>{`cave: ${to}`}</button>
@@ -30,8 +14,11 @@ export default ({route, handleRoute}) => {
       <Cave {...props} />
       {nextPath.map((to, key) => <CaveButton to={to} key={key} />)}
     </>
-  ) : null;
-  const Route = ({path, children}) => route === path ? <>{children}</> : null;    
+  ) : null;  
+
+  const Route = RouteFactory(route);
+
+  const [ContentFrame] = divFactory(['contentFrame']) // TODO
   
   return (
     <div className="contentFrame">

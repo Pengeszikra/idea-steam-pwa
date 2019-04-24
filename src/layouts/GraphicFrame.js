@@ -1,29 +1,42 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import Content from './Content';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore } from '../flow/action';
 import '../styles/graphic.scss';
+import { whoIsTheHero } from '../caves/applicationData';
+import divFactory from '../show/divFactory';
+
+const [HeaderBarSection, LevelOneAvatar] = divFactory(["header-bar", "lvl-1-char"]);
+
+console.log(LevelOneAvatar)
 
 const HeaderBar = () => (
-  <div className="header-bar">
-    <div className="lvl-1-char"></div>
-  </div>
+  <HeaderBarSection>
+    <LevelOneAvatar />
+  </HeaderBarSection>
 );
 
+const [
+  BottomBarSection, 
+  MapIcon, 
+  InventoryIcon, 
+  SavedIcon, 
+  HistoryIcon
+] = divFactory(["bottom-bar", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
+
 const BottomBar = () => (
-  <div className="bottom-bar">
-    <div className="bottom-map"></div>
-    <div className="bottom-inventory"></div>
-    <div className="bottom-saved"></div>
-    <div className="bottom-history"></div>
-  </div>
+  <BottomBarSection>
+    <MapIcon />
+    <InventoryIcon />
+    <SavedIcon />
+    <HistoryIcon />
+  </BottomBarSection>
 );
 
 const GamePlay = ({route, handleRoute}) => {
   return (
     <>
       <div className="play-city"></div>
-      <div className="socrates"><span>Igaz lenne? Sokan elbeszélték már nekem Thébától Mükénéig, Hérodotosztól Thuküdidészig, hogy lesz majd ki kész a kalandokra, 
-ki jártas a tudományokban, ki felszabadítja a fogságban tartottakat.</span></div>
+      <div className="socrates"><span>{whoIsTheHero}</span></div>
       <div className="small-logo"></div>
     </>
   );
@@ -31,16 +44,13 @@ ki jártas a tudományokban, ki felszabadítja a fogságban tartottakat.</span><
 
 export default () => {
   const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);
-  const handleRoute = path => event => {
-    dispatch(changeRoute(path))    
-  };
+  const handleRoute = path => event => dispatch(changeRoute(path));
 
   return (
     <main className="graph-frame">      
       <GamePlay route={route} handleRoute={handleRoute} />
       <HeaderBar score={score} saved={saved} />
-      <BottomBar handleRoute = {handleRoute} />
-      
+      <BottomBar handleRoute = {handleRoute} />      
     </main>  
   );
 }
