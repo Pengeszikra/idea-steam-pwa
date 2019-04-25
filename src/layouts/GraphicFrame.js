@@ -3,25 +3,24 @@ import Content from './Content';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore } from '../flow/action';
 import '../styles/graphic.scss';
 import { whoIsTheHero } from '../caves/applicationData';
-import divFactory from '../show/divFactory';
-
-const [HeaderBarSection, LevelOneAvatar] = divFactory(["header-bar", "lvl-1-char"]);
-
-console.log(LevelOneAvatar)
+import {
+  HeaderBarSection, 
+  LevelOneAvatar,
+  BottomBarSection,
+  MapIcon,
+  InventoryIcon,
+  SavedIcon,
+  HistoryIcon,
+  PlayCity,
+  Socrates,
+  SmallLogo,
+} from '../layouts/divStore';
 
 const HeaderBar = () => (
   <HeaderBarSection>
     <LevelOneAvatar />
   </HeaderBarSection>
 );
-
-const [
-  BottomBarSection, 
-  MapIcon, 
-  InventoryIcon, 
-  SavedIcon, 
-  HistoryIcon
-] = divFactory(["bottom-bar", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
 
 const BottomBar = () => (
   <BottomBarSection>
@@ -35,9 +34,9 @@ const BottomBar = () => (
 const GamePlay = ({route, handleRoute}) => {
   return (
     <>
-      <div className="play-city"></div>
-      <div className="socrates"><span>{whoIsTheHero}</span></div>
-      <div className="small-logo"></div>
+      <PlayCity />
+      <Socrates><span>{whoIsTheHero}</span></Socrates>
+      <SmallLogo />
     </>
   );
 }

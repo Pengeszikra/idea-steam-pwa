@@ -5,7 +5,7 @@ import Inventory from '../show/Inventory';
 import RouteFactory from '../show/RouteFactory';
 import {caveNumbers} from '../caves/applicationData';
 import { EdgesGeometry } from 'three';
-import divFactory from '../show/divFactory';
+import divFactory from './divFactory';
 
 export default ({route, handleRoute}) => {
   const CaveButton = ({to}) => <button className="map" onClick={handleRoute(to)}>{`cave: ${to}`}</button>
