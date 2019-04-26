@@ -17,6 +17,7 @@ import {
   BlueCave,
   RedCave,
   InteractiveMap,
+  EntranceCave,
 } from '../layouts/divStore';
 
 const HeaderBar = () => (
@@ -25,36 +26,33 @@ const HeaderBar = () => (
   </HeaderBarSection>
 );
 
-const BottomBar = ({handleMap}) => {
+const BottomBar = ({handleMap, handleInventory, handlePrisoner, handleHistory}) => {
   return (
     <BottomBarSection>
       <MapIcon onClick={handleMap}/>
-      <InventoryIcon />
-      <SavedIcon />
-      <HistoryIcon />
+      <InventoryIcon onClick={handleInventory} />
+      <SavedIcon onClick={handlePrisoner} />
+      <HistoryIcon onClick={handleHistory} />
     </BottomBarSection>
   );  
 }
 
 const Scenes = ({scene}) => {
   switch(scene) {
-    case 1: return <PlayCity />;
-    case 2: return <RedCave />;
+    case 1: return <EntranceCave />;
+    case 2: return <PlayCity />;
+    case 3: return <RedCave />;
     default: return <BlueCave />;
   }
 }
 
-const GamePlay = ({route, handleRoute, mapVisible}) => {
-  const [scene, setScene] = useState(1);
+const GamePlay = ({route, handleRoute, mapVisible, scene, setScene}) => {
   const handleNextScene = () => setScene(scene + 1);
   return (
     <>      
       <Scenes scene={scene} />      
       {scene < 3 && 
-        <Socrates onClick={() => {
-          setScene(scene + 1)
-          console.log(scene);
-        }}><span>{whoIsTheHero}</span></Socrates>
+        <Socrates onClick={handleNextScene}><span>{whoIsTheHero}</span></Socrates>
       }
       <SmallLogo />
       { mapVisible && <InteractiveMap />}
@@ -66,13 +64,21 @@ export default () => {
   const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);  
   const handleRoute = path => event => dispatch(changeRoute(path));
   const [mapVisible, setMapVisiblity] = useState(false);
+  
+  
+  const [scene, setScene] = useState(1);
+  
+
   const handleMap = () => setMapVisiblity(!mapVisible);
+  const handlePrisoner = () => setScene(1);
+  const handleInventory = () => setScene(2);
+  const handleHistory = () => setScene(3);  
 
   return (
     <main className="graph-frame">      
-      <GamePlay route={route} handleRoute={handleRoute} mapVisible={mapVisible}/>
+      <GamePlay route={route} handleRoute={handleRoute} mapVisible={mapVisible} scene={scene} setScene={setScene}/>
       <HeaderBar score={score} saved={saved} />
-      <BottomBar handleRoute = {handleRoute} handleMap={handleMap}/>      
+      <BottomBar handleRoute = {handleRoute} handleMap={handleMap} handlePrisoner={handlePrisoner} handleInventory={handleInventory} handleHistory={handleHistory}/>
     </main>  
   );
 }
