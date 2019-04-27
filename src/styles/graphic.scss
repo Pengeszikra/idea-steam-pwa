@@ -24,6 +24,7 @@
 .play-red-cave { @include bimage('/img/gui/red-cave.png', 100vmin, 100vmin); }
 .play-city { @include bimage('/img/gui/city.png', 100vmin, 100vmin); }
 .entrance-cave { @include bimage('/img/gui/entrance.png', 100vmin, 100vmin); }
+.long-cave { @include bimage('/img/gui/barlang-01.png', 100vmin, 100vmin); }
 .small-logo { @include bimage('/img/gui/small-logo.png', 50vmin, 18vmin, 11vmin, 13vmin); }
 .socrates { 
   @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); 
@@ -40,11 +41,39 @@
 
 .header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 13.5vmin); }
 .bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 18vmin, 84vmin); }
+.bottom-bar > div {
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
   .bottom-map { @include bimage('/img/gui/map.png', 13vmin, 13vmin, 3vmin, 2vmin); }
   .bottom-inventory { @include bimage('/img/gui/bag.png', 13vmin, 13vmin, 4vmin, 18vmin); }
   .bottom-saved { @include bimage('/img/gui/saved.png', 13vmin, 13vmin, 5vmin, 32vmin); }
   .bottom-history { @include bimage('/img/gui/pergamen.png', 13vmin, 13vmin, 4vmin, 48vmin); }
 
-  .lvl-1-char { @include bimage('/img/gui/lvl-1-char.png', 13vmin, 13vmin, 1vmin, 2vmin); }
-  
-  .interactive-map { @include bimage('/img/gui/papper.png', 70vmin, 75vmin, 11vmin, 2vmin); }
+
+.lvl-1-char { 
+  @include bimage('/img/gui/lvl-1-char.png', 13vmin, 13vmin, 1vmin, 2vmin); 
+  transition: top 500ms, left 500ms;
+}
+.interactive-map { 
+  @include bimage('/img/gui/interacive-map.png', 70vmin, 75vmin, 11vmin, 2vmin); 
+  position: relative;
+}
+
+.actual-score, .saved-prisoner {
+  position: absolute;
+  font-size: 3vmin;
+}
+
+.actual-score {
+  color: gold;
+  top: 4vmin;
+  left: 30vmin;
+}
+
+.saved-prisoner {
+  color: blueviolet;
+  top: 4vmin;
+  left: 40vmin;  
+}
