@@ -8,13 +8,13 @@ export default function ({canvasOpacity = true}) {
 
   useLayoutEffect(()=>{setData({isMounted:true})}, [mount]);
 
-  function makeBox( w , h , d , color, opacity = 1 ) {
+  function makeBox( w , h , d , color, opacity = .7 ) {
     const geom = new THREE.BoxGeometry( w , h , d, 1, 1, 1 );    
       geom.translate( 0 , 0 , d/2 );
     const flatShading = THREE.FlatShading;
-    const transparent = opacity < 1;
-    const mat = new THREE.MeshBasicMaterial( {color, flatShading, opacity , transparent } );
-    //const mat = new THREE.LineBasicMaterial({color: 0x4080ff })
+    const transparent = true; //opacity < 1;
+    // const mat = new THREE.MeshBasicMaterial( {color, flatShading, opacity , transparent, wireframe: true } );
+    const mat = new THREE.MeshLambertMaterial( {color, flatShading, opacity , transparent } );
     return new THREE.Mesh( geom, mat );
   }
 
@@ -82,7 +82,7 @@ export default function ({canvasOpacity = true}) {
     width:'50vw', 
     height:'50vh', 
     top:'10vh', 
-    right:0 
+    left:0,
   };
 
   return (

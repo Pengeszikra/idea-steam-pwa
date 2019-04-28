@@ -3,6 +3,7 @@ import Content from './Content';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../flow/action';
 import '../styles/graphic.scss';
 import { whoIsTheHero, cavePositions } from '../caves/applicationData';
+import ThreeDimensionTest from '../show/ThreeDimensionTest';
 import {
   HeaderBarSection, 
   LevelOneAvatar,
@@ -38,9 +39,9 @@ import {
 } from '../layouts/divStore';
 import showtime from './showtime';
 
-const HeaderBar = ({score, saved}) => (
+const HeaderBar = ({score, saved, setWay}) => (
   <HeaderBarSection>
-    <LevelOneAvatar />
+    <LevelOneAvatar onClick={()=>setWay(2)} />
     <ActualScore>{score}</ActualScore>
     <SavedPrisoner>{saved}</SavedPrisoner>
   </HeaderBarSection>
@@ -67,7 +68,7 @@ const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
     <EntranceCave />,    
-    <RedCave />,
+    <RedCave><ThreeDimensionTest /></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave />,
     <WaterFallCave />,
@@ -110,7 +111,7 @@ const FakeGame = ({onClick}) => <Game1 onClick={onClick}><PrisonerOne /></Game1>
 const ActualGame = showtime(FakeGame);
 const SocratesSpeaking = showtime(Socrates);
 
-export default () => {
+export default ({setWay}) => {
   const scoreStore = useReducer(scoreReducer, scoreInitial);  
   const [{route, score, saved}, dispatch] = scoreStore;
   const handleRoute = path => event => dispatch(changeRoute(path));
@@ -144,7 +145,7 @@ export default () => {
         handleHistory={handleHistory}
       />
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
-      <HeaderBar score={score} saved={saved} />
+      <HeaderBar score={score} saved={saved} setWay={setWay} />
       <MapWithHero show={mapVisible} addScore={addScore} savePrisoner={savePrisoner} />      
     </main>  
   );

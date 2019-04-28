@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 
 const targetAreaStyle = {
-  width: '30vmin',
-  height: '30vmin',
+  width: '20vmin',
+  height: '20vmin',
   background: '#444',
   margin: '1em',
   display: 'inline-block',
@@ -18,8 +18,8 @@ const targetDragStyles = [
 ]
 
 const cardStyle = {
-  width: 'calc(25vmin)',
-  height: 'calc(30vmin)',
+  width: 'calc(15vmin)',
+  height: 'calc(20vmin)',
   background: '#777',
   margin: '1em',
   display: 'inline-block',

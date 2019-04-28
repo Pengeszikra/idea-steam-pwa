@@ -5,7 +5,7 @@ export const [ACHIVE_SCORE, achiveScore] = actionCreator('achive-score');
 export const [RELEASE_PRISONER, releasePrisoner] = actionCreator('release-prisoner');
 export const [CHANGE_ROUTE, changeRoute] = actionCreator('change-route');
 
-export const scoreInitial = {score: 0, saved: 0, level: 1, route:'inventory'};
+export const scoreInitial = {score: 0, saved: 0, level: 1, route:'intro'};
 
 export const scoreReducer = (state, {type, payload}) => {
   switch(type) {
