@@ -14,6 +14,7 @@ export const [
 export const [PlayCity, Socrates, SmallLogo]= divFactory(["play-city", "socrates", "small-logo"]);
 
 export const [BlueCave, RedCave, EntranceCave, LongCave] = divFactory(["play-blue-cave", "play-red-cave", "entrance-cave", "long-cave"])
+export const [WaterFallCave] = divFactory(["waterfall-cave"]);
 
 export const [InteractiveMap] = divFactory(["interactive-map"]);
 

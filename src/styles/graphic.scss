@@ -25,6 +25,8 @@
 .play-city { @include bimage('/img/gui/city.png', 100vmin, 100vmin); }
 .entrance-cave { @include bimage('/img/gui/entrance.png', 100vmin, 100vmin); }
 .long-cave { @include bimage('/img/gui/barlang-01.png', 100vmin, 100vmin); }
+.waterfall-cave { @include bimage('/img/gui/waterfall-cave.png', 100vmin, 100vmin); }
+
 .small-logo { @include bimage('/img/gui/small-logo.png', 50vmin, 18vmin, 11vmin, 13vmin); }
 .socrates { 
   @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); 

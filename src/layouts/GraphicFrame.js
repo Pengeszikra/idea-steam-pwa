@@ -21,6 +21,7 @@ import {
   LongCave,
   ActualScore,
   SavedPrisoner,
+  WaterFallCave,
 } from '../layouts/divStore';
 
 const HeaderBar = ({score, saved}) => (
@@ -49,6 +50,7 @@ const Scenes = ({scene}) => {
     case 3: return <RedCave />;
     case 4: return <LongCave />;
     case 5: return <BlueCave />;
+    case 6: return <WaterFallCave />;
     default: return <EntranceCave />;
   }
 }
@@ -92,15 +94,14 @@ const GamePlay = ({route, handleRoute, mapVisible, scene, setScene, hasSocrates,
 }
 
 export default () => {
-  const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);  
+  const scoreStore = useReducer(scoreReducer, scoreInitial);  
+  const [{route, score, saved}, dispatch] = scoreStore;
   const handleRoute = path => event => dispatch(changeRoute(path));
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
-  
-  
+    
   const [scene, setScene] = useState(1);
   
-
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleInventory = () => setScene(1);
   const handlePrisoner = () => {
