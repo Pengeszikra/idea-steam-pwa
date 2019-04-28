@@ -22,7 +22,21 @@ import {
   ActualScore,
   SavedPrisoner,
   WaterFallCave,
+  LightCave,
+  Game1,
+  AvatarOnMap,
+  FangCave,
+  NeedleCave,
+  StairCaseCave,
+  Circle,
+  PrisonerOne,
+  ItemOne,
+  ChainCave,
+  BuildingCave,
+  WheelCave,
+  EnginerCave,
 } from '../layouts/divStore';
+import showtime from './showtime';
 
 const HeaderBar = ({score, saved}) => (
   <HeaderBarSection>
@@ -43,21 +57,34 @@ const BottomBar = ({handleMap, handleInventory, handlePrisoner, handleHistory}) 
   );  
 }
 
-const Scenes = ({scene}) => {
-  switch(scene) {
-    case 1: return <EntranceCave />;
-    case 2: return <PlayCity />;
-    case 3: return <RedCave />;
-    case 4: return <LongCave />;
-    case 5: return <BlueCave />;
-    case 6: return <WaterFallCave />;
-    default: return <EntranceCave />;
-  }
+const CityWithLogo = () => (
+  <PlayCity>
+    <SmallLogo />
+  </PlayCity>
+)
+
+const Scenes = ({scene, playGame}) => {
+  return [
+    <CityWithLogo />,
+    <EntranceCave />,    
+    <RedCave />,
+    <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
+    <BlueCave />,
+    <WaterFallCave />,
+    <LightCave />,
+    <FangCave />,
+    <StairCaseCave />,
+    <NeedleCave />,
+    <ChainCave />,
+    <BuildingCave />,
+    <WheelCave />,
+    <EnginerCave />,
+    <PlayCity />,
+  ][scene % 14]
 }
 
 //const MapWithHero = ({position:[x,y]=[10,15]}) => {
-const MapWithHero = ({addScore, savePrisoner}) => {
-
+const MapWithHero = showtime( ({addScore, savePrisoner}) => {
   const [caveNumber, setCaveNumber] = useState(0)
   const [pos, setPos] = useState(cavePositions[caveNumber])  
   const handleClick = () => {
@@ -71,27 +98,17 @@ const MapWithHero = ({addScore, savePrisoner}) => {
   return (
     <>
       <InteractiveMap onClick={handleClick} />
-      <LevelOneAvatar style={{
-        top: `${y}vmin`,
-        left: `${x}vmin`,
-        transform: 'scale(.7)',
-        transformOrigin: 'bottom center',
+      <AvatarOnMap style={{
+        top: `${(y+3)}vmin`,
+        left: `${(x+3)}vmin`,
       }}/>
     </>
   )
-}
+});
 
-const GamePlay = ({route, handleRoute, mapVisible, scene, setScene, hasSocrates, addScore, savePrisoner}) => {
-  const handleNextScene = () => setScene(scene + 1);
-  return (
-    <>      
-      <Scenes scene={scene} />      
-      { hasSocrates && !mapVisible && <Socrates onClick={handleNextScene}><span>{whoIsTheHero}</span></Socrates>}      
-      { [1,2].indexOf(scene) >= 0 && <SmallLogo />}
-      { mapVisible && <MapWithHero addScore={addScore} savePrisoner={savePrisoner} />}
-    </>
-  );
-}
+const FakeGame = ({onClick}) => <Game1 onClick={onClick}><PrisonerOne /></Game1>
+const ActualGame = showtime(FakeGame);
+const SocratesSpeaking = showtime(Socrates);
 
 export default () => {
   const scoreStore = useReducer(scoreReducer, scoreInitial);  
@@ -101,6 +118,8 @@ export default () => {
   const [hasSocrates, setSocrates] = useState(false);
     
   const [scene, setScene] = useState(1);
+
+  const [gameOngoing, playGame] = useState(false);
   
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleInventory = () => setScene(1);
@@ -115,17 +134,8 @@ export default () => {
 
   return (
     <main className="graph-frame">      
-      <GamePlay 
-        route={route} 
-        handleRoute={handleRoute} 
-        mapVisible={mapVisible} 
-        hasSocrates={hasSocrates} 
-        scene={scene} 
-        setScene={setScene} 
-        addScore={addScore}
-        savePrisoner={savePrisoner}
-      />
-      <HeaderBar score={score} saved={saved} />
+      <Scenes scene={scene} playGame={playGame}/>      
+      <SocratesSpeaking show={hasSocrates && !mapVisible}><span>{whoIsTheHero}</span></SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 
         handleMap={handleMap} 
@@ -133,6 +143,9 @@ export default () => {
         handleInventory={handleInventory} 
         handleHistory={handleHistory}
       />
+      <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
+      <HeaderBar score={score} saved={saved} />
+      <MapWithHero show={mapVisible} addScore={addScore} savePrisoner={savePrisoner} />      
     </main>  
   );
 }
