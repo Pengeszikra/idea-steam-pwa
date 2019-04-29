@@ -39,6 +39,7 @@ import {
 } from '../layouts/divStore';
 import showtime from './showtime';
 import ThreeArea from '../show/ThreeArea';
+import * as THREE from 'three';
 
 const HeaderBar = ({score, saved, setWay}) => (
   <HeaderBarSection>
@@ -65,29 +66,54 @@ const CityWithLogo = () => (
   </PlayCity>
 )
 
-/*
-const box = makeBox(72, 172, 172, 0xBBCCDD );
-box.rotateZ(12 / RAD);
-box.rotateX(32 / RAD);    
-scene.add(box);
+const GEOMS = {
+  box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),
+  dedocahedron: (w,h,d) => new THREE.DodecahedronGeometry(d),
+  icosahedron: (w,h,d) => new THREE.IcosahedronGeometry(d),
+  octahedron: (w,h,d) => new THREE.OctahedronGeometry(d),
+  plane: (w,h,d) => new THREE.PlaneGeometry( w, h, d ),
+  tetrahedron: (w,h,d) => new THREE.TetrahedronGeometry(d),
+}
 
-const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 20 );
+function makeShape( geomMaker, w , h , d , color, opacity = .7 ) {
+  //const geom = new THREE.BoxGeometry( w , h , d, 1, 1, 1 );    
+  // const geom = new THREE.DodecahedronGeometry(d);  
+  //const geom = new THREE.IcosahedronGeometry(d,0);
+  const geom = geomMaker(w,h,d);
+  const flatShading = THREE.FlatShading;
+  const mat = new THREE.MeshLambertMaterial( {color, flatShading, opacity } );
+  return new THREE.Mesh( geom, mat );
+}
 
-clearInterval(boxMoving);
-*/
+const turnContent = geom => ({scene}) => {
+
+  // make 3d object
+  const RAD = 180/Math.PI
+  const box = makeShape(geom, 100, 100, 100, 0xBBCCDD );
+  //box.rotateZ(12 / RAD);
+  //box.rotateX(32 / RAD);    
+  scene.add(box); 
+
+  // animation
+  return () => {
+    const boxMoving = setInterval( () => box.rotateY( 2/RAD ) , 30 );
+    // unsubscribe
+    return () => clearInterval(boxMoving);
+  }
+}
 
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
-    <EntranceCave><ThreeArea /></EntranceCave>,    
-    <RedCave></RedCave>,
+    <EntranceCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.box)}/></EntranceCave>,
+    <RedCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.dedocahedron)}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave />,
-    <WaterFallCave />,
-    <LightCave />,
-    <FangCave />,
+    <WaterFallCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.icosahedron)}/></WaterFallCave>,
+    <LightCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.octahedron)}/></LightCave>,
+    <FangCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.plane)}/></FangCave>,
     <StairCaseCave />,
-    <NeedleCave />,
+    <NeedleCave><ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(GEOMS.tetrahedron)}/></NeedleCave>,
     <ChainCave />,
     <BuildingCave />,
     <WheelCave />,

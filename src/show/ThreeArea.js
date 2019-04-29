@@ -21,8 +21,7 @@ export default function (props) {
 
   useEffect(()=>{
     const {clientWidth, clientHeight} = mount.current;
-    console.log(clientWidth, clientHeight); // TODO
-    
+        
     const RAD = 180/Math.PI
     const FOW = 55
     const MAX_DISTANCE = 15000
