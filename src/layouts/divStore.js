@@ -10,7 +10,7 @@ export const [
   InventoryIcon, 
   SavedIcon, 
   HistoryIcon
-] = divFactory(["bottom-bar zoom-in", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
+] = divFactory(["bottom-bar", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
 
 export const [PlayCity, Socrates, SmallLogo]= divFactory(["play-city", "socrates", "small-logo"]);
 

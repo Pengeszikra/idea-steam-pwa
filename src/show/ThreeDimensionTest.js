@@ -55,7 +55,7 @@ export default function ({canvasOpacity = true}) {
     scene.add(ambient);
     scene.add(camera);
 
-    const box = makeBox(172, 172, 172, 0xBBCCDD );
+    const box = makeBox(72, 172, 172, 0xBBCCDD );
     box.rotateZ(12 / RAD);
     box.rotateX(32 / RAD);    
     scene.add(box);
@@ -66,7 +66,7 @@ export default function ({canvasOpacity = true}) {
       hasPlay && requestAnimationFrame(animate);
     };
 
-    const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 30 );
+    const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 20 );
 
     animate();
     
@@ -79,8 +79,8 @@ export default function ({canvasOpacity = true}) {
   const canvasStyle = {
     position:'absolute', 
     background:'transparent', 
-    width:'50vw', 
-    height:'50vh', 
+    width:'40vw', 
+    height:'40vh', 
     top:'10vh', 
     left:0,
   };

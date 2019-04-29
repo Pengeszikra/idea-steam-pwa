@@ -38,6 +38,7 @@ import {
   EnginerCave,
 } from '../layouts/divStore';
 import showtime from './showtime';
+import ThreeArea from '../show/ThreeArea';
 
 const HeaderBar = ({score, saved, setWay}) => (
   <HeaderBarSection>
@@ -64,11 +65,22 @@ const CityWithLogo = () => (
   </PlayCity>
 )
 
+/*
+const box = makeBox(72, 172, 172, 0xBBCCDD );
+box.rotateZ(12 / RAD);
+box.rotateX(32 / RAD);    
+scene.add(box);
+
+const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 20 );
+
+clearInterval(boxMoving);
+*/
+
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
-    <EntranceCave />,    
-    <RedCave><ThreeDimensionTest /></RedCave>,
+    <EntranceCave><ThreeArea /></EntranceCave>,    
+    <RedCave></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave />,
     <WaterFallCave />,
