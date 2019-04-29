@@ -55,13 +55,6 @@ export default function (props) {
     scene.add(ambient);
     scene.add(camera);
 
-    /*
-    const box = makeBox(72, 172, 172, 0xBBCCDD );
-    box.rotateZ(12 / RAD);
-    box.rotateX(32 / RAD);    
-    scene.add(box);
-    */
-
     const animate3DContent = add3DContent({...props, scene, camera});
     const unsubscribeAnimate3D = animate3DContent();
 
@@ -71,33 +64,18 @@ export default function (props) {
       hasPlay && requestAnimationFrame(animate);
     };
 
-    // const boxMoving = setInterval( _ => box.rotateY( 2/RAD ) , 20 );
-
     animate();
     
     return () => {
       hasPlay = false;
       unsubscribeAnimate3D();
-      // clearInterval(boxMoving);
     };
   }, []);
-
-  /*
-  const canvasStyle = {
-    position:'absolute', 
-    background:'transparent', 
-    width:'40vw', 
-    height:'40vh', 
-    top:'10vh', 
-    left:0,
-  };
-  */
 
   return (
     <canvas 
       className={["nosel", ...canvasClasses].join(" ")}
       ref={mount} 
-      // style={canvasStyle}
       onContextMenu={event=>event.preventDefault()}
     />
   );

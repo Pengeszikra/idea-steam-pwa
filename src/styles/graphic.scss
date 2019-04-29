@@ -145,7 +145,7 @@
   left: 40vmin;  
 }
 
-.area-3d-canvas {
+.small-3d, .area-3d-canvas {
     position: absolute; 
     background: transparent; 
     width: 65vw;     
@@ -153,3 +153,19 @@
     top: 20vh; 
     left:0; 
 }
+
+.small-3d {
+  top: initial;
+  left: initial;
+  width: 20vmin;
+  min-height: 20vmin;
+  transform: scale(1.4);
+}
+
+.p1 { top: 20vmin; left:  0vmin; }
+.p2 { top: 20vmin; left: 14vmin; }
+.p3 { top: 20vmin; left: 28vmin; }
+.p4 { top: 20vmin; left: 42vmin; }
+.p5 { top: 40vmin; left:  0vmin; }
+.p6 { top: 40vmin; left: 14vmin; }
+.p7 { top: 40vmin; left: 28vmin; }
