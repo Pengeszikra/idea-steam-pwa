@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
-
+const version = require('./version');
 const path = require('path');
 const config = {
   APP_NAME: 'iDea',
@@ -21,7 +21,7 @@ const manifestData = {
 	
 module.exports = {
   module: {
-    rules: [
+    rules: [      
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -49,13 +49,23 @@ module.exports = {
       },   
     ]
   },
-  devServer: { port: 4545 },
   plugins: [
     new CopyWebpackPlugin(
       [
         {from: './assets/', to: './'},
       ], {copyUnmodified: false}
     ),
+    new SWPrecacheWebpackPlugin({
+      cacheId: version,
+      filename: 'service-worker.js',
+      staticFileGlobs: [
+        '/assets/**.*',
+      ],
+      stripPrefix: '/assets/', // stripPrefixMulti is also supported
+      mergeStaticsConfig: true, // if you don't set this to true, you won't see any webpack-emitted assets in your serviceworker config
+      // staticFileGlobsIgnorePatterns: [/\.png\~/, /azaki\\/], // use this to ignore sourcemap files
+      maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+    }),		    
     new HtmlWebPackPlugin({
       title: 'iDea',
       template: 'src/index.html',
@@ -80,5 +90,6 @@ module.exports = {
         }
       ]
     }),	
-  ]
+  ],
+  devServer: { port: 4545 },
 };
