@@ -28,7 +28,7 @@ export default ({route, handleRoute}) => {
         <img style={{position:'absolute', bottom:40, left: 0, transform:'scale(.5)'}} src="/img/platon-simple.png" />
       </Route>
       <CaveRoute path={'idea'} url={'/document/idea.md'} />
-      <CaveRoute path={'intro'} url={'/document/intro.md'} />
+      <CaveRoute path={'intro'} url={'/document/cave.intro.md'} />
       <CaveRoute path={'level'} url={'/document/levelSelector.md'} />
       <CaveRoute path={'history'} url={'/document/history.md'} />
       <CaveRoute path={'finale'} url={'/document/.md'} />
