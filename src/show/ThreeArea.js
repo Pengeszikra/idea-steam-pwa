@@ -3,7 +3,7 @@ import {useRef, useLayoutEffect, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
 
 export default function (props) {
-  const {canvasOpacity = true, add3DContent=()=>()=>()=>{}, canvasClasses=[]} = props;
+  const { canvasOpacity = true, add3DContent=()=>()=>()=>{}, canvasClasses=[], clickHandle=()=>{} } = props;
   const mount = useRef(null);
   const [data, setData] = useState({});
 
@@ -77,6 +77,7 @@ export default function (props) {
       className={["nosel", ...canvasClasses].join(" ")}
       ref={mount} 
       onContextMenu={event=>event.preventDefault()}
+      onClick={clickHandle}
     />
   );
 }

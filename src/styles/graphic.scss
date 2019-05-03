@@ -82,8 +82,7 @@
   &:hover { filter: none; }
 }
 
-.socrates { 
-  @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); 
+.socrates, .history-papper {   
   span {
     color: #222;
     display: block;
@@ -91,8 +90,18 @@
     margin: 25vmin 4vmin;
     font-weight: 700;
     line-height: 1.3em;
-    font-size: 1em;
+    font-size: .8em;
   }  
+}
+
+.socrates { @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); }
+.history-papper { 
+  @include bimage('/img/gui/papper.png', 100vmin, 80vmin);  
+  top: 13vmin;
+  span {
+    margin: 5vmin 4vmin;
+    font-size: .64em;
+  }
 }
 
 .header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 13.5vmin); }
