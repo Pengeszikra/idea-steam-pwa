@@ -20,6 +20,10 @@ const manifestData = {
 }
 	
 module.exports = {
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: 'idea.js'
+  },
   module: {
     rules: [      
       {
@@ -70,6 +74,16 @@ module.exports = {
       title: 'iDea',
       template: 'src/index.html',
     }),
+    /*
+    new HtmlWebpackPlugin({
+      title: 'iDea',
+      mobile: true,
+      favicon: './assets/img/_icons/' + config.FAV_ICON,
+      template: './src/index.html',				
+      inject: false,
+      baseUrl: '',
+    }),
+    */
     new WebpackModules(),
     new WebpackPwaManifest({
       filename: 'manifest.json',
