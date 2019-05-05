@@ -94,7 +94,7 @@
   }  
 }
 
-.socrates { @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 40vmin, 1vmin); }
+.socrates { @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 20vmin, 1vmin); }
 .history-papper { 
   @include bimage('/img/gui/papper.png', 100vmin, 80vmin);  
   top: 13vmin;

@@ -37,6 +37,7 @@ import {
 import showtime from './showtime';
 import {Add3D, GEOMS, GameWith3dObjects} from '../show/Geometries';
 import DescriptionOfHistory from '../show/DescriptionOfHistory';
+import speaks from '../caves/speaks';
 
 const HeaderBar = ({score, saved, setWay}) => (
   <HeaderBarSection>
@@ -116,6 +117,7 @@ export default ({setWay}) => {
   const handleRoute = path => event => dispatch(changeRoute(path));
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
+  const [speakNumber, setSpeakNumber] = useState(0);
     
   const [scene, setScene] = useState(1);
 
@@ -128,21 +130,24 @@ export default ({setWay}) => {
     setSocrates(false)
     setMapVisiblity(false)
   };  
-  const handleHistory = () => setSocrates(!hasSocrates);  
+  const handleHistory = () => {
+    setSocrates(!hasSocrates);
+    hasSocrates && setSpeakNumber(speakNumber < speaks.length - 1 ? speakNumber + 1 : 0);
+  };  
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
 
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame}/>            
-      <SocratesSpeaking show={hasSocrates && !mapVisible}><span>{cave_2_1.intro(avatarNames(level))}</span></SocratesSpeaking>
+      <SocratesSpeaking show={hasSocrates && !mapVisible}><span>{speaks[speakNumber](avatarNames(level))}</span></SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 
         handleMap={handleMap} 
         handlePrisoner={handlePrisoner} 
         handleInventory={handleInventory} 
         handleHistory={handleHistory}
-      />
+      />      
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
       <HeaderBar score={score} saved={saved} setWay={setWay} />
       {/* <DescriptionOfHistory show={hasSocrates && !mapVisible}/> */}
