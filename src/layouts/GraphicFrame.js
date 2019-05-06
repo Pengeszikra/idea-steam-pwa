@@ -67,14 +67,14 @@ const CityWithLogo = () => (
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
-    <EntranceCave><Add3D content={GEOMS.box}/></EntranceCave>,
+    <EntranceCave></EntranceCave>,
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,
     <WaterFallCave><Add3D content={GEOMS.icosahedron}/></WaterFallCave>,
     <LightCave><Add3D content={GEOMS.octahedron}/></LightCave>,
     <FangCave><Add3D content={GEOMS.plane}/></FangCave>,
-    <StairCaseCave />,
+    <StairCaseCave><Add3D content={GEOMS.box}/></StairCaseCave>,
     <NeedleCave><Add3D content={GEOMS.tetrahedron}/></NeedleCave>,
     <ChainCave><Add3D content={GEOMS.cone}/></ChainCave>,
     <BuildingCave />,
@@ -100,8 +100,8 @@ const MapWithHero = showtime( ({addScore, savePrisoner}) => {
     <>
       <InteractiveMap onClick={handleClick} />
       <AvatarOnMap style={{
-        top: `${(y+3)}vmin`,
-        left: `${(x+3)}vmin`,
+        top: `${(y * 1.9)}vmin`,
+        left: `${(x * 1.9)}vmin`,
       }}/>
     </>
   )
@@ -122,6 +122,8 @@ export default ({setWay}) => {
   const [scene, setScene] = useState(1);
 
   const [gameOngoing, playGame] = useState(false);
+
+  useEffect(()=>{console.log('--- graphic-frame-v0.3.4.5 ---')},[])
   
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleInventory = () => setScene(1);

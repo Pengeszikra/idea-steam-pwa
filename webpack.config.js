@@ -6,9 +6,11 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
 const version = require('./version');
 const path = require('path');
+
 const config = {
   APP_NAME: 'iDea',
   SHORT_NAME: 'iDea',
+  BASE_URL: '',
   PWA_ICON: 'pwa-icon-idea.png',
   projectDescription: 'Geometriai feladványokkal tűzdelt játékos applikáció a Platón barlangjában.',
 }
@@ -19,11 +21,12 @@ const manifestData = {
   orientation: "portrait",
 }
 	
-module.exports = {
+module.exports = { 
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: 'idea.js'
   },
+
   module: {
     rules: [      
       {
@@ -53,6 +56,7 @@ module.exports = {
       },   
     ]
   },
+
   plugins: [
     new CopyWebpackPlugin(
       [
@@ -67,23 +71,22 @@ module.exports = {
       ],
       stripPrefix: '/assets/', // stripPrefixMulti is also supported
       mergeStaticsConfig: true, // if you don't set this to true, you won't see any webpack-emitted assets in your serviceworker config
-      // staticFileGlobsIgnorePatterns: [/\.png\~/, /azaki\\/], // use this to ignore sourcemap files
       maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
     }),		    
     new HtmlWebPackPlugin({
-      title: 'iDea',
-      template: 'src/index.html',
+      filename: 'app.html',
+      template: 'src/app.html',
+      inject: true,
+      appMountId: 'app',
     }),
-    /*
-    new HtmlWebpackPlugin({
-      title: 'iDea',
+    new HtmlWebPackPlugin({
+      title: config.APP_NAME,
       mobile: true,
-      favicon: './assets/img/_icons/' + config.FAV_ICON,
-      template: './src/index.html',				
+      favicon: './favicon.ico',
+      template: './src/index.html',
       inject: false,
-      baseUrl: '',
+      baseUrl: config.BASE_URL,
     }),
-    */
     new WebpackModules(),
     new WebpackPwaManifest({
       filename: 'manifest.json',

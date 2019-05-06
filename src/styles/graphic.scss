@@ -18,31 +18,31 @@
   position: relative;
   display: block;
   height: 100vh;
-  width: 60.47vh;
+  width: 100vw;
   overflow: hidden;
   background: #000;
 }
 
-.play-city { @include bimage('/img/caves/city.png', 100vmin, 100vmin); }
-.entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vmin); }
+.play-city { @include bimage('/img/caves/city.png', 100vmin, 100vh); }
+.entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vh); }
 
-.play-blue-cave { @include bimage('/img/caves/blue-cave.png', 100vmin, 100vmin); }
-.play-red-cave { @include bimage('/img/caves/red-cave.png', 100vmin, 100vmin); }
-.long-cave { @include bimage('/img/caves/barlang-01.png', 100vmin, 100vmin); }
-.waterfall-cave { @include bimage('/img/caves/waterfall-cave.png', 100vmin, 100vmin); }
-.light-cave { @include bimage('/img/caves/light-cave.png', 100vmin, 100vmin); }
-.fang-cave { @include bimage('/img/caves/fang-cave.png', 100vmin, 100vmin); }
-.needle-cave { @include bimage('/img/caves/needle-cave.png', 100vmin, 100vmin); }
-.staircase-cave { @include bimage('/img/caves/staircase-cave.png', 100vmin, 100vmin); }
-.building-cave { @include bimage('/img/caves/building-cave.png', 100vmin, 100vmin); }
-.chain-cave { @include bimage('/img/caves/chain-cave.png', 100vmin, 100vmin); }
-.wheel-cave { @include bimage('/img/caves/wheel-cave.png', 100vmin, 100vmin); }
-.enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vmin); }
+.play-blue-cave { @include bimage('/img/caves/blue-cave.png', 100vmin, 100vh); }
+.play-red-cave { @include bimage('/img/caves/red-cave.png', 100vmin, 100vh); }
+.long-cave { @include bimage('/img/caves/barlang-01.png', 100vmin, 100vh); }
+.waterfall-cave { @include bimage('/img/caves/waterfall-cave.png', 100vmin, 100vh); }
+.light-cave { @include bimage('/img/caves/light-cave.png', 100vmin, 100vh); }
+.fang-cave { @include bimage('/img/caves/fang-cave.png', 100vmin, 100vh); }
+.needle-cave { @include bimage('/img/caves/needle-cave.png', 100vmin, 100vh); }
+.staircase-cave { @include bimage('/img/caves/staircase-cave.png', 100vmin, 100vh); }
+.building-cave { @include bimage('/img/caves/building-cave.png', 100vmin, 100vh); }
+.chain-cave { @include bimage('/img/caves/chain-cave.png', 100vmin, 100vh); }
+.wheel-cave { @include bimage('/img/caves/wheel-cave.png', 100vmin, 100vh); }
+.enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vh); }
 
-.game-1 { @include bimage('/img/gui/game-1.png', 100vmin, 100vmin, 7vmin); }
+.game-1 { @include bimage('/img/gui/game-1.png', 100vmin, 100vh, 7vmin); }
 
 .small-logo { 
-  @include bimage('/img/gui/small-logo.png', 50vmin, 18vmin, 65vmin, 13vmin); 
+  @include bimage('/img/gui/small-logo.png', 63vmin, 36vmin, 102vmin, 19vmin); 
 }
 
 .zoom-in {
@@ -86,15 +86,15 @@
   span {
     color: #222;
     display: block;
-    width: 50vmin;    
-    margin: 25vmin 4vmin;
+    width: 85vmin;    
+    margin: 40vmin 6vmin;
     font-weight: 700;
     line-height: 1.3em;
-    font-size: .8em;
+    font-size: 1em;
   }  
 }
 
-.socrates { @include bimage('/img/gui/speak.png', 100vmin, 66vmin, 20vmin, 1vmin); }
+.socrates { @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin); }
 .history-papper { 
   @include bimage('/img/gui/papper.png', 100vmin, 80vmin);  
   top: 13vmin;
@@ -104,25 +104,25 @@
   }
 }
 
-.header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 13.5vmin); }
-.bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 18vmin, 84vmin); }
+.header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 23vmin); }
+.bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 32vmin, 136vmin); }
 .bottom-bar > div { &:hover { filter: brightness(1.2); }}
-  .bottom-map { @include bimage('/img/gui/map.png', 13vmin, 13vmin, 3vmin, 2vmin); }
-  .bottom-inventory { @include bimage('/img/gui/bag.png', 13vmin, 13vmin, 4vmin, 18vmin); }
-  .bottom-saved { @include bimage('/img/gui/saved.png', 13vmin, 13vmin, 5vmin, 32vmin); }
-  .bottom-history { @include bimage('/img/gui/pergamen.png', 13vmin, 13vmin, 4vmin, 48vmin); }
+  .bottom-map { @include bimage('/img/gui/map.png', 18vmin, 18vmin, 10vmin, 5vmin); }
+  .bottom-inventory { @include bimage('/img/gui/bag.png', 18vmin, 18vmin, 10vmin, 31vmin); }
+  .bottom-saved { @include bimage('/img/gui/saved.png', 18vmin, 18vmin, 10vmin, 55vmin); }
+  .bottom-history { @include bimage('/img/gui/pergamen.png', 18vmin, 18vmin, 10vmin, 80vmin); }
 
 
 
 
 .lvl-1-char { 
-  @include bimage('/img/gui/lvl-1-char.png', 13vmin, 13vmin, 1vmin, 2vmin); 
+  @include bimage('/img/gui/lvl-1-char.png', 18vmin, 18vmin, 2vmin, 4vmin); 
 }
 
 .avatar-on-map {
   transform: scale(0);
-  width: 10vmin;
-  height: 10vmin;
+  width: 14vmin;
+  height: 14vmin;
   transition: top 500ms, left 500ms;
   transform-origin: bottom center;
   animation: zoom-in 300ms 600ms forwards ease-in;
@@ -131,7 +131,7 @@
 
 
 .interactive-map { 
-  @include bimage('/img/gui/interacive-map.png', 70vmin, 75vmin, 11vmin, 2vmin); 
+  @include bimage('/img/gui/interacive-map.png', 100vmin, 133vmin, 15vmin, 1vmin); 
   position: relative;
   animation: zoom-in 300ms forwards ease-in;
   transform-origin: center center;
@@ -139,28 +139,29 @@
 
 .actual-score, .saved-prisoner {
   position: absolute;
-  font-size: 3vmin;
+  font-size: 4vmin;
 }
 
 .actual-score {
   color: gold;
-  top: 4vmin;
-  left: 30vmin;
+  top: 7vmin;
+  left: 50vmin;
 }
 
 .saved-prisoner {
   color: blueviolet;
-  top: 4vmin;
-  left: 40vmin;  
+  top: 7vmin;
+  left: 67vmin;  
 }
 
 .small-3d, .area-3d-canvas {
     position: absolute; 
     background: transparent; 
-    width: 65vw;     
-    min-height: 80vh;
-    top: 20vh; 
-    left:0; 
+    width: 100vmin;     
+    min-height: 100vh;
+    top: 0; 
+    left: 0; 
+    overflow: hidden;
 }
 
 .small-3d {
