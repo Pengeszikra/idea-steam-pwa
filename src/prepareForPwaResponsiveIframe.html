@@ -18,15 +18,17 @@
       display: flex; 
       flex-direction: column;
       justify-content: center;
-      height: 100%; 
+      height: 100vh;
+      min-height: 100vh;
+      position: relative;
     }
     iframe { border: none; width: 100vw; height: 100vh; }      
-
-    @media (max-aspect-ratio: 16/9) { iframe { height: 56.25vw; }  }
-    @media (min-aspect-ratio: 20/8) {
+    @media (max-aspect-ratio: 8/20 ){
       body, html { align-content: center; flex-direction: row; }
-      iframe { width: 250vh; }
-    }
+      iframe { width: 40vh; }
+    }     
+    @media (min-aspect-ratio: 9/16)
+    { iframe { width: 40vh; }  }
   </style>
 </head>
 <body>
@@ -43,13 +45,5 @@
     }
     addEventListener('message', removeLoader ,false);
   </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133178768-1"></script> -->
-  <!-- <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-133178768-1');
-  </script> -->
 </body>
 </html>

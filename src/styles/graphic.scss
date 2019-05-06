@@ -23,21 +23,21 @@
   background: #000;
 }
 
-.play-city { @include bimage('/img/gui/city.png', 100vmin, 100vmin); }
-.entrance-cave { @include bimage('/img/gui/entrance.png', 100vmin, 100vmin); }
+.play-city { @include bimage('/img/caves/city.png', 100vmin, 100vmin); }
+.entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vmin); }
 
-.play-blue-cave { @include bimage('/img/gui/blue-cave.png', 100vmin, 100vmin); }
-.play-red-cave { @include bimage('/img/gui/red-cave.png', 100vmin, 100vmin); }
-.long-cave { @include bimage('/img/gui/barlang-01.png', 100vmin, 100vmin); }
-.waterfall-cave { @include bimage('/img/gui/waterfall-cave.png', 100vmin, 100vmin); }
-.light-cave { @include bimage('/img/gui/light-cave.png', 100vmin, 100vmin); }
-.fang-cave { @include bimage('/img/gui/fang-cave.png', 100vmin, 100vmin); }
-.needle-cave { @include bimage('/img/gui/needle-cave.png', 100vmin, 100vmin); }
-.staircase-cave { @include bimage('/img/gui/staircase-cave.png', 100vmin, 100vmin); }
-.building-cave { @include bimage('/img/gui/building-cave.png', 100vmin, 100vmin); }
-.chain-cave { @include bimage('/img/gui/chain-cave.png', 100vmin, 100vmin); }
-.wheel-cave { @include bimage('/img/gui/wheel-cave.png', 100vmin, 100vmin); }
-.enginer-cave { @include bimage('/img/gui/enginer-cave.png', 100vmin, 100vmin); }
+.play-blue-cave { @include bimage('/img/caves/blue-cave.png', 100vmin, 100vmin); }
+.play-red-cave { @include bimage('/img/caves/red-cave.png', 100vmin, 100vmin); }
+.long-cave { @include bimage('/img/caves/barlang-01.png', 100vmin, 100vmin); }
+.waterfall-cave { @include bimage('/img/caves/waterfall-cave.png', 100vmin, 100vmin); }
+.light-cave { @include bimage('/img/caves/light-cave.png', 100vmin, 100vmin); }
+.fang-cave { @include bimage('/img/caves/fang-cave.png', 100vmin, 100vmin); }
+.needle-cave { @include bimage('/img/caves/needle-cave.png', 100vmin, 100vmin); }
+.staircase-cave { @include bimage('/img/caves/staircase-cave.png', 100vmin, 100vmin); }
+.building-cave { @include bimage('/img/caves/building-cave.png', 100vmin, 100vmin); }
+.chain-cave { @include bimage('/img/caves/chain-cave.png', 100vmin, 100vmin); }
+.wheel-cave { @include bimage('/img/caves/wheel-cave.png', 100vmin, 100vmin); }
+.enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vmin); }
 
 .game-1 { @include bimage('/img/gui/game-1.png', 100vmin, 100vmin, 7vmin); }
 
