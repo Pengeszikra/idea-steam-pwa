@@ -1,0 +1,55 @@
+/* The CSS import
+ *   @import url('https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:400,500');
+ * results in a number of @font-face {...} rules. From those, we keep only those for
+ * latin and latin-ext
+ * We use a locally served version of the fonts in order to protect privacy
+ */
+/* Fira Sans Extra Condensed Regular latin-ext */
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fira Sans Extra Condensed Regular'),
+       local('FiraSansExtraCondensed-Regular'),
+       /* url(https://fonts.gstatic.com/s/firasansextracondensed/v2/NaPKcYDaAO5dirw6IaFn7lPJFqXmS-M9Atn3wgda1fGuukef.woff2) */
+       url("/fonts/FiraSansExtraCondensed-Regular-latin-ext.woff2")
+       format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Fira Sans Extra Condensed Regular latin */
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fira Sans Extra Condensed Regular'),
+       local('FiraSansExtraCondensed-Regular'),
+       /* url(https://fonts.gstatic.com/s/firasansextracondensed/v2/NaPKcYDaAO5dirw6IaFn7lPJFqXmS-M9Atn3wgda1f-uug.woff2) */
+       url("/fonts/FiraSansExtraCondensed-Regular-latin.woff2")
+       format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Fira Sans Extra Condensed Medium latin-ext */
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Fira Sans Extra Condensed Medium'),
+       local('FiraSansExtraCondensed-Medium'),
+       /* url(https://fonts.gstatic.com/s/firasansextracondensed/v2/NaPPcYDaAO5dirw6IaFn7lPJFqXmS-M9Atn3wgda3QyNr3a-oXZ-.woff2) */
+       url("/fonts/FiraSansExtraCondensed-Medium-latin-ext.woff2")
+       format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Fira Sans Extra Condensed Medium latin */
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Fira Sans Extra Condensed Medium'),
+       local('FiraSansExtraCondensed-Medium'),
+       /* url(https://fonts.gstatic.com/s/firasansextracondensed/v2/NaPPcYDaAO5dirw6IaFn7lPJFqXmS-M9Atn3wgda3QyNr3i-oQ.woff2) */
+       url("/fonts/FiraSansExtraCondensed-Medium-latin.woff2")
+       format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
