@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {render} from 'react-dom';
 import ThreeDimensionTest from './show/ThreeDimensionTest';
+import './styles/font.scss';
 import './styles/global.scss';
 import Cave from './caves/Cave';
 import AppFrame from './layouts/AppFrame';

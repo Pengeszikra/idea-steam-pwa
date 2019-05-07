@@ -123,7 +123,7 @@ export default ({setWay}) => {
 
   const [gameOngoing, playGame] = useState(false);
 
-  useEffect(()=>{console.log('--- graphic-frame-v0.3.4.5 ---')},[])
+  // useEffect(()=>{console.log('--- graphic-frame-v0.3.4.5 ---')},[])
   
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleInventory = () => setScene(1);
@@ -142,7 +142,7 @@ export default ({setWay}) => {
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame}/>            
-      <SocratesSpeaking show={hasSocrates && !mapVisible}><span>{speaks[speakNumber](avatarNames(level))}</span></SocratesSpeaking>
+      <SocratesSpeaking show={hasSocrates && !mapVisible}><span style={{top:`${speaks[speakNumber][1]}vmin`}}>{speaks[speakNumber][0](avatarNames(level))}</span></SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 
         handleMap={handleMap} 
