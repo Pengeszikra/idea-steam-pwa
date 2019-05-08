@@ -139,10 +139,20 @@ export default ({setWay}) => {
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
 
+  useEffect(()=>{
+    console.log('-------------')
+    console.log(`${speaks[speakNumber][1]}vmin`)
+  
+  })
+
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame}/>            
-      <SocratesSpeaking show={hasSocrates && !mapVisible}><span style={{top:`${speaks[speakNumber][1]}vmin`}}>{speaks[speakNumber][0](avatarNames(level))}</span></SocratesSpeaking>
+      <SocratesSpeaking show={hasSocrates && !mapVisible}>
+        <span style={{top:`${speaks[speakNumber][1]}vmin`}}>
+          {speaks[speakNumber][0](avatarNames(level))}
+        </span>
+      </SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 
         handleMap={handleMap} 

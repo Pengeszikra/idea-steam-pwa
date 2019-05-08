@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const version = require('./version');
 const path = require('path');
 
@@ -58,6 +60,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin(
       [
         {from: './assets/', to: './'},
@@ -108,5 +111,8 @@ module.exports = {
       ]
     }),	
   ],
-  devServer: { port: 4545 },
+  devServer: { 
+    port: 4545,
+    clientLogLevel: 'none',
+  },
 };

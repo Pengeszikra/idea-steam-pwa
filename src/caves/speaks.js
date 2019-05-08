@@ -16,11 +16,11 @@ import {
 } from "./applicationData";
 
 export default [
-  [entrance.intro, 100],
-  [entrance.mission, 100],
-  [entrance.gratulation, 100],
+  [entrance.intro, 80],
+  [entrance.mission, 50],
+  [entrance.gratulation, 70],
   
-  [cave_1_1.intro, 100],
+  [cave_1_1.intro, 120],
   [cave_1_1.intro_2, 100],
   [cave_1_1.duality, 100],
   [cave_1_1.mission, 100],
