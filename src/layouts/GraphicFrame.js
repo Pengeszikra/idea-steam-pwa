@@ -148,10 +148,8 @@ export default ({setWay}) => {
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame}/>            
-      <SocratesSpeaking show={hasSocrates && !mapVisible}>
-        <span style={{top:`${speaks[speakNumber][1]}vmin`}}>
-          {speaks[speakNumber][0](avatarNames(level))}
-        </span>
+      <SocratesSpeaking show={hasSocrates && !mapVisible} style={{top:`${speaks[speakNumber][1]}vmin`}} data-num={speakNumber}>
+        <span>{speaks[speakNumber][0](avatarNames(level))}</span>
       </SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 

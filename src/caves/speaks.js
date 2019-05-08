@@ -16,22 +16,22 @@ import {
 } from "./applicationData";
 
 export default [
-  [entrance.intro, 80],
-  [entrance.mission, 50],
-  [entrance.gratulation, 70],
+  [entrance.intro, 66],
+  [entrance.mission, 100],
+  [entrance.gratulation, 100],
   
-  [cave_1_1.intro, 120],
-  [cave_1_1.intro_2, 100],
-  [cave_1_1.duality, 100],
-  [cave_1_1.mission, 100],
+  [cave_1_1.intro, 95],
+  [cave_1_1.intro_2, 64],
+  [cave_1_1.duality, 78],
+  [cave_1_1.mission, 110],
 
-  [cave_2_1.intro, 100],
-  [cave_2_1.mission, 100],
-  [cave_2_1.extraInfo, 100],
+  [cave_2_1.intro, 78],
+  [cave_2_1.mission, 78],
+  [cave_2_1.extraInfo, 110],
 
-  [cave_2_2.intro, 100],
-  [cave_2_2.mission, 100],
-  [cave_2_2.info, 100],
+  [cave_2_2.intro, 87],
+  [cave_2_2.mission, 87],
+  [cave_2_2.info, 81],
   [cave_2_2.extraInfo, 100],  
 
   [cave_2_3.mission, 100],

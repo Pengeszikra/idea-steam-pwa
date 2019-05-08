@@ -105,7 +105,7 @@
 }
 
 .header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 23vmin); }
-.bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 32vmin, 148vmin); }
+.bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 32vmin, 149vmin); }
 .bottom-bar > div { &:hover { filter: brightness(1.2); }}
   .bottom-map { @include bimage('/img/gui/map.png', 18vmin, 18vmin, 10vmin, 5vmin); }
   .bottom-inventory { @include bimage('/img/gui/bag.png', 18vmin, 18vmin, 10vmin, 31vmin); }
