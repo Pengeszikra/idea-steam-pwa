@@ -35,7 +35,7 @@ import {
   EnginerCave,
 } from '../layouts/divStore';
 import showtime from './showtime';
-import {Add3D, GEOMS, GameWith3dObjects} from '../show/Geometries';
+import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import speaks from '../caves/speaks';
 
@@ -67,7 +67,7 @@ const CityWithLogo = () => (
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
-    <EntranceCave></EntranceCave>,
+    <EntranceCave><Minigame /></EntranceCave>,
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,
@@ -138,12 +138,6 @@ export default ({setWay}) => {
   };  
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
-
-  useEffect(()=>{
-    console.log('-------------')
-    console.log(`${speaks[speakNumber][1]}vmin`)
-  
-  })
 
   return (
     <main className="graph-frame">      

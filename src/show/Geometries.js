@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import ThreeArea from '../show/ThreeArea';
 import * as THREE from 'three';
+import {useGesture} from 'react-with-gesture';
 
 export const GEOMS = {
   box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),
@@ -22,15 +23,15 @@ function makeShape( geomMaker, w , h , d , color, opacity = .7 ) {
 const turnContent = geom => ({scene}) => {
   // make 3d object
   const RAD = 180/Math.PI
-  const box = makeShape(geom, 100, 100, 100, 0xBBCCDD );
-  box.rotateZ(12 / RAD);
-  box.rotateX(32 / RAD);    
-  scene.add(box); 
+  const mesh = makeShape(geom, 100, 100, 100, 0xBBCCDD );
+  mesh.rotateZ(12 / RAD);
+  mesh.rotateX(32 / RAD);    
+  scene.add(mesh); 
   // animation
   return () => {
-    const boxMoving = setInterval( () => box.rotateY( 2/RAD ) , 30 );
+    const meshMoving = setInterval( () => mesh.rotateY( 2/RAD ) , 30 );
     // unsubscribe
-    return () => clearInterval(boxMoving);
+    return () => clearInterval(meshMoving);
   }
 }
 
@@ -48,4 +49,42 @@ export const GameWith3dObjects = () => {
       <ThreeArea canvasClasses={['small-3d', 'p7']} add3DContent={turnContent(GEOMS.plane)}/>
     </>
   )
+}
+
+export const minigameTest = ({scene}) => {
+  const RAD = 180/Math.PI
+  const box = makeShape(GEOMS.box, 100, 100, 100, 0xBBCCDD, 1 );
+  box.rotateZ(22/RAD).rotateX(32/RAD);
+  scene.add(box);
+  const onClick = e => console.log(e);
+  scene.addEventListener('click', onClick);
+
+  return () => {
+    const meshMoving = setInterval( () => {} , 30 );
+    return () => {
+      clearInterval(meshMoving)
+      scene.removeEventListener('click', onClick);
+    };
+  }
+};
+
+
+export const Minigame = () => {
+  const [bind, {local: [x, y]}] = useGesture();
+
+  return (
+    <>
+      <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={minigameTest}/>
+      <div {...bind()} style={{
+        transform: `translate3d(${x}px, ${y}px, 0)`,
+        background: 'gold',
+        width: '14vmin',
+        height: '14vmin',
+        position: 'absolute',
+        zIndex: '500',
+        cursor: 'pointer',
+      }} />
+    </>
+    
+  );
 }
