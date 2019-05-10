@@ -164,13 +164,16 @@
     overflow: hidden;
 }
 
-.small-3d {
+.small-3d, .medium-3d {
   top: initial;
   left: initial;
   width: 20vmin;
   min-height: 20vmin;
-  transform: scale(1.4);
+  position: absolute;
+  // background: peru;
 }
+
+.medium-3d {width: 40vmin; height:40vmin; }
 
 .p1 { top: 20vmin; left:  0vmin; }
 .p2 { top: 20vmin; left: 14vmin; }
@@ -179,3 +182,4 @@
 .p5 { top: 40vmin; left:  0vmin; }
 .p6 { top: 40vmin; left: 14vmin; }
 .p7 { top: 40vmin; left: 28vmin; }
+.p8 { top: 40vmin; left: 28vmin; }

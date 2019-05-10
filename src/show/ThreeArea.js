@@ -3,21 +3,17 @@ import {useRef, useLayoutEffect, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
 
 export default function (props) {
-  const { canvasOpacity = true, add3DContent=()=>()=>()=>{}, canvasClasses=[], clickHandle=()=>{} } = props;
+  const { 
+    canvasOpacity = true, 
+    add3DContent=()=>()=>()=>{}, 
+    canvasClasses=[], 
+    clickHandle=()=>{},
+    ...restProps
+  } = props;
   const mount = useRef(null);
   const [data, setData] = useState({});
 
   useLayoutEffect(()=>{setData({isMounted:true})}, [mount]);
-
-  function makeBox( w , h , d , color, opacity = .7 ) {
-    const geom = new THREE.BoxGeometry( w , h , d, 1, 1, 1 );    
-      geom.translate( 0 , 0 , d/2 );
-    const flatShading = THREE.FlatShading;
-    const transparent = true; //opacity < 1;
-    // const mat = new THREE.MeshBasicMaterial( {color, flatShading, opacity , transparent, wireframe: true } );
-    const mat = new THREE.MeshLambertMaterial( {color, flatShading, opacity , transparent } );
-    return new THREE.Mesh( geom, mat );
-  }
 
   useEffect(()=>{
     const {clientWidth, clientHeight} = mount.current;
@@ -78,6 +74,7 @@ export default function (props) {
       ref={mount} 
       onContextMenu={event=>event.preventDefault()}
       onClick={clickHandle}
+      {...restProps}
     />
   );
 }

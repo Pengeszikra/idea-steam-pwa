@@ -20,10 +20,10 @@ function makeShape( geomMaker, w , h , d , color, opacity = .7 ) {
   return new THREE.Mesh( geom, mat );
 }
 
-const turnContent = geom => ({scene}) => {
+const turnContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => ({scene}) => {
   // make 3d object
   const RAD = 180/Math.PI
-  const mesh = makeShape(geom, 100, 100, 100, 0xBBCCDD );
+  const mesh = makeShape(geom, w, h, d, color, opacity );
   mesh.rotateZ(12 / RAD);
   mesh.rotateX(32 / RAD);    
   scene.add(mesh); 
@@ -40,30 +40,27 @@ export const Add3D = ({content}) => <ThreeArea canvasClasses={['area-3d-canvas']
 export const GameWith3dObjects = () => {
   return (
     <>
-      <ThreeArea canvasClasses={['small-3d', 'p1']} add3DContent={turnContent(GEOMS.tetrahedron)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p2']} add3DContent={turnContent(GEOMS.dedocahedron)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p3']} add3DContent={turnContent(GEOMS.box)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p4']} add3DContent={turnContent(GEOMS.cone)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p5']} add3DContent={turnContent(GEOMS.icosahedron)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p6']} add3DContent={turnContent(GEOMS.octahedron)}/>
-      <ThreeArea canvasClasses={['small-3d', 'p7']} add3DContent={turnContent(GEOMS.plane)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p1']} add3DContent={turnContent(GEOMS.tetrahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p2']} add3DContent={turnContent(GEOMS.dedocahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p3']} add3DContent={turnContent(GEOMS.box, 200, 200, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p4']} add3DContent={turnContent(GEOMS.cone, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p5']} add3DContent={turnContent(GEOMS.icosahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p6']} add3DContent={turnContent(GEOMS.octahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p7']} add3DContent={turnContent(GEOMS.box, 5, 300, 300)}/>
     </>
   )
 }
 
 export const minigameTest = ({scene}) => {
   const RAD = 180/Math.PI
-  const box = makeShape(GEOMS.box, 100, 100, 100, 0xBBCCDD, 1 );
+  const box = makeShape(GEOMS.box, 250, 250, 250, 0xBBCCDD, 1 );
   box.rotateZ(22/RAD).rotateX(32/RAD);
   scene.add(box);
-  const onClick = e => console.log(e);
-  scene.addEventListener('click', onClick);
 
   return () => {
     const meshMoving = setInterval( () => {} , 30 );
     return () => {
       clearInterval(meshMoving)
-      scene.removeEventListener('click', onClick);
     };
   }
 };
@@ -71,20 +68,19 @@ export const minigameTest = ({scene}) => {
 
 export const Minigame = () => {
   const [bind, {local: [x, y]}] = useGesture();
+  const [bind2, {local: [x2, y2]}] = useGesture();
 
   return (
     <>
-      <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={minigameTest}/>
-      <div {...bind()} style={{
-        transform: `translate3d(${x}px, ${y}px, 0)`,
-        background: 'gold',
-        width: '14vmin',
-        height: '14vmin',
-        position: 'absolute',
-        zIndex: '500',
-        cursor: 'pointer',
-      }} />
-    </>
-    
+      <ThreeArea 
+        canvasClasses={['medium-3d']} add3DContent={minigameTest}
+        {...bind()}
+        style={{transform: `translate3d(${x}px, ${y}px, 0)`, top: `122vmin`, left: '58vmin'}} 
+      />
+      <ThreeArea 
+        {...bind2()} style={{transform: `translate3d(${x2}px, ${y2}px, 0)`, top: `122vmin`, left: '8vmin'}}
+        canvasClasses={['medium-3d']} add3DContent={turnContent(GEOMS.dedocahedron, 200)}
+      />
+    </>    
   );
 }
