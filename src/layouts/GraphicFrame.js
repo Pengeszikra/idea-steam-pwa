@@ -33,6 +33,8 @@ import {
   BuildingCave,
   WheelCave,
   EnginerCave,
+  Island,
+  SimpleDarkBg,
 } from '../layouts/divStore';
 import showtime from './showtime';
 import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
@@ -67,7 +69,9 @@ const CityWithLogo = () => (
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
-    <EntranceCave><Minigame /></EntranceCave>,
+    <Island />,
+    <SimpleDarkBg><Minigame /></SimpleDarkBg>,
+    <EntranceCave></EntranceCave>,
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,
@@ -80,8 +84,8 @@ const Scenes = ({scene, playGame}) => {
     <BuildingCave />,
     <WheelCave></WheelCave>,
     <EnginerCave />,
-    <PlayCity />,
-  ][scene % 14]
+    
+  ][scene % 15]
 }
 
 //const MapWithHero = ({position:[x,y]=[10,15]}) => {
@@ -107,7 +111,7 @@ const MapWithHero = showtime( ({addScore, savePrisoner}) => {
   )
 });
 
-const FakeGame = ({onClick}) => <Game1 onClick={onClick}><PrisonerOne /></Game1>
+const FakeGame = ({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>
 const ActualGame = showtime(FakeGame);
 const SocratesSpeaking = showtime(Socrates);
 

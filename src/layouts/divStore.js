@@ -29,3 +29,4 @@ export const [Game1] = divFactory(["game-1"]);
 export const [Circle] = divFactory(["circle"]);
 export const [PrisonerOne] = divFactory(["prisoner-1"]);
 export const [ItemOne] = divFactory(["item-1"]);
+export const [SimpleDarkBg, Island] = divFactory(["simple-dark-bg", "island"]);

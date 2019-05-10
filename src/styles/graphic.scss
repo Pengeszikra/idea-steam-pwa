@@ -23,6 +23,8 @@
   background: #000;
 }
 
+.simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); }
+.island { @include bimage('/img/caves/island.png', 100vmin, 100vh); }
 .play-city { @include bimage('/img/caves/city.png', 100vmin, 100vh); }
 .entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vh); }
 

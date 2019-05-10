@@ -116,3 +116,16 @@ module.exports = {
     clientLogLevel: 'none',
   },
 };
+
+
+/*
+
+      <ThreeArea canvasClasses={['medium-3d', 'p1']} add3DContent={turnContent(GEOMS.tetrahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p2']} add3DContent={turnContent(GEOMS.dedocahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p3']} add3DContent={turnContent(GEOMS.box, 200, 200, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p4']} add3DContent={turnContent(GEOMS.cone, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p5']} add3DContent={turnContent(GEOMS.icosahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p6']} add3DContent={turnContent(GEOMS.octahedron, 200)}/>
+      <ThreeArea canvasClasses={['medium-3d', 'p7']} add3DContent={turnContent(GEOMS.box, 5, 300, 300)}/>
+
+*/
