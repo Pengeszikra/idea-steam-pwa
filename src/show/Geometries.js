@@ -51,7 +51,20 @@ export const GameWith3dObjects = () => {
   )
 }
 
-export const minigameTest = ({scene}) => {
+export const Draggable3D = ({add3DContent, top=0, left=0, ...props}) => {
+  const [bind, {local: [x, y]}] = useGesture();
+
+  return (
+      <ThreeArea 
+        canvasClasses={['medium-3d']} add3DContent={add3DContent}
+        {...bind()}
+        style={{transform: `translate3d(${x}px, ${y}px, 0)`, top: `${top}vmin`, left: `${left}vmin`}}
+        {...props}
+      />
+  );
+}
+
+export const Custom3DContent = ({scene}) => {
   const RAD = 180/Math.PI
   const box = makeShape(GEOMS.box, 250, 250, 250, 0xBBCCDD, 1 );
   box.rotateZ(22/RAD).rotateX(32/RAD);
@@ -67,20 +80,12 @@ export const minigameTest = ({scene}) => {
 
 
 export const Minigame = () => {
-  const [bind, {local: [x, y]}] = useGesture();
-  const [bind2, {local: [x2, y2]}] = useGesture();
-
   return (
     <>
-      <ThreeArea 
-        canvasClasses={['medium-3d']} add3DContent={minigameTest}
-        {...bind()}
-        style={{transform: `translate3d(${x}px, ${y}px, 0)`, top: `122vmin`, left: '58vmin'}} 
-      />
-      <ThreeArea 
-        {...bind2()} style={{transform: `translate3d(${x2}px, ${y2}px, 0)`, top: `122vmin`, left: '8vmin'}}
-        canvasClasses={['medium-3d']} add3DContent={turnContent(GEOMS.dedocahedron, 200)}
-      />
+      <Draggable3D add3DContent={Custom3DContent} top={122} left={58} />
+      <Draggable3D add3DContent={turnContent(GEOMS.dedocahedron, 200)} top={122} left={8} />
+      <Draggable3D add3DContent={turnContent(GEOMS.icosahedron, 200)} top={80} left={8} />
+      <Draggable3D add3DContent={turnContent(GEOMS.box, 5, 300, 300)} top={80} left={58} />
     </>    
   );
 }
