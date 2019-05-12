@@ -35,6 +35,9 @@ import {
   EnginerCave,
   Island,
   SimpleDarkBg,
+  LevelTwoAvatar,
+  AvatarOneOnMap,
+  AvatarTwoOnMap,
 } from '../layouts/divStore';
 import showtime from './showtime';
 import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
@@ -42,9 +45,9 @@ import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import speaks from '../caves/speaks';
 import DraggableList from '../test/DraggableList';
 
-const HeaderBar = ({score, saved, setWay}) => (
+const HeaderBar = ({score, saved, setWay, Avatar}) => (
   <HeaderBarSection>
-    <LevelOneAvatar onClick={()=>setWay(2)} />
+    <Avatar onClick={()=>setWay(3)} />
     <ActualScore>{score}</ActualScore>
     <SavedPrisoner>{saved}</SavedPrisoner>
   </HeaderBarSection>
@@ -71,8 +74,8 @@ const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
     <Island />,
-    <SimpleDarkBg><Minigame /></SimpleDarkBg>,
-    <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,
+    <EntranceCave></EntranceCave>,
+    <SimpleDarkBg><Minigame /></SimpleDarkBg>,    
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,
@@ -90,7 +93,7 @@ const Scenes = ({scene, playGame}) => {
 }
 
 //const MapWithHero = ({position:[x,y]=[10,15]}) => {
-const MapWithHero = showtime( ({addScore, savePrisoner}) => {
+const MapWithHero = showtime( ({addScore, savePrisoner, Avatar}) => {
   const [caveNumber, setCaveNumber] = useState(0)
   const [pos, setPos] = useState(cavePositions[caveNumber])  
   const handleClick = () => {
@@ -104,7 +107,7 @@ const MapWithHero = showtime( ({addScore, savePrisoner}) => {
   return (
     <>
       <InteractiveMap onClick={handleClick} />
-      <AvatarOnMap style={{
+      <Avatar style={{
         top: `${(y * 1.9)}vmin`,
         left: `${(x * 1.9)}vmin`,
       }}/>
@@ -116,8 +119,8 @@ const FakeGame = ({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /><
 const ActualGame = showtime(FakeGame);
 const SocratesSpeaking = showtime(Socrates);
 
-export default ({setWay}) => {
-  const scoreStore = useReducer(scoreReducer, scoreInitial);  
+export default ({setWay, scoreStore}) => {
+  // const scoreStore = useReducer(scoreReducer, scoreInitial);  
   const [{route, score, saved, level}, dispatch] = scoreStore;
   const handleRoute = path => event => dispatch(changeRoute(path));
   const [mapVisible, setMapVisiblity] = useState(false);
@@ -158,9 +161,11 @@ export default ({setWay}) => {
         handleHistory={handleHistory}
       />      
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
-      <HeaderBar score={score} saved={saved} setWay={setWay} />
+      <HeaderBar score={score} saved={saved} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
       {/* <DescriptionOfHistory show={hasSocrates && !mapVisible}/> */}
-      <MapWithHero show={mapVisible} addScore={addScore} savePrisoner={savePrisoner} />      
+      <MapWithHero show={mapVisible} addScore={addScore} savePrisoner={savePrisoner} Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} /> 
     </main>  
   );
 }
+
+// <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,

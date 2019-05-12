@@ -1,8 +1,8 @@
 import React from 'react';
 import divFactory from '../layouts/divFactory';
 
-export const [HeaderBarSection, LevelOneAvatar] = divFactory(["header-bar", "lvl-1-char"]);
-export const [AvatarOnMap] = divFactory(["lvl-1-char avatar-on-map"]);
+export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory(["header-bar", "lvl-1-char", "lvl-2-char"]);
+export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-21-char avatar-on-map"]);
 
 export const [
   BottomBarSection, 
@@ -32,3 +32,7 @@ export const [ItemOne] = divFactory(["item-1"]);
 export const [SimpleDarkBg, Island] = divFactory(["simple-dark-bg", "island"]);
 
 export const [DarkGold, IntroButton] = divFactory(["dark-gold", "intro-button nosel"]);
+export const [Adeimantosz, Glaukon] = divFactory(["adeimantosz", "glaukon"]);
+
+export const [GameHolder, GeomTarget] = divFactory(["game-holder", "drop-target"]);
+

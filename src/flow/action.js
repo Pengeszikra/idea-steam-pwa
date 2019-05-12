@@ -4,6 +4,7 @@ import { actionCreator } from "../hooks/actionCreator";
 export const [ACHIVE_SCORE, achiveScore] = actionCreator('achive-score');
 export const [RELEASE_PRISONER, releasePrisoner] = actionCreator('release-prisoner');
 export const [CHANGE_ROUTE, changeRoute] = actionCreator('change-route');
+export const [SELECT_LEVEL, selectLevel] = actionCreator('select-level');
 
 export const scoreInitial = {score: 0, saved: 0, level: 1, route:'intro'};
 
@@ -12,6 +13,7 @@ export const scoreReducer = (state, {type, payload}) => {
     case ACHIVE_SCORE: return {...state, score: state.score + payload };
     case RELEASE_PRISONER: return {...state, saved: state.saved + 1};
     case CHANGE_ROUTE: return {...state, route: payload };
+    case SELECT_LEVEL: return {...state, level: payload};
     default: state;
   }
 }

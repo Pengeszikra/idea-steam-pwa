@@ -5,11 +5,11 @@ export default ({score, saved, avatarName = 'Adeimantosz', setWay}) => {
   
   return (
     <div className="header">
-      <span className="avatar avatar-level-1" onClick={()=>setWay(1)}></span>
+      <span className="avatar avatar-level-1" onClick={()=>setWay(2)}></span>
       <span className="score"><b>pont:</b>{score}</span>
       <span className="saved"><b>megmentett:</b>{saved}</span>
       <span className="timer"><b>idő:</b>{time}</span>
-      <button>setup</button>
+      <button onClick={()=>setWay(0)}>setup</button>
     </div>
   )
 }

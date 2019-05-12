@@ -2,6 +2,8 @@ import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'r
 import ThreeArea from '../show/ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-with-gesture';
+import { GameHolder, GeomTarget, IntroButton } from '../layouts/divStore';
+import { DropTarget } from 'react-dnd';
 
 export const GEOMS = {
   box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),
@@ -76,12 +78,32 @@ export const Custom3DContent = ({scene}) => {
 
 
 export const Minigame = () => {
-  return (
-    <>
+  return (    
+    <GameHolder>
+      <GeomTarget id={1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
+      <GeomTarget id={2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
+      <GeomTarget id={3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
+      <GeomTarget id={4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
+      <Draggable3D add3DContent={turnContent(GEOMS.box, 150, 150, 150)} top={122} left={58} />
+      <Draggable3D add3DContent={turnContent(GEOMS.dedocahedron, 150)} top={122} left={8} />
+      <Draggable3D add3DContent={turnContent(GEOMS.icosahedron, 150)} top={80} left={8} />
+      <Draggable3D add3DContent={turnContent(GEOMS.box, 5, 150, 150)} top={80} left={58} />
+      <IntroButton>Megoldás</IntroButton>
+    </GameHolder>
+  );
+}
+
+/*
+
+Helyezd el:
+Csúcsok száma
+Van derékszöge
+Nincs derékszöge
+
       <Draggable3D add3DContent={Custom3DContent} top={122} left={58} />
       <Draggable3D add3DContent={turnContent(GEOMS.dedocahedron, 200)} top={122} left={8} />
       <Draggable3D add3DContent={turnContent(GEOMS.icosahedron, 200)} top={80} left={8} />
       <Draggable3D add3DContent={turnContent(GEOMS.box, 5, 300, 300)} top={80} left={58} />
-    </>    
-  );
-}
+
+
+*/

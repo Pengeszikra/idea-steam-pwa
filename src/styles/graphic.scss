@@ -53,7 +53,7 @@
   position: relative;
   color: #000;
   text-align: center;
-  line-height: 20vmin;
+  line-height: 19vmin;
   font-size: 2em;
   font-weight: 700;
   &:hover {
@@ -117,17 +117,24 @@
     width: 85vmin;    
     margin: 40vmin 6vmin;
     font-weight: 700;
-    line-height: 1.3em;
-    font-size: 1.4em;
+    line-height: 1.3em;    
   }  
 }
 
-.socrates { @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin); }
+.socrates {
+  @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin); 
+  span {
+    line-height: 1.5em;
+    font-size: 1.5em;  
+  }
+}
 .history-papper { 
   @include bimage('/img/gui/papper.png', 95vmin, 133vmin, 25vmin, 2vmin);  
+  animation: zoom-in 200ms forwards ease-in;
+  transform-origin: center bottom;
   span {
-    margin: 11vmin 7vmin;
-    font-size: 1.1em;
+    margin: 9vmin 7vmin;
+    font-size: 1.2em;
   }
 }
 
@@ -142,9 +149,8 @@
 
 
 
-.lvl-1-char { 
-  @include bimage('/img/gui/lvl-1-char.png', 18vmin, 18vmin, 2vmin, 4vmin); 
-}
+.lvl-1-char { @include bimage('/img/gui/lvl-1-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
+.lvl-2-char { @include bimage('/img/gui/lvl-2-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
 
 .avatar-on-map {
   transform: scale(0);
@@ -166,6 +172,7 @@
 
 .actual-score, .saved-prisoner {
   position: absolute;
+  user-select: none;
   font-size: 4vmin;
 }
 
@@ -210,3 +217,34 @@
 .p6 { top: 40vmin; left: 14vmin; }
 .p7 { top: 40vmin; left: 28vmin; }
 .p8 { top: 40vmin; left: 28vmin; }
+
+.glaukon  { 
+  @include bimage('/img/gui/glaukon.png', 44vmin, 103vmin, unset, 4vmin); 
+  bottom: 11vmin;
+}
+.adeimantosz  { 
+  @include bimage('/img/gui/adeimantosz.png', 53vmin, 103vmin, unset, -6vmin);
+  bottom: 15vmin;
+ }
+
+ // 53 103 -6 15
+
+ .game-holder {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: space-evenly;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+ }
+
+ .drop-target {
+  @include bimage('/img/gui/drop-target.png', 40vmin, 40vmin);
+  position: relative;
+  color: #000;  
+  padding: 3em;   
+ }
