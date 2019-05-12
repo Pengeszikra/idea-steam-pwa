@@ -25,6 +25,7 @@
 
 .simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); }
 .island { @include bimage('/img/caves/island.png', 100vmin, 100vh); }
+.dark-gold { @include bimage('/img/gui/dark-gold-intro.png', 100vmin, 100vh); }
 .play-city { @include bimage('/img/caves/city.png', 100vmin, 100vh); }
 .entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vh); }
 
@@ -46,6 +47,31 @@
 .small-logo { 
   @include bimage('/img/gui/small-logo.png', 63vmin, 36vmin, 102vmin, 19vmin); 
 }
+
+.intro-button { 
+  @include bimage('/img/gui/intro-button.png', 53vmin, 20vmin); 
+  position: relative;
+  color: #000;
+  text-align: center;
+  line-height: 20vmin;
+  font-size: 2em;
+  font-weight: 700;
+  &:hover {
+    filter: brightness(1.2);
+  }
+  user-select: none;
+}
+
+.intro-button-holder {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  position: absolute;
+  bottom: 1em;
+  left: 0;
+}
+
 
 .zoom-in {
   animation: zoom-in 300ms forwards ease-in;
@@ -98,11 +124,10 @@
 
 .socrates { @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin); }
 .history-papper { 
-  @include bimage('/img/gui/papper.png', 100vmin, 80vmin);  
-  top: 13vmin;
+  @include bimage('/img/gui/papper.png', 95vmin, 133vmin, 25vmin, 2vmin);  
   span {
-    margin: 5vmin 4vmin;
-    font-size: .64em;
+    margin: 11vmin 7vmin;
+    font-size: 1.1em;
   }
 }
 

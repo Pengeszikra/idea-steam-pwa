@@ -1,0 +1,16 @@
+import React, {useState} from 'react';
+import { DarkGold, IntroButton } from '../layouts/divStore';
+import DescriptionOfHistory from '../show/DescriptionOfHistory';
+
+export default ({setWay}) => {
+  const [hasHistory, setHistory] = useState(false);
+  return (
+    <DarkGold>
+      <div className='intro-button-holder'>
+        <IntroButton onClick={()=>setHistory(!hasHistory)}>Történet</IntroButton>
+        <IntroButton onClick={()=>setWay(1)}>Kaland</IntroButton>
+      </div>
+      <DescriptionOfHistory show={hasHistory} />
+    </DarkGold>
+  );
+}

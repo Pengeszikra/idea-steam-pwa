@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import ThreeArea from '../show/ThreeArea';
 import * as THREE from 'three';
-import {useGesture} from 'react-with-gesture';
+import { useGesture } from 'react-with-gesture';
 
 export const GEOMS = {
   box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),

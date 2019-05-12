@@ -40,6 +40,7 @@ import showtime from './showtime';
 import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import speaks from '../caves/speaks';
+import DraggableList from '../test/DraggableList';
 
 const HeaderBar = ({score, saved, setWay}) => (
   <HeaderBarSection>
@@ -71,7 +72,7 @@ const Scenes = ({scene, playGame}) => {
     <CityWithLogo />,
     <Island />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
-    <EntranceCave></EntranceCave>,
+    <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,
