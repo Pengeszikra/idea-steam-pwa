@@ -37,6 +37,13 @@ const turnContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => (
   }
 }
 
+const showContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => ({scene}) => {
+  const RAD = 180/Math.PI
+  const mesh = makeShape(geom, w, h, d, color, opacity );
+  scene.add(mesh); 
+  return () => { return () => {}; }
+}
+
 export const Add3D = ({content}) => <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(content)}/>;
 
 export const GameWith3dObjects = () => {
@@ -79,31 +86,18 @@ export const Custom3DContent = ({scene}) => {
 
 export const Minigame = () => {
   return (    
-    <GameHolder>
-      <GeomTarget id={1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
-      <GeomTarget id={2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
-      <GeomTarget id={3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
-      <GeomTarget id={4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
-      <Draggable3D add3DContent={turnContent(GEOMS.box, 150, 150, 150)} top={122} left={58} />
-      <Draggable3D add3DContent={turnContent(GEOMS.dedocahedron, 150)} top={122} left={8} />
-      <Draggable3D add3DContent={turnContent(GEOMS.icosahedron, 150)} top={80} left={8} />
-      <Draggable3D add3DContent={turnContent(GEOMS.box, 5, 150, 150)} top={80} left={58} />
-      <IntroButton>Megoldás</IntroButton>
-    </GameHolder>
+    <>
+      <GameHolder>
+        <GeomTarget id={1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
+        <GeomTarget id={2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
+        <GeomTarget id={3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
+        <GeomTarget id={4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
+        <IntroButton>Megoldás</IntroButton>
+      </GameHolder>
+      <Draggable3D add3DContent={showContent(GEOMS.box, 150, 150, 150)} top={15} left={0} />
+      <Draggable3D add3DContent={showContent(GEOMS.dedocahedron, 150)} top={15} left={25} />
+      <Draggable3D add3DContent={showContent(GEOMS.icosahedron, 150)} top={15} left={50} />
+      <Draggable3D add3DContent={showContent(GEOMS.box, 5, 150, 150)} top={15} left={75} />
+    </>          
   );
 }
-
-/*
-
-Helyezd el:
-Csúcsok száma
-Van derékszöge
-Nincs derékszöge
-
-      <Draggable3D add3DContent={Custom3DContent} top={122} left={58} />
-      <Draggable3D add3DContent={turnContent(GEOMS.dedocahedron, 200)} top={122} left={8} />
-      <Draggable3D add3DContent={turnContent(GEOMS.icosahedron, 200)} top={80} left={8} />
-      <Draggable3D add3DContent={turnContent(GEOMS.box, 5, 300, 300)} top={80} left={58} />
-
-
-*/

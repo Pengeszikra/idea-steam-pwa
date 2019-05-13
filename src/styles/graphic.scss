@@ -232,19 +232,28 @@
  .game-holder {
    display: flex;
    flex-wrap: wrap;
-   align-items: center;
+   align-content: flex-start;
    justify-content: space-evenly;
    position: absolute;
-   top: 0;
+   top: 50vmin;
    left: 0;
    width: 100vw;
-   height: 100vh;
+   height: calc(100vh - 50vmin);
    overflow: hidden;
  }
 
  .drop-target {
-  @include bimage('/img/gui/drop-target.png', 40vmin, 40vmin);
+  // @include bimage('/img/gui/drop-target.png', 40vmin, 40vmin);
+  width: 40vmin;
+  height: 40vmin;
+  background: rgba(#222,.5);
   position: relative;
-  color: #000;  
-  padding: 3em;   
+  color: #AAA;  
+  padding: 2em;   
+  margin-bottom: 1em;
+  font-weight: 500;
+  font-size: 1.2em;
+  user-select: none;
+  border-radius: 1em;
+  box-shadow: 0 0 2px #AAA;
  }
