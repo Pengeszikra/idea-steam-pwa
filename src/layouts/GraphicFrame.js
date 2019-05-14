@@ -73,9 +73,9 @@ const CityWithLogo = () => (
 const Scenes = ({scene, playGame}) => {
   return [
     <CityWithLogo />,
+    <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <Island />,
-    <EntranceCave></EntranceCave>,
-    <SimpleDarkBg><Minigame /></SimpleDarkBg>,    
+    <EntranceCave></EntranceCave>,    
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,

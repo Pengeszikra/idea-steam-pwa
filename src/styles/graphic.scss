@@ -250,10 +250,16 @@
   position: relative;
   color: #AAA;  
   padding: 2em;   
-  margin-bottom: 1em;
+  margin: .5em;
   font-weight: 500;
   font-size: 1.2em;
   user-select: none;
   border-radius: 1em;
   box-shadow: 0 0 2px #AAA;
+ }
+
+ .medium-3d {
+   // background: gold;
+   width: 23vmin;
+   height: 23vmin;
  }

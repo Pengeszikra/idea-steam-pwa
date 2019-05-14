@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import ThreeArea from '../show/ThreeArea';
 import * as THREE from 'three';
-import { useGesture } from 'react-with-gesture';
+import { useGesture } from 'react-use-gesture';
 import { GameHolder, GeomTarget, IntroButton } from '../layouts/divStore';
 import { DropTarget } from 'react-dnd';
 
@@ -54,22 +54,30 @@ export const GameWith3dObjects = () => {
   )
 }
 
-export const Draggable3D = ({add3DContent, top=0, left=0, ...props}) => {
-  const [bind, {local: [x, y]}] = useGesture({
-    onDragEnd: e => console.log('---- on drag end ---', e)
-  });
+export const Drag3D = ({add3DContent, top=0, left=0, targets, ...props}) => {
+  const [local, setLocal] = useState([0,0]);
+  const bind = useGesture({
+    onDrag: dragState => setLocal(dragState.local),
+    onDragEnd: dragState => {
+      console.log(dragState)
+      const [x, y] = dragState.local;
+      console.log(targets)
+    },
+  })
+
+  const [xPos, yPos] = local;
 
   return (
-      <ThreeArea 
-        canvasClasses={['medium-3d']} add3DContent={add3DContent}
-        {...bind()}
-        style={{transform: `translate3d(${x}px, ${y}px, 0)`, top: `${top}vmin`, left: `${left}vmin`}}
-        {...props}
-      />
+    <ThreeArea 
+      canvasClasses={['medium-3d']} add3DContent={add3DContent}
+      {...bind()}      
+      style={{transform: `translate3d(${xPos}px, ${yPos}px, 0)`, top: `${top}vmin`, left: `${left}vmin`}}
+      {...props}
+    />
   );
 }
 
-export const Custom3DContent = ({scene}) => {
+export const Custom3DContent = ({scene}) => {  
   const RAD = 180/Math.PI
   const box = makeShape(GEOMS.box, 250, 250, 250, 0xBBCCDD, 1 );
   box.rotateZ(22/RAD).rotateX(32/RAD);
@@ -85,19 +93,31 @@ export const Custom3DContent = ({scene}) => {
 
 
 export const Minigame = () => {
+  const targetEl = useRef(null);
+
+  useEffect(()=>console.log(targetEl), []);
+  /*
+  const t1 = useRef(null);
+  const t2 = useRef(null);
+  const t3 = useRef(null);
+  const t4 = useRef(null);
+
+  const targets = [t1, t2, t3, t4];
+  */
+
   return (    
     <>
       <GameHolder>
-        <GeomTarget id={1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
-        <GeomTarget id={2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
-        <GeomTarget id={3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
-        <GeomTarget id={4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
+        <GeomTarget id={1} ref={targetEl}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
+        <GeomTarget id={2} ><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
+        <GeomTarget id={3} ><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
+        <GeomTarget id={4} ><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
         <IntroButton>Megoldás</IntroButton>
       </GameHolder>
-      <Draggable3D add3DContent={showContent(GEOMS.box, 150, 150, 150)} top={15} left={0} />
-      <Draggable3D add3DContent={showContent(GEOMS.dedocahedron, 150)} top={15} left={25} />
-      <Draggable3D add3DContent={showContent(GEOMS.icosahedron, 150)} top={15} left={50} />
-      <Draggable3D add3DContent={showContent(GEOMS.box, 5, 150, 150)} top={15} left={75} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} />
+      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} />
+      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} />
     </>          
   );
 }
