@@ -2,7 +2,7 @@ import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'r
 import ThreeArea from '../show/ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-use-gesture';
-import { GameHolder, GeomTarget, IntroButton } from '../layouts/divStore';
+import { GameHolder, IntroButton } from '../layouts/divStore';
 import { DropTarget } from 'react-dnd';
 
 export const GEOMS = {
@@ -91,27 +91,26 @@ export const Custom3DContent = ({scene}) => {
   }
 };
 
+const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
+
 
 export const Minigame = () => {
-  const targetEl = useRef(null);
-
-  useEffect(()=>console.log(targetEl), []);
-  /*
   const t1 = useRef(null);
   const t2 = useRef(null);
   const t3 = useRef(null);
   const t4 = useRef(null);
 
+  useEffect(()=>console.log(t1, t2, t3, t4), []);
+  
   const targets = [t1, t2, t3, t4];
-  */
-
+  
   return (    
     <>
       <GameHolder>
-        <GeomTarget id={1} ref={targetEl}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
-        <GeomTarget id={2} ><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
-        <GeomTarget id={3} ><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
-        <GeomTarget id={4} ><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
+        <GeomTarget fref={t1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
+        <GeomTarget fref={t2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
+        <GeomTarget fref={t3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
+        <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
         <IntroButton>Megoldás</IntroButton>
       </GameHolder>
       <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} />

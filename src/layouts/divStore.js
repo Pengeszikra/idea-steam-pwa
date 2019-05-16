@@ -34,5 +34,5 @@ export const [SimpleDarkBg, Island] = divFactory(["simple-dark-bg", "island"]);
 export const [DarkGold, IntroButton] = divFactory(["dark-gold", "intro-button nosel"]);
 export const [Adeimantosz, Glaukon] = divFactory(["adeimantosz", "glaukon"]);
 
-export const [GameHolder, GeomTarget] = divFactory(["game-holder", "drop-target"]);
+export const [GameHolder] = divFactory(["game-holder"]);
 
