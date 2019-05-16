@@ -100,7 +100,7 @@ export const Minigame = () => {
   const t3 = useRef(null);
   const t4 = useRef(null);
 
-  useEffect(()=>console.log(t1, t2, t3, t4), []);
+  // useEffect(()=>console.log(t1, t2, t3, t4), []);
   
   const targets = [t1, t2, t3, t4];
   
@@ -113,10 +113,10 @@ export const Minigame = () => {
         <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
         <IntroButton>Megoldás</IntroButton>
       </GameHolder>
-      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} />
-      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} />
-      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} />
-      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} targets={targets} />
+      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} targets={targets} />
+      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} targets={targets} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} targets={targets} />
     </>          
   );
 }
