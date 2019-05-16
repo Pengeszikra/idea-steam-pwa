@@ -54,14 +54,30 @@ export const GameWith3dObjects = () => {
   )
 }
 
+function doesOverlap(shape, zone) {
+  const [shapeRect] = shape.getClientRects();
+  const [zoneRect] = zone.getClientRects();
+  const {x, y, width, height} = shapeRect;
+  const {x:tx, y:ty, width:tw, height:th} = zoneRect;
+  return (
+    !( tx + tw < x || tx > x + width )
+                   &&
+    !( ty + th < y || ty > y + height )
+  );  
+}
+
 export const Drag3D = ({add3DContent, top=0, left=0, targets, ...props}) => {
   const [local, setLocal] = useState([0,0]);
   const bind = useGesture({
     onDrag: dragState => setLocal(dragState.local),
     onDragEnd: dragState => {
-      console.log(dragState)
-      const [x, y] = dragState.local;
-      console.log(targets)
+      const {currentTarget : shape} = dragState;      
+      const overlaps = targets.filter(({current}) => doesOverlap(shape, current));
+      targets.map(({current}) => current.style.filter='');
+      if (overlaps.length === 1) {
+        const [dropZone] = overlaps;
+        dropZone.current.style.filter = 'brightness(1.4)'
+      }
     },
   })
 
