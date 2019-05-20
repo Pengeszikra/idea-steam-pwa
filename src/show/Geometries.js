@@ -66,17 +66,20 @@ function doesOverlap(shape, zone) {
   );  
 }
 
-export const Drag3D = ({add3DContent, top=0, left=0, targets, ...props}) => {
+export const Drag3D = ({add3DContent, top=0, left=0, targets, setHold, ...props}) => {
+  const [clearHold, setDrop] = setHold;
   const [local, setLocal] = useState([0,0]);
   const bind = useGesture({
     onDrag: dragState => setLocal(dragState.local),
+    onDragStart: dragState => {clearHold()},
     onDragEnd: dragState => {
       const {currentTarget : shape} = dragState;      
       const overlaps = targets.filter(({current}) => doesOverlap(shape, current));
       targets.map(({current}) => current.style.filter='');
       if (overlaps.length === 1) {
         const [dropZone] = overlaps;
-        dropZone.current.style.filter = 'brightness(1.4)'
+        dropZone.current.style.filter = 'brightness(1.4)';
+        setDrop(dropZone);
       }
     },
   })
@@ -111,6 +114,8 @@ const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target"
 
 
 export const Minigame = () => {
+  const [attached, setAttached] = useState(["", "", "", ""]);
+  const [solution, setSolution] = useState("Megoldás");
   const t1 = useRef(null);
   const t2 = useRef(null);
   const t3 = useRef(null);
@@ -119,20 +124,42 @@ export const Minigame = () => {
   // useEffect(()=>console.log(t1, t2, t3, t4), []);
   
   const targets = [t1, t2, t3, t4];
+  const [h1, h2, h3, h4] = attached;
+
+  const holdFactory = (shape) => [
+      () => {
+        const hold = [...attached];
+        setAttached(hold.map(e => e == shape ? null : e));  
+      } 
+      ,
+      (dropZone) => {
+        const hold = [...attached];
+        const index = targets.indexOf(dropZone);
+        if (index > -1) {
+          hold.map(prev => prev === shape ? null : prev );
+          hold[index] = shape;
+          setAttached(hold);
+        }
+      } 
+    ]
+  
   
   return (    
     <>
+      <div style={{marginTop:"40vmin"}}>{attached.join(" - ")}</div>
       <GameHolder>
-        <GeomTarget fref={t1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p></GeomTarget>  
-        <GeomTarget fref={t2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p></GeomTarget>
-        <GeomTarget fref={t3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p></GeomTarget>
-        <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p></GeomTarget>
-        <IntroButton>Megoldás</IntroButton>
+          
+        <GeomTarget fref={t1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p><p>{h1}</p></GeomTarget>  
+        <GeomTarget fref={t2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p><p>{h2}</p></GeomTarget>
+        <GeomTarget fref={t3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p><p>{h3}</p></GeomTarget>
+        <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p><p>{h4}</p></GeomTarget>
+        <IntroButton onClick={() => setSolution( attached.join("-") === "alfa-beta--" ? "Jó!" : "Rossz!" ) }>{solution}</IntroButton>
+        
       </GameHolder>
-      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} targets={targets} />
-      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} targets={targets} />
-      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} targets={targets} />
-      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} targets={targets} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} targets={targets} setHold={holdFactory("alfa")} />
+      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} targets={targets} setHold={holdFactory("beta")} />
+      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} targets={targets} setHold={holdFactory("gamma")} />
+      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} targets={targets} setHold={holdFactory("delta")} />
     </>          
   );
 }
