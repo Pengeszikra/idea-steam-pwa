@@ -19,3 +19,5 @@ A feladat teljesítése után animáció: kijutás a barlangból
 - Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?
 - Melyik barlang telik meg először vízzel?
 - Hány barlangnyi vízre lenne szükség, hogy a felhajtóerő segítségével kijuss a barlangrends	
+
+![image221.png](/document/scenario-from-excel/idea-scenario_elemei/image221.png)

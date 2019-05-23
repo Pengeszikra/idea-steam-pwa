@@ -13,8 +13,15 @@ Működés: Kiinduló pont adott. Amelyik pontra (csúcsra) kattint, oda húzód
 A feladat teljesített, ha berajzolódott egy folyamatos út (kör), ami 1 pontot csak egyszer érint és visszajut a kiinduló barlangba
 
 - 1. feladat: kocka, csúcspontjai láthatóak. (ha a feladat kész kirajzolódik a kocka)
+![image205.png](/document/scenario-from-excel/idea-scenario_elemei/image205.png)
+![image206.png](/document/scenario-from-excel/idea-scenario_elemei/image206.png)
+![image207.png](/document/scenario-from-excel/idea-scenario_elemei/image207.png)
 - 2. feladat: dodekaéder csúcspontja láthatóak (ha a feladat kész kirajzolódik a dodekaéder)
+
 - 3. feladat: ikozaéder csúcspontjai láthatóak
+![image213.png](/document/scenario-from-excel/idea-scenario_elemei/image213.png)
+![image215.png](/document/scenario-from-excel/idea-scenario_elemei/image215.png)
+![image214.png](/document/scenario-from-excel/idea-scenario_elemei/image214.png)
 
 Szöveg (3. feladat megjelenésekor): Ezek a pontok jelölik a barlangrendszert mely fogva tart! Kiutat csak az első barlangból találsz. Mutasd meg hát, hogy lehet bejárni!
 
