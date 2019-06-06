@@ -8,7 +8,7 @@ export default ({setWay}) => {
     <DarkGold>
       <div className='intro-button-holder'>
         <IntroButton onClick={()=>setHistory(!hasHistory)}>Történet</IntroButton>
-        <IntroButton onClick={()=>setWay(1)}>Kaland</IntroButton>
+        <IntroButton onClick={()=>setWay(1)}>A barlang</IntroButton>
       </div>
       <DescriptionOfHistory show={hasHistory} />
     </DarkGold>

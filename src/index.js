@@ -6,4 +6,6 @@ import './styles/global.scss';
 import rootRender from './flow/rootRender';
 import AppWithWichableDocument from './layouts/AppWithWichableDocument';
 
+import version from '../version'; console.log(`idea :: ${version}`);
+
 rootRender(<AppWithWichableDocument />);

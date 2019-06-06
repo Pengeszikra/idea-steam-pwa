@@ -3,7 +3,6 @@ import Header from './Header';
 import ButtonLine from './ButtonLine';
 import Content from './Content';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore } from '../flow/action';
-import ThreeDimensionTest from '../show/ThreeDimensionTest';
 
 export default ({setWay}) => {
   const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);
@@ -17,7 +16,6 @@ export default ({setWay}) => {
       <Header score={score} saved={saved} setWay={setWay} />
       <Content route={route} handleRoute={handleRoute} />
       <ButtonLine handleRoute = {handleRoute} />
-      {/* <ThreeDimensionTest /> */}
     </main>  
   );
 }
