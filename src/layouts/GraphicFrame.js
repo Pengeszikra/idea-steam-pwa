@@ -47,6 +47,7 @@ import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import speaks from '../caves/speaks';
 import DraggableList from '../test/DraggableList';
+import DownToDeep from '../story/DownToDeep';
 
 const HeaderBar = ({score, saved, setWay, Avatar}) => (
   <HeaderBarSection>
@@ -73,9 +74,9 @@ const CityWithLogo = () => (
   </PlayCity>
 )
 
-const Scenes = ({scene, playGame}) => {
+const Scenes = ({scene, playGame, level}) => {
   const sceneList = [
-    <CityWithLogo />,
+    <DownToDeep level={level} />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <Island />,
     <EntranceCave></EntranceCave>,    
@@ -96,7 +97,6 @@ const Scenes = ({scene, playGame}) => {
   return sceneList[scene % sceneList.length];
 }
 
-//const MapWithHero = ({position:[x,y]=[10,15]}) => {
 const MapWithHero = showtime( ({addScore, savePrisoner, Avatar}) => {
   const [caveNumber, setCaveNumber] = useState(0)
   const [pos, setPos] = useState(cavePositions[caveNumber])  
@@ -131,7 +131,7 @@ export default ({setWay, scoreStore}) => {
   const [hasSocrates, setSocrates] = useState(false);
   const [speakNumber, setSpeakNumber] = useState(0);
     
-  const [scene, setScene] = useState(1);
+  const [scene, setScene] = useState(0);
 
   const [gameOngoing, playGame] = useState(false);
 
@@ -153,7 +153,7 @@ export default ({setWay, scoreStore}) => {
 
   return (
     <main className="graph-frame">      
-      <Scenes scene={scene} playGame={playGame}/>            
+      <Scenes scene={scene} playGame={playGame} level={level}/>            
       <SocratesSpeaking show={hasSocrates && !mapVisible} data-num={speakNumber}>
         <SocratesHolder>
           <SocratesAvatar />
@@ -176,4 +176,3 @@ export default ({setWay, scoreStore}) => {
 }
 
 // <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,
-// style={{top:`${speaks[speakNumber][1]}vmin`}}

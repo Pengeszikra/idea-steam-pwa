@@ -2,7 +2,7 @@ import React from 'react';
 import divFactory from '../layouts/divFactory';
 
 export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory(["header-bar", "lvl-1-char", "lvl-2-char"]);
-export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-21-char avatar-on-map"]);
+export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-2-char avatar-on-map"]);
 
 export const [
   BottomBarSection, 

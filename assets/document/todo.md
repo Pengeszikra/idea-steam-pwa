@@ -16,6 +16,7 @@
   - [ ] preload images
   - [ ] folder structure refact
   - [x] automatic speak height
+  - [x] extend avatar selection with text
 
 ## game types:
   - [ ] open cave system : drag and drop correct shape by matrix
@@ -32,7 +33,7 @@
 
 ## unique interaction / animation
   - [ ] history reader
-  - [ ] level selector
+  - [x] level selector
   - [ ] open cave gate
   - [ ] show regular solids
   - [ ] minimap

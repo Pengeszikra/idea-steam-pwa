@@ -42,6 +42,10 @@ export const historicalBackground = `Platón - ókori görög filozófus - barla
 export const whoIsTheHero = `Igaz lenne? Sokan elbeszélték már nekem Thébától Mükénéig, Hérodotosztól Thuküdidészig, hogy lesz majd ki kész a kalandokra, 
   ki jártas a tudományokban, ki felszabadítja a fogságban tartottakat.`;
 
+export const avatarDescripts = [
+  `Platón fivére vagyok. Eszemnél vagyok, de nem szeretem a túl nehéz feladványokat. 1-es szint feladatok`,
+  `Én vagyok a legidősebb testvér, bármilyen nehéz feladvánnyal megbirkózom. 2-es szint feladatok`,
+] 
 export const entrance = {
   intro: karakter => `Elindulsz hát az úton kedves ${karakter}! Alattunk terül el a barlangrendszer, melyben a fogságban tartott emberek barlangéletet élnek. Ők, a vakságban tartottak várják azt a napot, mely a felszabadításuk napja lesz! karakter tanult ember vagy, ám erről bizonyságot kell tenned! Helyesen felelj és te leszel, aki megváltja a vakságban tartottakat!`
   ,

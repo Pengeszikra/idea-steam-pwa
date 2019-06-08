@@ -34,7 +34,7 @@
   background: #000;
 }
 
-.simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); }
+.simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); background-size: cover; }
 .island { @include bimage('/img/caves/island.png', 100vmin, 100vh); }
 .dark-gold { @include bimage('/img/gui/dark-gold-intro.png', 100vmin, 100vh); }
 .play-city { @include bimage('/img/caves/city.png', 100vmin, 100vh); }
@@ -57,6 +57,13 @@
 
 .small-logo { 
   @include bimage('/img/gui/small-logo.png', 63vmin, 36vmin, 102vmin, 19vmin); 
+}
+
+.intro-header {
+  padding: 1em;
+  font-size: 1.4em;
+  text-align: center;
+  color: goldenrod;
 }
 
 .intro-button { 
@@ -259,11 +266,21 @@
 
 .glaukon  { 
   @include bimage('/img/gui/glaukon.png', 44vmin, 103vmin, unset, 4vmin); 
-  bottom: 11vmin;
+  bottom: 45vmin;
 }
 .adeimantosz  { 
   @include bimage('/img/gui/adeimantosz.png', 53vmin, 103vmin, unset, -6vmin);
-  bottom: 15vmin;
+  bottom: 45vmin;
+ }
+
+ .glaukon span, .adeimantosz span {
+  color: #77777F;
+  line-height: 6vmin;
+  font-size: 4vmin;
+  position: absolute;
+  left: 0;
+  top: 97vmin;
+  padding: 0 4vmin;
  }
 
  // 53 103 -6 15
