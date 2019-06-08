@@ -14,6 +14,17 @@
 
 @keyframes zoom-in { from {transform: scale(0)} to {transform: scale(1)} }  
 
+@keyframes speak-in { 
+  from {
+    transform: translateX(20vmin); 
+    opacity: 0;
+  } 
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  } 
+}
+
 .graph-frame {
   position: relative;
   display: block;
@@ -110,7 +121,7 @@
   &:hover { filter: none; }
 }
 
-.socrates, .history-papper {   
+.socrates, .history-papper, .scorates-speaking {   
   span {
     color: #222;
     display: block;
@@ -122,12 +133,13 @@
 }
 
 .socrates {
-  @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin); 
+  @include bimage('/img/gui/speak.png', 100vmin, 111vmin, 38vmin, 1vmin);   
   span {
     line-height: 1.5em;
     font-size: 1.5em;  
   }
 }
+
 .history-papper { 
   @include bimage('/img/gui/papper.png', 95vmin, 133vmin, 25vmin, 2vmin);  
   animation: zoom-in 200ms forwards ease-in;
@@ -138,6 +150,38 @@
   }
 }
 
+.socrates-speaking {
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  bottom: 0;
+  right: 0;
+  animation: speak-in 200ms forwards ease-in;
+
+  .socrates-holder {
+    height: auto;
+    display: block;
+    position: absolute;
+    bottom: 20vmin;
+    right: 5vmin;
+    color: black;
+    font-size: 1.5em;
+    font-weight: 700;
+    padding: 1em;
+    border-radius: .3em;
+    max-width: 85vmin;
+
+    .socrates-avatar {
+      @include bimage('/img/gui/speak.png', 100vmin, 111vmin, -40vmin, -5vmin);
+    }
+
+    .speak-text {
+      position: relative;
+    }
+  }
+}
+
 .header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 23vmin); }
 .bottom-bar { @include bimage('/img/gui/bottom-gui.png', 100vmin, 32vmin, 149vmin); }
 .bottom-bar > div { &:hover { filter: brightness(1.2); }}
@@ -145,9 +189,6 @@
   .bottom-inventory { @include bimage('/img/gui/bag.png', 18vmin, 18vmin, 10vmin, 31vmin); }
   .bottom-saved { @include bimage('/img/gui/saved.png', 18vmin, 18vmin, 10vmin, 55vmin); }
   .bottom-history { @include bimage('/img/gui/pergamen.png', 18vmin, 18vmin, 10vmin, 80vmin); }
-
-
-
 
 .lvl-1-char { @include bimage('/img/gui/lvl-1-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
 .lvl-2-char { @include bimage('/img/gui/lvl-2-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
@@ -160,8 +201,6 @@
   transform-origin: bottom center;
   animation: zoom-in 300ms 600ms forwards ease-in;
 }
-
-
 
 .interactive-map { 
   @include bimage('/img/gui/interacive-map.png', 100vmin, 133vmin, 15vmin, 1vmin); 

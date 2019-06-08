@@ -12,6 +12,9 @@ import {
   HistoryIcon,
   PlayCity,
   Socrates,
+  SocratesHolder,
+  SocratesAvatar,
+  SpeakText,
   SmallLogo,
   BlueCave,
   RedCave,
@@ -71,7 +74,7 @@ const CityWithLogo = () => (
 )
 
 const Scenes = ({scene, playGame}) => {
-  return [
+  const sceneList = [
     <CityWithLogo />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <Island />,
@@ -88,8 +91,9 @@ const Scenes = ({scene, playGame}) => {
     <BuildingCave />,
     <WheelCave></WheelCave>,
     <EnginerCave />,
-    
-  ][scene % 15]
+  ]
+  
+  return sceneList[scene % sceneList.length];
 }
 
 //const MapWithHero = ({position:[x,y]=[10,15]}) => {
@@ -150,8 +154,11 @@ export default ({setWay, scoreStore}) => {
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame}/>            
-      <SocratesSpeaking show={hasSocrates && !mapVisible} style={{top:`${speaks[speakNumber][1]}vmin`}} data-num={speakNumber}>
-        <span>{speaks[speakNumber][0](avatarNames(level))}</span>
+      <SocratesSpeaking show={hasSocrates && !mapVisible} data-num={speakNumber}>
+        <SocratesHolder>
+          <SocratesAvatar />
+          <SpeakText>{speaks[speakNumber](avatarNames(level))}</SpeakText>
+        </SocratesHolder>
       </SocratesSpeaking>
       <BottomBar 
         handleRoute = {handleRoute} 
@@ -169,3 +176,4 @@ export default ({setWay, scoreStore}) => {
 }
 
 // <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,
+// style={{top:`${speaks[speakNumber][1]}vmin`}}

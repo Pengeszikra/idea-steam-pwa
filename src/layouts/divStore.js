@@ -12,7 +12,9 @@ export const [
   HistoryIcon
 ] = divFactory(["bottom-bar", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
 
-export const [PlayCity, Socrates, SmallLogo, HistorycalPapper]= divFactory(["play-city", "socrates", "small-logo", "history-papper"]);
+export const [PlayCity, SmallLogo, HistorycalPapper]= divFactory(["play-city", "small-logo", "history-papper"]);
+export const [Socrates, SocratesAvatar, SpeakText, SocratesHolder]= divFactory(["socrates-speaking", "socrates-avatar", "speak-text", "socrates-holder"]);
+
 
 export const [BlueCave, RedCave, EntranceCave, LongCave] = divFactory(["play-blue-cave", "play-red-cave", "entrance-cave", "long-cave"])
 export const [WaterFallCave, LightCave, FangCave] = divFactory(["waterfall-cave", "light-cave", "fang-cave"]);

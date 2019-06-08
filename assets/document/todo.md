@@ -2,17 +2,20 @@
 
 ## main goals
   - [x] collect game types
-  - [ ] collect unique interaction / animation
+  - [x] collect unique interaction / animation
   - [ ] exact game flow without correct games
   - [ ] solve all game types
   - [ ] game flow
-  - [ ] score system
-  - [ ] collect items
-  - [ ] release slaves
+    - [ ] score system
+    - [ ] collect items
+    - [ ] release slaves
 
-## minor goals 
+## minor goals
+  - [x] prevent IOS page over scrolling
+  - [ ] fix fonts on IOS
   - [ ] preload images
   - [ ] folder structure refact
+  - [x] automatic speak height
 
 ## game types:
   - [ ] open cave system : drag and drop correct shape by matrix
