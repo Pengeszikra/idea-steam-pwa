@@ -74,9 +74,9 @@ const CityWithLogo = () => (
   </PlayCity>
 )
 
-const Scenes = ({scene, playGame, level}) => {
+const Scenes = ({scene, playGame, level, talkSocrates}) => {
   const sceneList = [
-    <DownToDeep level={level} />,
+    <DownToDeep level={level} talkSocrates={talkSocrates} />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <Island />,
     <EntranceCave></EntranceCave>,    
@@ -150,10 +150,14 @@ export default ({setWay, scoreStore}) => {
   };  
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
+  const talkSocrates = speakNumber => {
+    setSocrates(true);
+    setSpeakNumber(speakNumber);
+  }
 
   return (
     <main className="graph-frame">      
-      <Scenes scene={scene} playGame={playGame} level={level}/>            
+      <Scenes scene={scene} playGame={playGame} level={level} talkSocrates={talkSocrates} />            
       <SocratesSpeaking show={hasSocrates && !mapVisible} data-num={speakNumber}>
         <SocratesHolder>
           <SocratesAvatar />

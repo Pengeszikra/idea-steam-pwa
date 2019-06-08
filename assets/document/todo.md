@@ -40,3 +40,16 @@
   - [ ] caves selection system
   - [ ] items
   - [ ] slaves
+
+## story flow 
+
+maybe callbags is the best for organize story flow.
+
+```jsx
+usePipe(  
+  delay(50),
+  show(avatar[level]),
+  delay(1000),
+  show(talk),
+);
+```
