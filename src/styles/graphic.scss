@@ -163,7 +163,7 @@
   width: 100vw;
   height: 100vh;
   bottom: 0;
-  right: 0;
+  left: 7vmin;
   animation: speak-in 200ms forwards ease-in;
 
   .socrates-holder {
@@ -171,7 +171,7 @@
     display: block;
     position: absolute;
     bottom: 20vmin;
-    right: 5vmin;
+    right: 10vmin;
     color: black;
     font-size: 1.5em;
     font-weight: 700;
@@ -300,8 +300,8 @@
 
  .drop-target {
   // @include bimage('/img/gui/drop-target.png', 40vmin, 40vmin);
-  width: 40vmin;
-  height: 40vmin;
+  width: 30vmin;
+  height: 30vmin;
   background: rgba(#222,.5);
   position: relative;
   color: #AAA;  

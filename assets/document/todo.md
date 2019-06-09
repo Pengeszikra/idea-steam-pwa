@@ -20,13 +20,15 @@
 
 ## game types:
   - [ ] open cave system : drag and drop correct shape by matrix
-  - [ ] find regular solids projection in matrix
-  - [ ] find solid for 2 projection
-  - [ ] select matrix wich hold solid UV map ( cube, tetrahedron )
-  - [ ] turn tile of uv map
-  - [ ] show uv and select correct fallen solid, time quest
-  - [ ] select projection from point for showed solid 2.9
+  - [ ] 3D - find regular solids projection in matrix
+  - [ ] 3D - find solid for 2 projection
+  - [ ] 3D/2D - select matrix wich hold solid UV map ( cube, tetrahedron )
+  - [ ] 3D - turn tile of uv map
+  - [ ] 3D - show uv and select correct fallen solid, time quest
+  - [ ] 3D - select projection from point for showed solid 2.9
   - [ ] roman number order game :: 2.10
+      <http://www.ngkszki.hu/~trembe/primek/prim01.htm>
+      <http://www.betonopus.hu/notesz/mertekegyseg/romaiszam.htm>
   - [ ] quest of items :: 2.11
   - [ ] link of routes :: 2.12
   - [ ] rain of caves :: 3

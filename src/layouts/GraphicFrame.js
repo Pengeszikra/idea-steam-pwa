@@ -1,32 +1,14 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../flow/action';
 import '../styles/graphic.scss';
-import { whoIsTheHero, cavePositions, cave_2_1, avatarNames } from '../caves/applicationData';
 import {
-  HeaderBarSection, 
   LevelOneAvatar,
-  BottomBarSection,
-  MapIcon,
-  InventoryIcon,
-  SavedIcon,
-  HistoryIcon,
-  PlayCity,
-  Socrates,
-  SocratesHolder,
-  SocratesAvatar,
-  SpeakText,
-  SmallLogo,
   BlueCave,
   RedCave,
-  InteractiveMap,
   EntranceCave,
   LongCave,
-  ActualScore,
-  SavedPrisoner,
   WaterFallCave,
   LightCave,
-  Game1,
-  AvatarOnMap,
   FangCave,
   NeedleCave,
   StairCaseCave,
@@ -44,35 +26,12 @@ import {
 } from '../layouts/divStore';
 import showtime from './showtime';
 import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
-import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import speaks from '../caves/speaks';
-import DraggableList from '../test/DraggableList';
 import DownToDeep from '../story/DownToDeep';
-
-const HeaderBar = ({score, saved, setWay, Avatar}) => (
-  <HeaderBarSection>
-    <Avatar onClick={()=>setWay(3)} />
-    <ActualScore>{score}</ActualScore>
-    <SavedPrisoner>{saved}</SavedPrisoner>
-  </HeaderBarSection>
-);
-
-const BottomBar = ({handleMap, handleInventory, handlePrisoner, handleHistory}) => {
-  return (
-    <BottomBarSection>
-      <MapIcon onClick={handleMap}/>
-      <InventoryIcon onClick={handleInventory} />
-      <SavedIcon onClick={handlePrisoner} />
-      <HistoryIcon onClick={handleHistory} />
-    </BottomBarSection>
-  );  
-}
-
-const CityWithLogo = () => (
-  <PlayCity>
-    <SmallLogo />
-  </PlayCity>
-)
+import SocratesSpeaking from './SocratesSpeaking';
+import BottomBar from './BottomBar';
+import HeaderBar from './HeaderBar';
+import MapWithHero from './MapWithHero';
 
 const Scenes = ({scene, playGame, level, talkSocrates}) => {
   const sceneList = [
@@ -97,31 +56,7 @@ const Scenes = ({scene, playGame, level, talkSocrates}) => {
   return sceneList[scene % sceneList.length];
 }
 
-const MapWithHero = showtime( ({addScore, savePrisoner, Avatar}) => {
-  const [caveNumber, setCaveNumber] = useState(0)
-  const [pos, setPos] = useState(cavePositions[caveNumber])  
-  const handleClick = () => {
-    const move = caveNumber < cavePositions.length - 1 ? caveNumber + 1 : 0;    
-    setCaveNumber(move)
-    setPos(cavePositions[move]);
-    addScore(10);
-    savePrisoner();
-  };
-  const [y,x] = pos;
-  return (
-    <>
-      <InteractiveMap onClick={handleClick} />
-      <Avatar style={{
-        top: `${(y * 1.9)}vmin`,
-        left: `${(x * 1.9)}vmin`,
-      }}/>
-    </>
-  )
-});
-
-const FakeGame = ({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>
-const ActualGame = showtime(FakeGame);
-const SocratesSpeaking = showtime(Socrates);
+const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
   // const scoreStore = useReducer(scoreReducer, scoreInitial);  
@@ -158,12 +93,7 @@ export default ({setWay, scoreStore}) => {
   return (
     <main className="graph-frame">      
       <Scenes scene={scene} playGame={playGame} level={level} talkSocrates={talkSocrates} />            
-      <SocratesSpeaking show={hasSocrates && !mapVisible} data-num={speakNumber}>
-        <SocratesHolder>
-          <SocratesAvatar />
-          <SpeakText>{speaks[speakNumber](avatarNames(level))}</SpeakText>
-        </SocratesHolder>
-      </SocratesSpeaking>
+      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} />
       <BottomBar 
         handleRoute = {handleRoute} 
         handleMap={handleMap} 
@@ -173,7 +103,6 @@ export default ({setWay, scoreStore}) => {
       />      
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
       <HeaderBar score={score} saved={saved} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
-      {/* <DescriptionOfHistory show={hasSocrates && !mapVisible}/> */}
       <MapWithHero show={mapVisible} addScore={addScore} savePrisoner={savePrisoner} Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} /> 
     </main>  
   );
