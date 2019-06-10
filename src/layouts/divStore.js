@@ -38,3 +38,10 @@ export const [Adeimantosz, Glaukon] = divFactory(["adeimantosz", "glaukon"]);
 
 export const [GameHolder] = divFactory(["game-holder"]);
 
+export const [
+  PrisonerOnScene, 
+  PrisonerCave, 
+  PrisonerCaveRoute1, 
+  PrisonerCaveRoute2
+] = divFactory(['prisoner-unsolved', 'prisoner-cave', 'prisoner-cave-r1', 'prisoner-cave-r2']);
+

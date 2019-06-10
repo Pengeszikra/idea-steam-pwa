@@ -9,6 +9,7 @@
     - [ ] score system
     - [ ] collect items
     - [ ] release slaves
+  - [ ] sparate document md show parts
 
 ## minor goals
   - [x] prevent IOS page over scrolling
@@ -45,13 +46,52 @@
 
 ## story flow 
 
-maybe callbags is the best for organize story flow.
+- read history
+- level selector
+- listen socrates
+
+- walk between caves
+
+- solve problems ( 11 types of quest )
+  - collect items
+  - release prisoners
+  - earn score // lost score
+
+- check items / prisoners
+
+- ask help
+
+## organize 
 
 ```jsx
-usePipe(  
-  delay(50),
-  show(avatar[level]),
-  delay(1000),
-  show(talk),
-);
+
+Frame() => {
+  return (
+    <main>
+      <Scenes />
+      <SocratesSpeaking />
+      <BottomBar />
+      <HeaderBar />
+      <MapWithHero />
+    </main>
+  )
+}
+
+// Quest is a special scene with interaction
+
+Quest({interaction, view, level, ...props}) => {
+  const {walk, socrates, collect, release, earnScore} = interaction;
+  const {Prisoner, Items, Paths, CaveBackgroundByQuest} = view;
+    
+  return (
+    <CaveBackgroundByQuest>
+      <Paths /> 
+      <Items />
+      <Prisoner />      
+    </CaveBackgroundByQuest>
+  )
+}
+
+
+
 ```
