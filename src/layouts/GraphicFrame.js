@@ -33,22 +33,12 @@ import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import PrisonerDemo from '../caves/PrisonerDemo';
+import { pipeline } from 'stream';
 
-
-const Scenes = ({scene, playGame, level, talkSocrates, setMapVisiblity, setCaveNumber}) => {
+const Scenes = ({scene, playGame, level, talkSocrates, interaction}) => {
   const sceneList = [
     <DownToDeep level={level} talkSocrates={talkSocrates} />,
-    <PrisonerDemo interaction={
-      {
-        handleRoute: target => e => {
-          setMapVisiblity(true);
-          setTimeout(() => {
-            setCaveNumber(target);
-          }, 900); 
-        },
-        handleRelease: prisoner => e => console.log(`release prisoner: ${prisoner}`),
-      }
-    } />,
+    <PrisonerDemo interaction={interaction} />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <Island />,
     <EntranceCave></EntranceCave>,    
@@ -104,6 +94,22 @@ export default ({setWay, scoreStore}) => {
     setSpeakNumber(speakNumber);
   }
 
+  const mapInteraction = {
+    handleRoute: (from, to, targetScene = to) => e => {
+      setCaveNumber(from);
+      setMapVisiblity(true);
+      setTimeout(() => setCaveNumber(to), 900); 
+      setTimeout(() => setScene(targetScene), 1700);
+      setTimeout(() => setMapVisiblity(false), 2000);       
+    },
+  }
+
+  const prisonerInteraction = {
+    handleTryToRelease: (prisoner, speakNumber) => e => {
+      talkSocrates(speakNumber)
+    }
+  }
+
   return (
     <main className="graph-frame">      
       <Scenes 
@@ -113,6 +119,8 @@ export default ({setWay, scoreStore}) => {
         talkSocrates={talkSocrates} 
         setMapVisiblity={setMapVisiblity}
         setCaveNumber={setCaveNumber}
+        setScene={setScene}
+        interaction={{...mapInteraction, ...prisonerInteraction}}
       />            
       <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} />
       <BottomBar 
