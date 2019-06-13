@@ -335,3 +335,26 @@
    width: 23vmin;
    height: 23vmin;
  }
+
+ .item {
+   position: absolute;
+   width: 50vmin;
+   height: 50vmin;
+   top: 20vmin;
+   left: 5vmin;
+   background-position: -315px -45px;
+   background-image: url('/img/gui/items.png');
+ }
+
+ .item-00 { background-position: -45px -45px; }
+ .item-01 { background-position: -45px -45px; }
+ .item-02 { background-position:  -8px -45px; }
+ .item-03 { background-position: -45px -45px; }
+ .item-04 { background-position: -45px -45px; }
+ .item-05 { background-position: -45px -45px; }
+ .item-06 { background-position: -45px -45px; }
+ .item-07 { background-position: -45px -45px; }
+ .item-08 { background-position: -45px -45px; }
+ .item-09 { background-position: -45px -45px; }
+ .item-10 { background-position: -45px -45px; }
+ .item-11 { background-position: -45px -45px; }

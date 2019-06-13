@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRef, useLayoutEffect, useEffect, useState, useCallback} from 'react';
+import {useRef, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
 
 export default function (props) {
@@ -12,8 +12,6 @@ export default function (props) {
   } = props;
   const mount = useRef(null);
   const [data, setData] = useState({});
-
-  useLayoutEffect(()=>{setData({isMounted:true})}, [mount]);
 
   useEffect(()=>{
     const {clientWidth, clientHeight} = mount.current;
@@ -66,7 +64,7 @@ export default function (props) {
       hasPlay = false;
       unsubscribeAnimate3D();
     };
-  }, []);
+  }, [mount]);
 
   return (
     <canvas 

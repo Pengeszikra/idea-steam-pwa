@@ -34,14 +34,16 @@ import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import PrisonerDemo from '../caves/PrisonerDemo';
 import { pipeline } from 'stream';
+import ChainCaveDemo from '../caves/ChainCaveDemo';
 
 const Scenes = ({scene, playGame, level, talkSocrates, interaction}) => {
   const sceneList = [
     <DownToDeep level={level} talkSocrates={talkSocrates} />,
     <PrisonerDemo interaction={interaction} />,
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
-    <Island />,
-    <EntranceCave></EntranceCave>,    
+    <Island />,    
+    <EntranceCave></EntranceCave>,
+    <ChainCaveDemo interaction={interaction} />,
     <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
     <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
     <BlueCave><GameWith3dObjects /></BlueCave>,

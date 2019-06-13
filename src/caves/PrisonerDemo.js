@@ -8,8 +8,9 @@ import {
 
 export default ({interaction}) => {
   const {handleRoute, handleTryToRelease} = interaction;
+
   return (
-    <PrisonerCave>
+    <PrisonerCave>      
       <PrisonerCaveRoute1 onClick={handleRoute(1,0,4)}/>
       <PrisonerCaveRoute2 onClick={handleRoute(1,2,5)}/>
       <PrisonerOnScene onClick={handleTryToRelease('prisoner - 1', 12)} />
