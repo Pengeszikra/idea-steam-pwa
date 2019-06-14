@@ -1,65 +1,21 @@
-import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
+import React, {useState} from 'react';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../flow/action';
 import '../styles/graphic.scss';
 import {
   LevelOneAvatar,
-  BlueCave,
-  RedCave,
-  EntranceCave,
-  LongCave,
-  WaterFallCave,
-  LightCave,
-  FangCave,
-  NeedleCave,
-  StairCaseCave,
   PrisonerOne,
-  ItemOne,
-  ChainCave,
-  BuildingCave,
-  WheelCave,
-  EnginerCave,
-  Island,
   SimpleDarkBg,
   LevelTwoAvatar,
   AvatarOneOnMap,
   AvatarTwoOnMap,
 } from '../layouts/divStore';
 import showtime from './showtime';
-import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import speaks from '../caves/speaks';
-import DownToDeep from '../story/DownToDeep';
 import SocratesSpeaking from './SocratesSpeaking';
 import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
-import PrisonerDemo from '../caves/PrisonerDemo';
-import { pipeline } from 'stream';
-import ChainCaveDemo from '../caves/ChainCaveDemo';
-
-const Scenes = ({scene, playGame, level, talkSocrates, interaction}) => {
-  const sceneList = [
-    <DownToDeep level={level} talkSocrates={talkSocrates} />,
-    <PrisonerDemo interaction={interaction} />,
-    <SimpleDarkBg><Minigame /></SimpleDarkBg>,
-    <Island />,    
-    <EntranceCave></EntranceCave>,
-    <ChainCaveDemo interaction={interaction} />,
-    <RedCave><Add3D content={GEOMS.dedocahedron}/></RedCave>,
-    <LongCave onClick={()=>playGame(true)}><ItemOne /></LongCave>,
-    <BlueCave><GameWith3dObjects /></BlueCave>,
-    <WaterFallCave><Add3D content={GEOMS.icosahedron}/></WaterFallCave>,
-    <LightCave><Add3D content={GEOMS.octahedron}/></LightCave>,
-    <FangCave><Add3D content={GEOMS.plane}/></FangCave>,
-    <StairCaseCave><Add3D content={GEOMS.box}/></StairCaseCave>,
-    <NeedleCave><Add3D content={GEOMS.tetrahedron}/></NeedleCave>,
-    <ChainCave><Add3D content={GEOMS.cone}/></ChainCave>,
-    <BuildingCave />,
-    <WheelCave></WheelCave>,
-    <EnginerCave />,
-  ]
-  
-  return sceneList[scene % sceneList.length];
-}
+import Scenes from '../story/Scenes';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
@@ -116,12 +72,8 @@ export default ({setWay, scoreStore}) => {
     <main className="graph-frame">      
       <Scenes 
         scene={scene} 
-        playGame={playGame} 
         level={level} 
         talkSocrates={talkSocrates} 
-        setMapVisiblity={setMapVisiblity}
-        setCaveNumber={setCaveNumber}
-        setScene={setScene}
         interaction={{...mapInteraction, ...prisonerInteraction}}
       />            
       <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} />
