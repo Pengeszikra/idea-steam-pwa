@@ -15,12 +15,12 @@ export const [
 export const [PlayCity, SmallLogo, HistorycalPapper]= divFactory(["play-city", "small-logo", "history-papper"]);
 export const [Socrates, SocratesAvatar, SpeakText, SocratesHolder]= divFactory(["socrates-speaking", "socrates-avatar", "speak-text", "socrates-holder"]);
 
-
 export const [BlueCave, RedCave, EntranceCave, LongCave] = divFactory(["play-blue-cave", "play-red-cave", "entrance-cave", "long-cave"])
 export const [WaterFallCave, LightCave, FangCave] = divFactory(["waterfall-cave", "light-cave", "fang-cave"]);
 export const [StairCaseCave, NeedleCave] = divFactory(["staircase-cave", "needle-cave"]);
 export const [ChainCave, BuildingCave] = divFactory(["chain-cave", "building-cave"]);
 export const [WheelCave, EnginerCave] = divFactory(["wheel-cave", "enginer-cave"]);
+export const [RoadCave] = divFactory(["road-cave"]);
 
 export const [InteractiveMap, MapCloseButton] = divFactory(["interactive-map", "interactive-map-close"]);
 

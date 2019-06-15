@@ -52,6 +52,7 @@
 .chain-cave { @include bimage('/img/caves/chain-cave.png', 100vmin, 100vh); }
 .wheel-cave { @include bimage('/img/caves/wheel-cave.png', 100vmin, 100vh); }
 .enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vh); }
+.road-cave { @include bimage('/img/caves/road-cave.png', 100vmin, 100vh); }
 
 .prisoner-cave { @include bimage('/img/caves/prisoner-place.png', 100vmin, 100vh); }
 .prisoner-cave-r1 { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
