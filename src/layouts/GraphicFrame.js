@@ -26,7 +26,8 @@ export default ({setWay, scoreStore}) => {
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
   const [speakNumber, setSpeakNumber] = useState(0);
-  const [caveNumber, setCaveNumber] = useState(1);
+  const [caveNumber, setCaveNumber] = useState(0);
+  const [underWalk, setUnderWalk] = useState(false);
     
   const [scene, setScene] = useState(0);
 
@@ -35,6 +36,7 @@ export default ({setWay, scoreStore}) => {
   // useEffect(()=>{console.log('--- graphic-frame-v0.3.4.5 ---')},[])
   
   const handleMap = () => setMapVisiblity(!mapVisible);
+  const handleCloseMap = () => setMapVisiblity(false);
   const handleInventory = () => setScene(1);
   const handlePrisoner = () => {
     setScene(scene + 1)
@@ -56,9 +58,13 @@ export default ({setWay, scoreStore}) => {
     handleRoute: (from, to, targetScene = to) => e => {
       setCaveNumber(from);
       setMapVisiblity(true);
+      setUnderWalk(true);
       setTimeout(() => setCaveNumber(to), 900); 
       setTimeout(() => setScene(targetScene), 1700);
-      setTimeout(() => setMapVisiblity(false), 2000);       
+      setTimeout(() => {
+        setMapVisiblity(false);
+        setUnderWalk(false);
+      }, 2000);       
     },
   }
 
@@ -86,7 +92,14 @@ export default ({setWay, scoreStore}) => {
       />      
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
       <HeaderBar score={score} saved={saved} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
-      <MapWithHero show={mapVisible} caveNumber={caveNumber} Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} /> 
+      <MapWithHero 
+        show={mapVisible} 
+        caveNumber={caveNumber} 
+        Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} 
+        handleCloseMap={handleCloseMap} 
+        underWalk={underWalk}
+        setCaveNumber={setCaveNumber}
+      /> 
     </main>  
   );
 }

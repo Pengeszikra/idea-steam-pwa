@@ -19,21 +19,42 @@ export const caveNumbers = [
 ];
   
 export const cavePositions = [
-  [15,10],
-  [13,28],
-  [15,45],
-  [13,28], //
-  [22,27],
-  [30,43],
-  [22,27], //
-  [32, 6],
-  [50, 7],
-  [39,20],
-  [61,19],
-  [65,41],
-  [52,35],
-  [46,46],
+  [ 14, 49], // door Q  
+  [ 28, 49], // cross road Y
+  [ 34, 27], // cave A : 1
+  [ 55, 24], // cave B : 2
+  [ 45, 49], // cross road X
+  [ 32, 72], // cave C : 3
+  [ 58, 69], // cave D : 4
+  [ 45, 49], // cross road Y -- again ! 
+  [ 76, 46], // cave E : 5
+  [ 84, 16], // cave F : 6
+  [ 76, 46], // cave E -- again !  
+  [ 88, 73], // cave G : 7
+  [ 99, 49], // cave H : 8
+  [121, 25], // cave I : 9
+  [141, 30], // cave J : 10
+  [116, 56], // cave K : 11
+  [142, 67], // cave L : 12
 ]
+
+export const caveRoutes = {
+  Q: 'Y',
+  Y: 'A|B',
+  A: 'C|Y|X',
+  B: 'D|Y|X',
+  C: 'A|X',
+  D: 'B|X',
+  X: 'A|B|C|D|E',
+  E: 'X|F|G',
+  F: 'E|H',
+  G: 'E|H',
+  H: 'F|G|I',
+  I: 'H:J',
+  J: 'I:K',
+  K: 'J:L',
+  L: 'K'
+}
 
 export const avatarNames = level => level == 2 ? 'Adeimantosz' : 'Glaukón';
 
@@ -115,6 +136,11 @@ export const cave_2_3 = {
   Ha a hálóját látod, Őt magát kell megtalálnod. Ha őt magát látod, Hálóját kell megtalálnod.` 
   ,
   extraInfo: _ => `Ábraként a kocka és a 11 hálója, tetraéder és a 2 hálója`
+  ,
+  routes: [
+    {path:[3,2,0], x:2, y:60, direction:90},
+    {path:[3,4,3], x:55, y:20, direction:180},
+  ]
 }
 
 export const cave_2_4 = {

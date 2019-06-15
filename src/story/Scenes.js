@@ -20,6 +20,7 @@ import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import DownToDeep from './DownToDeep';
 import PrisonerDemo from '../caves/PrisonerDemo';
 import cavePath from '../caves/cavePath';
+import { cave_2_3 } from '../caves/applicationData';
 
 export default ({scene, level, talkSocrates, interaction}) => {
   const sceneList = [
@@ -28,7 +29,7 @@ export default ({scene, level, talkSocrates, interaction}) => {
     <SimpleDarkBg><Minigame /></SimpleDarkBg>,
     <IslandPath interaction={interaction} />,    
     <EntranceCave></EntranceCave>,
-    <RedCavePath interaction={interaction}><Add3D content={GEOMS.dedocahedron}/></RedCavePath>,
+    <RedCavePath interaction={interaction} routes={cave_2_3.routes}><Add3D content={GEOMS.dedocahedron}/></RedCavePath>,
     <LongCave />,
     <BlueCave><GameWith3dObjects /></BlueCave>,
     <WaterFallCave><Add3D content={GEOMS.icosahedron}/></WaterFallCave>,

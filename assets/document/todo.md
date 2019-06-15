@@ -4,6 +4,7 @@
   - [x] collect game types
   - [x] collect unique interaction / animation
   - [ ] exact game flow without correct games
+    - [x] draw new cave routes
   - [ ] solve all game types
   - [ ] game flow
     - [ ] score system
@@ -64,7 +65,6 @@
 ## organize 
 
 ```jsx
-
 Frame() => {
   return (
     <main>
@@ -91,7 +91,7 @@ Quest({interaction, view, level, ...props}) => {
     </CaveBackgroundByQuest>
   )
 }
+```
 
-
-
+```jsx 
 ```

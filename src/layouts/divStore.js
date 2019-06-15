@@ -22,7 +22,7 @@ export const [StairCaseCave, NeedleCave] = divFactory(["staircase-cave", "needle
 export const [ChainCave, BuildingCave] = divFactory(["chain-cave", "building-cave"]);
 export const [WheelCave, EnginerCave] = divFactory(["wheel-cave", "enginer-cave"]);
 
-export const [InteractiveMap] = divFactory(["interactive-map"]);
+export const [InteractiveMap, MapCloseButton] = divFactory(["interactive-map", "interactive-map-close"]);
 
 export const [ActualScore, SavedPrisoner] = divFactory(["actual-score", "saved-prisoner"]);
 
@@ -45,3 +45,4 @@ export const [
   PrisonerCaveRoute2
 ] = divFactory(['prisoner-unsolved', 'prisoner-cave', 'prisoner-cave-r1', 'prisoner-cave-r2']);
 
+export const [RouteArrow] = divFactory(['route-arrow']);
