@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../flow/action';
 import '../styles/graphic.scss';
+import '../styles/caves.scss';
 import {
   LevelOneAvatar,
   PrisonerOne,
@@ -26,7 +27,7 @@ export default ({setWay, scoreStore}) => {
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
   const [speakNumber, setSpeakNumber] = useState(0);
-  const [walk, setWalk] = useState({from: area.Q.map, to:null});
+  const [walk, setWalk] = useState(area.Q.walk);
   const [underWalk, setUnderWalk] = useState(false);  
   const [sceneId, setScene] = useState('Q');
   const [gameOngoing, playGame] = useState(false);

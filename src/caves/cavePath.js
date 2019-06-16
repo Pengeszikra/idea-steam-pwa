@@ -7,19 +7,12 @@ import {
 export default Cave => ({interaction, exits = [], children, ...props}) => {
   const {handleRoute, handleTryToRelease} = interaction;
   
-  const Route = ({path, x, y, direction}) => !isNaN(x) && !isNaN(y)
-    ?
-      <RouteArrow 
-        data-poth={path}
-        onClick={handleRoute(path)} 
-        style={{transform: `translate(${x}vmin, ${y}vmin) rotate(${direction}deg)`}} 
-      />
-    : null;
+  const Route = ({path}) => <RouteArrow data-path={path} onClick={handleRoute(path)} />;
 
   return (
     <Cave {...props}>      
       {children}
-      {exits.map((exit, key) => <Route key={key} {...exit} />)}
+      {exits.map((exit, key) => <Route key={key} path={exit} />)}
       {/* <PrisonerOnScene onClick={handleTryToRelease('prisoner - 42', 8)} /> */}      
     </Cave>
   );

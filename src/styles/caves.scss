@@ -1,0 +1,56 @@
+@mixin arrow($x, $y, $direction) {
+  transform: translate(#{$x}vmin, #{$y}vmin) rotate(#{$direction}deg);  
+}
+
+.route-arrow {
+  &[data-path="Q-Y"] { @include arrow( 45, 53, 0 ); }
+  &[data-path="Y-A"] { @include arrow(  2, 55,  45 ); }  
+  &[data-path="Y-B"] { @include arrow( 55, 55, -25 ); }
+  
+  &[data-path="A-Y"] { @include arrow( 51,  98, -154 ); }
+  &[data-path="A-X"] { @include arrow( 68, 132,  -81 ); }
+  &[data-path="A-C"] { @include arrow(  7, 127,    0 ); }
+  
+  &[data-path="B-Y"] { @include arrow( 35,  34,  115 ); }
+  &[data-path="B-X"] { @include arrow(  3,  96,   72 ); }
+  &[data-path="B-D"] { @include arrow( 49, 120,  -51 ); }
+  
+  &[data-path="C-A"] { @include arrow(  2, 50,  30 ); }
+  &[data-path="C-X"] { @include arrow( 70, 50, -30 ); }
+  
+  &[data-path="D-B"] { @include arrow( 15,  78, 210 ); }
+  &[data-path="D-X"] { @include arrow(  5, 127,  90 ); }
+  
+  &[data-path="X-A"] { @include arrow(  2,  30,  120 ); }
+  &[data-path="X-B"] { @include arrow( 70,  30, -120 ); }
+  &[data-path="X-C"] { @include arrow(  2,  90,   30 ); }
+  &[data-path="X-D"] { @include arrow( 70,  90,  -30 ); }
+  &[data-path="X-E"] { @include arrow( 36, 126,    0 ); }
+  
+  &[data-path="E-X"] { @include arrow( 32,  72, 180 ); }
+  &[data-path="E-G"] { @include arrow( 70, 110, -30 ); } 
+  &[data-path="E-F"] { @include arrow(  2, 110,  69 ); }
+  
+  &[data-path="F-E"] { @include arrow( 65,  67, 239 ); }
+  &[data-path="F-H"] { @include arrow( 40, 113, -63 ); }
+  
+  &[data-path="G-E"] { @include arrow( 35,  80, 96 ); }
+  &[data-path="G-H"] { @include arrow(  5, 123, 72 ); }
+  
+  &[data-path="H-I"] { @include arrow( 47, 108,  45 ); }
+  &[data-path="H-G"] { @include arrow( 70, 50, -120 ); }
+  &[data-path="H-F"] { @include arrow(  2, 50,  120 ); }
+  
+  &[data-path="I-H"] { @include arrow( 40,  74, 200 ); }
+  &[data-path="I-J"] { @include arrow( 30, 113, -78 ); }
+  
+  &[data-path="J-I"] { @include arrow( 18, 122,  90 ); }
+  &[data-path="J-K"] { @include arrow( 61, 122, -90 ); }
+  
+  &[data-path="K-J"] { @include arrow( 11, 62, 114 ); } 
+  &[data-path="K-L"] { @include arrow( 56, 131, -111 ); }
+  
+  &[data-path="L-K"] { @include arrow( 50,  75, -170 ); }   
+}
+
+

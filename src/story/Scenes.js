@@ -62,13 +62,13 @@ const [
 
 
 export default ({sceneId, level, talkSocrates, interaction}) => {
-  const sceneList = {
+  const sceneLookup = {
     Q: <DownToDeepPath level={level} talkSocrates={talkSocrates} interaction={interaction} exits={area.Q.exits} />,
     Y: <RedCavePath interaction={interaction} exits={area.Y.exits} />,
     A: <BlueCavePath interaction={interaction} exits={area.A.exits} />,
     B: <BuildingCavePath interaction={interaction} exits={area.B.exits} />,
     C: <PrisonerDemo interaction={interaction} exits={area.C.exits} />,
-    D: <LongCavePath WaterFallCavePath interaction={interaction} exits={area.D.exits} />,
+    D: <LongCavePath interaction={interaction} exits={area.D.exits} />,
     X: <StairCaseCavePath interaction={interaction}  exits={area.X.exits} />,
     E: <NeedleCavePath interaction={interaction} exits={area.E.exits} />,
     F: <WaterFallCavePath interaction={interaction} exits={area.F.exits} />,
@@ -76,9 +76,9 @@ export default ({sceneId, level, talkSocrates, interaction}) => {
     H: <LightCavePath interaction={interaction} exits={area.H.exits} />,
     I: <FangCavePath interaction={interaction} exits={area.I.exits} />,
     J: <EnginerCavePath interaction={interaction} exits={area.J.exits} />,
-    K: <ChainCavePath interaction={interaction} exits={area.K.exits} />,
-    L: <WheelCavePath interaction={interaction} exits={area.L.exits} />,
+    K: <WheelCavePath interaction={interaction} exits={area.K.exits} />,
+    L: <ChainCavePath interaction={interaction} exits={area.L.exits} />,
   };
   
-  return sceneList[sceneId] || null;
+  return sceneLookup[sceneId] || null;
 }

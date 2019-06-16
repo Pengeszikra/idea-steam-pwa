@@ -78,11 +78,6 @@ export const cave_2_3 = {
   Ha a hálóját látod, Őt magát kell megtalálnod. Ha őt magát látod, Hálóját kell megtalálnod.` 
   ,
   extraInfo: _ => `Ábraként a kocka és a 11 hálója, tetraéder és a 2 hálója`
-  ,
-  routes: [
-    {path:[3,2,0], x:2, y:60, direction:90},
-    {path:[3,4,3], x:55, y:20, direction:180},
-  ]
 }
 
 export const cave_2_4 = {
@@ -218,72 +213,20 @@ export const items = {
   H: ['körző', 'stílus'],
 }
 
-export const routes = {
-  QY: {path:'Q-Y', x: 45, y: 53, direction:   0 },
-
-  YA: {path:'Y-A', x:  2, y: 55, direction:  45 },  
-  YB: {path:'Y-B', x: 55, y: 55, direction: -25 },
-
-  AY: {path:'A-Y', x: 51, y:  98, direction: -154 },
-  AX: {path:'A-X', x: 68, y: 132, direction:  -81 },
-  AC: {path:'A-C', x:  7, y: 127, direction:    0 },
-
-  BY: {path:'B-Y', x: 35, y:  34, direction:  115 },
-  BX: {path:'B-X', x:  3, y:  96, direction:   72 },
-  BD: {path:'B-D', x: 49, y: 120, direction:  -51 },
-
-  CA: {path:'C-A', x:  2, y: 50, direction:  30 },
-  CX: {path:'C-X', x: 70, y: 50, direction: -30 },
-
-  DB: {path:'D-B', x: 15, y:  78, direction: 210 },
-  DX: {path:'D-X', x:  5, y: 127, direction:  90 },
-
-  XA: {path:'X-A', x:  2, y:  30, direction:  120 },
-  XB: {path:'X-B', x: 70, y:  30, direction: -120 },
-  XC: {path:'X-C', x:  2, y:  90, direction:   30 },
-  XD: {path:'X-D', x: 70, y:  90, direction:  -30 },
-  XE: {path:'X-E', x: 36, y: 126, direction:    0 },
-
-  EX: {path:'E-X', x: 32, y:  72, direction: 180 },
-  EG: {path:'E-G', x: 70, y: 110, direction: -30 }, 
-  EF: {path:'E-F', x:  2, y: 110, direction:  69 },
-
-  FE: {path:'F-E', x: 65, y:  67, direction: 239 },
-  FH: {path:'F-H', x: 40, y: 113, direction: -63 },
-
-  GE: {path:'G-E', x: 35, y:  80, direction: 96 },
-  GH: {path:'G-H', x:  5, y: 123, direction: 72 },
-
-  HI: {path:'H-I', x: 47, y: 108, direction:  45 },
-  HG: {path:'H-G', x: 70, y: 50, direction: -120 },
-  HF: {path:'H-F', x:  2, y: 50, direction:  120 },
-
-  IH: {path:'I-H', x: 40, y:  74, direction: 200 },
-  IJ: {path:'I-J', x: 30, y: 113, direction: -78 },
-
-  JI: {path:'J-I', x: 18, y: 122, direction:  90 },
-  JK: {path:'J-K', x: 61, y: 122, direction: -90 },
-
-  KJ: {path:'K-J', x:  2, y: 122, direction:   62 },
-  KL: {path:'K-L', x: 50, y:  75, direction: -170 },
-
-  LK: {path:'L-K', x: 11, y: 62, direction: 114 },
-}
-
 export const area = {
-  Q: {exits:[routes.QY], walk:[ 14, 49], data:entrance },
-  Y: {exits:[routes.YA, routes.YB], walk:[ 28, 49], data:cave_1_1 },
-  A: {exits:[routes.AC, routes.AX, routes.AY], walk:[ 34, 27], data:cave_2_1 },
-  B: {exits:[routes.BD, routes.BX, routes.BY], walk:[ 32, 72], data:cave_2_2 },
-  C: {exits:[routes.CA, routes.CX], walk:[ 55, 24], data:cave_2_3 },
-  D: {exits:[routes.DB, routes.DX], walk:[ 58, 69], data:cave_2_4 },
-  X: {exits:[routes.XA, routes.XB, routes.XC, routes.XD, routes.XE], walk:[ 45, 49], data:{} },
-  E: {exits:[routes.EF, routes.EG, routes.EX], walk:[ 76, 46], data:cave_2_5 },
-  F: {exits:[routes.FE, routes.FH], walk:[ 84, 16], data:cave_2_6 },
-  G: {exits:[routes.GE, routes.GH], walk:[ 88, 73], data:cave_2_7 },
-  H: {exits:[routes.HI, routes.HG, routes.HF], walk:[ 99, 49], data:cave_2_8 },
-  I: {exits:[routes.IH, routes.IJ], walk:[121, 25], data:cave_2_9 },
-  J: {exits:[routes.JI, routes.JK], walk:[141, 30], data:cave_2_10 },
-  K: {exits:[routes.KJ, routes.KL], walk:[116, 56], data:cave_2_11 },
-  L: {exits:[routes.LK], walk:[142, 67], data:cave_2_12 },
+  Q: {exits:['Q-Y'], walk:[ 14, 49], data:entrance },
+  Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1 },
+  A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },
+  B: {exits:['B-D', 'B-X', 'B-Y'], walk:[ 32, 72], data:cave_2_2 },
+  C: {exits:['C-A', 'C-X'], walk:[ 55, 24], data:cave_2_3 },
+  D: {exits:['D-B', 'D-X'], walk:[ 58, 69], data:cave_2_4 },
+  X: {exits:['X-A', 'X-B', 'X-C', 'X-D', 'X-E'], walk:[ 45, 49], data:{} },
+  E: {exits:['E-F', 'E-G', 'E-X'], walk:[ 76, 46], data:cave_2_5 },
+  F: {exits:['F-E', 'F-H'], walk:[ 84, 16], data:cave_2_6 },
+  G: {exits:['G-E', 'G-H'], walk:[ 88, 73], data:cave_2_7 },
+  H: {exits:['H-I', 'H-G', 'H-F'], walk:[ 99, 49], data:cave_2_8 },
+  I: {exits:['I-H', 'I-J'], walk:[121, 25], data:cave_2_9 },
+  J: {exits:['J-I', 'J-K'], walk:[141, 30], data:cave_2_10 },
+  K: {exits:['K-J', 'K-L'], walk:[116, 56], data:cave_2_11 },
+  L: {exits:['L-K'], walk:[142, 67], data:cave_2_12 },
 }
