@@ -6,13 +6,14 @@ import {
   PrisonerCaveRoute2
 } from '../layouts/divStore';
 
-export default ({interaction}) => {
-  const {handleRoute, handleTryToRelease} = interaction;
 
+export default ({interaction}) => {
+  const {handleRoute, handleTryToRelease} = interaction;  
+  
   return (
     <PrisonerCave>      
-      <PrisonerCaveRoute1 onClick={handleRoute(1,0,4)}/>
-      <PrisonerCaveRoute2 onClick={handleRoute(1,2,5)}/>
+      <PrisonerCaveRoute1 onClick={handleRoute('C-X')} />
+      <PrisonerCaveRoute2 onClick={handleRoute('C-A')} />
       {/* <PrisonerOnScene onClick={handleTryToRelease('prisoner - 1', 12)} /> */}
     </PrisonerCave>
   );

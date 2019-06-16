@@ -4,15 +4,22 @@ import {
   RouteArrow, 
 } from '../layouts/divStore';
 
-export default Cave => ({, interaction, routes = [], children}) => {
+export default Cave => ({interaction, exits = [], children, ...props}) => {
   const {handleRoute, handleTryToRelease} = interaction;
-  const Route = ({path, x, y, direction}) => <RouteArrow onClick={handleRoute(...path)} style={{transform: `translate(${x}vmin, ${y}vmin) rotate(${direction}deg)`}} />
+  
+  const Route = ({path, x, y, direction}) => !isNaN(x) && !isNaN(y)
+    ?
+      <RouteArrow 
+        onClick={handleRoute(path)} 
+        style={{transform: `translate(${x}vmin, ${y}vmin) rotate(${direction}deg)`}} 
+      />
+    : null;
 
   return (
-    <Cave>      
+    <Cave {...props}>      
       {children}
-      {routes.map(route => <Route {...route} />)}
-      {/* <PrisonerOnScene onClick={handleTryToRelease('prisoner - 42', 8)} /> */}
+      {exits.map((exit, key) => <Route key={key} {...exit} />)}
+      {/* <PrisonerOnScene onClick={handleTryToRelease('prisoner - 42', 8)} /> */}      
     </Cave>
   );
 }

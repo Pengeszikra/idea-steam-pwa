@@ -16,75 +16,75 @@ import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import Scenes from '../story/Scenes';
+import { area } from '../caves/applicationData';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
   // const scoreStore = useReducer(scoreReducer, scoreInitial);  
   const [{route, score, saved, level}, dispatch] = scoreStore;
-  const handleRoute = path => event => dispatch(changeRoute(path));
+  // const handleRoute = path => event => dispatch(changeRoute(path));
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
   const [speakNumber, setSpeakNumber] = useState(0);
-  const [caveNumber, setCaveNumber] = useState(0);
-  const [underWalk, setUnderWalk] = useState(false);
-    
-  const [scene, setScene] = useState(0);
-
+  // const [caveNumber, setCaveNumber] = useState(0);
+  const [walk, setWalk] = useState({from: area.Q.map, to:null});
+  const [underWalk, setUnderWalk] = useState(false);  
+  const [sceneId, setScene] = useState('Q');
   const [gameOngoing, playGame] = useState(false);
 
-  // useEffect(()=>{console.log('--- graphic-frame-v0.3.4.5 ---')},[])
-  
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleCloseMap = () => setMapVisiblity(false);
-  const handleInventory = () => setScene(1);
+  const handleInventory = () => {
+    setScene('Y');
+    setSocrates(false);
+  };
   const handlePrisoner = () => {
-    setScene(scene + 1)
-    setSocrates(false)
-    setMapVisiblity(false)
   };  
   const handleHistory = () => {
     setSocrates(!hasSocrates);
     hasSocrates && setSpeakNumber(speakNumber < speaks.length - 1 ? speakNumber + 1 : 0);
   };  
+  
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
   const talkSocrates = speakNumber => {
-    setSocrates(true);
+     setSocrates(true);
     setSpeakNumber(speakNumber);
   }
 
   const mapInteraction = {
-    handleRoute: (from, to, targetScene = to) => e => {
-      setCaveNumber(from);
+    handleRoute: path => e => {      
+      const [currentAreaId, targetAreaId] = path.split('-');
+      setWalk(area[currentAreaId].walk);
       setMapVisiblity(true);
       setUnderWalk(true);
-      setTimeout(() => setCaveNumber(to), 900); 
-      setTimeout(() => setScene(targetScene), 1700);
+      setTimeout(() => setWalk(area[targetAreaId].walk), 900); 
+      setTimeout(() => setScene(targetAreaId), 1700);
       setTimeout(() => {
         setMapVisiblity(false);
         setUnderWalk(false);
       }, 2000);       
     },
-  }
+  };
 
   const prisonerInteraction = {
     handleTryToRelease: (prisoner, speakNumber) => e => {
       talkSocrates(speakNumber)
     }
-  }
+  };
 
   return (
     <main className="graph-frame">      
       <Scenes 
-        scene={scene} 
+        sceneId={sceneId} 
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
       />            
-      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} />
+      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} handleStopSpeak={e=>setSocrates(false)} />
       <BottomBar 
-        handleRoute = {handleRoute} 
+        // handleRoute = {handleRoute} 
         handleMap={handleMap} 
         handlePrisoner={handlePrisoner} 
         handleInventory={handleInventory} 
@@ -93,12 +93,13 @@ export default ({setWay, scoreStore}) => {
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
       <HeaderBar score={score} saved={saved} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
       <MapWithHero 
-        show={mapVisible} 
-        caveNumber={caveNumber} 
+        show={mapVisible}
         Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} 
         handleCloseMap={handleCloseMap} 
+        walk={walk}
         underWalk={underWalk}
-        setCaveNumber={setCaveNumber}
+        // caveNumber={caveNumber} 
+        // setCaveNumber={setCaveNumber}
       /> 
     </main>  
   );

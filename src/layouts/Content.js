@@ -1,11 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import Cave from '../caves/Cave';  
-import { useScoreReducer, achiveScore } from '../flow/action';
+import Cave from '../caves/CaveOld';  
 import Inventory from '../show/Inventory';
 import RouteFactory from '../show/RouteFactory';
-import {caveNumbers} from '../caves/applicationData';
-import { EdgesGeometry } from 'three';
 import divFactory from './divFactory';
+
+const caveNumbers = [
+  ['intro', 1.1],
+  [1.1, 2.1],
+  [2.1, 2.2, 2.3, 2.4],  
+  [2.2, 2.3, 2.4, 2.1, 2.5, 2.6, 2.7, 2.8],
+  [2.3, 2.4, 2.1, 2.2],
+  [2.4, 2.5, 2.6, 2.7, 2.8],
+  [2.5, 2.6],
+  [2.6, 2.7],
+  [2.7, 2.8],
+  [2.8, 2.9],
+  [2.9, '2.10'],
+  ['2.10', 2.11],
+  [2.11, 2.12],
+  [2.12, '2.1.again'],
+  ['2.1.again', 3],
+  [3, 4],
+  [4,'intro'],
+];
 
 export default ({route, handleRoute}) => {
   const CaveButton = ({to}) => <button className="map" onClick={handleRoute(to)}>{`cave: ${to}`}</button>

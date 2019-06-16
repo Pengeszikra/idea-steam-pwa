@@ -1,61 +1,3 @@
-export const caveNumbers = [
-  ['intro', 1.1],
-  [1.1, 2.1],
-  [2.1, 2.2, 2.3, 2.4],  
-  [2.2, 2.3, 2.4, 2.1, 2.5, 2.6, 2.7, 2.8],
-  [2.3, 2.4, 2.1, 2.2],
-  [2.4, 2.5, 2.6, 2.7, 2.8],
-  [2.5, 2.6],
-  [2.6, 2.7],
-  [2.7, 2.8],
-  [2.8, 2.9],
-  [2.9, '2.10'],
-  ['2.10', 2.11],
-  [2.11, 2.12],
-  [2.12, '2.1.again'],
-  ['2.1.again', 3],
-  [3, 4],
-  [4,'intro'],
-];
-  
-export const cavePositions = [
-  [ 14, 49], // door Q  
-  [ 28, 49], // cross road Y
-  [ 34, 27], // cave A : 1
-  [ 55, 24], // cave B : 2
-  [ 45, 49], // cross road X
-  [ 32, 72], // cave C : 3
-  [ 58, 69], // cave D : 4
-  [ 45, 49], // cross road Y -- again ! 
-  [ 76, 46], // cave E : 5
-  [ 84, 16], // cave F : 6
-  [ 76, 46], // cave E -- again !  
-  [ 88, 73], // cave G : 7
-  [ 99, 49], // cave H : 8
-  [121, 25], // cave I : 9
-  [141, 30], // cave J : 10
-  [116, 56], // cave K : 11
-  [142, 67], // cave L : 12
-]
-
-export const caveRoutes = {
-  Q: 'Y',
-  Y: 'A|B',
-  A: 'C|Y|X',
-  B: 'D|Y|X',
-  C: 'A|X',
-  D: 'B|X',
-  X: 'A|B|C|D|E',
-  E: 'X|F|G',
-  F: 'E|H',
-  G: 'E|H',
-  H: 'F|G|I',
-  I: 'H:J',
-  J: 'I:K',
-  K: 'J:L',
-  L: 'K'
-}
-
 export const avatarNames = level => level == 2 ? 'Adeimantosz' : 'Glaukón';
 
 export const historicalBackground = `Platón - ókori görög filozófus - barlanghasonlatában az emberek kikötözve csak a barlang falára vetülő árnyakat látják. Mivel egész életüket kikötözve élik a barlangban az árnyak világát tartják valóságosnak. Platón hasonlatában a barlang a látható valóságot jelképezi, a barlangból való felszabadítás pedig a lélek felemelkedését az ideák világába. Platón szerint nem elég a valóság megismerése, hanem vissza kell térni a barlangba és a többi embernek is meg kell mutatni a helyes utat és ezt neveléssel lehet elérni, A barlangból felszabadított ember a Nap sugárzásától először képtelen lenne látni, hogy minek az árnyékát látta. Zavarban lenne és azt hinné, hogy amit a barlangban látott az sokkal valóságosabb. Előbb hozzá kellene edződnie, de legvégül megláthatná a valóságot. Aki megismerte a valóságot az utána mindent inkább elszenved, csak ne kelljen újra úgy élni, mint a barlangban élőknek. Ha visszatér a barlangba csak vakoskodik, míg a szeme újra meg nem szokja a sötétet és barlangban élő társai, akik még nem ismerik a valóságot azt gondolhatják, hogy nem éri meg felmenni, hiszen elvesztette a szeme világát. Platón azt is leírja, hogy a nevelésre és ezáltal az emberek felszabadítására a filozófusok a legalkalmasabbak, akiknek jártasnak kell lenniük a zenében, költészetben és testnevelésben (elemi képzés), matematikában, csillagászatban és harmóniatanban (tudományos képzés), valamint a filozófiában.`;
@@ -254,3 +196,116 @@ export const finale = {
   ,
   PlatonMerit: karakter => `${karakter} discső felszabadító (pecsét)`
 }
+
+export const prisoners = {
+  A: [1],
+  B: [1,1],
+  C: [1],
+  D: [1],
+  E: [1,1],
+  F: [1,1],
+  G: [1],
+  H: [1],
+  I: [1],
+}
+
+export const items = {
+  C: ['tűzpattintó', 'amfóra'],
+  D: ['szárított taplógomba', 'kovakő'],
+  E: ['kulcs', 'érme'],
+  F: ['tóga', 'saru'],
+  G: ['hárfa', 'fáklya test'],
+  H: ['körző', 'stílus'],
+}
+
+export const routes = {
+  QY: {path:'Q-Y', x: 70, y: 20, direction: -90 },
+
+  YA: {path:'Y-A', x:   2, y: 55, direction: 45 },  
+  YB: {path:'Y-B', x:  55, y: 55, direction: -25 },
+
+  AY: {path:'A-Y', x:  2, y: 60, direction:0  },
+  AX: {path:'A-X', x: 55, y: 20, direction:-90  },
+  AC: {path:'A-C', x:  2, y: 20, direction:180  },
+
+  BY: {path:'B-Y', },
+  BX: {path:'B-X', },
+  BD: {path:'B-D', },
+
+  CA: {path:'C-A', },
+  CX: {path:'C-X', },
+
+  DB: {path:'D-B', x:  2, y: 60, direction:90  },
+  DX: {path:'D-X', x: 55, y: 20, direction:180 },
+
+  XA: {path:'X-A', },
+  XB: {path:'X-B', },
+  XC: {path:'X-C', },
+  XD: {path:'X-D', },
+  XE: {path:'X-E', },
+
+  EX: {path:'E-X', },
+  EG: {path:'E-G', },
+  EF: {path:'E-F', },
+
+  FE: {path:'F-E', },
+  FH: {path:'F-H', },
+
+  GE: {path:'G-E', },
+  GH: {path:'G-H', },
+
+  HI: {path:'H-I', },
+  HG: {path:'H-G', },
+  HF: {path:'H-F', },
+
+  IH: {path:'I-H', },
+  IJ: {path:'I-J', },
+
+  JI: {path:'J-I', },
+  JK: {path:'J-K', },
+
+  KJ: {path:'K-J', },
+  KL: {path:'K-L', },
+
+  LK: {path:'L-K', },
+}
+
+export const area = {
+  Q: {exits:[routes.QY], walk:[ 14, 49], data:entrance },
+  Y: {exits:[routes.YA, routes.YB], walk:[ 28, 49], data:cave_1_1 },
+  A: {exits:[routes.AC, routes.AX, routes.AY], walk:[ 34, 27], data:cave_2_1 },
+  B: {exits:[routes.BD, routes.BX, routes.BY], walk:[ 32, 72], data:cave_2_2 },
+  C: {exits:[routes.CA, routes.CX], walk:[ 55, 24], data:cave_2_3 },
+  D: {exits:[routes.BD, routes.BX, routes.BY], walk:[ 58, 69], data:cave_2_4 },
+  X: {exits:[routes.XA, routes.XB, routes.XC, routes.XD, routes.XD], walk:[ 45, 49], data:{} },
+  E: {exits:[routes.EF, routes.EG, routes.EX], walk:[ 76, 46], data:cave_2_5 },
+  F: {exits:[routes.FE, routes.FH], walk:[ 84, 16], data:cave_2_6 },
+  G: {exits:[routes.GE, routes.GH], walk:[ 88, 73], data:cave_2_7 },
+  H: {exits:[routes.HI, routes.HG, routes.HF], walk:[ 99, 49], data:cave_2_8 },
+  I: {exits:[routes.IH, routes.IJ], walk:[121, 25], data:cave_2_9 },
+  J: {exits:[routes.JI, routes.JK], walk:[141, 30], data:cave_2_10 },
+  K: {exits:[routes.KJ, routes.KL], walk:[116, 56], data:cave_2_11 },
+  L: {exits:[routes.LK], walk:[142, 67], data:cave_2_12 },
+}
+
+/*
+export const mapPositions = [
+  area.Q.map,
+  area.Y.map,
+  area.A.map,  
+  area.C.map,
+  area.X.map,
+  area.B.map,
+  area.D.map,
+  area.X.map, //
+  area.E.map,
+  area.F.map,
+  area.E.map, //
+  area.G.map,
+  area.H.map,
+  area.I.map,
+  area.J.map,
+  area.K.map,
+  area.L.map,
+]
+*/

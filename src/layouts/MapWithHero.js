@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import showtime from './showtime';
 import { InteractiveMap, MapCloseButton } from './divStore';
-import { cavePositions } from '../caves/applicationData';
+// import { mapPositions } from '../caves/applicationData';
 
-export default showtime( ({Avatar, caveNumber, handleCloseMap, underWalk = false, setCaveNumber}) => {  
-  const [pos, setPos] = useState(cavePositions[caveNumber])  
-  
-  useEffect(()=>{
-    setPos(cavePositions[caveNumber]);
-  }, [caveNumber]);
-  const [y,x] = pos;
+export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk}) => {    
+  const [y,x] = walk;
+  const avatarStyle = {
+    top: `${y}vmin`,
+    left: `${x}vmin`,
+  };
 
   return (
     <>
-      <InteractiveMap 
-        onClick={_=>{
-        if (underWalk) return;
-        setCaveNumber(num => {
-          console.log(`prev cave: ${num}`)
-          return (num + 1) % cavePositions.length;
-        })
-      }}
-      >
+      <InteractiveMap>
         {!underWalk && <MapCloseButton onClick={handleCloseMap}/>}
       </InteractiveMap>
-      <Avatar style={{
-        top: `${y}vmin`,
-        left: `${x}vmin`,
-      }}/>
+      <Avatar style={avatarStyle}/>
     </>
   )
 });
