@@ -16,7 +16,6 @@ import {
   Island,
   RoadCave,
 } from '../layouts/divStore';
-import {Add3D, GEOMS, GameWith3dObjects, Minigame} from '../show/Geometries';
 import DownToDeep from './DownToDeep';
 import PrisonerDemo from '../caves/PrisonerDemo';
 import cavePath from '../caves/cavePath';
@@ -65,19 +64,19 @@ const [
 export default ({sceneId, level, talkSocrates, interaction}) => {
   const sceneList = {
     Q: <DownToDeepPath level={level} talkSocrates={talkSocrates} interaction={interaction} exits={area.Q.exits} />,
-    Y: <EnginerCavePath interaction={interaction} exits={area.Y.exits} />,
+    Y: <RedCavePath interaction={interaction} exits={area.Y.exits} />,
     A: <BlueCavePath interaction={interaction} exits={area.A.exits} />,
-    B: <LongCavePath interaction={interaction} exits={area.B.exits} />,
+    B: <BuildingCavePath interaction={interaction} exits={area.B.exits} />,
     C: <PrisonerDemo interaction={interaction} exits={area.C.exits} />,
-    D: <WaterFallCavePath interaction={interaction} exits={area.D.exits} />,
-    X: <RoadCavePath interaction={interaction}  exits={area.X.exits} />,
-    E: <LightCavePath interaction={interaction} exits={area.E.exits} />,
-    F: <FangCavePath interaction={interaction} exits={area.F.exits} />,
-    G: <StairCaseCavePath interaction={interaction} exits={area.G.exits} />,
-    H: <RedCavePath interaction={interaction} exits={area.H.exits} />,
-    I: <NeedleCavePath interaction={interaction} exits={area.I.exits} />,
-    J: <ChainCavePath interaction={interaction} exits={area.J.exits} />,
-    K: <BuildingCavePath interaction={interaction} exits={area.K.exits} />,
+    D: <LongCavePath WaterFallCavePath interaction={interaction} exits={area.D.exits} />,
+    X: <StairCaseCavePath interaction={interaction}  exits={area.X.exits} />,
+    E: <NeedleCavePath interaction={interaction} exits={area.E.exits} />,
+    F: <WaterFallCavePath interaction={interaction} exits={area.F.exits} />,
+    G: <RoadCavePath interaction={interaction} exits={area.G.exits} />,
+    H: <LightCavePath interaction={interaction} exits={area.H.exits} />,
+    I: <FangCavePath interaction={interaction} exits={area.I.exits} />,
+    J: <EnginerCavePath interaction={interaction} exits={area.J.exits} />,
+    K: <ChainCavePath interaction={interaction} exits={area.K.exits} />,
     L: <WheelCavePath interaction={interaction} exits={area.L.exits} />,
   };
   

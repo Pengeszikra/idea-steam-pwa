@@ -369,7 +369,7 @@
  .route-arrow { 
    @include bimage('/img/gui/route-arrow.png', 28vmin, 28vmin); 
    transition: opacity 300ms;
-   opacity: 0.1;
+   opacity: 0.3;
    &:hover { opacity: 1;}
    transform-origin: center center;
   }

@@ -10,6 +10,7 @@ export default Cave => ({interaction, exits = [], children, ...props}) => {
   const Route = ({path, x, y, direction}) => !isNaN(x) && !isNaN(y)
     ?
       <RouteArrow 
+        data-poth={path}
         onClick={handleRoute(path)} 
         style={{transform: `translate(${x}vmin, ${y}vmin) rotate(${direction}deg)`}} 
       />
