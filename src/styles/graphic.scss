@@ -53,6 +53,7 @@
 .wheel-cave { @include bimage('/img/caves/wheel-cave.png', 100vmin, 100vh); }
 .enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vh); }
 .road-cave { @include bimage('/img/caves/road-cave.png', 100vmin, 100vh); }
+.door-closed { @include bimage('/img/caves/door-closed.png', 100vmin, 100vh); }
 
 .prisoner-cave { @include bimage('/img/caves/prisoner-place.png', 100vmin, 100vh); }
 .prisoner-cave-r1 { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
@@ -125,24 +126,6 @@
     text-align: center;
     z-index: -5;
   }
-}
-
-.prisoner-1 {
-  @include bimage('/img/gui/prisoner-1.png', 12vmin, 12vmin);   
-  bottom: 8vmin;
-  left: 45vmin;
-  top: initial;
-  z-index: 10;
-  filter: grayscale(1);
-  &:hover { filter: none; }
-}
-
-.item-1 {
-  @include bimage('/img/gui/item-1.png', 12vmin, 12vmin, initial);
-  bottom: 14vmin;
-  left: 22vmin;
-  filter: grayscale(1) brightness(.7);
-  &:hover { filter: none; }
 }
 
 .socrates, .history-papper, .scorates-speaking {   
@@ -337,39 +320,20 @@
   box-shadow: 0 0 2px #AAA;
  }
 
- .medium-3d {
-   // background: gold;
-   width: 23vmin;
-   height: 23vmin;
- }
+.medium-3d {
+  // background: gold;
+  width: 23vmin;
+  height: 23vmin;
+}
 
- .item {
-   position: absolute;
-   width: 50vmin;
-   height: 50vmin;
-   top: 20vmin;
-   left: 5vmin;
-   background-position: -315px -45px;
-   background-image: url('/img/gui/items.png');
- }
+.route-arrow { 
+  @include bimage('/img/gui/route-arrow.png', 28vmin, 28vmin); 
+  transition: opacity 300ms;
+  opacity: 0.3;
+  &:hover { opacity: 1;}
+  transform-origin: center center;
+}
 
- .item-00 { background-position: -45px -45px; }
- .item-01 { background-position: -45px -45px; }
- .item-02 { background-position:  -8px -45px; }
- .item-03 { background-position: -45px -45px; }
- .item-04 { background-position: -45px -45px; }
- .item-05 { background-position: -45px -45px; }
- .item-06 { background-position: -45px -45px; }
- .item-07 { background-position: -45px -45px; }
- .item-08 { background-position: -45px -45px; }
- .item-09 { background-position: -45px -45px; }
- .item-10 { background-position: -45px -45px; }
- .item-11 { background-position: -45px -45px; }
-
- .route-arrow { 
-   @include bimage('/img/gui/route-arrow.png', 28vmin, 28vmin); 
-   transition: opacity 300ms;
-   opacity: 0.3;
-   &:hover { opacity: 1;}
-   transform-origin: center center;
-  }
+.prisoner {
+  &[data-prisoner="A"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 33vmin, 50vmin); }
+}

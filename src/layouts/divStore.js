@@ -20,7 +20,7 @@ export const [WaterFallCave, LightCave, FangCave] = divFactory(["waterfall-cave"
 export const [StairCaseCave, NeedleCave] = divFactory(["staircase-cave", "needle-cave"]);
 export const [ChainCave, BuildingCave] = divFactory(["chain-cave", "building-cave"]);
 export const [WheelCave, EnginerCave] = divFactory(["wheel-cave", "enginer-cave"]);
-export const [RoadCave] = divFactory(["road-cave"]);
+export const [RoadCave, BehindTheDoor] = divFactory(["road-cave", "door-closed"]);
 
 export const [InteractiveMap, MapCloseButton] = divFactory(["interactive-map", "interactive-map-close"]);
 
