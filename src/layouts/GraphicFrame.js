@@ -11,7 +11,6 @@ import {
   AvatarTwoOnMap,
 } from '../layouts/divStore';
 import showtime from './showtime';
-import speaks from '../caves/speaks';
 import SocratesSpeaking from './SocratesSpeaking';
 import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
@@ -22,11 +21,10 @@ import { area } from '../caves/applicationData';
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
-  // const scoreStore = useReducer(scoreReducer, scoreInitial);  
   const [{route, score, saved, level}, dispatch] = scoreStore;
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
-  const [speakNumber, setSpeakNumber] = useState(0);
+  const [talk, setTalk] = useState(_ => _ => "");
   const [walk, setWalk] = useState(area.Q.walk);
   const [underWalk, setUnderWalk] = useState(false);  
   const [sceneId, setScene] = useState('Q');
@@ -41,15 +39,14 @@ export default ({setWay, scoreStore}) => {
   const handlePrisoner = () => {
   };  
   const handleHistory = () => {
-    setSocrates(!hasSocrates);
-    hasSocrates && setSpeakNumber(speakNumber < speaks.length - 1 ? speakNumber + 1 : 0);
+    setSocrates(!hasSocrates);    
   };  
   
   const addScore = n => dispatch(achiveScore(n));
   const savePrisoner = () => dispatch(releasePrisoner());
-  const talkSocrates = speakNumber => {
-     setSocrates(true);
-    setSpeakNumber(speakNumber);
+  const talkSocrates = speak => {
+    setTalk(_ => speak);
+    setSocrates(true);    
   }
 
   const mapInteraction = {
@@ -68,20 +65,20 @@ export default ({setWay, scoreStore}) => {
   };
 
   const prisonerInteraction = {
-    handleTryToRelease: (prisoner, speakNumber) => e => {
-      talkSocrates(speakNumber)
+    handleTryToRelease: (prisoner, speak) => e => {
+      talkSocrates(speak)
     }
   };
 
   return (
-    <main className="graph-frame">      
+    <main className="graph-frame">
       <Scenes 
         sceneId={sceneId} 
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
       />            
-      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={speaks[speakNumber]} level={level} handleStopSpeak={e=>setSocrates(false)} />
+      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={talk} level={level} handleStopSpeak={e=>setSocrates(false)} />
       <BottomBar 
         handleMap={handleMap} 
         handlePrisoner={handlePrisoner} 
@@ -97,8 +94,6 @@ export default ({setWay, scoreStore}) => {
         walk={walk}
         underWalk={underWalk}
       /> 
-    </main>  
+    </main>
   );
 }
-
-// <EntranceCave><DraggableList items={'Alfa Beta Gamma Delta'.split(' ')} /></EntranceCave>,

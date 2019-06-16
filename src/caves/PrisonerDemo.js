@@ -14,7 +14,7 @@ export default ({interaction}) => {
     <PrisonerCave>      
       <PrisonerCaveRoute1 onClick={handleRoute('C-A')} />
       <PrisonerCaveRoute2 onClick={handleRoute('C-X')} />
-      {/* <PrisonerOnScene onClick={handleTryToRelease('prisoner - 1', 12)} /> */}
+      <PrisonerOnScene onClick={handleTryToRelease('prisoner - 1', 12)} />
     </PrisonerCave>
   );
 }

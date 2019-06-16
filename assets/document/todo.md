@@ -5,6 +5,7 @@
   - [x] collect unique interaction / animation
   - [ ] exact game flow without correct games
     - [x] draw new cave routes
+    - [x] walk between caves and corssroads
   - [ ] solve all game types
   - [ ] game flow
     - [ ] score system

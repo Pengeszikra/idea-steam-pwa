@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Adeimantosz, Glaukon, Island } from '../layouts/divStore';
 import { useSpring, animated} from 'react-spring';
+import { entrance } from '../caves/applicationData';
 
 export default ({level, talkSocrates, children}) => {
 
@@ -12,7 +13,7 @@ export default ({level, talkSocrates, children}) => {
   });
 
   useEffect(()=>{
-    setTimeout(() => talkSocrates(0), 1000);
+    setTimeout(() => talkSocrates(entrance.intro), 1000);
   }, []);
 
   return (
