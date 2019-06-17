@@ -46,3 +46,20 @@ export const [
 ] = divFactory(['prisoner-unsolved', 'prisoner-cave', 'prisoner-cave-r1', 'prisoner-cave-r2']);
 
 export const [RouteArrow] = divFactory(['route-arrow']);
+
+/*
+export const [
+  PrisonerA1,
+  PrisonerB1,
+  PrisonerB2,
+  PrisonerC1,
+  PrisonerD1,
+  PrisonerE1,
+  PrisonerE2,
+  PrisonerF1,
+  PrisonerF2,
+  PrisonerG1,
+  PrisonerH1,
+  PrisonerI1,
+] = divFactory('A-1|B-1|B-2|C-1|D-1|E-1|E-2|F-1|F-2|G-1|H-1|I-1'.split('|').map(i=>`prisoner[data-prisoner="${i}"]`))
+*/

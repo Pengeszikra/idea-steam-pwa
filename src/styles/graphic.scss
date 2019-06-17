@@ -335,5 +335,16 @@
 }
 
 .prisoner {
-  &[data-prisoner="A"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 33vmin, 50vmin); }
+  &[data-prisoner="A-1"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="B-1"] { @include bimage('/img/mobs/prisoner-02.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="B-2"] { @include bimage('/img/mobs/prisoner-03.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="C-1"] { @include bimage('/img/mobs/prisoner-04.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="D-1"] { @include bimage('/img/mobs/prisoner-05.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="E-1"] { @include bimage('/img/mobs/prisoner-06.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="E-2"] { @include bimage('/img/mobs/prisoner-07.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="F-1"] { @include bimage('/img/mobs/prisoner-08.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="F-2"] { @include bimage('/img/mobs/prisoner-09.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="G-1"] { @include bimage('/img/mobs/prisoner-10.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="H-1"] { @include bimage('/img/mobs/prisoner-11.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="I-1"] { @include bimage('/img/mobs/prisoner-12.png', 33vmin, 33vmin, 33vmin, 50vmin) }
 }
