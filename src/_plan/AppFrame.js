@@ -2,7 +2,7 @@ import React, {useState, useEffect, useReducer} from 'react';
 import Header from './Header';
 import ButtonLine from './ButtonLine';
 import Content from './Content';
-import { changeRoute, scoreReducer, scoreInitial, achiveScore } from '../flow/action';
+import { changeRoute, scoreReducer, scoreInitial, achiveScore } from './action';
 
 export default ({setWay}) => {
   const [{route, score, saved}, dispatch] = useReducer(scoreReducer, scoreInitial);

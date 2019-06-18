@@ -1,11 +1,11 @@
 import React, {useState, useReducer} from 'react';
 
-import AppFrame from './AppFrame';
+import AppFrame from '../_plan/AppFrame';
 import GraphicFrame from './GraphicFrame';
 import showtime from './showtime';
 import IdeaIntro from '../story/IdeaIntro';
 import AvatarSelection from '../story/AvatarSelection';
-import { scoreInitial, scoreReducer } from '../flow/action';
+import { scoreInitial, scoreReducer } from '../_plan/action';
 
 const loaderOver = content => {postApplicationReady(); return content; };
 const rootRender = content => render(loaderOver(content), document.getElementById('root'));

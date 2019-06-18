@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../flow/action';
+import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../_plan/action';
 import '../styles/graphic.scss';
 import '../styles/caves.scss';
 import {
@@ -77,6 +77,8 @@ export default ({setWay, scoreStore}) => {
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
+        prisonerProps = {{}}
+        itemProps = {{}}
       />            
       <SocratesSpeaking show={hasSocrates && !mapVisible} speak={talk} level={level} handleStopSpeak={e=>setSocrates(false)} />
       <BottomBar 

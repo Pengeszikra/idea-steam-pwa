@@ -335,31 +335,31 @@
 }
 
 .prisoner {
-  &[data-prisoner="A-1"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 83vmin, 15vmin) }
-  &[data-prisoner="B-1"] { @include bimage('/img/mobs/prisoner-02.png', 33vmin, 33vmin, 34vmin, 56vmin) }
-  &[data-prisoner="B-2"] { @include bimage('/img/mobs/prisoner-03.png', 33vmin, 33vmin, 82vmin, 30vmin) }
-  &[data-prisoner="C-1"] { @include bimage('/img/mobs/prisoner-04.png', 33vmin, 33vmin, 33vmin, 50vmin) }
-  &[data-prisoner="D-1"] { @include bimage('/img/mobs/prisoner-05.png', 43vmin, 43vmin, 83vmin, 50vmin) }
-  &[data-prisoner="E-1"] { @include bimage('/img/mobs/prisoner-06.png', 33vmin, 33vmin, 33vmin, 65vmin) }
-  &[data-prisoner="E-2"] { @include bimage('/img/mobs/prisoner-07.png', 33vmin, 33vmin, 44vmin,  5vmin) }
-  &[data-prisoner="F-1"] { @include bimage('/img/mobs/prisoner-08.png', 33vmin, 33vmin, 33vmin, 50vmin) }
-  &[data-prisoner="F-2"] { @include bimage('/img/mobs/prisoner-09.png', 33vmin, 33vmin, 33vmin, -4vmin); transform: scaleX(-1); transform-origin: center center }
-  &[data-prisoner="G-1"] { @include bimage('/img/mobs/prisoner-10.png', 33vmin, 33vmin, 33vmin,  5vmin) }
-  &[data-prisoner="H-1"] { @include bimage('/img/mobs/prisoner-11.png', 33vmin, 53vmin, 103vmin, 5vmin) }
-  &[data-prisoner="I-1"] { @include bimage('/img/mobs/prisoner-12.png', 40vmin, 40vmin, 66vmin, 56vmin); transform: scaleX(-1); transform-origin: center center }
+  &[data-prisoner="A1"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 83vmin, 15vmin) }
+  &[data-prisoner="B1"] { @include bimage('/img/mobs/prisoner-02.png', 33vmin, 33vmin, 34vmin, 56vmin) }
+  &[data-prisoner="B2"] { @include bimage('/img/mobs/prisoner-03.png', 33vmin, 33vmin, 82vmin, 30vmin) }
+  &[data-prisoner="C1"] { @include bimage('/img/mobs/prisoner-04.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="D1"] { @include bimage('/img/mobs/prisoner-05.png', 43vmin, 43vmin, 83vmin, 50vmin) }
+  &[data-prisoner="E1"] { @include bimage('/img/mobs/prisoner-06.png', 33vmin, 33vmin, 33vmin, 65vmin) }
+  &[data-prisoner="E2"] { @include bimage('/img/mobs/prisoner-07.png', 33vmin, 33vmin, 44vmin,  5vmin) }
+  &[data-prisoner="F1"] { @include bimage('/img/mobs/prisoner-08.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="F2"] { @include bimage('/img/mobs/prisoner-09.png', 33vmin, 33vmin, 33vmin, -4vmin); transform: scaleX(-1); transform-origin: center center }
+  &[data-prisoner="G1"] { @include bimage('/img/mobs/prisoner-10.png', 33vmin, 33vmin, 33vmin,  5vmin) }
+  &[data-prisoner="H1"] { @include bimage('/img/mobs/prisoner-11.png', 33vmin, 53vmin, 103vmin, 5vmin) }
+  &[data-prisoner="I1"] { @include bimage('/img/mobs/prisoner-12.png', 40vmin, 40vmin, 66vmin, 56vmin); transform: scaleX(-1); transform-origin: center center }
 }
 
 .item {
-  &[data-item="C-1"] { @include bimage('/img/mobs/item-01.png', 25vmin, 25vmin, 125vmin, 20vmin) }
-  &[data-item="C-2"] { @include bimage('/img/mobs/item-02.png', 25vmin, 25vmin, 129vmin, 74vmin) }
-  &[data-item="D-1"] { @include bimage('/img/mobs/item-03.png', 25vmin, 25vmin, 55vmin, 50vmin) }
-  &[data-item="D-2"] { @include bimage('/img/mobs/item-04.png', 25vmin, 25vmin, 120vmin, 70vmin) }
-  &[data-item="E-1"] { @include bimage('/img/mobs/item-05.png', 25vmin, 25vmin, 140vmin, 50vmin) }
-  &[data-item="E-2"] { @include bimage('/img/mobs/item-06.png', 25vmin, 25vmin, 80vmin, 20vmin) }
-  &[data-item="F-1"] { @include bimage('/img/mobs/item-07.png', 25vmin, 25vmin, 80vmin, 40vmin) }
-  &[data-item="F-2"] { @include bimage('/img/mobs/item-08.png', 25vmin, 25vmin, 140vmin, 75vmin) }
-  &[data-item="G-1"] { @include bimage('/img/mobs/item-09.png', 25vmin, 25vmin, 70vmin, 10vmin) }
-  &[data-item="G-2"] { @include bimage('/img/mobs/item-10.png', 25vmin, 25vmin, 100vmin, 2vmin) }
-  &[data-item="H-1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
-  &[data-item="H-2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
+  &[data-item="C1"] { @include bimage('/img/mobs/item-01.png', 25vmin, 25vmin, 125vmin, 20vmin) }
+  &[data-item="C2"] { @include bimage('/img/mobs/item-02.png', 25vmin, 25vmin, 129vmin, 74vmin) }
+  &[data-item="D1"] { @include bimage('/img/mobs/item-03.png', 25vmin, 25vmin, 55vmin, 50vmin) }
+  &[data-item="D2"] { @include bimage('/img/mobs/item-04.png', 25vmin, 25vmin, 120vmin, 70vmin) }
+  &[data-item="E1"] { @include bimage('/img/mobs/item-05.png', 25vmin, 25vmin, 140vmin, 50vmin) }
+  &[data-item="E2"] { @include bimage('/img/mobs/item-06.png', 25vmin, 25vmin, 80vmin, 20vmin) }
+  &[data-item="F1"] { @include bimage('/img/mobs/item-07.png', 25vmin, 25vmin, 80vmin, 40vmin) }
+  &[data-item="F2"] { @include bimage('/img/mobs/item-08.png', 25vmin, 25vmin, 140vmin, 75vmin) }
+  &[data-item="G1"] { @include bimage('/img/mobs/item-09.png', 25vmin, 25vmin, 70vmin, 10vmin) }
+  &[data-item="G2"] { @include bimage('/img/mobs/item-10.png', 25vmin, 25vmin, 100vmin, 2vmin) }
+  &[data-item="H1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
+  &[data-item="H2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
 }

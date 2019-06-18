@@ -4,8 +4,8 @@
 
 .route-arrow {
   &[data-path="Q-Y"] { @include arrow( 45, 53, 0 ); }
-  &[data-path="Y-A"] { @include arrow(  2, 55,  45 ); }  
-  &[data-path="Y-B"] { @include arrow( 55, 55, -25 ); }
+  &[data-path="Y-A"] { @include arrow(  3, 87,  90 ); }  
+  &[data-path="Y-B"] { @include arrow( 70, 85, -90 ); }
   
   &[data-path="A-Y"] { @include arrow( 51,  98, -154 ); }
   &[data-path="A-X"] { @include arrow( 68, 132,  -81 ); }

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { DarkGold, IntroButton, SimpleDarkBg, Adeimantosz, Glaukon } from '../layouts/divStore';
 import DescriptionOfHistory from '../show/DescriptionOfHistory';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../caves/applicationData';
-import { selectLevel } from '../flow/action';
+import { selectLevel } from '../_plan/action';
 
 export default ({setWay, scoreStore}) => {
 
