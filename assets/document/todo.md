@@ -7,22 +7,25 @@
     - [x] draw new cave routes
     - [x] walk between caves and corssroads
   - [ ] solve all game types
-  - [ ] game flow
+  - [ ] story flow
+    - [x] story reducer
+    - [ ] mock game types
     - [ ] score system
     - [ ] collect items
-    - [ ] release slaves
+    - [ ] release prisoners
   - [ ] sparate document md show parts
 
 ## minor goals
   - [x] prevent IOS page over scrolling
   - [ ] fix fonts on IOS
   - [ ] preload images
-  - [ ] folder structure refact // too much folder names
+  - [x] folder structure refact // too much folder names
   - [x] separate _plan
   - [x] automatic speak height
   - [x] extend avatar selection with text
   - [x] prisoners in caves
   - [x] items in caves
+  - [x] version info on intro page
 
 ## game types:
   - [ ] open cave system : drag and drop correct shape by matrix
@@ -94,7 +97,4 @@ Quest({interaction, view, level, ...props}) => {
     </CaveBackgroundByQuest>
   )
 }
-```
-
-```jsx 
 ```

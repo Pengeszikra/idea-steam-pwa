@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { DarkGold, IntroButton, SimpleDarkBg, Adeimantosz, Glaukon } from '../styles/divStore';
 import DescriptionOfHistory from './DescriptionOfHistory';
-import { avatarNames, whoIsTheHero, avatarDescripts } from './applicationData';
+import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../_plan/action';
 
 export default ({setWay, scoreStore}) => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import '../styles/graphic.scss';
 import '../styles/caves.scss';
 import {
@@ -15,12 +15,13 @@ import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import Scenes from '../story/Scenes';
-import { area } from '../story/applicationData';
+import { area } from '../engine/applicationData';
+import { storyReducer, storyInitial, achiveScore, moveToArea } from '../engine/reducers';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
-  const [{route, score, saved, level}, dispatch] = scoreStore;
+  const [{score, saved, level, areaId}, dispatch] = useReducer(storyReducer, storyInitial);
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
   const [talk, setTalk] = useState(_ => _ => "");
@@ -33,9 +34,12 @@ export default ({setWay, scoreStore}) => {
   const handleCloseMap = () => setMapVisiblity(false);
   const handleInventory = () => {
     setScene('Y');
+    dispatch(moveToArea('Y'));
     setSocrates(false);
   };
   const handlePrisoner = () => {
+    dispatch(achiveScore(10));
+    console.log(areaId, score);
   };  
   const handleHistory = () => {
     setSocrates(!hasSocrates);    
@@ -46,6 +50,13 @@ export default ({setWay, scoreStore}) => {
     setSocrates(true);    
   }
 
+  /*
+  useEffect(() => {
+    dispatch(moveToArea('Q'));
+    return () => {};
+  }, [dispatch])
+  */
+
   const mapInteraction = {
     handleRoute: path => e => {      
       const [currentAreaId, targetAreaId] = path.split('-');
@@ -53,7 +64,10 @@ export default ({setWay, scoreStore}) => {
       setMapVisiblity(true);
       setUnderWalk(true);
       setTimeout(() => setWalk(area[targetAreaId].walk), 900); 
-      setTimeout(() => setScene(targetAreaId), 1700);
+      setTimeout(() => {
+        setScene(targetAreaId)
+        dispatch(moveToArea(targetAreaId));
+      }, 1700);
       setTimeout(() => {
         setMapVisiblity(false);
         setUnderWalk(false);
@@ -70,7 +84,7 @@ export default ({setWay, scoreStore}) => {
   return (
     <main className="graph-frame">
       <Scenes 
-        sceneId={sceneId} 
+        sceneId={sceneId}
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
@@ -85,7 +99,7 @@ export default ({setWay, scoreStore}) => {
         handleHistory={handleHistory}
       />      
       <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
-      <HeaderBar score={score} saved={saved} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
+      <HeaderBar score={score} saved={saved.length} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
       <MapWithHero 
         show={mapVisible}
         Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} 

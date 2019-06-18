@@ -46,3 +46,5 @@ export const [
 ] = divFactory(['prisoner-unsolved', 'prisoner-cave', 'prisoner-cave-r1', 'prisoner-cave-r2']);
 
 export const [RouteArrow] = divFactory(['route-arrow']);
+
+export const [Version, IntroButtonHolder] = divFactory(['version', 'intro-button-holder']);

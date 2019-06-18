@@ -4,8 +4,8 @@ import './styles/font.scss';
 import './styles/global.scss';
 
 import rootRender from './utils/rootRender';
-import AppWithWichableDocument from './layouts/AppWithWichableDocument';
+import IdeaWithWichableDocument from './layouts/IdeaWithWichableDocument';
 
 import version from '../version'; console.log(`idea :: ${version}`);
 
-rootRender(<AppWithWichableDocument />);
+rootRender(<IdeaWithWichableDocument />);

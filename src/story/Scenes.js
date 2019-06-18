@@ -20,7 +20,7 @@ import {
 import DownToDeep from './DownToDeep';
 import PrisonerDemo from './PrisonerDemo';
 import cavePath from '../layouts/cavePath';
-import { area } from './applicationData';
+import { area } from '../engine/applicationData';
 import { Add3D, GEOMS } from '../layouts/Geometries';
 
 const cavePaths = (...caves) => caves.map(cave => cavePath(cave));
@@ -66,9 +66,6 @@ const [
 const Prisoner = ({prisonerProps, ...props}) => <div className="prisoner" {...props} />
 
 const Item = ({itemProps, ...props}) => {
-  // const id = props["data-item"]
-  // const show = false;
-  // console.log(id);
   return <div className="item" {...props} />;
 }
 

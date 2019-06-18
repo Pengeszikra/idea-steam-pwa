@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Adeimantosz, Glaukon, Island } from '../styles/divStore';
 import { useSpring, animated} from 'react-spring';
-import { entrance } from './applicationData';
+import { entrance } from '../engine/applicationData';
 
 export default ({level, talkSocrates, children}) => {
 
