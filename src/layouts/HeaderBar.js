@@ -3,7 +3,7 @@ import {
   HeaderBarSection, 
   ActualScore,
   SavedPrisoner,
-} from './divStore';
+} from '../styles/divStore';
 
 export default ({score, saved, setWay, Avatar}) => (
   <HeaderBarSection>

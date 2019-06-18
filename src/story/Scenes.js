@@ -16,12 +16,12 @@ import {
   Island,
   RoadCave,
   BehindTheDoor,
-} from '../layouts/divStore';
+} from '../styles/divStore';
 import DownToDeep from './DownToDeep';
-import PrisonerDemo from '../caves/PrisonerDemo';
-import cavePath from '../caves/cavePath';
-import { area } from '../caves/applicationData';
-import { Add3D, GEOMS } from '../show/Geometries';
+import PrisonerDemo from './PrisonerDemo';
+import cavePath from '../layouts/cavePath';
+import { area } from './applicationData';
+import { Add3D, GEOMS } from '../layouts/Geometries';
 
 const cavePaths = (...caves) => caves.map(cave => cavePath(cave));
 

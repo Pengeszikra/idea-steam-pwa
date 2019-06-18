@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { actionCreator } from "../hooks/actionCreator";
+import { actionCreator } from "../utils/actionCreator";
 
 export const [ACHIVE_SCORE, achiveScore] = actionCreator('achive-score');
 export const [RELEASE_PRISONER, releasePrisoner] = actionCreator('release-prisoner');

@@ -1,5 +1,5 @@
 import React from 'react';
-import divFactory from '../layouts/divFactory';
+import divFactory from '../utils/divFactory';
 
 export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory(["header-bar", "lvl-1-char", "lvl-2-char"]);
 export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-2-char avatar-on-map"]);

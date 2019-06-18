@@ -1,8 +1,8 @@
 import React, {useState, useReducer} from 'react';
 
-import AppFrame from '../_plan/AppFrame';
-import GraphicFrame from './GraphicFrame';
-import showtime from './showtime';
+import AppFrame from '../_plan/PlanFrame';
+import GraphicFrame from './AppFrame';
+import showtime from '../utils/showtime';
 import IdeaIntro from '../story/IdeaIntro';
 import AvatarSelection from '../story/AvatarSelection';
 import { scoreInitial, scoreReducer } from '../_plan/action';

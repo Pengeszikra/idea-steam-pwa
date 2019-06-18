@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { changeRoute, scoreReducer, scoreInitial, achiveScore, releasePrisoner } from '../_plan/action';
 import '../styles/graphic.scss';
 import '../styles/caves.scss';
 import {
@@ -9,14 +8,14 @@ import {
   LevelTwoAvatar,
   AvatarOneOnMap,
   AvatarTwoOnMap,
-} from '../layouts/divStore';
-import showtime from './showtime';
+} from '../styles/divStore';
+import showtime from '../utils/showtime';
 import SocratesSpeaking from './SocratesSpeaking';
 import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import Scenes from '../story/Scenes';
-import { area } from '../caves/applicationData';
+import { area } from '../story/applicationData';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
@@ -42,8 +41,6 @@ export default ({setWay, scoreStore}) => {
     setSocrates(!hasSocrates);    
   };  
   
-  const addScore = n => dispatch(achiveScore(n));
-  const savePrisoner = () => dispatch(releasePrisoner());
   const talkSocrates = speak => {
     setTalk(_ => speak);
     setSocrates(true);    

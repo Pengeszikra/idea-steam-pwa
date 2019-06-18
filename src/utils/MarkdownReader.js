@@ -1,6 +1,6 @@
 import React from 'react';
 import Markdown from 'react-markdown-renderer';
-import useDocument from '../hooks/useDocument';
+import useDocument from './useDocument';
 
 export default ({url}) => {
   const [document] = useDocument(url);

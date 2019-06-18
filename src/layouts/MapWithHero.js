@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import showtime from './showtime';
-import { InteractiveMap, MapCloseButton } from './divStore';
+import showtime from '../utils/showtime';
+import { InteractiveMap, MapCloseButton } from '../styles/divStore';
 // import { mapPositions } from '../caves/applicationData';
 
 export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk}) => {    

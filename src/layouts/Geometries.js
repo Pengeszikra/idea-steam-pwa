@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
-import ThreeArea from '../show/ThreeArea';
+import ThreeArea from './ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-use-gesture';
-import { GameHolder, IntroButton } from '../layouts/divStore';
+import { GameHolder, IntroButton } from '../styles/divStore';
 import { DropTarget } from 'react-dnd';
 
 export const GEOMS = {

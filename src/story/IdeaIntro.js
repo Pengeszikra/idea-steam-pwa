@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { DarkGold, IntroButton } from '../layouts/divStore';
-import DescriptionOfHistory from '../show/DescriptionOfHistory';
+import { DarkGold, IntroButton } from '../styles/divStore';
+import DescriptionOfHistory from './DescriptionOfHistory';
 
 export default ({setWay}) => {
   const [hasHistory, setHistory] = useState(false);

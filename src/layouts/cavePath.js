@@ -2,7 +2,7 @@ import React from 'react';
 import {
   PrisonerOnScene, 
   RouteArrow, 
-} from '../layouts/divStore';
+} from '../styles/divStore';
 
 export default Cave => ({interaction, exits = [], children, ...props}) => {
   const {handleRoute, handleTryToRelease} = interaction;

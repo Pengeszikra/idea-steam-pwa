@@ -17,7 +17,7 @@
   - [x] prevent IOS page over scrolling
   - [ ] fix fonts on IOS
   - [ ] preload images
-  - [ ] folder structure refact
+  - [ ] folder structure refact // too much folder names
   - [x] separate _plan
   - [x] automatic speak height
   - [x] extend avatar selection with text

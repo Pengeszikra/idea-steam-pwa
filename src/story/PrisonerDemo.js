@@ -4,7 +4,7 @@ import {
   PrisonerCave, 
   PrisonerCaveRoute1, 
   PrisonerCaveRoute2
-} from '../layouts/divStore';
+} from '../styles/divStore';
 
 
 export default ({interaction, children}) => {

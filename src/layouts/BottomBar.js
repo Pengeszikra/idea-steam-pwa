@@ -5,7 +5,7 @@ import {
   InventoryIcon,
   SavedIcon,
   HistoryIcon,
-} from '../layouts/divStore';
+} from '../styles/divStore';
 
 export default ({handleMap, handleInventory, handlePrisoner, handleHistory}) => {
   return (

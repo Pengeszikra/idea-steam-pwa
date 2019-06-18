@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Cave from './CaveOld';  
 import Inventory from './Inventory';
-import RouteFactory from '../show/RouteFactory';
-import divFactory from '../layouts/divFactory';
+import RouteFactory from './RouteFactory';
+import divFactory from '../utils/divFactory';
 
 const caveNumbers = [
   ['intro', 1.1],
