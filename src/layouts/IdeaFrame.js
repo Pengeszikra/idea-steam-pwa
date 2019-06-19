@@ -21,7 +21,7 @@ import { storyReducer, storyInitial, achiveScore, moveToArea } from '../engine/r
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
-  const [{score, saved, level, areaId}, dispatch] = useReducer(storyReducer, storyInitial);
+  const [{score, saved, level, position}, dispatch] = useReducer(storyReducer, storyInitial);
   const [mapVisible, setMapVisiblity] = useState(false);
   const [hasSocrates, setSocrates] = useState(false);
   const [talk, setTalk] = useState(_ => _ => "");
@@ -39,7 +39,7 @@ export default ({setWay, scoreStore}) => {
   };
   const handlePrisoner = () => {
     dispatch(achiveScore(10));
-    console.log(areaId, score);
+    console.log(position, score);
   };  
   const handleHistory = () => {
     setSocrates(!hasSocrates);    
@@ -49,13 +49,6 @@ export default ({setWay, scoreStore}) => {
     setTalk(_ => speak);
     setSocrates(true);    
   }
-
-  /*
-  useEffect(() => {
-    dispatch(moveToArea('Q'));
-    return () => {};
-  }, [dispatch])
-  */
 
   const mapInteraction = {
     handleRoute: path => e => {      
@@ -84,7 +77,7 @@ export default ({setWay, scoreStore}) => {
   return (
     <main className="graph-frame">
       <Scenes 
-        sceneId={sceneId}
+        sceneId={position}
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}

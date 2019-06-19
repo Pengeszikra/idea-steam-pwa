@@ -10,7 +10,7 @@ export const [QUEST_SOLVED, questSolved] = actionCreator('quest-solved');
 export const storyInitial = {
   level: 1,  
   score: 0,   
-  areaId: 'Q',
+  position: 'Q',
   caveLookUp: {
     Q: { explored: true , prisoners: [], items: [], solved: false },
     Y: { explored: false , prisoners: [], items: [], solved: false },
@@ -33,53 +33,43 @@ export const storyInitial = {
 };
 
 export const storyReducer = (state, {type, payload}) => {
-  const area = state.caveLookUp[state.areaId];
+  const {caveLookUp, position} = state;
+  const area = caveLookUp[position];
   
   switch(type) {
-    case ACHIVE_SCORE: 
-      return {
-        ...state, 
-        score: state.score + payload 
-      };
+    case ACHIVE_SCORE: return { ...state, score: state.score + payload };
 
-    case SELECT_LEVEL: 
-      return {
-        ...state, 
-        level: payload
-      };
+    case SELECT_LEVEL: return {...state, level: payload };
 
     case MOVE_TO_AREA: 
-      if (!state.caveLookUp[payload]) return state;
-      // const exploredArea = state.caveLookUp[state.areaId];
+      if (!caveLookUp[payload]) return state;
       return {
         ...state, 
         area: payload, 
-        caveLookUp: {...state.caveLookUp,  [state.areaId]:{...area, explored: true}} 
+        caveLookUp: {...caveLookUp,  [position]:{...area, explored: true}},
+        position: payload
       }
 
     case SAVE_PRISONER:
-      // const savedArea = state.caveLookUp[state.areaId];
       const prisoners = savedArea.items.filter(prisoner => prisoner !== payload);
       return {
         ...state, 
-        caveLookUp: {...state.caveLookUp,  [state.areaId]:{...area, prisoners} },
+        caveLookUp: {...caveLookUp,  [position]:{...area, prisoners} },
         saved: [...state.saved, payload]
       };
     
     case GET_ITEM: 
-      // const itemArea = state.caveLookUp[state.areaId];
       const items = itemArea.items.filter(item => item !== payload);
       return {
         ...state, 
-        caveLookUp: {...state.caveLookUp,  [state.areaId]:{...area, items} },
+        caveLookUp: {...caveLookUp,  [position]:{...area, items} },
         equipment: [...state.equipment, payload]
       };
 
     case QUEST_SOLVED:
-      // const questArea = state.caveLookUp[state.areaId];      
       return {
         ...state, 
-        caveLookUp: {...state.caveLookUp,  [state.areaId]:{...area, solved: true} },        
+        caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },        
       }
   
     default: state;
