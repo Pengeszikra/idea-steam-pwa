@@ -72,7 +72,7 @@ const Item = ({itemProps, ...props}) => {
 export default ({sceneId, level, talkSocrates, interaction, prisonerProps, itemProps}) => {
   
   const sceneLookup = {
-    Q:  <DownToDeepPath level={level} talkSocrates={talkSocrates} interaction={interaction} exits={area.Q.exits} />,
+    Q:  <DownToDeep level={level} talkSocrates={talkSocrates} interaction={interaction} />,
     Y:  <BehindTheDoorPath interaction={interaction} exits={area.Y.exits} />,
     A:  <BlueCavePath interaction={interaction} exits={area.A.exits} >
           <Prisoner data-prisoner="A1" prisonerProps={prisonerProps} />

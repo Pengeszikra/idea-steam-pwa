@@ -15,8 +15,10 @@ import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 import Scenes from '../story/Scenes';
+
 import { area } from '../engine/applicationData';
 import { storyReducer, storyInitial, achiveScore, moveToArea } from '../engine/reducers';
+import CaveSystem from '../story/CaveSystem';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
@@ -75,14 +77,12 @@ export default ({setWay, scoreStore}) => {
   };
 
   return (
-    <main className="graph-frame">
-      <Scenes 
-        sceneId={position}
+    <main className="graph-frame">      
+      <CaveSystem 
+        position={position}
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
-        prisonerProps = {{}}
-        itemProps = {{}}
       />            
       <SocratesSpeaking show={hasSocrates && !mapVisible} speak={talk} level={level} handleStopSpeak={e=>setSocrates(false)} />
       <BottomBar 
