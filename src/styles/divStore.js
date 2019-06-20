@@ -48,3 +48,5 @@ export const [
 export const [RouteArrow] = divFactory(['route-arrow']);
 
 export const [Version, IntroButtonHolder] = divFactory(['version', 'intro-button-holder']);
+
+export const [Prisoner, Item] = divFactory(['prisoner', 'item']);

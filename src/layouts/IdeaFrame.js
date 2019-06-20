@@ -17,56 +17,41 @@ import MapWithHero from './MapWithHero';
 import Scenes from '../story/Scenes';
 
 import { area } from '../engine/applicationData';
-import { storyReducer, storyInitial, achiveScore, moveToArea } from '../engine/reducers';
+import { storyReducer, storyInitial, achiveScore, moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 
 const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
 
 export default ({setWay, scoreStore}) => {
-  const [{score, saved, level, position}, dispatch] = useReducer(storyReducer, storyInitial);
-  const [mapVisible, setMapVisiblity] = useState(false);
-  const [hasSocrates, setSocrates] = useState(false);
-  const [talk, setTalk] = useState(_ => _ => "");
-  const [walk, setWalk] = useState(area.Q.walk);
-  const [underWalk, setUnderWalk] = useState(false);  
-  const [sceneId, setScene] = useState('Q');
-  const [gameOngoing, playGame] = useState(false);
-
+  const [{score, saved, level, position, walk, underWalk, speakAbout, hasSocrates}, dispatch] = useReducer(storyReducer, storyInitial);
+  
+  const [mapVisible, setMapVisiblity] = useState(false); 
+  
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleCloseMap = () => setMapVisiblity(false);
   const handleInventory = () => {
-    setScene('Y');
     dispatch(moveToArea('Y'));
-    setSocrates(false);
+    dispatch(stopTalk());
   };
-  const handlePrisoner = () => {
-    dispatch(achiveScore(10));
-    console.log(position, score);
-  };  
-  const handleHistory = () => {
-    setSocrates(!hasSocrates);    
-  };  
-  
-  const talkSocrates = speak => {
-    setTalk(_ => speak);
-    setSocrates(true);    
-  }
+  const handlePrisoner = () => dispatch(achiveScore(10));
+  const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
+    
+  const talkSocrates = speak => dispatch(socratesTalk(speak));
+  const handleStopSpeak = () => dispatch(stopTalk());
 
   const mapInteraction = {
-    handleRoute: path => e => {      
-      const [currentAreaId, targetAreaId] = path.split('-');
-      setWalk(area[currentAreaId].walk);
+    handleRoute: path => e => {            
+      const [currentPosition, targetPosition] = path.split('-');
+      console.log(area[currentPosition].walk, currentPosition, targetPosition)
+      dispatch(walkOnMap(area[currentPosition].walk));      
       setMapVisiblity(true);
-      setUnderWalk(true);
-      setTimeout(() => setWalk(area[targetAreaId].walk), 900); 
-      setTimeout(() => {
-        setScene(targetAreaId)
-        dispatch(moveToArea(targetAreaId));
-      }, 1700);
+      dispatch(startWalk());
+      setTimeout(() => dispatch(walkOnMap(area[targetPosition].walk)), 500); 
+      setTimeout(() => dispatch(moveToArea(targetPosition)), 1000);
       setTimeout(() => {
         setMapVisiblity(false);
-        setUnderWalk(false);
-      }, 2000);       
+        dispatch(stopWalk());
+      }, 1300);       
     },
   };
 
@@ -84,14 +69,13 @@ export default ({setWay, scoreStore}) => {
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
       />            
-      <SocratesSpeaking show={hasSocrates && !mapVisible} speak={talk} level={level} handleStopSpeak={e=>setSocrates(false)} />
+      <SocratesSpeaking show={hasSocrates && !mapVisible} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 
         handleMap={handleMap} 
         handlePrisoner={handlePrisoner} 
         handleInventory={handleInventory} 
         handleHistory={handleHistory}
       />      
-      <ActualGame show={gameOngoing} onClick={()=>playGame(false)}/>
       <HeaderBar score={score} saved={saved.length} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
       <MapWithHero 
         show={mapVisible}

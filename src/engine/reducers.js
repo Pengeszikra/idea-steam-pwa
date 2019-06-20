@@ -1,4 +1,5 @@
 import { actionCreator } from "../utils/actionCreator";
+import { area, avatarNames } from "../engine/applicationData";
 
 export const [ACHIVE_SCORE, achiveScore] = actionCreator('achive-score');
 export const [SELECT_LEVEL, selectLevel] = actionCreator('select-level');
@@ -7,10 +8,20 @@ export const [GET_ITEM, getItem] = actionCreator('get-item');
 export const [MOVE_TO_AREA, moveToArea] = actionCreator('move-to-area');
 export const [QUEST_SOLVED, questSolved] = actionCreator('quest-solved');
 
+export const [WALK_ON_MAP, walkOnMap] = actionCreator('walk-on-map');
+export const [START_WALK, startWalk] = actionCreator('start-walk');
+export const [STOP_WALK, stopWalk] = actionCreator('stop-walk');
+
+export const [SOCRATES_TALK, socratesTalk] = actionCreator('socrates-talk');
+export const [STOP_TALK, stopTalk] = actionCreator('stop-talk');
+export const [CONTINUE_TALK, continueTalk] = actionCreator('continue-talk');
+
 export const storyInitial = {
   level: 1,  
   score: 0,   
   position: 'Q',
+  walk: [area.Q.walk],
+  underWalk: false,
   caveLookUp: {
     Q: { explored: true , prisoners: [], items: [], solved: false },
     Y: { explored: false , prisoners: [], items: [], solved: false },
@@ -30,15 +41,19 @@ export const storyInitial = {
   },
   saved: [],
   equipment: [],
+  speakAbout: "",
+  hasSocrates: false,
 };
 
 export const storyReducer = (state, {type, payload}) => {
-  const {caveLookUp, position} = state;
+  console.log(type, payload, state)
+
+  const {caveLookUp, position, level} = state;
   const area = caveLookUp[position];
   
   switch(type) {
     case ACHIVE_SCORE: return { ...state, score: state.score + payload };
-
+    
     case SELECT_LEVEL: return {...state, level: payload };
 
     case MOVE_TO_AREA: 
@@ -71,7 +86,15 @@ export const storyReducer = (state, {type, payload}) => {
         ...state, 
         caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },        
       }
-  
+
+    case START_WALK: return {...state, underWalk: true};
+    case STOP_WALK: return {...state, underWalk: false};
+    case WALK_ON_MAP: return {...state, walk: payload };
+
+    case SOCRATES_TALK: return {...state, speakAbout: payload(avatarNames[level]), hasSocrates: true };
+    case CONTINUE_TALK: return {...state, hasSocrates: true };
+    case STOP_TALK: return {...state, hasSocrates: false };
+
     default: state;
   }
 }

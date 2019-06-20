@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  RouteArrow,
+  RouteArrow, Prisoner, Item,
   BlueCave, LongCave, WaterFallCave, BehindTheDoor,
   LightCave, FangCave, NeedleCave, StairCaseCave,
   ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave,   
@@ -9,9 +9,6 @@ import DownToDeep from './DownToDeep';
 import PrisonerDemo from './PrisonerDemo';
 import cavePath from '../layouts/cavePath';
 import { area } from '../engine/applicationData';
-
-const Prisoner = props => <div className="prisoner" {...props} />;
-const Item = props => <div className="item" {...props} />;
 
 const backroundLookup = {
   // Q:  DownToDeep,
@@ -32,7 +29,9 @@ const backroundLookup = {
 };
 
 export default ({position, level, talkSocrates, interaction}) => {
+  // Q:  DownToDeep,
   if (position === 'Q') return <DownToDeep level={level} talkSocrates={talkSocrates} interaction={interaction} />;
+  // C:  PrisonerDemo,
   if (position === 'C') return (
     <PrisonerDemo interaction={interaction} exits={area.C.exits}>
       <Item data-item="C1" />

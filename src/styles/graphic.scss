@@ -206,13 +206,13 @@
   height: 14vmin;
   transition: top 500ms, left 500ms;
   transform-origin: bottom center;
-  animation: zoom-in 300ms 600ms forwards ease-in;
+  animation: zoom-in 100ms 300ms forwards ease-in;
 }
 
 .interactive-map { 
   @include bimage('/img/gui/interacive-map.png', 100vmin, 175vmin, 0vmin, 1vmin); 
   position: relative;
-  animation: zoom-in 300ms forwards ease-in;
+  animation: zoom-in 200ms forwards ease-in;
   transform-origin: center center;
 }
 
