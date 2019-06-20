@@ -15,19 +15,22 @@ import MapWithHero from './MapWithHero';
 import { area } from '../engine/applicationData';
 import { storyReducer, storyInitial, achiveScore, moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
+import Inventory from './Inventory';
+import showtime from '../utils/showtime';
+import Teams from './Teams';
 
 export default ({setWay, scoreStore}) => {
-  const [{score, saved, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp}, dispatch] = useReducer(storyReducer, storyInitial);
+  const [{score, saved, equipment, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp}, dispatch] = useReducer(storyReducer, storyInitial);
   
   const [mapVisible, setMapVisiblity] = useState(false); 
+  const [inventoryVisible, setInventoryVisiblity] = useState(false);
+  const [teamVisible, setTeamVisiblity] = useState(false);
   
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleCloseMap = () => setMapVisiblity(false);
-  const handleInventory = () => {
-    dispatch(moveToArea('Y'));
-    dispatch(stopTalk());
-  };
-  const handlePrisoner = () => dispatch(achiveScore(10));
+  const handleInventory = () => setInventoryVisiblity(true);
+  const handlePrisoner = () => setTeamVisiblity(true);
+  
   const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
     
   const talkSocrates = speak => dispatch(socratesTalk(speak));
@@ -56,6 +59,9 @@ export default ({setWay, scoreStore}) => {
     }
   };
 
+  const CollectedItems = showtime(Inventory);
+  const SavedPrisoners = showtime(Teams);
+
   return (
     <main className="graph-frame">      
       <CaveSystem 
@@ -79,7 +85,9 @@ export default ({setWay, scoreStore}) => {
         handleCloseMap={handleCloseMap} 
         walk={walk}
         underWalk={underWalk}
-      /> 
+      />
+      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} />
+      <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />
     </main>
   );
 }
