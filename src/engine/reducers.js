@@ -46,7 +46,7 @@ export const storyInitial = {
 };
 
 export const storyReducer = (state, {type, payload}) => {
-  console.log(type, payload, state)
+  // console.log(type, payload, state)
 
   const {caveLookUp, position, level} = state;
   const area = caveLookUp[position];
@@ -66,7 +66,7 @@ export const storyReducer = (state, {type, payload}) => {
       }
 
     case SAVE_PRISONER:
-      const prisoners = savedArea.items.filter(prisoner => prisoner !== payload);
+      const prisoners = area.prisoners.filter(prisoner => prisoner !== payload);
       return {
         ...state, 
         caveLookUp: {...caveLookUp,  [position]:{...area, prisoners} },
@@ -74,7 +74,7 @@ export const storyReducer = (state, {type, payload}) => {
       };
     
     case GET_ITEM: 
-      const items = itemArea.items.filter(item => item !== payload);
+      const items = area.items.filter(item => item !== payload);
       return {
         ...state, 
         caveLookUp: {...caveLookUp,  [position]:{...area, items} },

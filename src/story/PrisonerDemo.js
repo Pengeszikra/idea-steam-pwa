@@ -8,13 +8,13 @@ import {
 
 
 export default ({interaction, children}) => {
-  const {handleRoute, handleTryToRelease} = interaction;  
+  const {handleRoute, handleSavePrisoner, handleGetItem} = interaction;  
   
   return (
     <PrisonerCave>      
       <PrisonerCaveRoute1 onClick={handleRoute('C-A')} />
       <PrisonerCaveRoute2 onClick={handleRoute('C-X')} />
-      <PrisonerOnScene onClick={()=>console.log('C prisoner wait for solving geometry problem')} />
+      <PrisonerOnScene onClick={handleSavePrisoner('C1')} />
       {children}
     </PrisonerCave>
   );

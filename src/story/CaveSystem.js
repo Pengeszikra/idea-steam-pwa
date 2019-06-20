@@ -28,24 +28,30 @@ const backroundLookup = {
   L:  ChainCave,
 };
 
-export default ({position, level, talkSocrates, interaction}) => {
+export default ({position, level, talkSocrates, interaction, currentArea}) => {
+  const {handleRoute, handleSavePrisoner, handleGetItem} = interaction;
+
+  const showItems = currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />);
+  const showExits = area[position].exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
+  const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
+
   // Q:  DownToDeep,
   if (position === 'Q') return <DownToDeep level={level} talkSocrates={talkSocrates} interaction={interaction} />;
+
   // C:  PrisonerDemo,
   if (position === 'C') return (
     <PrisonerDemo interaction={interaction} exits={area.C.exits}>
-      <Item data-item="C1" />
-      <Item data-item="C2" />
+      {showItems}      
     </PrisonerDemo>
   );
 
-  const {handleRoute} = interaction;
-  const Route = ({path}) => <RouteArrow data-path={path} onClick={handleRoute(path)} />;
   const Background = backroundLookup[position];
 
   return (
     <Background>
-      {area[position].exits.map((exit, key) => <Route key={key} path={exit} />)}
+      {showExits}
+      {showItems}
+      {showPrisoners}
     </Background>
   );
 }

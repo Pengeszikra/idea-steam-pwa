@@ -3,27 +3,21 @@ import '../styles/graphic.scss';
 import '../styles/caves.scss';
 import {
   LevelOneAvatar,
-  PrisonerOne,
-  SimpleDarkBg,
   LevelTwoAvatar,
   AvatarOneOnMap,
   AvatarTwoOnMap,
 } from '../styles/divStore';
-import showtime from '../utils/showtime';
 import SocratesSpeaking from './SocratesSpeaking';
 import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
-import Scenes from '../story/Scenes';
 
 import { area } from '../engine/applicationData';
-import { storyReducer, storyInitial, achiveScore, moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk } from '../engine/reducers';
+import { storyReducer, storyInitial, achiveScore, moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 
-const ActualGame = showtime(({onClick}) => <SimpleDarkBg onClick={onClick}><PrisonerOne /></SimpleDarkBg>);
-
 export default ({setWay, scoreStore}) => {
-  const [{score, saved, level, position, walk, underWalk, speakAbout, hasSocrates}, dispatch] = useReducer(storyReducer, storyInitial);
+  const [{score, saved, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp}, dispatch] = useReducer(storyReducer, storyInitial);
   
   const [mapVisible, setMapVisiblity] = useState(false); 
   
@@ -42,7 +36,6 @@ export default ({setWay, scoreStore}) => {
   const mapInteraction = {
     handleRoute: path => e => {            
       const [currentPosition, targetPosition] = path.split('-');
-      console.log(area[currentPosition].walk, currentPosition, targetPosition)
       dispatch(walkOnMap(area[currentPosition].walk));      
       setMapVisiblity(true);
       dispatch(startWalk());
@@ -53,6 +46,8 @@ export default ({setWay, scoreStore}) => {
         dispatch(stopWalk());
       }, 1300);       
     },
+    handleSavePrisoner: prisonerId => e => dispatch(savePrisoner(prisonerId)), 
+    handleGetItem: itemId => e => dispatch(getItem(itemId)),
   };
 
   const prisonerInteraction = {
@@ -65,6 +60,7 @@ export default ({setWay, scoreStore}) => {
     <main className="graph-frame">      
       <CaveSystem 
         position={position}
+        currentArea={caveLookUp[position]}
         level={level} 
         talkSocrates={talkSocrates} 
         interaction={{...mapInteraction, ...prisonerInteraction}}
