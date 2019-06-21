@@ -8,7 +8,7 @@ import {
 import DownToDeep from './DownToDeep';
 import PrisonerDemo from './PrisonerDemo';
 import cavePath from '../layouts/cavePath';
-import { area } from '../engine/applicationData';
+import { areaData } from '../engine/applicationData';
 
 const backroundLookup = {
   // Q:  DownToDeep,
@@ -31,8 +31,10 @@ const backroundLookup = {
 export default ({position, level, talkSocrates, interaction, currentArea}) => {
   const {handleRoute, handleSavePrisoner, handleGetItem} = interaction;
 
-  const showItems = currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />);
-  const showExits = area[position].exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
+  const showItems = currentArea.solved 
+    ? currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />) 
+    : null;
+  const showExits = areaData[position].exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
   const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
 
   // Q:  DownToDeep,
@@ -40,7 +42,7 @@ export default ({position, level, talkSocrates, interaction, currentArea}) => {
 
   // C:  PrisonerDemo,
   if (position === 'C') return (
-    <PrisonerDemo interaction={interaction} exits={area.C.exits}>
+    <PrisonerDemo interaction={interaction} exits={areaData.C.exits}>
       {showItems}      
     </PrisonerDemo>
   );

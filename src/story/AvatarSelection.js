@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import { DarkGold, IntroButton, SimpleDarkBg, Adeimantosz, Glaukon } from '../styles/divStore';
 import DescriptionOfHistory from './DescriptionOfHistory';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
-import { selectLevel } from '../_plan/action';
+import { selectLevel } from '../engine/reducers';
 
-export default ({setWay, scoreStore}) => {
+export default ({setWay, storyStore}) => {
 
-  const [{level}, dispatch] = scoreStore;
+  const [{level}, dispatch] = storyStore;
 
   const handleLevelSelection = level => () => {
     setWay(2);

@@ -12,15 +12,15 @@ import BottomBar from './BottomBar';
 import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 
-import { area } from '../engine/applicationData';
-import { storyReducer, storyInitial, achiveScore, moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem } from '../engine/reducers';
+import { areaData } from '../engine/applicationData';
+import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
 import showtime from '../utils/showtime';
 import Teams from './Teams';
 
-export default ({setWay, scoreStore}) => {
-  const [{score, saved, equipment, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp}, dispatch] = useReducer(storyReducer, storyInitial);
+export default ({setWay, storyStore}) => {
+  const [{score, saved, equipment, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp}, dispatch] = storyStore;
   
   const [mapVisible, setMapVisiblity] = useState(false); 
   const [inventoryVisible, setInventoryVisiblity] = useState(false);
@@ -28,8 +28,8 @@ export default ({setWay, scoreStore}) => {
   
   const handleMap = () => setMapVisiblity(!mapVisible);
   const handleCloseMap = () => setMapVisiblity(false);
-  const handleInventory = () => setInventoryVisiblity(true);
-  const handlePrisoner = () => setTeamVisiblity(true);
+  const handleInventory = () => setInventoryVisiblity(visible => !visible);
+  const handlePrisoner = () => setTeamVisiblity(visible => !visible);
   
   const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
     
@@ -39,10 +39,10 @@ export default ({setWay, scoreStore}) => {
   const mapInteraction = {
     handleRoute: path => e => {            
       const [currentPosition, targetPosition] = path.split('-');
-      dispatch(walkOnMap(area[currentPosition].walk));      
+      dispatch(walkOnMap(areaData[currentPosition].walk));      
       setMapVisiblity(true);
       dispatch(startWalk());
-      setTimeout(() => dispatch(walkOnMap(area[targetPosition].walk)), 500); 
+      setTimeout(() => dispatch(walkOnMap(areaData[targetPosition].walk)), 500); 
       setTimeout(() => dispatch(moveToArea(targetPosition)), 1000);
       setTimeout(() => {
         setMapVisiblity(false);
@@ -77,6 +77,8 @@ export default ({setWay, scoreStore}) => {
         handlePrisoner={handlePrisoner} 
         handleInventory={handleInventory} 
         handleHistory={handleHistory}
+        equipment={equipment}
+        saved={saved}
       />      
       <HeaderBar score={score} saved={saved.length} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
       <MapWithHero 

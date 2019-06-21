@@ -11,8 +11,8 @@
     - [x] story reducer
     - [ ] mock game types
     - [ ] score system
-    - [ ] collect items
-    - [ ] release prisoners
+    - [x] collect items
+    - [x] release prisoners
   - [ ] sparate document md show parts
 
 ## minor goals

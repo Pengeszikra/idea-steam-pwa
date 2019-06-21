@@ -213,7 +213,7 @@ export const items = {
   H: ['körző', 'stílus'],
 }
 
-export const area = {
+export const areaData = {
   Q: {exits:['Q-Y'], walk:[ 14, 49], data:entrance },
   Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1 },
   A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },

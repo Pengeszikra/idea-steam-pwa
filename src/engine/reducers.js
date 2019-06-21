@@ -1,5 +1,5 @@
 import { actionCreator } from "../utils/actionCreator";
-import { area, avatarNames } from "../engine/applicationData";
+import { areaData, avatarNames } from "../engine/applicationData";
 
 export const [ACHIVE_SCORE, achiveScore] = actionCreator('achive-score');
 export const [SELECT_LEVEL, selectLevel] = actionCreator('select-level');
@@ -20,7 +20,7 @@ export const storyInitial = {
   level: 1,  
   score: 0,   
   position: 'Q',
-  walk: [area.Q.walk],
+  walk: [areaData.Q.walk],
   underWalk: false,
   caveLookUp: {
     Q: { explored: true , prisoners: [], items: [], solved: false },
@@ -34,7 +34,7 @@ export const storyInitial = {
     F: { explored: false , prisoners: ['F1','F2'], items: ['F1','F2'], solved: false },
     G: { explored: false , prisoners: ['G1'], items: ['G1','G2'], solved: false },
     H: { explored: false , prisoners: ['H1'], items: ['H1','H2'], solved: false },
-    I: { explored: false , prisoners: [], items: [], solved: false },
+    I: { explored: false , prisoners: ['I1'], items: [], solved: false },
     J: { explored: false , prisoners: [], items: [], solved: false },
     K: { explored: false , prisoners: [], items: [], solved: false },
     L: { explored: false , prisoners: [], items: [], solved: false },  
@@ -66,6 +66,16 @@ export const storyReducer = (state, {type, payload}) => {
       }
 
     case SAVE_PRISONER:
+      if (!area.solved) {
+        console.log(areaData[position])
+        const {intro} = areaData[position].data;
+        return {          
+          ...state, 
+          speakAbout: intro ? intro(avatarNames(level)) : `${position}: intro still missing!`, 
+          hasSocrates: true, 
+          caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },
+        };
+      }
       const prisoners = area.prisoners.filter(prisoner => prisoner !== payload);
       return {
         ...state, 
@@ -91,7 +101,7 @@ export const storyReducer = (state, {type, payload}) => {
     case STOP_WALK: return {...state, underWalk: false};
     case WALK_ON_MAP: return {...state, walk: payload };
 
-    case SOCRATES_TALK: return {...state, speakAbout: payload(avatarNames[level]), hasSocrates: true };
+    case SOCRATES_TALK: return {...state, speakAbout: payload(avatarNames(level)), hasSocrates: true };
     case CONTINUE_TALK: return {...state, hasSocrates: true };
     case STOP_TALK: return {...state, hasSocrates: false };
 

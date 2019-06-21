@@ -7,12 +7,12 @@ import {
   HistoryIcon,
 } from '../styles/divStore';
 
-export default ({handleMap, handleInventory, handlePrisoner, handleHistory}) => {
+export default ({handleMap, handleInventory, handlePrisoner, handleHistory, equipment, saved}) => {
   return (
     <BottomBarSection>
       <MapIcon onClick={handleMap}/>
-      <InventoryIcon onClick={handleInventory} />
-      <SavedIcon onClick={handlePrisoner} />
+      {equipment.length  && <InventoryIcon onClick={handleInventory} />}
+      {saved.length && <SavedIcon onClick={handlePrisoner} />}
       <HistoryIcon onClick={handleHistory} />
     </BottomBarSection>
   );  
