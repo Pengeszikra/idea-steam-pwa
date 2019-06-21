@@ -52,3 +52,33 @@
   
   &[data-path="L-K"] { @include arrow(  6,  117, -190 ); }   
 }
+
+[data-teams] .prisoner {
+  &[data-prisoner="A1"] { top:   7vmin; left:  10vmin; }
+  &[data-prisoner="B1"] { top:   8vmin; left:  43vmin; }
+  &[data-prisoner="B2"] { top:  43vmin; left:   6vmin; }
+  &[data-prisoner="C1"] { top:  33vmin; left:  33vmin; }
+  &[data-prisoner="D1"] { top:  43vmin; left:  43vmin; }
+  &[data-prisoner="E1"] { top:  38vmin; left:  69vmin; }
+  &[data-prisoner="E2"] { top:  89vmin; left:  34vmin; }
+  &[data-prisoner="F1"] { top:  33vmin; left:  33vmin; }
+  &[data-prisoner="F2"] { top:  33vmin; left:  33vmin; }
+  &[data-prisoner="G1"] { top:  80vmin; left:   5vmin; }
+  &[data-prisoner="H1"] { top:  33vmin; left:  53vmin; }
+  &[data-prisoner="I1"] { top:  40vmin; left:  40vmin; }
+}
+
+[data-equipment] .item{
+  &[data-item="C1"] { top:   7vmin; left:  40vmin; }
+  &[data-item="C2"] { top:   3vmin; left:   3vmin; }
+  &[data-item="D1"] { top:  33vmin; left:   3vmin; }
+  &[data-item="D2"] { top:  33vmin; left:  20vmin; }
+  &[data-item="E1"] { top:  63vmin; left:   4vmin; }
+  &[data-item="E2"] { top:  63vmin; left:  43vmin; }
+  &[data-item="F1"] { top:  33vmin; left:  47vmin; }
+  &[data-item="F2"] { top:  83vmin; left:   7vmin; }
+  &[data-item="G1"] { top:  93vmin; left:  40vmin; }
+  &[data-item="G2"] { top:  67vmin; left:  63vmin; }
+  &[data-item="H1"] { top:  33vmin; left:  73vmin; }
+  &[data-item="H2"] { top:  90vmin; left:  70vmin; }
+}
