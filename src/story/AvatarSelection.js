@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import { DarkGold, IntroButton, SimpleDarkBg, Adeimantosz, Glaukon } from '../styles/divStore';
-import DescriptionOfHistory from './DescriptionOfHistory';
+import React from 'react';
+import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder } from '../styles/divStore';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../engine/reducers';
 
 export default ({setWay, storyStore}) => {
 
-  const [{level}, dispatch] = storyStore;
+  const [{}, dispatch] = storyStore;
 
   const handleLevelSelection = level => () => {
     setWay(2);
@@ -15,8 +14,8 @@ export default ({setWay, storyStore}) => {
 
   return (
     <SimpleDarkBg>
-      <div className='intro-header'>{whoIsTheHero}</div>
-      <div className='intro-button-holder'>      
+      <IntroHeader>{whoIsTheHero}</IntroHeader>
+      <IntroButtonHolder>
         <IntroButton onClick={handleLevelSelection(1)}>
           <Glaukon><span>{avatarDescripts[0]}</span></Glaukon>
           {avatarNames(1)}
@@ -25,7 +24,7 @@ export default ({setWay, storyStore}) => {
           <Adeimantosz><span>{avatarDescripts[1]}</span></Adeimantosz>
           {avatarNames(2)}
         </IntroButton>
-      </div>
+      </IntroButtonHolder>
     </SimpleDarkBg>
   );
 }

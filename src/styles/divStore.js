@@ -1,16 +1,10 @@
-import React from 'react';
-import divFactory from '../utils/divFactory';
+import divFactory, {showFactory} from '../utils/divFactory';
 
 export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory(["header-bar", "lvl-1-char", "lvl-2-char"]);
 export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-2-char avatar-on-map"]);
 
-export const [
-  BottomBarSection, 
-  MapIcon, 
-  InventoryIcon, 
-  SavedIcon, 
-  HistoryIcon
-] = divFactory(["bottom-bar", "bottom-map", "bottom-inventory", "bottom-saved", "bottom-history"]);
+export const [BottomBarSection, MapIcon, HistoryIcon] = divFactory(["bottom-bar", "bottom-map", "bottom-history"]);
+export const [InventoryIcon, SavedIcon] = showFactory(["bottom-inventory", "bottom-saved"]);
 
 export const [PlayCity, SmallLogo, HistorycalPapper]= divFactory(["play-city", "small-logo", "history-papper"]);
 export const [Socrates, SocratesAvatar, SpeakText, SocratesHolder]= divFactory(["socrates-speaking", "socrates-avatar", "speak-text", "socrates-holder"]);
@@ -33,7 +27,7 @@ export const [PrisonerOne] = divFactory(["prisoner-1"]);
 export const [ItemOne] = divFactory(["item-1"]);
 export const [SimpleDarkBg, Island] = divFactory(["simple-dark-bg", "island"]);
 
-export const [DarkGold, IntroButton] = divFactory(["dark-gold", "intro-button nosel"]);
+export const [DarkGold, IntroButton, IntroHeader] = divFactory(["dark-gold", "intro-button nosel", "intro-header"]);
 export const [Adeimantosz, Glaukon] = divFactory(["adeimantosz", "glaukon"]);
 
 export const [GameHolder] = divFactory(["game-holder"]);

@@ -1,13 +1,11 @@
 import React from 'react';
 import {
-  RouteArrow, Prisoner, Item,
+  RouteArrow, Prisoner, Item, PrisonerCave,
   BlueCave, LongCave, WaterFallCave, BehindTheDoor,
   LightCave, FangCave, NeedleCave, StairCaseCave,
   ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave,   
 } from '../styles/divStore';
 import DownToDeep from './DownToDeep';
-import PrisonerDemo from './PrisonerDemo';
-import cavePath from '../layouts/cavePath';
 import { areaData } from '../engine/applicationData';
 
 const backroundLookup = {
@@ -15,7 +13,7 @@ const backroundLookup = {
   Y:  BehindTheDoor,
   A:  BlueCave,
   B:  BuildingCave,
-  // C:  PrisonerDemo,
+  C:  PrisonerCave,
   D:  LongCave,
   X:  StairCaseCave,
   E:  NeedleCave,
@@ -40,16 +38,9 @@ export default ({position, level, talkSocrates, interaction, currentArea}) => {
   // Q:  DownToDeep,
   if (position === 'Q') return <DownToDeep level={level} talkSocrates={talkSocrates} interaction={interaction} />;
 
-  // C:  PrisonerDemo,
-  if (position === 'C') return (
-    <PrisonerDemo interaction={interaction} exits={areaData.C.exits}>
-      {showItems}      
-    </PrisonerDemo>
-  );
-
   const Background = backroundLookup[position];
 
-  return (
+  return (    
     <Background>
       {showExits}
       {showItems}

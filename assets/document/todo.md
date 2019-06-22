@@ -6,14 +6,14 @@
   - [ ] exact game flow without correct games
     - [x] draw new cave routes
     - [x] walk between caves and corssroads
+    - [ ] mock game types
   - [ ] solve all game types
   - [ ] story flow
     - [x] story reducer
-    - [ ] mock game types
     - [ ] score system
     - [x] collect items
     - [x] release prisoners
-  - [ ] sparate document md show parts
+  - [x] sparate document md show parts
 
 ## minor goals
   - [x] prevent IOS page over scrolling
@@ -47,10 +47,10 @@
   - [x] level selector
   - [ ] open cave gate
   - [ ] show regular solids
-  - [ ] minimap
-  - [ ] caves selection system
-  - [ ] items
-  - [ ] prisoners
+  - [x] minimap
+  - [x] caves selection system
+  - [x] items
+  - [x] prisoners
 
 ## story flow 
 
@@ -59,42 +59,16 @@
 - [x] listen socrates
 - [x] walk between caves
 - [ ] solve problems ( 11 types of quest )
-  - [ ] collect items
-  - [ ] release prisoners
+  - [x] collect items
+  - [x] release prisoners
   - [ ] earn score // lost score
   - [ ] solve quest under time frame
 
-- [ ] check items 
-- [ ] prisoners
+- [x] check items 
+- [x] check prisoners
 - [ ] ask help
 
-## organize 
+## organize story flow
 
 ```jsx
-Frame() => {
-  return (
-    <main>
-      <Scenes />
-      <SocratesSpeaking />
-      <BottomBar />
-      <HeaderBar />
-      <MapWithHero />
-    </main>
-  )
-}
-
-// Quest is a special scene with interaction
-
-Quest({interaction, view, level, ...props}) => {
-  const {walk, socrates, collect, release, earnScore} = interaction;
-  const {Prisoner, Items, Paths, CaveBackgroundByQuest} = view;
-    
-  return (
-    <CaveBackgroundByQuest>
-      <Paths /> 
-      <Items />
-      <Prisoner />      
-    </CaveBackgroundByQuest>
-  )
-}
 ```

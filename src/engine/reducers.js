@@ -6,6 +6,9 @@ export const [SELECT_LEVEL, selectLevel] = actionCreator('select-level');
 export const [SAVE_PRISONER, savePrisoner] = actionCreator('save-prisoner');
 export const [GET_ITEM, getItem] = actionCreator('get-item');
 export const [MOVE_TO_AREA, moveToArea] = actionCreator('move-to-area');
+
+export const [BEGIN_QUEST, beginQuest] = actionCreator('begin-quest');
+export const [OUT_OF_QUEST, outOfQuest] = actionCreator('out-of-quest');
 export const [QUEST_SOLVED, questSolved] = actionCreator('quest-solved');
 
 export const [WALK_ON_MAP, walkOnMap] = actionCreator('walk-on-map');
@@ -15,6 +18,7 @@ export const [STOP_WALK, stopWalk] = actionCreator('stop-walk');
 export const [SOCRATES_TALK, socratesTalk] = actionCreator('socrates-talk');
 export const [STOP_TALK, stopTalk] = actionCreator('stop-talk');
 export const [CONTINUE_TALK, continueTalk] = actionCreator('continue-talk');
+export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset'); // TODO remove!
 
 export const storyInitial = {
   level: 1,  
@@ -43,6 +47,7 @@ export const storyInitial = {
   equipment: [],
   speakAbout: "",
   hasSocrates: false,
+  hasQuesting: false,
 };
 
 export const storyReducer = (state, {type, payload}) => {
@@ -52,6 +57,8 @@ export const storyReducer = (state, {type, payload}) => {
   const area = caveLookUp[position];
   
   switch(type) {
+    case DEBUG_RESET: return {...storyInitial};
+
     case ACHIVE_SCORE: return { ...state, score: state.score + payload };
     
     case SELECT_LEVEL: return {...state, level: payload };
@@ -66,16 +73,19 @@ export const storyReducer = (state, {type, payload}) => {
       }
 
     case SAVE_PRISONER:
+      // After area solved, but prisoner didn't released.
       if (!area.solved) {
-        console.log(areaData[position])
         const {intro} = areaData[position].data;
         return {          
           ...state, 
-          speakAbout: intro ? intro(avatarNames(level)) : `${position}: intro still missing!`, 
+          speakAbout: intro ? intro(avatarNames(level)) : `A -[${position}]- barlangban még hiányzik a bevezető szöveg!`, 
           hasSocrates: true, 
-          caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },
+          hasQuesting: true,
+          // caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} }, // TODO
         };
       }
+
+      // before solved  
       const prisoners = area.prisoners.filter(prisoner => prisoner !== payload);
       return {
         ...state, 
@@ -100,8 +110,14 @@ export const storyReducer = (state, {type, payload}) => {
     case START_WALK: return {...state, underWalk: true};
     case STOP_WALK: return {...state, underWalk: false};
     case WALK_ON_MAP: return {...state, walk: payload };
+    
+    case BEGIN_QUEST: return {...state, hasQuesting: true};
+    case OUT_OF_QUEST: return {...state, hasQuesting: false, hasSocrates: false};
 
-    case SOCRATES_TALK: return {...state, speakAbout: payload(avatarNames(level)), hasSocrates: true };
+    case SOCRATES_TALK: 
+      const speakAbout = payload(avatarNames(level));
+      return {...state, speakAbout, hasSocrates: true };
+
     case CONTINUE_TALK: return {...state, hasSocrates: true };
     case STOP_TALK: return {...state, hasSocrates: false };
 

@@ -15,8 +15,10 @@
   &[data-path="B-X"] { @include arrow(  3,  96,   72 ); }
   &[data-path="B-D"] { @include arrow( 49, 120,  -51 ); }
   
-  &[data-path="C-A"] { @include arrow(  2, 50,  30 ); }
-  &[data-path="C-X"] { @include arrow( 70, 50, -30 ); }
+  /*
+  &[data-path="C-A"] { @include arrow(  0, 0, 0 ); }
+  &[data-path="C-X"] { @include arrow(  0, 0, 0 ); }
+  */
   
   &[data-path="D-B"] { @include arrow( 15,  78, 210 ); }
   &[data-path="D-X"] { @include arrow(  5, 127,  90 ); }
