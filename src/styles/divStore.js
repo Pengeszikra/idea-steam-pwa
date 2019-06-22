@@ -44,3 +44,18 @@ export const [RouteArrow] = divFactory(['route-arrow']);
 export const [Version, IntroButtonHolder] = divFactory(['version', 'intro-button-holder']);
 
 export const [Prisoner, Item] = divFactory(['prisoner', 'item']);
+
+export const [
+  QuestSketch,
+  FoundCubeUvQuest,
+  OpenCodeQuest,
+  FoundAllProjectionQuest,
+  SolidByProjectionQuest,
+  FoundTetraederUvQuest,
+  PointProjectionQuest,
+  EquipmentQuest,
+  RomanNumbers,
+  ContinuosPathQuest,
+  PipelineQuest,
+] = divFactory(['quest-sketch', 'quest-found-cube-uv', 'open-code', 'found-all-projection', 'solid-by-projection',
+'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest'])

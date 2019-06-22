@@ -366,3 +366,19 @@
   &[data-item="H1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
   &[data-item="H2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
 }
+
+.quest-sketch { 
+  @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh);
+  // animation: speak-in 400ms forwards ease-in;
+  // transform-origin: center bottom;
+}
+.quest-found-cube-uv { @include bimage('/img/quest/found-cube-uv.jpg', 100vmin, 100vh) }
+.open-code { @include bimage('/img/quest/open-code.jpg', 100vmin, 100vh) }
+.found-all-projection { @include bimage('/img/quest/found-all-projection.jpg', 100vmin, 100vh) }
+.solid-by-projection { @include bimage('/img/quest/solid-by-projection.jpg', 100vmin, 100vh) }
+.found-tetraeder-uv { @include bimage('/img/quest/found-tetraeder-uv.jpg', 100vmin, 100vh) }
+.point-projection { @include bimage('/img/quest/point-projection.jpg', 100vmin, 100vh) }
+.equipment-quest { @include bimage('/img/quest/equipment-quest.jpg', 100vmin, 100vh) }
+.roman-numbers { @include bimage('/img/quest/roman-numbers.jpg', 100vmin, 100vh) }
+.continuos-path { @include bimage('/img/quest/continuos-path.jpg', 100vmin, 100vh) }
+.pipeline-quest { @include bimage('/img/quest/pipeline-quest.jpg', 100vmin, 100vh) }
