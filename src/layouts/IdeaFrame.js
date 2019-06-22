@@ -13,7 +13,7 @@ import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 
 import { areaData } from '../engine/applicationData';
-import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem, questSolved, outOfQuest } from '../engine/reducers';
+import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem, questSolved, outOfQuest, achiveScore } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
 import showtime from '../utils/showtime';
@@ -50,20 +50,23 @@ export default ({setWay, storyStore}) => {
         dispatch(stopWalk());
       }, 1300);       
     },
-    handleSavePrisoner: prisonerId => e => dispatch(savePrisoner(prisonerId)), 
-    handleGetItem: itemId => e => dispatch(getItem(itemId)),
+    handleSavePrisoner: prisonerId => e => {
+      dispatch(savePrisoner(prisonerId))
+      dispatch(achiveScore(10 * level));
+    }, 
+    handleGetItem: itemId => e => {
+      dispatch(getItem(itemId));
+      dispatch(achiveScore(5 * level));
+    },
   };
 
   const handleQuestResult = isSucces => e => {
-    isSucces && dispatch(questSolved());
+    if (isSucces) {
+      dispatch(questSolved());
+      dispatch(achiveScore(100 * level));
+    } 
     dispatch(outOfQuest());
   }
-
-  const prisonerInteraction = {
-    handleTryToRelease: (prisoner, speak) => e => {
-      talkSocrates(speak)
-    }
-  };
 
   const CollectedItems = showtime(Inventory);
   const SavedPrisoners = showtime(Teams);
@@ -75,7 +78,7 @@ export default ({setWay, storyStore}) => {
         currentArea={caveLookUp[position]}
         level={level} 
         talkSocrates={talkSocrates} 
-        interaction={{...mapInteraction, ...prisonerInteraction}}
+        interaction={{...mapInteraction}}
       />            
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 
