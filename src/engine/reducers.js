@@ -104,7 +104,7 @@ export const storyReducer = (state, {type, payload}) => {
     case QUEST_SOLVED:
       return {
         ...state, 
-        caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },        
+        caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} },
       }
 
     case START_WALK: return {...state, underWalk: true};
