@@ -524,6 +524,21 @@ Meggyőzheted őt rátermettségedről, ha bizonyítod neki jártasságodat a k�
 ### Feladat szövege
 ### Információ
 ### Működés
+```jsx
+[
+// [ level 1 ]
+  {
+    task:       XXI, XIIIX,	IVXXXI,	IXLII, XLI,	VLIXI, XILX,	IXXXL,	XXXXLI,
+    solution:   XIX, XXIII,	XXXVII,	XLIII, LXI,	LXVII, LXXI,	LXXIX,	LXXXIX,
+  }
+
+// [ level 2 ]
+  {
+    task:       XVIIC, IXXVCC, IIIXCD,	CDIXCC, CIXLCC,	IDC, XIMC, XMIX, MCLIXXXM,
+    solution:   XCVII, CXCVIX, DCXIII,  DCCCXI, CCCLIX, DCI, CMXI, MXXI, MMCLXXIX
+  }
+]
+```
 
 # 2.11
 ### Játék leírása 

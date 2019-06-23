@@ -13,7 +13,7 @@ import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 
 import { areaData } from '../engine/applicationData';
-import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem, questSolved, outOfQuest, achiveScore } from '../engine/reducers';
+import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
 import showtime from '../utils/showtime';
@@ -33,23 +33,23 @@ export default ({setWay, storyStore}) => {
   const handlePrisoner = () => setTeamVisiblity(visible => !visible);
  
   const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
-    
-  const talkSocrates = speak => dispatch(socratesTalk(speak));
   const handleStopSpeak = () => dispatch(stopTalk());
 
-  const mapInteraction = {
-    handleRoute: path => e => {            
-      const [currentPosition, targetPosition] = path.split('-');
-      dispatch(walkOnMap(areaData[currentPosition].walk));      
-      setMapVisiblity(true);
-      dispatch(startWalk());
-      setTimeout(() => dispatch(walkOnMap(areaData[targetPosition].walk)), 500); 
-      setTimeout(() => dispatch(moveToArea(targetPosition)), 1000);
-      setTimeout(() => {
-        setMapVisiblity(false);
-        dispatch(stopWalk());
-      }, 1300);       
-    },
+  const walkOnMinimap = path => {            
+    const [currentPosition, targetPosition] = path.split('-');
+    dispatch(walkOnMap(areaData[currentPosition].walk));      
+    setMapVisiblity(true);
+    dispatch(startWalk());
+    setTimeout(() => dispatch(walkOnMap(areaData[targetPosition].walk)), 500); 
+    setTimeout(() => dispatch(moveToArea(targetPosition)), 1000);
+    setTimeout(() => {
+      setMapVisiblity(false);
+      dispatch(stopWalk());
+    }, 1300);       
+  };
+
+  const interaction = {
+    handleRoute: path => e => walkOnMinimap(path),
     handleSavePrisoner: prisonerId => e => {
       dispatch(savePrisoner(prisonerId))
       dispatch(achiveScore(10 * level));
@@ -58,14 +58,21 @@ export default ({setWay, storyStore}) => {
       dispatch(getItem(itemId));
       dispatch(achiveScore(5 * level));
     },
+    talkSocrates: speak => {
+      dispatch(socratesTalk(speak));
+      dispatch(beginQuest());
+    },
   };
 
-  const handleQuestResult = isSucces => e => {
+  const handleQuestResult = (isSucces, currentPosition) => e => {
     if (isSucces) {
       dispatch(questSolved());
       dispatch(achiveScore(100 * level));
     } 
-    dispatch(outOfQuest());
+    dispatch(outOfQuest());    
+    if (currentPosition === 'Q') {
+      walkOnMinimap('Q-Y');
+    }
   }
 
   const CollectedItems = showtime(Inventory);
@@ -77,8 +84,7 @@ export default ({setWay, storyStore}) => {
         position={position}
         currentArea={caveLookUp[position]}
         level={level} 
-        talkSocrates={talkSocrates} 
-        interaction={{...mapInteraction}}
+        interaction={interaction}
       />            
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 
@@ -99,7 +105,7 @@ export default ({setWay, storyStore}) => {
       />
       <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} />
       <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
-      <MockQuest show={hasQuesting && !hasSocrates} position={position} handleQuestResult={handleQuestResult} />
+      <MockQuest show={hasQuesting && !hasSocrates} position={position} handleQuestResult={handleQuestResult} level={level} />
     </main>
   );
 }

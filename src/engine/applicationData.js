@@ -83,7 +83,7 @@ export const cave_2_3 = {
 export const cave_2_4 = {
   intro: ``
   ,
-  mission: _ => `Forgasd el a mezőket úgy, hogy a test hóját adják!`
+  mission: _ => `Forgasd el a mezőket úgy, hogy a test hálóját adják!`
   ,
   info: _ => `Így már nem határol testet: Fala síkba kiterítve Szétnyílt élekben őrződik A térbeliség emléke.
 
@@ -145,9 +145,11 @@ export const cave_2_9 = {
 export const cave_2_10 = {
   intro: karakter => `Minden cselekedeteddel a jóra törekedtél ${karakter}. Azonban a figyelmedet elkerülte, hogy a felszabadítottak között egy szabotőr bújuk meg. Látta tudományos képességeidet a geometria területén, de fogságba kerülése előtt ő csak a római számok ismeretét sajátotta el. Elvesztetted hiteledet a szemében, így a felszabadítás szabotálásán mesterkedik. Meggyőzheted őt rátermettségedről, ha bizonyítod neki jártasságodat a következő feladványokban.`
   ,
-  mission: ``
+  mission: _ => `Változtasd meg a karakterek sorrendjét úgy, hogy a legnagyobb prímszám legyen!`
   ,
-  info: `` 
+  info: ``
+  ,
+  gratulation: karakter => `Jól feleltél ${karakter}! Igaz követőd lett a római felszabadított!`
 }
 
 export const cave_2_11 = {
@@ -202,7 +204,7 @@ export const itemNames = {
 }
 
 export const areaData = {
-  Q: {exits:['Q-Y'], walk:[ 14, 49], data:entrance },
+  Q: {exits:[], walk:[ 14, 49], data:entrance },
   Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1 },
   A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },
   B: {exits:['B-D', 'B-X', 'B-Y'], walk:[ 32, 72], data:cave_2_2 },

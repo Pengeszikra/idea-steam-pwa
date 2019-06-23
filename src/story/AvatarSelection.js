@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder } from '../styles/divStore';
+import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder, GreekCity, QuestSketch } from '../styles/divStore';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../engine/reducers';
 
@@ -12,8 +12,8 @@ export default ({setWay, storyStore}) => {
     dispatch(selectLevel(level))
   };
 
-  return (
-    <SimpleDarkBg>
+return (
+    <QuestSketch>
       <IntroHeader>{whoIsTheHero}</IntroHeader>
       <IntroButtonHolder>
         <IntroButton onClick={handleLevelSelection(1)}>
@@ -25,6 +25,6 @@ export default ({setWay, storyStore}) => {
           {avatarNames(2)}
         </IntroButton>
       </IntroButtonHolder>
-    </SimpleDarkBg>
+    </QuestSketch>
   );
 }

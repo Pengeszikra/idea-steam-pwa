@@ -54,10 +54,12 @@
 .enginer-cave { @include bimage('/img/caves/enginer-cave.png', 100vmin, 100vh); }
 .road-cave { @include bimage('/img/caves/road-cave.png', 100vmin, 100vh); }
 .door-closed { @include bimage('/img/caves/door-closed.png', 100vmin, 100vh); }
+.greek-city { @include bimage('/img/caves/greek-city.jpg', 100vmin, 100vh); }
+
 
 .prisoner-cave { @include bimage('/img/caves/prisoner-place.png', 100vmin, 100vh); }
-.prisoner-cave-r1 { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
-.prisoner-cave-r2 { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
+// .prisoner-cave-r1 { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
+// .prisoner-cave-r2 { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
 
 .prisoner-cave-r1, .prisoner-cave-r2 {
   transition: opacity 300ms;
@@ -151,6 +153,7 @@
   @include bimage('/img/gui/papper.png', 95vmin, 133vmin, 25vmin, 2vmin);  
   animation: zoom-in 200ms forwards ease-in;
   transform-origin: center bottom;
+  user-select: none;
   span {
     margin: 9vmin 7vmin;
     font-size: 1.2em;
@@ -384,3 +387,22 @@
 .pipeline-quest { @include bimage('/img/quest/pipeline-quest.jpg', 100vmin, 100vh) }
 .pair-solid-to-projection { @include bimage('/img/quest/pair-solid-to-projection.jpg', 100vmin, 100vh) }
 .pair-project-to-solid { @include bimage('/img/quest/pair-project-to-solid.jpg', 100vmin, 100vh) }
+
+.roman-task-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vmin;
+}
+
+.roman-number {
+  font-size: 4em;
+  font-weight: 900;
+  padding: .1em;
+  background: rgba($color: #000000, $alpha: 0.3);
+  margin-left: .1em;
+  width: 8vmin;
+  border-radius: .1em;
+  text-align: center;
+  user-select: none;
+}

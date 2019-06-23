@@ -62,3 +62,5 @@ export const [
 ] = divFactory(['quest-sketch', 'quest-found-cube-uv', 'open-code', 'found-all-projection', 'solid-by-projection',
 'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest',
 'pair-solid-to-projection','pair-project-to-solid'])
+
+export const [GreekCity] = divFactory(['greek-city']);

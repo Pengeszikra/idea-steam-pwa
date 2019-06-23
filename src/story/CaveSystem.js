@@ -9,7 +9,7 @@ import DownToDeep from './DownToDeep';
 import { areaData } from '../engine/applicationData';
 
 const backroundLookup = {
-  // Q:  DownToDeep,
+  Q:  DownToDeep,
   Y:  BehindTheDoor,
   A:  BlueCave,
   B:  BuildingCave,
@@ -26,7 +26,7 @@ const backroundLookup = {
   L:  ChainCave,
 };
 
-export default ({position, level, talkSocrates, interaction, currentArea}) => {
+export default ({position, level, interaction, currentArea}) => {
   const {handleRoute, handleSavePrisoner, handleGetItem} = interaction;
 
   const showItems = currentArea.solved 
@@ -34,14 +34,10 @@ export default ({position, level, talkSocrates, interaction, currentArea}) => {
     : null;
   const showExits = areaData[position].exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
   const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
-
-  // Q:  DownToDeep,
-  if (position === 'Q') return <DownToDeep level={level} talkSocrates={talkSocrates} interaction={interaction} />;
-
   const Background = backroundLookup[position];
 
   return (    
-    <Background>
+    <Background level={level} interaction={interaction} >
       {showExits}
       {showItems}
       {showPrisoners}

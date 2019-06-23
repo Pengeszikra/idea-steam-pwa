@@ -9,17 +9,18 @@ import {
 } from '../styles/divStore';
 import showtime from '../utils/showtime';
 import { Minigame } from '../layouts/Geometries';
+import RomanNumbersTask from './RomanNumbersTask';
 
 const questLookup = {
-  Q:  Minigame,
+  Q:  OpenCodeQuest,
   Y:  QuestSketch,
-  A:  FoundCubeUvQuest,
-  B:  OpenCodeQuest,
+  A:  RomanNumbersTask,
+  B:  Minigame,
   C:  FoundAllProjectionQuest,
   D:  SolidByProjectionQuest,
   X:  FoundTetraederUvQuest,
   E:  PointProjectionQuest,
-  F:  RomanNumbers,
+  F:  FoundCubeUvQuest,
   G:  EquipmentQuest,
   H:  ContinuosPathQuest,
   I:  PipelineQuest,
@@ -28,14 +29,14 @@ const questLookup = {
   L:  PairProjectionToSolidQuest,
 };
 
-export default showtime(({handleQuestResult, position}) => {
+export default showtime(({handleQuestResult, position, level}) => {
   const Quest = questLookup[position];
   return (
     <SimpleDarkBg>
-      <Quest />
+      <Quest level={level} />
       <IntroButtonHolder>
-        <IntroButton onClick={handleQuestResult(false)}>Balsiker</IntroButton>
-        <IntroButton onClick={handleQuestResult(true)}>Győzelem</IntroButton>
+        <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>
+        <IntroButton onClick={handleQuestResult(true, position)}>Győzelem</IntroButton>
       </IntroButtonHolder>
     </SimpleDarkBg>
   );

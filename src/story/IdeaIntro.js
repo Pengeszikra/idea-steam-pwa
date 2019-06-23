@@ -5,14 +5,15 @@ import version from '../../version';
 
 export default ({setWay}) => {
   const [hasHistory, setHistory] = useState(false);
+  const toggleHistory = () => setHistory(view=>!view);
   return (
     <DarkGold>
       <Version>{version}</Version>
       <IntroButtonHolder>
-        <IntroButton onClick={()=>setHistory(!hasHistory)}>Történet</IntroButton>
+        <IntroButton onClick={toggleHistory}>Történet</IntroButton>
         <IntroButton onClick={()=>setWay(1)}>A barlang</IntroButton>
         </IntroButtonHolder>
-      <DescriptionOfHistory show={hasHistory} />
+      <DescriptionOfHistory show={hasHistory} toggleHistory={toggleHistory} />
     </DarkGold>
   );
 }
