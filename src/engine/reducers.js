@@ -18,7 +18,7 @@ export const [STOP_WALK, stopWalk] = actionCreator('stop-walk');
 export const [SOCRATES_TALK, socratesTalk] = actionCreator('socrates-talk');
 export const [STOP_TALK, stopTalk] = actionCreator('stop-talk');
 export const [CONTINUE_TALK, continueTalk] = actionCreator('continue-talk');
-export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset'); // TODO remove!
+export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset');
 
 export const storyInitial = {
   level: 1,  
@@ -27,21 +27,21 @@ export const storyInitial = {
   walk: [areaData.Q.walk],
   underWalk: false,
   caveLookUp: {
-    Q: { explored: true , prisoners: [], items: [], solved: false },
-    Y: { explored: false , prisoners: [], items: [], solved: false },
-    A: { explored: false , prisoners: ['A1'], items: [], solved: false },
-    B: { explored: false , prisoners: ['B1','B2'], items: [], solved: false },
-    C: { explored: false , prisoners: ['C1'], items: ['C1','C2'], solved: false },
-    D: { explored: false , prisoners: ['D1'], items: ['D1','D2'], solved: false },
-    X: { explored: false , prisoners: [], items: [], solved: false },
-    E: { explored: false , prisoners: ['E1','E2'], items: ['E1','E2'], solved: false },
-    F: { explored: false , prisoners: ['F1','F2'], items: ['F1','F2'], solved: false },
-    G: { explored: false , prisoners: ['G1'], items: ['G1','G2'], solved: false },
-    H: { explored: false , prisoners: ['H1'], items: ['H1','H2'], solved: false },
-    I: { explored: false , prisoners: ['I1'], items: [], solved: false },
-    J: { explored: false , prisoners: [], items: [], solved: false },
-    K: { explored: false , prisoners: [], items: [], solved: false },
-    L: { explored: false , prisoners: [], items: [], solved: false },  
+    Q: { explored: true , prisoners: [], items: [], solved: false, readed: false },
+    Y: { explored: false , prisoners: [], items: [], solved: false, readed: false },
+    A: { explored: false , prisoners: ['A1'], items: [], solved: false, readed: false },
+    B: { explored: false , prisoners: ['B1','B2'], items: [], solved: false, readed: false },
+    C: { explored: false , prisoners: ['C1'], items: ['C1','C2'], solved: false, readed: false },
+    D: { explored: false , prisoners: ['D1'], items: ['D1','D2'], solved: false, readed: false },
+    X: { explored: false , prisoners: [], items: [], solved: false, readed: false },
+    E: { explored: false , prisoners: ['E1','E2'], items: ['E1','E2'], solved: false, readed: false },
+    F: { explored: false , prisoners: ['F1','F2'], items: ['F1','F2'], solved: false, readed: false },
+    G: { explored: false , prisoners: ['G1'], items: ['G1','G2'], solved: false, readed: false },
+    H: { explored: false , prisoners: ['H1'], items: ['H1','H2'], solved: false, readed: false },
+    I: { explored: false , prisoners: ['I1'], items: [], solved: false, readed: false },
+    J: { explored: false , prisoners: [], items: [], solved: false, readed: false },
+    K: { explored: false , prisoners: [], items: [], solved: false, readed: false },
+    L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
   saved: [],
   equipment: [],
@@ -112,7 +112,12 @@ export const storyReducer = (state, {type, payload}) => {
     case WALK_ON_MAP: return {...state, walk: payload };
     
     case BEGIN_QUEST: return {...state, hasQuesting: true};
-    case OUT_OF_QUEST: return {...state, hasQuesting: false, hasSocrates: false};
+    case OUT_OF_QUEST: return {
+      ...state, 
+      hasQuesting: false, 
+      hasSocrates: false, 
+      caveLookUp: {...caveLookUp,  [position]:{...area, readed: true} },
+    };
 
     case SOCRATES_TALK: 
       const speakAbout = payload(avatarNames(level));

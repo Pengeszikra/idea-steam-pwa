@@ -37,6 +37,8 @@ export default ({position, level, interaction, currentArea}) => {
   const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
   const Background = backroundLookup[position];
 
+  const afterMonolog = data.onEnterMonolog ? currentArea.readed : true;
+
   useEffect(()=>{
     if (data.onEnterMonolog && !currentArea.solved) {
       setTimeout(()=>monologBeforeQuest(data.onEnterMonolog),1000);
@@ -45,7 +47,7 @@ export default ({position, level, interaction, currentArea}) => {
 
   return (    
     <Background level={level} interaction={interaction} >
-      {showExits}
+      {afterMonolog && showExits}
       {showItems}
       {showPrisoners}
     </Background>

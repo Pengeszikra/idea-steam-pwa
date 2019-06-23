@@ -13,7 +13,10 @@ import HeaderBar from './HeaderBar';
 import MapWithHero from './MapWithHero';
 
 import { areaData } from '../engine/applicationData';
-import { moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest } from '../engine/reducers';
+import { 
+  moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, 
+  savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest 
+} from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
 import showtime from '../utils/showtime';

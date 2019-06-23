@@ -1,11 +1,5 @@
 import React from 'react';
-import {  
-  BottomBarSection,
-  MapIcon,
-  InventoryIcon,
-  SavedIcon,
-  HistoryIcon,
-} from '../styles/divStore';
+import { BottomBarSection, MapIcon, InventoryIcon, SavedIcon, HistoryIcon } from '../styles/divStore';
 
 export default ({handleMap, handleInventory, handlePrisoner, handleHistory, equipment, saved}) => {
 

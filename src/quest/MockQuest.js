@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { 
   IntroButton, IntroButtonHolder, SimpleDarkBg, FoundCubeUvQuest, 
   QuestSketch, OpenCodeQuest, FoundAllProjectionQuest, SolidByProjectionQuest, 
@@ -11,9 +11,14 @@ import showtime from '../utils/showtime';
 import { Minigame } from '../layouts/Geometries';
 import RomanNumbersTask from './RomanNumbersTask';
 
+const JustMonolog = ({questResultIs}) => {
+  useEffect(()=>questResultIs(true),[]);
+  return null;
+};
+
 const questLookup = {
   Q:  OpenCodeQuest,
-  Y:  SimpleDarkBg,
+  Y:  JustMonolog,
   A:  PairProjectionToSolidQuest,
   B:  Minigame,
   C:  FoundAllProjectionQuest,
@@ -31,13 +36,18 @@ const questLookup = {
 
 export default showtime(({handleQuestResult, position, level, interaction}) => {
   const Quest = questLookup[position];
+  if (!Quest) return null;
   return (
     <>
-      <Quest level={level} interaction={interaction} />
-      <IntroButtonHolder>
-        <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>
-        <IntroButton onClick={handleQuestResult(true, position)}>Győzelem</IntroButton>
-      </IntroButtonHolder>
+      <Quest level={level} interaction={interaction} questResultIs={solved => handleQuestResult(solved)()} />
+      {
+        ( Quest !== Minigame && Quest !== JustMonolog )
+        &&
+        <IntroButtonHolder>
+          <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>
+          <IntroButton onClick={handleQuestResult(true, position)}>Győzelem</IntroButton>
+        </IntroButtonHolder>
+      }
     </>
   );
 });

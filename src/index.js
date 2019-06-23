@@ -6,6 +6,5 @@ import './styles/global.scss';
 
 import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
-import GeneratorTest from './story/ContextSwithByInnerIndex';
 
 rootRender(<IdeaAdventuresBegin />);

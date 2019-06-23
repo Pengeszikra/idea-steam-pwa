@@ -3,7 +3,7 @@ import ThreeArea from './ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-use-gesture';
 import { GameHolder, IntroButton, SimpleDarkBg } from '../styles/divStore';
-import { DropTarget } from 'react-dnd';
+// import { DropTarget } from 'react-dnd';
 
 export const GEOMS = {
   box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),
@@ -113,7 +113,7 @@ export const Custom3DContent = ({scene}) => {
 const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
 
 
-export const Minigame = () => {
+export const Minigame = ({questResultIs}) => {
   const [attached, setAttached] = useState(["", "", "", ""]);
   const [solution, setSolution] = useState("Megoldás");
   const t1 = useRef(null);
@@ -153,7 +153,11 @@ export const Minigame = () => {
         <GeomTarget fref={t2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p><p>{h2}</p></GeomTarget>
         <GeomTarget fref={t3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p><p>{h3}</p></GeomTarget>
         <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p><p>{h4}</p></GeomTarget>
-        <IntroButton onClick={() => setSolution( attached.join("-") === "alfa-beta--" ? "Jó!" : "Rossz!" ) }>{solution}</IntroButton>
+        <IntroButton onClick={() => {
+          const isSolved = attached.join("-") === "alfa-beta--";
+          setTimeout(()=>questResultIs(isSolved),1000);
+          setSolution( isSolved ? "Jó!" : "Rossz!" );
+        }}>{solution}</IntroButton>
         
       </GameHolder>
       <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} targets={targets} setHold={holdFactory("alfa")} />

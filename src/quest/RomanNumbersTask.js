@@ -23,7 +23,9 @@ const [Number, TaskHolder] = divFactory(['roman-number', 'roman-task-holder']);
 export default ({level}) => {
   const [index, setIndex] = useState(0);
 
-  const current  = 'MCLIXXXM' //romanTasks[level].task[index];
+  useEffect(()=>setIndex(romanTasks[level].task.length * Math.random() | 0), [setIndex]);
+
+  const current  = romanTasks[level].task[index];
   const solution = romanTasks[level].solution[index];
   
   return (
@@ -31,8 +33,7 @@ export default ({level}) => {
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
       <TaskHolder>
         {current.split("").map((num,key) => <Number key={key}>{num}</Number>)}
-      </TaskHolder>
-      <IntroButton>Megoldás</IntroButton>
+      </TaskHolder>      
     </QuestSketch>
   );
 }
