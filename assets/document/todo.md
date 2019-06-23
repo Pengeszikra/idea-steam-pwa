@@ -55,7 +55,7 @@
 ## story flow 
 
 - [x] read history
-- [ ] level selector
+- [x] level selector
 - [x] listen socrates
 - [x] walk between caves
 - [ ] solve problems ( 11 types of quest )
@@ -71,4 +71,69 @@
 ## organize story flow
 
 ```jsx
+const ({level, position}) = props;
+
+<Story>
+  <Speach monolog={monolog_1} />
+  <WaitCloseSpeach />
+  <Speach monolog={monolog_2} />
+  <WaitCloseSpeach />
+  <Speach monolog={monolog_3} />
+  <WaitCloseSpeach />
+  <PathRevealed />
+</Story>
+
+<Story>
+  <Stage actor={avatar(level)} anim={anim.avatarFirstReveal} />
+    <WaitStageOn />
+  <Speach monolog={monolog.welcomeHero} />
+    <WaitCloseSpeach />
+  <Play quest={Enter} />
+    <WaitQuestOver />
+  <Walk to={area.Y} />
+    <WaitArraiving />
+  <Speach monolog={monolog.intro_2} />
+    <WaitCloseSpeach />
+  <Speach monolog={monologWithImage.duality} />
+    <WaitCloseSpeach />
+  <Speach monolog={monolog.wichRoad} />
+    <WaitCloseSpeach />        
+  <RoadRevealed />
+    <WaitForNormalActions />
+</Story>
+
+<Story flow={story.goingToCaveSystem}>
+  <Paralell>
+    <Stage actor={avatar(level)} anim={anim.avatarFirstReveal} />
+    <Stage actor={TopHeader} anim={anim.topHeaderReveal} />
+  </Paralell>
+  <Speach monolog={monolog.welcomeHero} />
+  <Play quest={Enter} />
+  <Walk to={area.Y} />
+  <Speach monolog={monolog.intro_2} />
+  <Speach monolog={monologWithImage.duality} />
+  <Speach monolog={monolog.wichRoad} />
+  <RoadRevealed />
+  <ActivateNormalInteractions />
+</Story>
 ```
+
+### Story
+```jsx
+export default ({children, flow}) => {
+  const [index, next] = useState(0);
+  const Phase = children[index];
+  return <Phase next={flow(next, index)} />;
+}
+```
+
+>> enter
+talk something
+>> close talk
+talk another
+>> close talk
+path revealed
+>> take map
+minimap functionality on
+>> enter again 
+>> take map // if forget

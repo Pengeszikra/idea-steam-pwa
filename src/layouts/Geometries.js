@@ -2,7 +2,7 @@ import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'r
 import ThreeArea from './ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-use-gesture';
-import { GameHolder, IntroButton } from '../styles/divStore';
+import { GameHolder, IntroButton, SimpleDarkBg } from '../styles/divStore';
 import { DropTarget } from 'react-dnd';
 
 export const GEOMS = {
@@ -145,7 +145,7 @@ export const Minigame = () => {
   
   
   return (    
-    <>
+    <SimpleDarkBg>
       <div style={{marginTop:"40vmin"}}>{attached.join(" - ")}</div>
       <GameHolder>
           
@@ -160,6 +160,6 @@ export const Minigame = () => {
       <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} targets={targets} setHold={holdFactory("beta")} />
       <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} targets={targets} setHold={holdFactory("gamma")} />
       <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} targets={targets} setHold={holdFactory("delta")} />
-    </>          
+    </SimpleDarkBg>          
   );
 }

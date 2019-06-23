@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   RouteArrow, Prisoner, Item, PrisonerCave,
   BlueCave, LongCave, WaterFallCave, BehindTheDoor,
@@ -27,14 +27,21 @@ const backroundLookup = {
 };
 
 export default ({position, level, interaction, currentArea}) => {
-  const {handleRoute, handleSavePrisoner, handleGetItem} = interaction;
+  const {handleRoute, handleSavePrisoner, handleGetItem, monologBeforeQuest} = interaction;
 
+  const data = areaData[position];
   const showItems = currentArea.solved 
     ? currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />) 
     : null;
-  const showExits = areaData[position].exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
+  const showExits = data.exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
   const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
   const Background = backroundLookup[position];
+
+  useEffect(()=>{
+    if (data.onEnterMonolog && !currentArea.solved) {
+      setTimeout(()=>monologBeforeQuest(data.onEnterMonolog),1000);
+    }
+  }, [position]);
 
   return (    
     <Background level={level} interaction={interaction} >

@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useEffect} from 'react';
+import React, {useState} from 'react';
 import '../styles/graphic.scss';
 import '../styles/caves.scss';
 import {
@@ -58,10 +58,11 @@ export default ({setWay, storyStore}) => {
       dispatch(getItem(itemId));
       dispatch(achiveScore(5 * level));
     },
-    talkSocrates: speak => {
+    monologBeforeQuest: speak => {
       dispatch(socratesTalk(speak));
       dispatch(beginQuest());
     },
+    startQuest: () => dispatch(beginQuest()),
   };
 
   const handleQuestResult = (isSucces, currentPosition) => e => {
@@ -105,7 +106,7 @@ export default ({setWay, storyStore}) => {
       />
       <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} />
       <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
-      <MockQuest show={hasQuesting && !hasSocrates} position={position} handleQuestResult={handleQuestResult} level={level} />
+      <MockQuest show={hasQuesting && !hasSocrates} position={position} handleQuestResult={handleQuestResult} interaction={interaction} level={level} />
     </main>
   );
 }

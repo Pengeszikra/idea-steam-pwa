@@ -31,7 +31,7 @@ export const cave_1_1 = {
   4. Ikozaéderben a dodekaéder
   5. Oktaéderben a kocka`
   ,
-  mission: _ => `Melyik úton indulsz tovább?`
+  whichRoad: _ => `Melyik úton indulsz tovább?`
 }
 
 export const cave_2_1 = {
@@ -205,7 +205,7 @@ export const itemNames = {
 
 export const areaData = {
   Q: {exits:[], walk:[ 14, 49], data:entrance },
-  Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1 },
+  Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1, onEnterMonolog: cave_1_1.intro },
   A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },
   B: {exits:['B-D', 'B-X', 'B-Y'], walk:[ 32, 72], data:cave_2_2 },
   C: {exits:['C-A', 'C-X'], walk:[ 55, 24], data:cave_2_3 },
@@ -216,7 +216,7 @@ export const areaData = {
   G: {exits:['G-E', 'G-H'], walk:[ 88, 73], data:cave_2_7 },
   H: {exits:['H-I', 'H-G', 'H-F'], walk:[ 99, 49], data:cave_2_8 },
   I: {exits:['I-H', 'I-J'], walk:[121, 25], data:cave_2_9 },
-  J: {exits:['J-I', 'J-K'], walk:[141, 30], data:cave_2_10 },
-  K: {exits:['K-J', 'K-L'], walk:[116, 56], data:cave_2_11 },
-  L: {exits:['L-K'], walk:[142, 67], data:cave_2_12 },
+  J: {exits:['J-I', 'J-K'], walk:[141, 30], data:cave_2_10, onEnterMonolog: cave_2_10.intro },
+  K: {exits:['K-J', 'K-L'], walk:[116, 56], data:cave_2_11, onEnterMonolog: cave_2_11.intro },
+  L: {exits:['L-K'], walk:[142, 67], data:cave_2_12, onEnterMonolog: cave_2_12.intro },
 }

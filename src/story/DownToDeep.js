@@ -1,13 +1,13 @@
-import React, {useState,useEffect} from 'react';
-import { Adeimantosz, Glaukon, Island, RouteArrow } from '../styles/divStore';
+import React, {useEffect} from 'react';
+import { Adeimantosz, Glaukon, Island } from '../styles/divStore';
 import { entrance } from '../engine/applicationData';
 
 export default ({level, children, interaction}) => {
-  const {talkSocrates} = interaction;
+  const {monologBeforeQuest} = interaction;
 
   useEffect(()=>{
     setTimeout(() => {
-      talkSocrates(entrance.intro)
+      monologBeforeQuest(entrance.intro);
     }, 500);
   }, []);
   

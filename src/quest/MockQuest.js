@@ -13,31 +13,31 @@ import RomanNumbersTask from './RomanNumbersTask';
 
 const questLookup = {
   Q:  OpenCodeQuest,
-  Y:  QuestSketch,
-  A:  RomanNumbersTask,
+  Y:  SimpleDarkBg,
+  A:  PairProjectionToSolidQuest,
   B:  Minigame,
   C:  FoundAllProjectionQuest,
   D:  SolidByProjectionQuest,
   X:  FoundTetraederUvQuest,
   E:  PointProjectionQuest,
   F:  FoundCubeUvQuest,
-  G:  EquipmentQuest,
+  G:  PairSolidToProjectionQuest,
   H:  ContinuosPathQuest,
-  I:  PipelineQuest,
-  J:  FoundTetraederUvQuest,
-  K:  PairSolidToProjectionQuest,
-  L:  PairProjectionToSolidQuest,
+  I:  FoundTetraederUvQuest,
+  J:  RomanNumbersTask,
+  K:  EquipmentQuest,
+  L:  PipelineQuest,
 };
 
-export default showtime(({handleQuestResult, position, level}) => {
+export default showtime(({handleQuestResult, position, level, interaction}) => {
   const Quest = questLookup[position];
   return (
-    <SimpleDarkBg>
-      <Quest level={level} />
+    <>
+      <Quest level={level} interaction={interaction} />
       <IntroButtonHolder>
         <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>
         <IntroButton onClick={handleQuestResult(true, position)}>Győzelem</IntroButton>
       </IntroButtonHolder>
-    </SimpleDarkBg>
+    </>
   );
 });
