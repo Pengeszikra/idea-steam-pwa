@@ -113,7 +113,7 @@ export const Custom3DContent = ({scene}) => {
 const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
 
 
-export const Minigame = ({questResultIs}) => {
+export const Minigame = ({interaction:{questResultIs}}) => {
   const [attached, setAttached] = useState(["", "", "", ""]);
   const [solution, setSolution] = useState("Megoldás");
   const t1 = useRef(null);
@@ -142,8 +142,7 @@ export const Minigame = ({questResultIs}) => {
         }
       } 
     ]
-  
-  
+    
   return (    
     <SimpleDarkBg>
       <div style={{marginTop:"40vmin"}}>{attached.join(" - ")}</div>

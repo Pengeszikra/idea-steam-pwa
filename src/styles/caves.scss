@@ -56,6 +56,7 @@
 }
 
 [data-teams] .prisoner {
+  transform: scale(.7);
   &[data-prisoner="A1"] { top:   7vmin; left:  10vmin; }
   &[data-prisoner="B1"] { top:   8vmin; left:  43vmin; }
   &[data-prisoner="B2"] { top:  43vmin; left:   6vmin; }

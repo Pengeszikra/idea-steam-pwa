@@ -51,6 +51,17 @@ export default ({setWay, storyStore}) => {
     }, 1300);       
   };
 
+  const questResultIs = (isSucces, currentPosition) => {
+    if (isSucces) {
+      dispatch(questSolved());
+      dispatch(achiveScore(100 * level));
+    } 
+    dispatch(outOfQuest());    
+    if (currentPosition === 'Q') {
+      walkOnMinimap('Q-Y');
+    }
+  }
+
   const interaction = {
     handleRoute: path => e => walkOnMinimap(path),
     handleSavePrisoner: prisonerId => e => {
@@ -66,18 +77,9 @@ export default ({setWay, storyStore}) => {
       dispatch(beginQuest());
     },
     startQuest: () => dispatch(beginQuest()),
+    questResultIs,
   };
 
-  const handleQuestResult = (isSucces, currentPosition) => e => {
-    if (isSucces) {
-      dispatch(questSolved());
-      dispatch(achiveScore(100 * level));
-    } 
-    dispatch(outOfQuest());    
-    if (currentPosition === 'Q') {
-      walkOnMinimap('Q-Y');
-    }
-  }
 
   const CollectedItems = showtime(Inventory);
   const SavedPrisoners = showtime(Teams);
@@ -109,7 +111,7 @@ export default ({setWay, storyStore}) => {
       />
       <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} />
       <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
-      <MockQuest show={hasQuesting && !hasSocrates} position={position} handleQuestResult={handleQuestResult} interaction={interaction} level={level} />
+      <MockQuest show={hasQuesting && !hasSocrates} position={position} interaction={interaction} level={level} />
     </main>
   );
 }

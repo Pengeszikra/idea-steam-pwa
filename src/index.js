@@ -6,5 +6,6 @@ import './styles/global.scss';
 
 import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
+import RomanNumbersTask from './quest/RomanNumbersTask';
 
-rootRender(<IdeaAdventuresBegin />);
+rootRender(<RomanNumbersTask level={2} />);

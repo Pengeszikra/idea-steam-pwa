@@ -10,8 +10,9 @@ import {
 import showtime from '../utils/showtime';
 import { Minigame } from '../layouts/Geometries';
 import RomanNumbersTask from './RomanNumbersTask';
+import DragListTest from './DragListTest';
 
-const JustMonolog = ({questResultIs}) => {
+const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
   return null;
 };
@@ -21,7 +22,7 @@ const questLookup = {
   Y:  JustMonolog,
   A:  PairProjectionToSolidQuest,
   B:  Minigame,
-  C:  FoundAllProjectionQuest,
+  C:  DragListTest,
   D:  SolidByProjectionQuest,
   X:  FoundTetraederUvQuest,
   E:  PointProjectionQuest,
@@ -34,12 +35,14 @@ const questLookup = {
   L:  PipelineQuest,
 };
 
-export default showtime(({handleQuestResult, position, level, interaction}) => {
+export default showtime(({position, level, interaction}) => {
+  const {questResultIs} = interaction;
+  const handleQuestResult = (result, position) => e => questResultIs(result, position);
   const Quest = questLookup[position];
   if (!Quest) return null;
   return (
     <>
-      <Quest level={level} interaction={interaction} questResultIs={solved => handleQuestResult(solved)()} />
+      <Quest level={level} interaction={interaction} />
       {
         ( Quest !== Minigame && Quest !== JustMonolog )
         &&

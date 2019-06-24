@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { QuestSketch, IntroHeader, IntroButton } from '../styles/divStore';
 import { cave_2_10 } from '../engine/applicationData';
 import divFactory from '../utils/divFactory';
+import DragRomanNumbers from './DragRomanNumbers';
 
 const romanTasks = [
     {},
@@ -27,13 +28,15 @@ export default ({level}) => {
 
   const current  = romanTasks[level].task[index];
   const solution = romanTasks[level].solution[index];
-  
+    
   return (
     <QuestSketch>
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
       <TaskHolder>
-        {current.split("").map((num,key) => <Number key={key}>{num}</Number>)}
+        {/* {current.split("").map((num,key) => <Number key={key}>{num}</Number>)} */}
+        <DragRomanNumbers items={current.split('')} />
       </TaskHolder>      
     </QuestSketch>
   );
 }
+
