@@ -8,4 +8,5 @@ import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
 
-rootRender(<RomanNumbersTask level={2} />);
+//rootRender(<RomanNumbersTask level={2} />);
+rootRender(<IdeaAdventuresBegin />);
