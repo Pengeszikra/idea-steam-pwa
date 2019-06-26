@@ -30,7 +30,7 @@ export default ({level}) => {
   const solution = romanTasks[level].solution[index];
     
   return (
-    <QuestSketch>
+    <QuestSketch style={{overflow:'hidden'}} >
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
       <TaskHolder>
         {/* {current.split("").map((num,key) => <Number key={key}>{num}</Number>)} */}

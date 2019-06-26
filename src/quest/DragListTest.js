@@ -21,6 +21,7 @@ const DraggableList =({ items }) => {
     const curIndex = order.current.indexOf(originalIndex)
     const curRow = clamp(Math.round((curIndex * 100 + y) / 100), 0, items.length - 1)
     const newOrder = swap(order.current, curIndex, curRow)
+    console.log(newOrder, down, originalIndex, curIndex, y)
     setSprings(fn(newOrder, down, originalIndex, curIndex, y)) // Feed springs new style data, they'll animate the view without causing a single render
     if (!down) order.current = newOrder
   })

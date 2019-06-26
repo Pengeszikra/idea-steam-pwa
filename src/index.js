@@ -7,6 +7,8 @@ import './styles/global.scss';
 import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
+import DragListTest from './quest/DragListTest';
 
+rootRender(<DragListTest />);
 //rootRender(<RomanNumbersTask level={2} />);
-rootRender(<IdeaAdventuresBegin />);
+//rootRender(<IdeaAdventuresBegin />);

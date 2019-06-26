@@ -13,7 +13,7 @@ const [Number] = divFactory(['roman-number']);
 const fn = (order, down, originalIndex, curIndex, x) => index =>
   down && index === originalIndex
     ? { 
-        x: curIndex *  + x,
+        x: curIndex * + x,
         scale: 1.1, 
         zIndex: '1', 
         shadow: 15, 
@@ -21,7 +21,7 @@ const fn = (order, down, originalIndex, curIndex, x) => index =>
         immediate: n => n === 'y' || n === 'zIndex' 
       }
     : { 
-        x: order.indexOf(index) * 50, 
+        x: order.indexOf(index) * 10, 
         scale: 1, 
         zIndex: '0', 
         shadow: 1, 
@@ -37,9 +37,10 @@ export default ({ items }) => {
   const [springs, setSprings] = useSprings(items.length, fn(order.current)) 
   const bind = useGesture(({ args: [originalIndex], down, delta: [x,] }) => {
     const curIndex = order.current.indexOf(originalIndex)
-    const curRow = clamp(Math.round((curIndex * 100 + x) / 100), 0, items.length - 1)
+    const curRow = clamp(Math.round((curIndex * 10 + x) / 10), 0, items.length - 1)
     const newOrder = swap(order.current, curIndex, curRow)
     // Feed springs new style data, they'll animate the view without causing a single render
+    console.log(newOrder, down, originalIndex, curIndex, x);
     setSprings(fn(newOrder, down, originalIndex, curIndex, x)) 
     if (!down) order.current = newOrder
   })
