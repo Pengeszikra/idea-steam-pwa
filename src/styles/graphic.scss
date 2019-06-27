@@ -396,13 +396,23 @@
 }
 
 .roman-number {
+  position: absolute;
+  top: 0;
+  left: 0;
   font-size: 4em;
   font-weight: 900;
   padding: .1em;
   background: rgba($color: #000000, $alpha: 0.3);
-  margin-left: .1em;
-  width: 8vmin;
+  // margin-left: .1em;
+  width: 12vmin;
   border-radius: .1em;
   text-align: center;
   user-select: none;
+}
+
+.rn-holder {
+  background: rgba($color: #F00F00, $alpha: 0.3);
+  margin: 45vmin 0vmin 0 20vmin;
+  position: relative;
+  width: 100%;
 }

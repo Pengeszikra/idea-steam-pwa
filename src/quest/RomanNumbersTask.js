@@ -32,10 +32,12 @@ export default ({level}) => {
   return (
     <QuestSketch style={{overflow:'hidden'}} >
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
-      <TaskHolder>
+      {/* <TaskHolder> */}
         {/* {current.split("").map((num,key) => <Number key={key}>{num}</Number>)} */}
-        <DragRomanNumbers items={current.split('')} />
-      </TaskHolder>      
+        <div className="rn-holder">
+          <DragRomanNumbers items={current.split('')} />
+        </div>
+      {/* </TaskHolder>       */}
     </QuestSketch>
   );
 }

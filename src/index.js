@@ -9,6 +9,6 @@ import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
 import DragListTest from './quest/DragListTest';
 
-rootRender(<DragListTest />);
-//rootRender(<RomanNumbersTask level={2} />);
+//rootRender(<DragListTest />);
+rootRender(<RomanNumbersTask level={2} />);
 //rootRender(<IdeaAdventuresBegin />);
