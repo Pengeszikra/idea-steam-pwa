@@ -34,7 +34,14 @@ export default ({position, level, interaction, currentArea}) => {
     ? currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />) 
     : null;
   const showExits = data.exits.map(exit => <RouteArrow data-path={exit} path={exit} onClick={handleRoute(exit)} key={`exit-${exit}`} />);
-  const showPrisoners = currentArea.prisoners.map(prisonerId => <Prisoner data-prisoner={prisonerId} onClick={handleSavePrisoner(prisonerId)} key={`prs-${prisonerId}`} />);
+  const showPrisoners = currentArea.prisoners.map(prisonerId => 
+    <Prisoner 
+      data-prisoner={prisonerId} 
+      data-released={currentArea.solved}
+      onClick={handleSavePrisoner(prisonerId)} 
+      key={`prs-${prisonerId}`} 
+    />
+  );
   const Background = backroundLookup[position];
 
   const afterMonolog = data.onEnterMonolog ? currentArea.readed : true;

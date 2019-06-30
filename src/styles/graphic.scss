@@ -353,6 +353,8 @@
   &[data-prisoner="G1"] { @include bimage('/img/mobs/prisoner-10.png', 33vmin, 33vmin, 33vmin,  5vmin) }
   &[data-prisoner="H1"] { @include bimage('/img/mobs/prisoner-11.png', 33vmin, 53vmin, 103vmin, 5vmin) }
   &[data-prisoner="I1"] { @include bimage('/img/mobs/prisoner-12.png', 40vmin, 40vmin, 66vmin, 56vmin); transform: scaleX(-1); transform-origin: center center }
+
+  &[data-released="true"] { filter: drop-shadow(0px 0px 2vmin #AFA); }
 }
 
 .item {
@@ -368,6 +370,7 @@
   &[data-item="G2"] { @include bimage('/img/mobs/item-10.png', 25vmin, 25vmin, 100vmin, 2vmin) }
   &[data-item="H1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
   &[data-item="H2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
+
 }
 
 .quest-sketch { 
