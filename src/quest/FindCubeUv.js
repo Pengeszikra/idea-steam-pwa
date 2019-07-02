@@ -8,7 +8,7 @@ const randomCubUvMatrix = (x, y) => {
     const u = i % x;
     const v = i / x | 0;
     return ({
-      side : Math.random() * 5 | 0, 
+      side : Math.random() * 6 | 0, 
       dir  : "NESW"[Math.random() * 4 | 0],
       u, v,
       key: uvId(u, v)
