@@ -64,3 +64,5 @@ export const [
 'pair-solid-to-projection','pair-project-to-solid'])
 
 export const [GreekCity] = divFactory(['greek-city']);
+
+export const [CubeUv, CubeUvArea] = divFactory(['cube-uv','cube-uv-area']);

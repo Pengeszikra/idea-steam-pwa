@@ -7,8 +7,8 @@ import './styles/global.scss';
 import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
-import DragListTest from './quest/DragListTest';
+import FindCubeUv from './quest/FindCubeUv';
 
-//rootRender(<DragListTest />);
-//rootRender(<RomanNumbersTask level={2} />);
-rootRender(<IdeaAdventuresBegin />);
+rootRender(<RomanNumbersTask level={2} />);
+//rootRender(<IdeaAdventuresBegin />);
+rootRender(<FindCubeUv />);
