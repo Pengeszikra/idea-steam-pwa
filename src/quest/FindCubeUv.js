@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { QuestSketch, IntroHeader, CubeUv, CubeUvArea, IntroButtonHolder, IntroButton } from '../styles/divStore';
 import { precache } from 'sw-toolbox';
+import nets from './netsOfCube';
 
-const uvId = (u, v) => `${u}:${v}`;
+const WIDTH = 5;
+const HEIGHT = 7;
+const uvId = (u, v) => `${u}${v}`;
 
 const randomCubUvMatrix = (x, y) => {
   return Array( x * y ).fill(0).map( (_, i) => {
@@ -17,8 +20,29 @@ const randomCubUvMatrix = (x, y) => {
   });
 };
 
-const CubeUvFragment = (selections, handleSelect) => ({side, dir, key}) => {
-  const selectedStyle = selections[key] ? {filter: 'brightness(2)'} : {}; // {border: '3px solid gold'}
+const getRandomNet = (index = Math.random() * nets.length | 0) => nets[index];
+
+const placeCubeShape = (net, position=[1,2], setMatrix) => {
+  const [x,y] = position;
+  const netMatrix = net.split(/\n/).filter(hor => hor.length).map(hor => hor.split(':'));
+  console.log(netMatrix);
+  setMatrix( mtx => {
+    netMatrix.map((hor, iy) => hor.map((uv, ix) => {
+        const [u,v] = [x + ix, y + iy];
+        const pos = u + v * WIDTH;
+        let [side, dir] = uv.split('');
+        dir.replace('Y','N').replace('J','S');        
+        if (side !== '-' && mtx[pos]) {
+          mtx[pos] = {...(mtx[pos]), side, dir, fine:true};
+        }        
+      })      
+    );
+    return mtx;    
+  });
+}
+
+const CubeUvFragment = (selections, handleSelect, hasWin) => ({side, dir, key}) => {
+  const selectedStyle = selections[key] ? hasWin ?  {filter: 'brightness(4) sepia(1)'} : {filter: 'brightness(2)'} : {}; // {border: '3px solid gold'}
   return (
     <CubeUv  key={key} data-uv={side} data-dir={dir} style={selectedStyle} onClick={handleSelect(key)}/>
   );
@@ -28,6 +52,7 @@ const CubeUvFragment = (selections, handleSelect) => ({side, dir, key}) => {
 export default ({}) => {
   const [matrix, setMatrix] = useState([]);
   const [selections, setSelections] = useState({});
+  const [hasWin, setWin] = useState(false);
     
   useEffect(() => {
     randomCubUvMatrix(5, 7) |> setMatrix;
@@ -38,16 +63,10 @@ export default ({}) => {
     let matrixLookUp = matrix
       .filter(e => selectedKeys.indexOf(e.key) !== -1)
       .reduce((r, e) => ({...r, [e.key]: e}) , {});
-      
-    
-    console.log( 
-      `
---- RULES ---       
-       six : ${selectedKeys.length === 6}
-no 4 sided : ${selectedKeys.filter(key => matrixLookUp[key].side === 4)}
 
+    const found = selectedKeys.filter(key => matrixLookUp[key].fine);
+    setWin(found.length === 6 && selectedKeys.length === 6);
 
-    `);
   }, [selections]);
 
   // JSON.stringify(matrixLookUp, null, 2)
@@ -58,13 +77,14 @@ no 4 sided : ${selectedKeys.filter(key => matrixLookUp[key].side === 4)}
   const handleSolutionIsValid = event => {
     const selectedUvs = matrix.filter(({key}) => selections[key]);
     const [first, second] = selectedUvs;
+
     if (selectedUvs.length === 1) { 
-      first.dir = {N:'W',W:'S',S:'E',E:'N'}[first.dir];
-      setMatrix(prev => prev.map(uv => uv.key === first.key ? first : uv) );
+      first.dir = {N:'E',E:'S',S:'W',W:'N'}[first.dir];
+      setMatrix(mtx => mtx.map(uv => uv.key === first.key ? first : uv) );
     }
 
     if (selectedUvs.length === 2) { 
-      setMatrix(prev => prev.map(
+      setMatrix(mtx => mtx.map(
         uv => uv.key === first.key 
           ? ({...uv, side:second.side}) 
           : uv.key === second.key 
@@ -80,13 +100,15 @@ no 4 sided : ${selectedKeys.filter(key => matrixLookUp[key].side === 4)}
     <QuestSketch style={{overflow:'hidden'}} >
       <IntroHeader>Meg kell találni a kocka kiterített lapjait.</IntroHeader>
       <CubeUvArea >
-        {matrix.map(CubeUvFragment(selections, handleSelect))}
+        {matrix.map(CubeUvFragment(selections, handleSelect, hasWin))}
       </CubeUvArea>
       <IntroButtonHolder>
         <IntroButton onClick={handleSolutionIsValid}>Ellenőrzés</IntroButton>
         <IntroButton onClick={e => {
-          randomCubUvMatrix(5, 7) |> setMatrix;
+          randomCubUvMatrix(WIDTH, HEIGHT) |> setMatrix;
           setSelections({})
+          const rnet = getRandomNet();
+          placeCubeShape(rnet, [Math.random() * 3 | 0, Math.random() * 3 | 0], setMatrix);      
         }}>Reset</IntroButton>        
       </IntroButtonHolder>
     </QuestSketch>
