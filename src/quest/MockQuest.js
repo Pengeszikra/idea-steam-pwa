@@ -11,6 +11,7 @@ import showtime from '../utils/showtime';
 import { Minigame } from '../layouts/Geometries';
 import RomanNumbersTask from './RomanNumbersTask';
 import DragListTest from './DragListTest';
+import FindCubeUv from './FindCubeUv';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -26,7 +27,7 @@ const questLookup = {
   D:  SolidByProjectionQuest,
   X:  FoundTetraederUvQuest,
   E:  PointProjectionQuest,
-  F:  FoundCubeUvQuest,
+  F:  FindCubeUv,
   G:  PairSolidToProjectionQuest,
   H:  ContinuosPathQuest,
   I:  FoundTetraederUvQuest,
@@ -44,7 +45,7 @@ export default showtime(({position, level, interaction}) => {
     <>
       <Quest level={level} interaction={interaction} />
       {
-        ( Quest !== Minigame && Quest !== JustMonolog )
+        [Minigame, JustMonolog, FindCubeUv].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>
           <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>

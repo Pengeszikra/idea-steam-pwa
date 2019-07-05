@@ -9,6 +9,6 @@ import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
 import FindCubeUv from './quest/FindCubeUv';
 
-rootRender(<RomanNumbersTask level={2} />);
-//rootRender(<IdeaAdventuresBegin />);
-rootRender(<FindCubeUv />);
+rootRender(<IdeaAdventuresBegin />);
+//rootRender(<RomanNumbersTask level={2} />);
+//rootRender(<FindCubeUv />);

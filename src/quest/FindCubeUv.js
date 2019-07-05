@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { QuestSketch, IntroHeader, CubeUv, CubeUvArea, IntroButtonHolder, IntroButton } from '../styles/divStore';
-import { precache } from 'sw-toolbox';
 import nets from './netsOfCube';
 
 const WIDTH = 5;
@@ -25,7 +24,7 @@ const getRandomNet = (index = Math.random() * nets.length | 0) => nets[index];
 const placeCubeShape = (net, position=[1,2], setMatrix) => {
   const [x,y] = position;
   const netMatrix = net.split(/\n/).filter(hor => hor.length).map(hor => hor.split(':'));
-  console.log(netMatrix);
+  
   setMatrix( mtx => {
     netMatrix.map((hor, iy) => hor.map((uv, ix) => {
         const [u,v] = [x + ix, y + iy];
@@ -49,14 +48,19 @@ const CubeUvFragment = (selections, handleSelect, hasWin) => ({side, dir, key}) 
 };
 
 
-export default ({}) => {
+export default ({interaction:{questResultIs}}) => {
   const [matrix, setMatrix] = useState([]);
   const [selections, setSelections] = useState({});
   const [hasWin, setWin] = useState(false);
-    
-  useEffect(() => {
-    randomCubUvMatrix(5, 7) |> setMatrix;
-  }, []);
+
+  const resetMatrix = () => {
+    randomCubUvMatrix(WIDTH, HEIGHT) |> setMatrix;
+    setSelections({})
+    const rnet = getRandomNet();
+    placeCubeShape(rnet, [Math.random() * 3 | 0, Math.random() * 3 | 0], setMatrix);      
+  };  
+
+  useEffect(resetMatrix, []);
 
   useEffect(() => {
     let selectedKeys = Object.keys(selections).filter(key => selections[key]);
@@ -65,15 +69,15 @@ export default ({}) => {
       .reduce((r, e) => ({...r, [e.key]: e}) , {});
 
     const found = selectedKeys.filter(key => matrixLookUp[key].fine);
-    setWin(found.length === 6 && selectedKeys.length === 6);
+    const isWin = found.length === 6 && selectedKeys.length === 6
+    setWin(isWin);
+    if (isWin) {
+      setTimeout(() => questResultIs(isWin) , 2000);
+    }    
 
   }, [selections]);
 
-  // JSON.stringify(matrixLookUp, null, 2)
-  // ${selectedKeys} : ${JSON.stringify(selections, null, 2)}
-
   const handleSelect = key => event => setSelections(prev => {prev[key] = !(prev[key]); return {...prev}});
-  // const handleSolutionIsValid = event => matrix.filter(({key}) => selections[key]).map(uv => console.log(uv));
   const handleSolutionIsValid = event => {
     const selectedUvs = matrix.filter(({key}) => selections[key]);
     const [first, second] = selectedUvs;
@@ -95,7 +99,6 @@ export default ({}) => {
     }
   }
   
-  
   return (
     <QuestSketch style={{overflow:'hidden'}} >
       <IntroHeader>Meg kell találni a kocka kiterített lapjait.</IntroHeader>
@@ -104,19 +107,8 @@ export default ({}) => {
       </CubeUvArea>
       <IntroButtonHolder>
         <IntroButton onClick={handleSolutionIsValid}>Ellenőrzés</IntroButton>
-        <IntroButton onClick={e => {
-          randomCubUvMatrix(WIDTH, HEIGHT) |> setMatrix;
-          setSelections({})
-          const rnet = getRandomNet();
-          placeCubeShape(rnet, [Math.random() * 3 | 0, Math.random() * 3 | 0], setMatrix);      
-        }}>Reset</IntroButton>        
+        <IntroButton onClick={resetMatrix}>Reset</IntroButton>        
       </IntroButtonHolder>
     </QuestSketch>
   );
 };
-
-// {Array(5 * 7).fill(0).map((cube, key) => <CubeUv key={key} data-uv={key%5} data-dir={"NESW"[key % 4]}/>)}
-// data-key={`${u}:${v}`}
-
-// image149.png
-
