@@ -60,7 +60,7 @@ export const [
   PipelineQuest,
   PairSolidToProjectionQuest,
   PairProjectionToSolidQuest,
-] = divFactory(['quest-sketch', 'quest-found-cube-uv', 'open-code no-scroll', 'found-all-projection', 'solid-by-projection',
+] = divFactory(['quest-sketch no-scroll', 'quest-found-cube-uv', 'open-code no-scroll', 'found-all-projection', 'solid-by-projection',
 'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest',
 'pair-solid-to-projection','pair-project-to-solid'])
 

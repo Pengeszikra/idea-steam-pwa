@@ -70,9 +70,10 @@ export default  ({interaction:{questResultIs}, level = 1, position}) => {
     ]
 
   const checkSolution = () => {
-    // console.log(attached, task.solution);
     const isSolved = attached.length === attached.filter((shape, i) => shape === task.solution[i]).length;
-    setTimeout(()=>questResultIs(isSolved, position), 1000);
+    if (isSolved) {
+      setTimeout(()=>questResultIs(isSolved, position), 1000);
+    }
     setSolution( isSolved ? "Jó!" : "Rossz!" );
   };
   
