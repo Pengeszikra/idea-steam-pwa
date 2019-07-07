@@ -2,6 +2,14 @@ import React from 'react';
 import {useRef, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
 
+const clearScene = scene => scene.children.map(mesh => {
+  scene.remove(mesh);
+  const {geometry, material} = mesh;
+  geometry && geometry.dispose();
+  material && material.dispose();
+  mesh = undefined;        
+})
+
 export default function (props) {
   const { 
     canvasOpacity = true, 
@@ -20,8 +28,8 @@ export default function (props) {
     const FOW = 55
     const MAX_DISTANCE = 15000
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( FOW , clientWidth/clientHeight , 1, MAX_DISTANCE );
+    const scene = new THREE.Scene();    
+    const camera = new THREE.PerspectiveCamera( FOW , clientWidth/clientHeight , 1, MAX_DISTANCE );    
       camera.position.set( 0, 0, 500 )
       camera.updateProjectionMatrix()
     const renderer = new THREE.WebGLRenderer( { antialias: true, canvas: mount.current, alpha:true } );
@@ -63,6 +71,7 @@ export default function (props) {
     return () => {
       hasPlay = false;
       unsubscribeAnimate3D();
+      clearScene(scene); // TODO found better way
     };
   }, [mount]);
 
@@ -76,3 +85,4 @@ export default function (props) {
     />
   );
 }
+
