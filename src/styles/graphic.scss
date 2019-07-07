@@ -12,6 +12,8 @@
   background-repeat: no-repeat;
 }
 
+.no-scroll {overflow: hidden;}
+
 @keyframes zoom-in { from {transform: scale(0)} to {transform: scale(1)} }  
 
 @keyframes speak-in { 
@@ -293,36 +295,6 @@
  }
 
  // 53 103 -6 15
-
- .game-holder {
-   display: flex;
-   flex-wrap: wrap;
-   align-content: flex-start;
-   justify-content: space-evenly;
-   position: absolute;
-   top: 50vmin;
-   left: 0;
-   width: 100vw;
-   height: calc(100vh - 50vmin);
-   overflow: hidden;
- }
-
- .drop-target {
-  // @include bimage('/img/gui/drop-target.png', 40vmin, 40vmin);
-  width: 30vmin;
-  height: 30vmin;
-  background: rgba(#222,.5);
-  position: relative;
-  color: #AAA;  
-  padding: 2em;   
-  margin: .5em;
-  font-weight: 500;
-  font-size: 1.2em;
-  user-select: none;
-  border-radius: 1em;
-  box-shadow: 0 0 2px #AAA;
- }
-
 .medium-3d {
   // background: gold;
   width: 23vmin;
@@ -442,4 +414,67 @@
   position: relative;
   flex-wrap: wrap;
   width: 100vmin;  
+}
+
+.game-holder {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 50vmin;
+  left: 5vmin;
+  width: 95vw;
+  height: calc(100vh - 50vmin);
+  overflow: hidden;
+}
+
+.geom-item {
+  @include bimage('/img/quest/cube-uv-4.png', 22vmin, 22vmin);
+  position: relative;
+  background-position: center center;
+  
+  &[data-shape="paralelogramma"] { background-image: url('/img/quest/ope-paralelogramma.png');}
+  &[data-shape="circle"] { background-image: url('/img/quest/ope-circle.png');}
+  &[data-shape="box"] { background-image: url('/img/quest/ope-box.png');}
+  &[data-shape="brick"] { background-image: url('/img/quest/ope-brick.png');}
+  &[data-shape="fine-trinagle"] { background-image: url('/img/quest/ope-fine-trinagle.png');}
+  &[data-shape="rombusz"] { background-image: url('/img/quest/ope-rombusz.png');}
+  &[data-shape="corner-trinagle"] { background-image: url('/img/quest/ope-corner-trinagle.png');}
+  &[data-shape="2-trinagle"] { background-image: url('/img/quest/ope-2-trinagle.png');}
+  &[data-shape="4-corner"] { background-image: url('/img/quest/ope-4-corner.png');}
+  &[data-shape="deltoid"] { background-image: url('/img/quest/ope-deltoid.png');}
+  &[data-shape="fine-rombusz"] { background-image: url('/img/quest/ope-fine-rombusz.png');}
+}
+
+.task-label {
+  display: inline-block;    
+  position: absolute;
+  font-size: 1.3em;
+  user-select: none;
+  color: #AAA;
+  font-weight: 500;
+
+  &[data-label="0"] { top:  44vmin; left:  11vmin; }
+  &[data-label="1"] { top:  44vmin; left:  58vmin; }
+  &[data-label="2"] { top:  69vmin; left:  -5vmin; transform: rotate(270deg); }
+  &[data-label="3"] { top: 120vmin; left:  -6vmin; transform: rotate(270deg); }
+}
+
+.drop-target {
+  width: 42vmin;
+  height: 42vmin;
+  position: relative;  
+  padding: 2em;   
+  margin: .5em .5em 2em;
+  user-select: none;
+}
+
+.item-holder {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  width: 100vmin;
+  margin-top: 4vmin;
 }

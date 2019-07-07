@@ -1,4 +1,5 @@
 import divFactory, {showFactory} from '../utils/divFactory';
+import { DropTarget } from 'react-dnd';
 
 export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory(["header-bar", "lvl-1-char", "lvl-2-char"]);
 export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory(["lvl-1-char avatar-on-map", "lvl-2-char avatar-on-map"]);
@@ -59,10 +60,12 @@ export const [
   PipelineQuest,
   PairSolidToProjectionQuest,
   PairProjectionToSolidQuest,
-] = divFactory(['quest-sketch', 'quest-found-cube-uv', 'open-code', 'found-all-projection', 'solid-by-projection',
+] = divFactory(['quest-sketch', 'quest-found-cube-uv', 'open-code no-scroll', 'found-all-projection', 'solid-by-projection',
 'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest',
 'pair-solid-to-projection','pair-project-to-solid'])
 
 export const [GreekCity] = divFactory(['greek-city']);
 
 export const [CubeUv, CubeUvArea] = divFactory(['cube-uv','cube-uv-area']);
+
+export const [GeomItem, TaskLabel, DropArea, ItemHolder] = divFactory(['geom-item', 'task-label', 'drop-target', 'item-holder']);

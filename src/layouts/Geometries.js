@@ -3,7 +3,7 @@ import ThreeArea from './ThreeArea';
 import * as THREE from 'three';
 import { useGesture } from 'react-use-gesture';
 import { GameHolder, IntroButton, SimpleDarkBg } from '../styles/divStore';
-// import { DropTarget } from 'react-dnd';
+import doesOverlap from './../utils/doesOverlap';
 
 export const GEOMS = {
   box: (w,h,d) => new THREE.BoxGeometry( w , h , d, 1, 1, 1 ),
@@ -45,26 +45,6 @@ const showContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => (
 }
 
 export const Add3D = ({content}) => <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(content)}/>;
-
-export const GameWith3dObjects = () => {
-  return (
-    <>
-
-    </>
-  )
-}
-
-function doesOverlap(shape, zone) {
-  const [shapeRect] = shape.getClientRects();
-  const [zoneRect] = zone.getClientRects();
-  const {x, y, width, height} = shapeRect;
-  const {x:tx, y:ty, width:tw, height:th} = zoneRect;
-  return (
-    !( tx + tw < x || tx > x + width )
-                   &&
-    !( ty + th < y || ty > y + height )
-  );  
-}
 
 export const Drag3D = ({add3DContent, top=0, left=0, targets, setHold, ...props}) => {
   const [clearHold, setDrop] = setHold;

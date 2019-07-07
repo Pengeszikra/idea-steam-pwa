@@ -1,23 +1,62 @@
-import React from 'react';
+import React, {useRef, useState, useEffect} from 'react';
+import { useGesture } from 'react-use-gesture';
+import { GameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest, TaskLabel, ItemHolder } from '../styles/divStore';
+import doesOverlap from './../utils/doesOverlap';
+import { taskSetups } from './data/openCodeQuest';
 
-default export ({interaction:{questResultIs}}) => {
+const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
+  const [clearHold, setDrop] = setHold(shapeId);
+  const [local, setLocal] = useState([0,0]);  
+
+  const bind = useGesture({
+    onDrag: dragState => setLocal(dragState.local),
+    onDragStart: dragState => {clearHold()},
+    onDragEnd: dragState => {
+      const {currentTarget : shape} = dragState;      
+      const overlaps = targets.filter(({current}) => doesOverlap(shape, current));
+      targets.map(({current}) => current.style.filter='');
+      if (overlaps.length === 1) {
+        const [dropZone] = overlaps;
+        dropZone.current.style.filter = 'brightness(1.4)';
+        setDrop(dropZone);
+      }
+    },
+  });
+
+  const [xPos, yPos] = local;
+
+  return (
+    <GeomItem
+      {...bind()}
+      style={{transform: `translate3d(${xPos}px, ${yPos}px, 0)`}}
+      data-shape={shapeId}
+      {...props}
+    />
+  );
+};
+
+const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
+
+export default  ({interaction:{questResultIs}, level = 1, position}) => {
   const [attached, setAttached] = useState(["", "", "", ""]);
-  const [solution, setSolution] = useState("Megoldás");
+  const [solution, setSolution] = useState("Ez a megoldás");
+  const [task, setTask] = useState(...taskSetups[0]);
   const t1 = useRef(null);
   const t2 = useRef(null);
   const t3 = useRef(null);
   const t4 = useRef(null);
 
-  // useEffect(()=>console.log(t1, t2, t3, t4), []);
-  
   const targets = [t1, t2, t3, t4];
-  const [h1, h2, h3, h4] = attached;
 
+  useEffect(() => {
+    const choised = Math.random() * 3 | 0;
+    const selectedTask = {...taskSetups[level][choised]};
+    const shapes = selectedTask.shapes.sort((a, b) => Math.random() > .5 ? -1 : 1);
+    setTask({...selectedTask, shapes});
+  }, []);
+  
   const holdFactory = (shape) => [
-      () => {
-        const hold = [...attached];
-        setAttached(hold.map(e => e == shape ? null : e));  
-      } 
+      () => setAttached(attached.map(e => e == shape ? null : e))
       ,
       (dropZone) => {
         const hold = [...attached];
@@ -29,32 +68,26 @@ default export ({interaction:{questResultIs}}) => {
         }
       } 
     ]
-    
+
+  const checkSolution = () => {
+    // console.log(attached, task.solution);
+    const isSolved = attached.length === attached.filter((shape, i) => shape === task.solution[i]).length;
+    setTimeout(()=>questResultIs(isSolved, position), 1000);
+    setSolution( isSolved ? "Jó!" : "Rossz!" );
+  };
+  
   return (    
-    <SimpleDarkBg>
-      <div style={{marginTop:"40vmin"}}>{attached.join(" - ")}</div>
-      <GameHolder>
-          
-        <GeomTarget fref={t1}><p>Csúcsok száma: 3</p><p>Van derékszöge</p><p>{h1}</p></GeomTarget>  
-        <GeomTarget fref={t2}><p>Csúcsok száma: 4</p><p>Van derékszöge</p><p>{h2}</p></GeomTarget>
-        <GeomTarget fref={t3}><p>Csúcsok száma: 3</p><p>Nincs derékszöge</p><p>{h3}</p></GeomTarget>
-        <GeomTarget fref={t4}><p>Csúcsok száma: 4</p><p>Nincs derékszöge</p><p>{h4}</p></GeomTarget>
-        <IntroButton onClick={() => {
-          const isSolved = attached.join("-") === "alfa-beta--";
-          setTimeout(()=>questResultIs(isSolved),1000);
-          setSolution( isSolved ? "Jó!" : "Rossz!" );
-        }}>{solution}</IntroButton>
-        
+    <OpenCodeQuest>
+      {task.labels.map((label, key) => <TaskLabel key={key} data-label={key}>{label}</TaskLabel>)}
+      <GameHolder>        
+        {targets.map((targetRef, key) => <GeomTarget key={key} fref={targetRef}></GeomTarget>)}
+        <IntroButtonHolder>
+          <IntroButton onClick={checkSolution}>{solution}</IntroButton>
+        </IntroButtonHolder>        
       </GameHolder>      
-    </SimpleDarkBg>          
+      <ItemHolder>
+        {task.shapes.map(shape => <QuestItem targets={targets} key={shape} setHold={holdFactory} shapeId={shape} />)}  
+      </ItemHolder>
+    </OpenCodeQuest>
   );
 }
-
-/*
-
-      <Drag3D add3DContent={showContent(GEOMS.box, 250, 250, 250)} top={15} left={0} targets={targets} setHold={holdFactory("alfa")} />
-      <Drag3D add3DContent={showContent(GEOMS.dedocahedron, 200)} top={15} left={25} targets={targets} setHold={holdFactory("beta")} />
-      <Drag3D add3DContent={showContent(GEOMS.icosahedron, 200)} top={15} left={50} targets={targets} setHold={holdFactory("gamma")} />
-      <Drag3D add3DContent={showContent(GEOMS.box, 5, 250, 250)} top={15} left={75} targets={targets} setHold={holdFactory("delta")} />
-
-*/

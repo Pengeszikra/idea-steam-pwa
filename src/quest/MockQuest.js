@@ -12,6 +12,7 @@ import { Minigame } from '../layouts/Geometries';
 import RomanNumbersTask from './RomanNumbersTask';
 import DragListTest from './DragListTest';
 import FindCubeUv from './FindCubeUv';
+import OpenCodeQuestGame from './OpenCodeQuestGame';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -19,7 +20,7 @@ const JustMonolog = ({interaction:{questResultIs}}) => {
 };
 
 const questLookup = {
-  Q:  OpenCodeQuest,
+  Q:  OpenCodeQuestGame,
   Y:  JustMonolog,
   A:  PairProjectionToSolidQuest,
   B:  Minigame,
@@ -43,9 +44,9 @@ export default showtime(({position, level, interaction}) => {
   if (!Quest) return null;
   return (
     <>
-      <Quest level={level} interaction={interaction} />
+      <Quest level={level} interaction={interaction} position={position}/>
       {
-        [Minigame, JustMonolog, FindCubeUv].indexOf(Quest) === -1
+        [Minigame, JustMonolog, FindCubeUv, OpenCodeQuestGame].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>
           <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>

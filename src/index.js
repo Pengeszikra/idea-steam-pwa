@@ -8,7 +8,13 @@ import rootRender from './utils/rootRender';
 import IdeaAdventuresBegin from './layouts/IdeaAdventuresBegin';
 import RomanNumbersTask from './quest/RomanNumbersTask';
 import FindCubeUv from './quest/FindCubeUv';
+import OpenCodeQuestGame from './quest/OpenCodeQuestGame';
+import { Minigame } from './layouts/Geometries';
+
+const mockGameCommunication = {questResultIs: result => console.log(`--------\ngame result is: ${result}`)};
 
 rootRender(<IdeaAdventuresBegin />);
 //rootRender(<RomanNumbersTask level={2} />);
-//rootRender(<FindCubeUv />);
+//rootRender(<FindCubeUv interaction={mockGameCommunication}/>);
+//rootRender(<Minigame interaction={mockGameCommunication} />);
+//rootRender(<OpenCodeQuestGame interaction={mockGameCommunication} />);

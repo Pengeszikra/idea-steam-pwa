@@ -48,6 +48,7 @@ const CubeUvFragment = (selections, handleSelect, hasWin) => ({side, dir, key}) 
 };
 
 
+
 export default ({interaction:{questResultIs}}) => {
   const [matrix, setMatrix] = useState([]);
   const [selections, setSelections] = useState({});
