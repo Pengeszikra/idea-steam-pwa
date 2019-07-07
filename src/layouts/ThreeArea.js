@@ -6,7 +6,7 @@ export default function (props) {
   const { 
     canvasOpacity = true, 
     add3DContent=()=>()=>()=>{}, 
-    canvasClasses=[], 
+    canvasClasses=['area-3d-canvas'], 
     clickHandle=()=>{},
     ...restProps
   } = props;
@@ -68,7 +68,7 @@ export default function (props) {
 
   return (
     <canvas 
-      className={["nosel", ...canvasClasses].join(" ")}
+      className={canvasClasses.join(" ")}
       ref={mount} 
       onContextMenu={event=>event.preventDefault()}
       onClick={clickHandle}

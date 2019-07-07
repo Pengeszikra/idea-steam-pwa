@@ -18,7 +18,3 @@ export const animationFlyRandomSolid = ({scene, camera}) => {
     scene.add(solid);
   }        
 };
-
-export const animationFoundProjection = ({scene, camera}) => {
-  
-}
