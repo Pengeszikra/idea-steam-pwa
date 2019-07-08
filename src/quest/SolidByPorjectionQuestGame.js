@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import * as THREE from 'three';
 import { QuestSketch, IntroButtonHolder, IntroButton } from '../styles/divStore';
-import { makeShape, GEOMS, RAD, play3dContent } from '../layouts/Geometries';
+import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
 import ThreeArea from '../layouts/ThreeArea';
 import showtime from '../utils/showtime';
 import { irnd } from '../utils/randoms';
@@ -13,16 +13,18 @@ const SolidProjectionGame = questResultIs => studio => {
 
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
   
-  const questItem = makeShape(shapes[irnd(shapes.length)],100,100,100, 0xAA5522, 1 , 0xFFAA77);
-  questItem.translateZ(-300).translateY(270).rotateX(-12/RAD).rotateY(45/RAD);
+  const questItem = makeShape(shapes[irnd(shapes.length)],90,90,90, 0xAA5522, 1 , 0xFFAA77);
+  questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
   scene.add(questItem);
 
-  const [width, height] = [6, 6];
+  const [width, height] = [4, 4];
 
-  Array(width * height).fill(0).map((_, i) => {    
-    const shadow = makeShape(shapes[irnd(shapes.length)], 30, 30, 30, 0x000000, 1);
-    shadow.position.set(i % width * 70 - 170, (i / width | 0) * 70 - 240, -300);    
+  const shadows = Array(width * height).fill(0).map((_, i) => {    
+    const shadow = makeFlatColorShape(shapes[irnd(shapes.length)], 45, 45, 45, 0x130802);
+    shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
+    rotate(shadow,45,0,90);
     scene.add(shadow);
+    return shadow;
   });
 
   const click3d = mouse => {
@@ -52,6 +54,10 @@ const SolidProjectionGame = questResultIs => studio => {
   const animation = studio => {
     const {scene, camera} = studio;
     questItem.rotateY(.4/RAD);
+    shadows
+      .filter(shadow => shadow.geometry.type == questItem.geometry.type)
+      // .forEach(shadow => rotate(shadow,-1,1,1));
+
     //camera.translateZ(1);
   }
   

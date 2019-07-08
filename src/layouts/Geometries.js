@@ -33,6 +33,13 @@ export function makeShape( geomMaker, w , h , d , color, opacity = .7, lineColor
   return body;   
 }
 
+export function makeFlatColorShape( geomMaker, w , h , d , color) {
+  const geom = geomMaker(w,h,d);
+  const mat = new THREE.MeshBasicMaterial( {color} );
+  const body = new THREE.Mesh( geom, mat );  
+  return body;   
+}
+
 // use : return flyThroughtRandomSolid |> play({scene, camera}); // at add3Dcontent
 export const play3dContent = ({scene, camera}) => animation => {
   const meshMoving = () => {
@@ -69,3 +76,8 @@ const showContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => (
 }
 
 export const Add3D = ({content}) => <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(content)}/>;
+
+export const rotate = (mesh, ...xyz ) => {
+  const [x = 0, y = 0, z = 0] = xyz;
+  mesh.rotateX(x/RAD).rotateY(y/RAD).rotateZ(z/RAD)
+};
