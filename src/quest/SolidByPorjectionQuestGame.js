@@ -51,7 +51,7 @@ const SolidProjectionGame = questResultIs => studio => {
 
   const animation = studio => {
     const {scene, camera} = studio;
-    questItem.rotateY(.3/RAD);
+    questItem.rotateY(.4/RAD);
     //camera.translateZ(1);
   }
   
@@ -63,7 +63,12 @@ export default ({interaction:{questResultIs}, level = 1, position}) => {
 
   return (
     <QuestSketch>
-      <ThreeInteraction show={flow} add3DContent={SolidProjectionGame(r => questResultIs(r, position))} />
+      <ThreeInteraction 
+        show={flow} 
+        add3DContent={SolidProjectionGame(r => questResultIs(r, position))} 
+        orthographic
+        // clickHandler={e=>console.log(e)}
+      />
       <IntroButtonHolder>
         <IntroButton onClick={e => {setFlow(f => !f); questResultIs(true, position)}}>Stop</IntroButton>
       </IntroButtonHolder>

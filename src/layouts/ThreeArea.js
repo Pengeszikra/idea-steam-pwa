@@ -10,14 +10,14 @@ const clearScene = scene => scene.children.map(mesh => {
   mesh = undefined;        
 })
 
-export default function (props) {
-  const { 
-    canvasOpacity = true, 
-    add3DContent=()=>()=>()=>{}, 
-    canvasClasses=['area-3d-canvas'], 
-    clickHandle=()=>{},
-    ...restProps
-  } = props;
+export default ({ 
+  canvasOpacity = true, 
+  add3DContent=()=>()=>()=>{}, 
+  canvasClasses=['area-3d-canvas'], 
+  clickHandler=()=>{},
+  orthographic = false,
+  ...props
+}) => {  
   const mount = useRef(null);
   const [data, setData] = useState({});
 
@@ -28,13 +28,16 @@ export default function (props) {
     const FOW = 55
     const MAX_DISTANCE = 15000
 
-    const scene = new THREE.Scene();    
-    const camera = new THREE.PerspectiveCamera( FOW , clientWidth/clientHeight , 1, MAX_DISTANCE );    
-      camera.position.set( 0, 0, 500 )
-      camera.updateProjectionMatrix()
+    const scene = new THREE.Scene();        
+    const camera = (!orthographic)  
+      ? new THREE.PerspectiveCamera( FOW , clientWidth/clientHeight , 1, MAX_DISTANCE )
+      : new THREE.OrthographicCamera( clientWidth / - 2, clientWidth / 2, clientHeight / 2, clientHeight / - 2, 1, MAX_DISTANCE );    
+    camera.position.set( 0, 0, 500 )
+    camera.updateProjectionMatrix()
+    
     const renderer = new THREE.WebGLRenderer( { antialias: true, canvas: mount.current, alpha:true } );
-      renderer.setSize(clientWidth, clientHeight);
-      renderer.setClearColor(0,0);
+    renderer.setSize(clientWidth, clientHeight);
+    renderer.setClearColor(0,0);
 
     if (!canvasOpacity) {
       const backgroundColor = 0x7799AA;
@@ -80,8 +83,8 @@ export default function (props) {
       className={canvasClasses.join(" ")}
       ref={mount} 
       onContextMenu={event=>event.preventDefault()}
-      onClick={clickHandle}
-      {...restProps}
+      onClick={clickHandler}
+      {...props}
     />
   );
 }
