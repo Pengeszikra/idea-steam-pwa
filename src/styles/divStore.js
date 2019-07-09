@@ -69,3 +69,5 @@ export const [GreekCity] = divFactory(['greek-city']);
 export const [CubeUv, CubeUvArea] = divFactory(['cube-uv','cube-uv-area']);
 
 export const [GeomItem, TaskLabel, DropArea, ItemHolder] = divFactory(['geom-item', 'task-label', 'drop-target', 'item-holder']);
+
+export const [ModalHolder] = divFactory(['modal-holder']);

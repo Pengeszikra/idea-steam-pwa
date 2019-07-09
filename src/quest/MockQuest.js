@@ -24,7 +24,7 @@ const questLookup = {
   Y:  JustMonolog,
   A:  PairProjectionQuestGame,
   B:  SolidByProjectionQuest,
-  C:  DragListTest,
+  C:  PairProjectionToSolidQuest,
   D:  SolidByPorjectionQuestGame,
   X:  FoundTetraederUvQuest,
   E:  PointProjectionQuest,

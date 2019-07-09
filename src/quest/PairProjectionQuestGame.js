@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import * as THREE from 'three';
-import { QuestSketch, IntroButtonHolder, IntroButton } from '../styles/divStore';
+import { QuestSketch, IntroButtonHolder, IntroButton, ModalHolder } from '../styles/divStore';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
 import ThreeArea from '../layouts/ThreeArea';
 import showtime from '../utils/showtime';
 import { irnd } from '../utils/randoms';
+import SocratesSpeaking from '../layouts/SocratesSpeaking';
 
 const ThreeInteraction = showtime(ThreeArea);
 
-const SolidProjectionGame = questResultIs => studio => {
+const PairProjectionGame = (questResultIs, setScore) => studio => {
   const {scene, camera} = studio;
 
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
@@ -36,11 +37,12 @@ const SolidProjectionGame = questResultIs => studio => {
     ray.setFromCamera( mouse, camera );
     const intersects = ray.intersectObjects( scene.children );
     const [{object} = {}] = intersects;
-    if (object && object !== quest1st && quest1st.geometry.type == object.geometry.type) {
+    if (object && object !== quest1st && object !== quest2nd && quest1st.geometry.type == object.geometry.type) {
       scene.remove(object);
       const {length} = scene.children.filter(({geometry}) => geometry && geometry.type == quest1st.geometry.type);
       if (length <= 2) {
-        questResultIs(true)
+        setScore( score => score + 100);
+        setTimeout(() => questResultIs(true), 2000);
       }
     }
   }
@@ -59,26 +61,38 @@ const SolidProjectionGame = questResultIs => studio => {
     shadows
       .filter(shadow => shadow.geometry.type == quest1st.geometry.type)
       // .forEach(shadow => rotate(shadow,-1,1,1));
-
     //camera.translateZ(1);
   }
   
+  // TODO az event listenereket igy nem szedem le ! 
   return animation |> play3dContent(studio);
 }
 
+const ModalScore = showtime(
+  ({score}) => (
+    <ModalHolder>
+      <IntroButton>{`Score: ${score}`}</IntroButton>
+    </ModalHolder>
+  )
+);
+
 export default ({interaction:{questResultIs}, level = 1, position}) => {
   const [flow, setFlow] = useState(true);
+  const [isSpeak, talking] = useState(false);
+  const [score, setScore] = useState(-1);
 
   return (
     <QuestSketch>
       <ThreeInteraction 
         show={flow} 
-        add3DContent={SolidProjectionGame(r => questResultIs(r, position))} 
+        add3DContent={PairProjectionGame(r => questResultIs(r, position), setScore)} 
         orthographic
       />
+      <ModalScore score={score} show={score > 0} />
       <IntroButtonHolder>
-        <IntroButton onClick={e => {setFlow(f => !f); questResultIs(true, position)}}>Stop</IntroButton>
+        <IntroButton onClick={e => {setScore(0); setFlow(f => !f); questResultIs(true, position)}}>Stop</IntroButton>
       </IntroButtonHolder>
+      <SocratesSpeaking show={isSpeak} speakAbout={'Teszt szovge ami igen hosszu mondanivalot is tratalmazhat igy mar mindjart jobb a lenyzo fekvese, azert az elegge para, hogy ettol fugg a Socrates megjelenese'} level={1} handleStopSpeak={()=> talking(false)} />
     </QuestSketch>
   );
 };

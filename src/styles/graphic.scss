@@ -470,11 +470,20 @@
   user-select: none;
 }
 
-.item-holder {
+.modal-holder, .item-holder {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: space-evenly;
   width: 100vmin;
   margin-top: 4vmin;
+}
+
+.modal-holder {
+  margin: 0;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-content: center;
 }

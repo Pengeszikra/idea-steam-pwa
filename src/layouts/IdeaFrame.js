@@ -80,7 +80,6 @@ export default ({setWay, storyStore}) => {
     questResultIs,
   };
 
-
   const CollectedItems = showtime(Inventory);
   const SavedPrisoners = showtime(Teams);
 
