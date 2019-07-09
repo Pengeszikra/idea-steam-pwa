@@ -12,6 +12,7 @@ import DragListTest from './DragListTest';
 import FindCubeUv from './FindCubeUv';
 import OpenCodeQuestGame from './OpenCodeQuestGame';
 import SolidByPorjectionQuestGame from './SolidByPorjectionQuestGame';
+import PairProjectionQuestGame from './PairProjectionQuestGame';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -21,7 +22,7 @@ const JustMonolog = ({interaction:{questResultIs}}) => {
 const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  JustMonolog,
-  A:  PairProjectionToSolidQuest,
+  A:  PairProjectionQuestGame,
   B:  SolidByProjectionQuest,
   C:  DragListTest,
   D:  SolidByPorjectionQuestGame,
