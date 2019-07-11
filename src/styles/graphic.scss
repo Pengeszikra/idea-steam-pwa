@@ -487,3 +487,15 @@
   left: 0;
   align-content: center;
 }
+
+.small-table {
+  @include bimage('/img/quest/small-table.png', 70vmin, 33vmin);
+  font-size: 2em;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  transform-origin: center;
+  animation: zoom-in 200ms forwards ease-in;
+}

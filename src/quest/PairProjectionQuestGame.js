@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import * as THREE from 'three';
-import { QuestSketch, IntroButtonHolder, IntroButton, ModalHolder } from '../styles/divStore';
+import { QuestSketch, IntroButtonHolder, IntroButton, ModalHolder, SmallTable } from '../styles/divStore';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
 import ThreeArea from '../layouts/ThreeArea';
 import showtime from '../utils/showtime';
 import { irnd } from '../utils/randoms';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
+
+import usePipe from '../utils/usePipe';
+import {forEach, interval, map, filter, take, pipe} from 'callbag-basics';
+import {fromEvent, fromIter, combine, merge, flatten, concat, share} from 'callbag-basics';
+import { animationFrames } from 'callbag-animation-frames';
 
 const ThreeInteraction = showtime(ThreeArea);
 
@@ -71,7 +76,7 @@ const PairProjectionGame = (questResultIs, setScore) => studio => {
 const ModalScore = showtime(
   ({score}) => (
     <ModalHolder>
-      <IntroButton>{`Score: ${score}`}</IntroButton>
+      <SmallTable>{`Score: ${score}`}</SmallTable>
     </ModalHolder>
   )
 );
@@ -80,6 +85,14 @@ export default ({interaction:{questResultIs}, level = 1, position}) => {
   const [flow, setFlow] = useState(true);
   const [isSpeak, talking] = useState(false);
   const [score, setScore] = useState(-1);
+
+  /*
+  usePipe(
+    interval(1000),
+    take(5),
+    forEach( r => console.log(r))
+  );
+  */
 
   return (
     <QuestSketch>

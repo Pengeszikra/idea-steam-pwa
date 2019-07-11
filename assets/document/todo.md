@@ -45,8 +45,8 @@
 ## unique interaction / animation
   - [ ] history reader
   - [x] level selector
-  - [ ] open cave gate
-  - [ ] show regular solids
+  - [x] open cave gate
+  - [x] show regular solids
   - [x] minimap
   - [x] caves selection system
   - [x] items
@@ -137,3 +137,10 @@ path revealed
 minimap functionality on
 >> enter again 
 >> take map // if forget
+
+
+## preload images 
+
+```jsx
+img.match(/\/img\/[^\.]*\..../g).map(pic => `<link rel="preload" href="${pic}" as="image" >`).join('\n')
+```

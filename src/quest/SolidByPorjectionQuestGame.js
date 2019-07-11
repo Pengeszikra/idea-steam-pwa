@@ -61,7 +61,7 @@ const SolidProjectionGame = questResultIs => studio => {
     //camera.translateZ(1);
   }
   
-  return animation |> play3dContent(studio);
+  return play3dContent(studio)(animation);
 }
 
 export default ({interaction:{questResultIs}, level = 1, position}) => {
