@@ -70,4 +70,4 @@ export const [CubeUv, CubeUvArea] = divFactory(['cube-uv','cube-uv-area']);
 
 export const [GeomItem, TaskLabel, DropArea, ItemHolder] = divFactory(['geom-item', 'task-label', 'drop-target', 'item-holder']);
 
-export const [ModalHolder, SmallTable] = divFactory(['modal-holder', 'small-table']);
+export const [ModalHolder, SmallTable] = divFactory(['modal-holder no-scroll', 'small-table']);

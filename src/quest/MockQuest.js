@@ -46,7 +46,7 @@ export default showtime(({position, level, interaction}) => {
     <>
       <Quest level={level} interaction={interaction} position={position}/>
       {
-        [JustMonolog, FindCubeUv, OpenCodeQuestGame].indexOf(Quest) === -1
+        [PairProjectionQuestGame, JustMonolog, FindCubeUv, OpenCodeQuestGame].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>
           <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>

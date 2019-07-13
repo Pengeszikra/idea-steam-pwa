@@ -75,10 +75,12 @@ const PairProjectionGame = (playOver, gainScore, setChecking) => studio => {
       gainScore(score);
       playOver(true);
       global.removeEventListener( 'click', onMouseMove, false );      
+    } else {
+      gainScore('Nem jó megoldás!')      
     }
   }
 
-  setChecking( () => () => checkSelectionsResult());  
+  setChecking(() => () => checkSelectionsResult());  
 
   const mouse = new THREE.Vector2();
   const onMouseMove = event => {
@@ -103,9 +105,9 @@ const PairProjectionGame = (playOver, gainScore, setChecking) => studio => {
 }
 
 const ModalScore = showtime(
-  ({score}) => (
-    <ModalHolder>
-      <SmallTable>{`Score: ${score}`}</SmallTable>
+  ({score, ...props}) => (
+    <ModalHolder {...props}>
+      <SmallTable>{isNaN(score) ? score : `Score: ${score}`}</SmallTable>
     </ModalHolder>
   )
 );
@@ -121,25 +123,24 @@ export default ({interaction:{questResultIs}, level = 1, position}) => {
   const handleGameReset = () => {
     gainScore(0);
     setFlow(f=>!f);
-    playOver(false);
-    // questResultIs(true, position);
+    playOver(false);        
   };
-
 
   usePipeWhen (itsOver) ( 
     interval(20), 
     take(gain),
     forEach(n => setScore(s => s + 1)),
   );
-  
+
   return (
     <QuestSketch>
       <ThreeInteraction 
         show={flow} 
         add3DContent={PairProjectionGame(playOver, gainScore, setChecking)} 
         orthographic        
-      />
-      <ModalScore score={score} show={itsOver} />
+      />      
+      <ModalScore score={gain} show={isNaN(gain)} onClick={() => gainScore(0)} />
+      <ModalScore score={score} show={itsOver} onClick={() => questResultIs(true, position)} />
       <IntroButtonHolder>        
         <IntroButton onClick={handleGameReset}>reset</IntroButton>
         <IntroButton onClick={e => checkResult()}>megoldás</IntroButton>
