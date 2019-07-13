@@ -7,20 +7,23 @@ import showtime from '../utils/showtime';
 import { irnd } from '../utils/randoms';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 
-import usePipe from '../utils/usePipe';
+import usePipe, { usePipeWhen } from '../utils/usePipe';
 import {forEach, interval, map, filter, take, pipe} from 'callbag-basics';
 import {fromEvent, fromIter, combine, merge, flatten, concat, share} from 'callbag-basics';
 import { animationFrames } from 'callbag-animation-frames';
 
 const ThreeInteraction = showtime(ThreeArea);
 
-const PairProjectionGame = (questResultIs, setScore) => studio => {
+const PairProjectionGame = (playOver, gainScore) => studio => {
   const {scene, camera} = studio;
 
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
+
+  const selectMaterial = new THREE.MeshLambertMaterial( {color: 0xCC7744, flatShading:THREE.FlatShading, opacity:1 } );
   
   const questShape = shapes[irnd(shapes.length)];
   const quest1st = makeFlatColorShape(questShape,70 ,70 ,70 , 0x130802);
+  //const quest1st = makeShape(questShape, 45, 45, 45, 0xAA5522, 1 , 0xFFAA77);
   const quest2nd = quest1st.clone();
   quest1st.translateX(-80).translateY(260).rotateX(0/RAD).rotateY(0/RAD);
   quest2nd.translateX( 80).translateY(260).rotateX(0/RAD).rotateY(90/RAD);
@@ -42,12 +45,14 @@ const PairProjectionGame = (questResultIs, setScore) => studio => {
     ray.setFromCamera( mouse, camera );
     const intersects = ray.intersectObjects( scene.children );
     const [{object} = {}] = intersects;
+    // object.material = selectMaterial;
+    
     if (object && object !== quest1st && object !== quest2nd && quest1st.geometry.type == object.geometry.type) {
       scene.remove(object);
+      gainScore(score => score + 10);
       const {length} = scene.children.filter(({geometry}) => geometry && geometry.type == quest1st.geometry.type);
       if (length <= 2) {
-        setScore( score => score + 100);
-        setTimeout(() => questResultIs(true), 2000);
+        playOver(true);
       }
     }
   }
@@ -60,13 +65,13 @@ const PairProjectionGame = (questResultIs, setScore) => studio => {
   }
   global.addEventListener( 'click', onMouseMove, false );
 
-
   const animation = studio => {
     const {scene, camera} = studio;    
     shadows
       .filter(shadow => shadow.geometry.type == quest1st.geometry.type)
       // .forEach(shadow => rotate(shadow,-1,1,1));
-    //camera.translateZ(1);
+    // rotate(quest1st, 1,1,.1)      
+    // camera.translateZ(1); // ortho camera distance dosn't count
   }
   
   // TODO az event listenereket igy nem szedem le ! 
@@ -84,26 +89,33 @@ const ModalScore = showtime(
 export default ({interaction:{questResultIs}, level = 1, position}) => {
   const [flow, setFlow] = useState(true);
   const [isSpeak, talking] = useState(false);
-  const [score, setScore] = useState(-1);
+  const [score, setScore] = useState(0);
+  const [gain, gainScore] = useState(0);
+  const [itsOver, playOver] = useState(false);
 
-  /*
-  usePipe(
-    interval(1000),
-    take(5),
-    forEach( r => console.log(r))
+  const handleIntroButton = () => {
+    gainScore(0);
+    setFlow(f=>!f);
+    playOver(false);
+    // questResultIs(true, position);
+  }
+
+  usePipeWhen (itsOver) ( 
+    interval(20), 
+    take(gain),
+    forEach(n => setScore(s => s + 1)),
   );
-  */
-
+  
   return (
     <QuestSketch>
       <ThreeInteraction 
         show={flow} 
-        add3DContent={PairProjectionGame(r => questResultIs(r, position), setScore)} 
-        orthographic
+        add3DContent={PairProjectionGame(playOver, gainScore)} 
+        orthographic        
       />
-      <ModalScore score={score} show={score > 0} />
+      <ModalScore score={score} show={itsOver} />
       <IntroButtonHolder>
-        <IntroButton onClick={e => {setScore(0); setFlow(f => !f); questResultIs(true, position)}}>Stop</IntroButton>
+        <IntroButton onClick={handleIntroButton}>reset</IntroButton>
       </IntroButtonHolder>
       <SocratesSpeaking show={isSpeak} speakAbout={'Teszt szovge ami igen hosszu mondanivalot is tratalmazhat igy mar mindjart jobb a lenyzo fekvese, azert az elegge para, hogy ettol fugg a Socrates megjelenese'} level={1} handleStopSpeak={()=> talking(false)} />
     </QuestSketch>
