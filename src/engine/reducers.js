@@ -126,6 +126,6 @@ export const storyReducer = (state, {type, payload}) => {
     case CONTINUE_TALK: return {...state, hasSocrates: true };
     case STOP_TALK: return {...state, hasSocrates: false };
 
-    default: state;
+    default: return state;
   }
 }

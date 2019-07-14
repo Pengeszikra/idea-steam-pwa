@@ -83,6 +83,7 @@ export default  ({interaction:{questResultIs}, level = 1, position}) => {
       <GameHolder>        
         {targets.map((targetRef, key) => <GeomTarget key={key} fref={targetRef}></GeomTarget>)}
         <IntroButtonHolder>
+          <IntroButton onClick={()=>questResultIs(true, position)}>simán kinyit</IntroButton>
           <IntroButton onClick={checkSolution}>{solution}</IntroButton>
         </IntroButtonHolder>        
       </GameHolder>      
