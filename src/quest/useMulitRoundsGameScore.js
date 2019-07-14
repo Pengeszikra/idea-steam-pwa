@@ -4,7 +4,7 @@ import {forEach, interval, take, pipe} from 'callbag-basics';
 
 export default ({level, position, questResultIs}) => {
   const [flow, setFlow] = useState(true);
-  const [isSpeak, talking] = useState(true);
+  const [isSpeak, talking] = useState(false);
   const [score, setScore] = useState(0);
   const [gain, gainScore] = useState(0);
   const [itsOver, playOver] = useState(false);

@@ -1,14 +1,12 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React from 'react';
 import * as THREE from 'three';
-import { QuestSketch, IntroButtonHolder, IntroButton } from '../styles/divStore';
+import { QuestSketch } from '../styles/divStore';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
-import ThreeArea from '../layouts/ThreeArea';
-import showtime from '../utils/showtime';
 import { irnd } from '../utils/randoms';
+import {ThreeInteraction} from '../layouts/ThreeArea';
+import MultiRoundGameFrame from './multiRoundGameFrame';
 
-const ThreeInteraction = showtime(ThreeArea);
-
-const SolidProjectionGame = questResultIs => studio => {
+const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
 
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
@@ -37,7 +35,8 @@ const SolidProjectionGame = questResultIs => studio => {
       scene.remove(object);
       const {length} = scene.children.filter(({geometry}) => geometry && geometry.type == questItem.geometry.type);
       if (length <= 1) {
-        questResultIs(true)
+        gainScore(100);
+        playOver(true);
       }
     }
   }
@@ -64,20 +63,12 @@ const SolidProjectionGame = questResultIs => studio => {
   return play3dContent(studio)(animation);
 }
 
-export default ({interaction:{questResultIs}, level = 1, position}) => {
-  const [flow, setFlow] = useState(true);
-
-  return (
-    <QuestSketch>
-      <ThreeInteraction 
-        show={flow} 
-        add3DContent={SolidProjectionGame(r => questResultIs(r, position))} 
-        orthographic
-        // clickHandler={e=>console.log(e)}
-      />
-      <IntroButtonHolder>
-        <IntroButton onClick={e => {setFlow(f => !f); questResultIs(true, position)}}>Stop</IntroButton>
-      </IntroButtonHolder>
-    </QuestSketch>
-  );
-};
+const Game = ({show, playOver, gainScore, setChecking}) => (
+  <ThreeInteraction 
+    show={show} 
+    add3DContent={solidProjection3dContent({playOver, gainScore, setChecking})} 
+    orthographic        
+  />
+);
+const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);
+export default props => <GameWithBackground {...props} />;
