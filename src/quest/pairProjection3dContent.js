@@ -56,8 +56,6 @@ export default ({playOver, gainScore, setChecking}) => studio => {
         isSolved: isSolved && geometry && geometry.type == quest1st.geometry.type  && material === selectMaterial,
         score: geometry && geometry.type == quest1st.geometry.type ? score + 10 : score      
       }), {isSolved:true, score:0});
-
-    console.log(isSolved, score);    
      
     if (isSolved && score) {
       isAllFounded = true;

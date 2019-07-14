@@ -66,11 +66,11 @@ export default ({setWay, storyStore}) => {
     handleRoute: path => e => walkOnMinimap(path),
     handleSavePrisoner: prisonerId => e => {
       dispatch(savePrisoner(prisonerId))
-      dispatch(achiveScore(10 * level));
+      // dispatch(achiveScore(10 * level));
     }, 
     handleGetItem: itemId => e => {
       dispatch(getItem(itemId));
-      dispatch(achiveScore(5 * level));
+      // dispatch(achiveScore(5 * level));
     },
     monologBeforeQuest: speak => {
       dispatch(socratesTalk(speak));

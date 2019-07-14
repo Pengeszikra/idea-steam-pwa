@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRef, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
+import showtime from '../utils/showtime';
 
 const clearScene = scene => scene.children.map(mesh => {
   scene.remove(mesh);
@@ -10,7 +11,7 @@ const clearScene = scene => scene.children.map(mesh => {
   mesh = undefined;        
 })
 
-export default ({ 
+const ThreeArea = ({ 
   canvasOpacity = true, 
   add3DContent=()=>()=>()=>{}, 
   canvasClasses=['area-3d-canvas'], 
@@ -89,3 +90,5 @@ export default ({
   );
 }
 
+export default ThreeArea;
+export const ThreeInteraction = showtime(ThreeArea);
