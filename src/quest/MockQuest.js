@@ -8,7 +8,6 @@ import {
 } from '../styles/divStore';
 import showtime from '../utils/showtime';
 import RomanNumbersTask from './RomanNumbersTask';
-import DragListTest from './DragListTest';
 import FindCubeUv from './FindCubeUv';
 import OpenCodeQuestGame from './OpenCodeQuestGame';
 import SolidByPorjectionQuestGame from './SolidByPorjectionQuestGame';

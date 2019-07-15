@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { QuestSketch, IntroHeader, CubeUv, CubeUvArea, IntroButtonHolder, IntroButton } from '../styles/divStore';
 import nets from './netsOfCube';
+import MultiRoundGameFrame from './multiRoundGameFrame';
 
 const WIDTH = 5;
 const HEIGHT = 7;
@@ -47,23 +48,20 @@ const CubeUvFragment = (selections, handleSelect, hasWin) => ({side, dir, key}) 
   );
 };
 
-
-
-export default ({interaction:{questResultIs}}) => {
+const FindCubeUvGame = ({show, playOver, gainScore, setChecking}) => {
   const [matrix, setMatrix] = useState([]);
   const [selections, setSelections] = useState({});
   const [hasWin, setWin] = useState(false);
+  const [tryAmount, trying] = useState(0);
 
   const resetMatrix = () => {
-    randomCubUvMatrix(WIDTH, HEIGHT) |> setMatrix;
+    setMatrix(randomCubUvMatrix(WIDTH, HEIGHT));
     setSelections({})
     const rnet = getRandomNet();
     placeCubeShape(rnet, [Math.random() * 3 | 0, Math.random() * 3 | 0], setMatrix);      
   };  
 
-  useEffect(resetMatrix, []);
-
-  useEffect(() => {
+  const checkResult = () => {
     let selectedKeys = Object.keys(selections).filter(key => selections[key]);
     let matrixLookUp = matrix
       .filter(e => selectedKeys.indexOf(e.key) !== -1)
@@ -73,43 +71,36 @@ export default ({interaction:{questResultIs}}) => {
     const isWin = found.length === 6 && selectedKeys.length === 6
     setWin(isWin);
     if (isWin) {
-      setTimeout(() => questResultIs(isWin) , 2000);
-    }    
+      gainScore(100);
+      playOver(isWin);
+    } else {
+      gainScore('Rossz megoldás!');
+    }
+  };
 
-  }, [selections]);
+  useEffect(() => {
+    setChecking(() => () => trying(n => n+1));
+  }, []);
+
+  useEffect(() => {
+    tryAmount && checkResult();
+  }, [tryAmount]);
+
+  useEffect(() => {
+    show && resetMatrix()
+  }, [show]);
 
   const handleSelect = key => event => setSelections(prev => {prev[key] = !(prev[key]); return {...prev}});
-  const handleSolutionIsValid = event => {
-    const selectedUvs = matrix.filter(({key}) => selections[key]);
-    const [first, second] = selectedUvs;
-
-    if (selectedUvs.length === 1) { 
-      first.dir = {N:'E',E:'S',S:'W',W:'N'}[first.dir];
-      setMatrix(mtx => mtx.map(uv => uv.key === first.key ? first : uv) );
-    }
-
-    if (selectedUvs.length === 2) { 
-      setMatrix(mtx => mtx.map(
-        uv => uv.key === first.key 
-          ? ({...uv, side:second.side}) 
-          : uv.key === second.key 
-            ? ({...uv, side:first.side})
-            : uv
-        ) 
-      );
-    }
-  }
   
   return (
-    <QuestSketch style={{overflow:'hidden'}} >
+    <>
       <IntroHeader>Meg kell találni a kocka kiterített lapjait.</IntroHeader>
       <CubeUvArea >
         {matrix.map(CubeUvFragment(selections, handleSelect, hasWin))}
       </CubeUvArea>
-      <IntroButtonHolder>
-        <IntroButton onClick={handleSolutionIsValid}>Ellenőrzés</IntroButton>
-        <IntroButton onClick={resetMatrix}>Reset</IntroButton>        
-      </IntroButtonHolder>
-    </QuestSketch>
+    </>
   );
 };
+
+const GameWithBackground = MultiRoundGameFrame(FindCubeUvGame, QuestSketch);
+export default props => <GameWithBackground {...props} />;
