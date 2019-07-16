@@ -18,6 +18,7 @@ export default (Game, Background) => ({interaction:{questResultIs}, level = 1, p
         playOver = {playOver}
         gainScore = {gainScore}
         setChecking = {setChecking}
+        level = {level}
       />
       <ModalScore score={gain} show={isNaN(gain)} onClick={() => gainScore(0)} />
       <ModalScore score={score} show={itsOver} onClick={handleRounds} />

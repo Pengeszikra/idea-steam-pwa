@@ -12,6 +12,7 @@
   background-repeat: no-repeat;
 }
 
+.no-sel {user-select: none;}
 .no-scroll {overflow: hidden;}
 
 @keyframes zoom-in { from {transform: scale(0)} to {transform: scale(1)} }  
@@ -374,12 +375,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 4em;
+  font-size: 3.8em;
   font-weight: 900;
   padding: .1em;
   background: rgba($color: #000000, $alpha: 0.3);
   // margin-left: .1em;
-  width: 12vmin;
+  width: 9vmin;
   border-radius: .1em;
   text-align: center;
   user-select: none;
@@ -387,7 +388,8 @@
 
 .rn-holder {
   background: rgba($color: #F00F00, $alpha: 0.3);
-  margin: 45vmin 0vmin 0 20vmin;
+  // margin: 45vmin 0vmin 0vmin 0vmin;
+  margin: 0;  
   position: relative;
   width: 100%;
 }

@@ -28,7 +28,7 @@ export const [PrisonerOne] = divFactory(["prisoner-1"]);
 export const [ItemOne] = divFactory(["item-1"]);
 export const [SimpleDarkBg, Island] = divFactory(["simple-dark-bg", "island"]);
 
-export const [DarkGold, IntroButton, IntroHeader] = divFactory(["dark-gold", "intro-button nosel", "intro-header"]);
+export const [DarkGold, IntroButton, IntroHeader] = divFactory(["dark-gold", "intro-button nosel", "intro-header no-sel"]);
 export const [Adeimantosz, Glaukon] = divFactory(["adeimantosz", "glaukon"]);
 
 export const [GameHolder] = divFactory(["game-holder"]);

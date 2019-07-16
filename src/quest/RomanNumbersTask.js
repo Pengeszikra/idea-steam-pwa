@@ -3,6 +3,7 @@ import { QuestSketch, IntroHeader, IntroButton } from '../styles/divStore';
 import { cave_2_10 } from '../engine/applicationData';
 import divFactory from '../utils/divFactory';
 import DragRomanNumbers from './DragRomanNumbers';
+import MultiRoundGameFrame from './multiRoundGameFrame';
 
 const romanTasks = [
     {},
@@ -19,26 +20,32 @@ const romanTasks = [
     }
 ];
 
-const [Number, TaskHolder] = divFactory(['roman-number', 'roman-task-holder']);
+const [RnHolder] = divFactory(['rn-holder']);
 
-export default ({level}) => {
-  const [index, setIndex] = useState(0);
+const RomanNumbersGame = ({show, playOver, gainScore, setChecking, level}) => {
+  const [items, setItems] = useState([]);
 
-  useEffect(()=>setIndex(romanTasks[level].task.length * Math.random() | 0), [setIndex]);
-
-  const current  = romanTasks[level].task[index];
-  const solution = romanTasks[level].solution[index];
-    
-  return (
-    <QuestSketch style={{overflow:'hidden'}} >
+  useEffect(()=>{
+    if (show) {      
+      const index = romanTasks[level].task.length * Math.random() | 0;
+      const current  = romanTasks[level].task[index];
+      const solution = romanTasks[level].solution[index];
+      setItems(current.split(''));  
+    } else {
+      // TODO find sloution of this crazy hack!
+      setItems(' '.repeat(15).split('')); 
+    }
+  }, [show]);
+      
+  return show && items.length ? (
+    <>
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
-      {/* <TaskHolder> */}
-        {/* {current.split("").map((num,key) => <Number key={key}>{num}</Number>)} */}
-        <div className="rn-holder">
-          <DragRomanNumbers items={current.split('')} />
-        </div>
-      {/* </TaskHolder>       */}
-    </QuestSketch>
-  );
+        <RnHolder style={{marginLeft: `${50 - (6 * items.length)}vmin`}}>
+          <DragRomanNumbers items={items} />
+        </RnHolder>
+    </>
+  ) : null;
 }
 
+const GameWithBackground = MultiRoundGameFrame(RomanNumbersGame, QuestSketch);
+export default props => <GameWithBackground {...props} />;
