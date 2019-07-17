@@ -33,6 +33,16 @@ export function makeShape( geomMaker, w , h , d , color, opacity = .7, lineColor
   return body;   
 }
 
+
+export function makeWireframe( geomMaker, w , h , d , lineColor, linewidth = 1 ) {
+  const geom = geomMaker(w,h,d);
+  const wmat = new THREE.LineBasicMaterial( { color: lineColor, linewidth } );
+  const  hardEdgesGeo = new THREE.EdgesGeometry( geom); 
+  const wireframe = new THREE.LineSegments( hardEdgesGeo, wmat );
+  return wireframe;   
+}
+
+
 export function makeFlatColorShape( geomMaker, w , h , d , color) {
   const geom = geomMaker(w,h,d);
   const mat = new THREE.MeshBasicMaterial( {color} );
