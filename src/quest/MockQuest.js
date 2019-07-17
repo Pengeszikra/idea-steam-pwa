@@ -51,6 +51,7 @@ export default showtime(({position, level, interaction}) => {
           FindCubeUv, 
           OpenCodeQuestGame,
           SolidByPorjectionQuestGame,
+          RomanNumbersTask,
         ].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>

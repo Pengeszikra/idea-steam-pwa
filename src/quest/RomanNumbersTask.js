@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { QuestSketch, IntroHeader, IntroButton } from '../styles/divStore';
+import { QuestSketch, IntroHeader, RnHolder } from '../styles/divStore';
 import { cave_2_10 } from '../engine/applicationData';
-import divFactory from '../utils/divFactory';
 import DragRomanNumbers from './DragRomanNumbers';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 
@@ -20,29 +19,40 @@ const romanTasks = [
     }
 ];
 
-const [RnHolder] = divFactory(['rn-holder']);
-
-const RomanNumbersGame = ({show, playOver, gainScore, setChecking, level}) => {
+const useRomanNumber = (show, level) => {
   const [items, setItems] = useState([]);
+  const [solution, setSolution] = useState('');
 
   useEffect(()=>{
     if (show) {      
       const index = romanTasks[level].task.length * Math.random() | 0;
       const current  = romanTasks[level].task[index];
-      const solution = romanTasks[level].solution[index];
+      setSolution(romanTasks[level].solution[index]);
       setItems(current.split(''));  
     } else {
       // TODO find sloution of this crazy hack!
       setItems(' '.repeat(15).split('')); 
     }
   }, [show]);
+
+  return [items, solution];
+}
+
+const RomanNumbersGame = ({show, playOver, gainScore, setChecking, level}) => {
+  const [items, solution] = useRomanNumber(show, level);
       
   return show && items.length ? (
     <>
       <IntroHeader>{cave_2_10.mission()}</IntroHeader>
-        <RnHolder style={{marginLeft: `${50 - (6 * items.length)}vmin`}}>
-          <DragRomanNumbers items={items} />
-        </RnHolder>
+      <RnHolder style={{marginLeft: `${50 - (6 * items.length)}vmin`}}>
+        <DragRomanNumbers 
+          items={items} 
+          solution={solution}
+          setChecking={setChecking}
+          gainScore={gainScore} 
+          playOver={playOver}
+        />
+      </RnHolder>
     </>
   ) : null;
 }

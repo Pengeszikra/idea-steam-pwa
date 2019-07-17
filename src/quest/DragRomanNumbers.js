@@ -1,6 +1,6 @@
 // Original: https://github.com/chenglou/react-motion/tree/master/demos/demo8-draggable-list
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import clamp from 'lodash-es/clamp'
 import swap from 'lodash-move'
 import { useGesture } from 'react-use-gesture'
@@ -26,7 +26,7 @@ const fn = (order, down, originalIndex, curIndex, x) => index =>
       }
     ;
 
-export default ({ items }) => {
+export default ({ items, solution, setChecking, gainScore, playOver }) => {
   // Store indicies as a local ref, this represents the item order
   const order = useRef(items.map((_, index) => index));
   // Create springs, each corresponds to an item, controlling its transform, scale, etc.
@@ -35,14 +35,28 @@ export default ({ items }) => {
     const curIndex = order.current.indexOf(originalIndex)
     const curRow = clamp(Math.round((curIndex * dimension + x) / dimension), 0, items.length - 1)
     const newOrder = swap(order.current, curIndex, curRow)
+    // console.log(newOrder, down, originalIndex, curIndex, x);
     // Feed springs new style data, they'll animate the view without causing a single render
-    console.log(newOrder, down, originalIndex, curIndex, x);
     setSprings(fn(newOrder, down, originalIndex, curIndex, x)) 
     if (!down) order.current = newOrder
   })
 
-  // useEffect(() => { console.log('-------------------')}, []);
-  // useEffect(() => { console.log(items) }, [items]);
+  const checkResult = () => order.current.map(i => items[i]).join('') == solution;
+
+  const [tryAmount, trying] = useState(0);
+  useEffect(() => { setChecking(() => () => {trying(n => n+1)});}, []);
+  useEffect(() => {
+    if (tryAmount) {
+      const result = checkResult();
+      //console.log(`result is: ${result}`)
+      if (result) {
+        gainScore(10 * items.length);
+        playOver(true);
+      } else {
+        gainScore('nem jo megoldas!')
+      }
+    };
+  }, [tryAmount]);
 
   return (
     //<div className="content" style={{ height: items.length * 100 }}>

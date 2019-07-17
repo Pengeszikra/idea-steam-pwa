@@ -387,11 +387,12 @@
 }
 
 .rn-holder {
-  background: rgba($color: #F00F00, $alpha: 0.3);
+  //background: rgba($color: #F00F00, $alpha: 0.3);
   // margin: 45vmin 0vmin 0vmin 0vmin;
   margin: 0;  
   position: relative;
   width: 100%;
+  height: 30vmin;
 }
 
 .cube-uv {
