@@ -10,10 +10,15 @@ const pipeDraw3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
 
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
-  
-  const questItem = makeWireframe(shapes[irnd(shapes.length)], 200 ,200 ,200 , 0xFFAA77);
+  const geom = shapes[irnd(shapes.length)];
+  const questItem = makeWireframe(geom, 200 ,200 ,200 , 0xFFAA77);
   questItem.translateZ(-300).translateY(0).rotateX(0/RAD).rotateY(0/RAD);
   scene.add(questItem);
+
+  // pomtok a modelen
+  // https://github.com/mrdoob/three.js/blob/master/examples/webgl_geometry_convex.html
+  // console.log(new THREE.DodecahedronGeometry( 10 ).vertices);
+  console.log(GEOMS.dedocahedron(1,1,1).vertices);
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
