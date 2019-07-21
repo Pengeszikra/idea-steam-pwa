@@ -15,7 +15,7 @@ import MapWithHero from './MapWithHero';
 import { areaData } from '../engine/applicationData';
 import { 
   moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, 
-  savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest 
+  savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest, putDownItem 
 } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
@@ -64,13 +64,11 @@ export default ({setWay, storyStore}) => {
 
   const interaction = {
     handleRoute: path => e => walkOnMinimap(path),
-    handleSavePrisoner: prisonerId => e => {
-      dispatch(savePrisoner(prisonerId))
-      // dispatch(achiveScore(10 * level));
-    }, 
-    handleGetItem: itemId => e => {
-      dispatch(getItem(itemId));
-      // dispatch(achiveScore(5 * level));
+    handleSavePrisoner: prisonerId => e => dispatch(savePrisoner(prisonerId)),
+    handleGetItem: itemId => e => dispatch(getItem(itemId)),
+    handlePutItem: itemId => e => {
+      setInventoryVisiblity(false);
+      dispatch(putDownItem(itemId));
     },
     monologBeforeQuest: speak => {
       dispatch(socratesTalk(speak));
@@ -108,7 +106,7 @@ export default ({setWay, storyStore}) => {
         walk={walk}
         underWalk={underWalk}
       />
-      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} />
+      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <MockQuest show={hasQuesting && !hasSocrates} position={position} interaction={interaction} level={level} />
     </main>

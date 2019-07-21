@@ -19,6 +19,7 @@ export const [SOCRATES_TALK, socratesTalk] = actionCreator('socrates-talk');
 export const [STOP_TALK, stopTalk] = actionCreator('stop-talk');
 export const [CONTINUE_TALK, continueTalk] = actionCreator('continue-talk');
 export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset');
+export const [PUT_DOWN_ITEM, putDownItem] = actionCreator('put-down-item');
 
 export const storyInitial = {
   level: 1,  
@@ -33,7 +34,7 @@ export const storyInitial = {
     B: { explored: false , prisoners: ['B1','B2'], items: [], solved: false, readed: false },
     C: { explored: false , prisoners: ['C1'], items: ['C1','C2'], solved: false, readed: false },
     D: { explored: false , prisoners: ['D1'], items: ['D1','D2'], solved: false, readed: false },
-    X: { explored: false , prisoners: [], items: [], solved: false, readed: false },
+    X: { explored: false , prisoners: [], items: [], solved: true, readed: false },
     E: { explored: false , prisoners: ['E1','E2'], items: ['E1','E2'], solved: false, readed: false },
     F: { explored: false , prisoners: ['F1','F2'], items: ['F1','F2'], solved: false, readed: false },
     G: { explored: false , prisoners: ['G1'], items: ['G1','G2'], solved: false, readed: false },
@@ -51,7 +52,7 @@ export const storyInitial = {
 };
 
 export const storyReducer = (state, {type, payload}) => {
-  // console.log(type, payload, state)
+  //console.log(type, payload, state)
 
   const {caveLookUp, position, level} = state;
   const area = caveLookUp[position];
@@ -78,7 +79,9 @@ export const storyReducer = (state, {type, payload}) => {
         const {intro} = areaData[position].data;
         return {          
           ...state, 
-          speakAbout: intro ? intro(avatarNames(level)) : `A -[${position}]- barlangban még hiányzik a bevezető szöveg!`, 
+          speakAbout: intro 
+            ? intro(avatarNames(level)) 
+            : `A -[${position}]- barlangban még hiányzik a bevezető szöveg!`, 
           hasSocrates: true, 
           hasQuesting: true,
           // caveLookUp: {...caveLookUp,  [position]:{...area, solved: true} }, // TODO
@@ -99,6 +102,16 @@ export const storyReducer = (state, {type, payload}) => {
         ...state, 
         caveLookUp: {...caveLookUp,  [position]:{...area, items} },
         equipment: [...state.equipment, payload]
+      };
+
+    case PUT_DOWN_ITEM:
+      if (state.equipment.indexOf(payload) === -1 || !area.solved) return state;
+      const equipment = state.equipment.filter(item => item !== payload);
+      const itemsPlusPutted = [...area.items, payload];
+      return {
+        ...state,
+        caveLookUp: {...caveLookUp, [position]:{...area, items: itemsPlusPutted}},
+        equipment
       };
 
     case QUEST_SOLVED:

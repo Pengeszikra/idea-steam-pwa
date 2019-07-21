@@ -22,7 +22,7 @@ const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  JustMonolog,
   A:  PairProjectionQuestGame,
-  B:  SolidByProjectionQuest,
+  B:  SolidByPorjectionQuestGame,
   C:  PairProjectionToSolidQuest,
   D:  SolidByPorjectionQuestGame,
   X:  FoundTetraederUvQuest,
