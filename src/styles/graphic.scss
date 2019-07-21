@@ -502,3 +502,22 @@
   transform-origin: center;
   animation: zoom-in 200ms forwards ease-in;
 }
+
+.game-timer {
+  width: 100vw;
+  height: 9vmin;
+  background: rgba($color: #000000, $alpha: 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  .timer-bar {
+    content: "";
+    background: cornflowerblue;
+    position: relative;
+    width: 0vmin;
+    height: 7vmin;
+    display: block;
+    margin: 1vmin;
+  }
+}

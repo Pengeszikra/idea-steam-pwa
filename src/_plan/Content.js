@@ -35,7 +35,7 @@ export default ({route, handleRoute}) => {
 
   const Route = RouteFactory(route);
 
-  const [ContentFrame] = divFactory(['contentFrame']) // TODO
+  const [ContentFrame] = divFactory('contentFrame') // TODO
   
   return (
     <div className="contentFrame">

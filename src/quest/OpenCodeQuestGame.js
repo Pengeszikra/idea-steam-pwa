@@ -39,7 +39,7 @@ const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target"
 
 export default  ({interaction:{questResultIs}, level = 1, position}) => {
   const [attached, setAttached] = useState(["", "", "", ""]);
-  const [solution, setSolution] = useState("Ez a megoldás");
+  const [solution, setSolution] = useState("Megoldás");
   const [task, setTask] = useState(...taskSetups[0]);
   const t1 = useRef(null);
   const t2 = useRef(null);

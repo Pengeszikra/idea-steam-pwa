@@ -15,7 +15,7 @@
     - [x] release prisoners
   - [x] sparate document md show parts
   - [ ] responsive ortho 3D view
-    - [ ] render sizes at different page size ! 
+    - [x] size depend on root Group!
 
 ## minor goals
   - [x] prevent IOS page over scrolling
@@ -37,12 +37,16 @@
   - [ ] 3D - turn tile of uv map ... near
   - [ ] 3D - show uv and select correct fallen solid, time quest
   - [ ] 3D - select projection from point for showed solid 2.9
+      <https://threejs.org/examples/#webgl_lights_hemisphere> - work on my mobil
+      <https://threejs.org/examples/#webgl_lights_physical>
+      <https://threejs.org/examples/#webgl_lights_spotlights>
+      <https://threejs.org/examples/#webgl_shadowmap_pointlight>
   - [ ] roman number order game :: 2.10
       <http://www.ngkszki.hu/~trembe/primek/prim01.htm>
       <http://www.betonopus.hu/notesz/mertekegyseg/romaiszam.htm>
   - [ ] quest of items :: 2.11
   - [ ] link of routes :: 2.12
-  - [ ] rain of caves :: 3
+  - [ ] rain of caves :: 3  
 
 ## unique interaction / animation
   - [ ] history reader
@@ -145,4 +149,9 @@ minimap functionality on
 
 ```jsx
 img.match(/\/img\/[^\.]*\..../g).map(pic => `<link rel="preload" href="${pic}" as="image" >`).join('\n')
+```
+
+## timer 
+```jsx
+const {timer, pauseTimer, playTimer, itsOver, setPeriod} = useTimer();
 ```

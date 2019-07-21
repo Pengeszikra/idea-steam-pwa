@@ -1,9 +1,6 @@
 import React, {useState, useEffect, useReducer, useRef, useLayoutEffect} from 'react';
 import ThreeArea from './ThreeArea';
 import * as THREE from 'three';
-import { useGesture } from 'react-use-gesture';
-import { GameHolder, IntroButton, SimpleDarkBg } from '../styles/divStore';
-import doesOverlap from './../utils/doesOverlap';
 
 export const RAD = 180/Math.PI;
 
@@ -51,9 +48,9 @@ export function makeFlatColorShape( geomMaker, w , h , d , color) {
 }
 
 // use : return flyThroughtRandomSolid |> play({scene, camera}); // at add3Dcontent
-export const play3dContent = ({scene, camera}) => animation => {
+export const play3dContent = ({scene, camera, root}) => animation => {
   const meshMoving = () => {
-    animation({scene, camera});
+    animation({scene, camera, root});
     requestAnimationFrame(meshMoving);
   };
 

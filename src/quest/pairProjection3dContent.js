@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
 import * as THREE from 'three';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
 import { irnd } from '../utils/randoms';
 
 export default ({playOver, gainScore, setChecking}) => studio => {
-  const {scene, camera} = studio;
-
+  const {camera, root} = studio;
+    
   const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
 
   const selectMaterial = new THREE.MeshLambertMaterial( {color: 0x130802, flatShading:THREE.FlatShading, opacity:1 } );
@@ -13,31 +12,30 @@ export default ({playOver, gainScore, setChecking}) => studio => {
   
   const questShape = shapes[irnd(shapes.length)];
   const quest1st = makeFlatColorShape(questShape,70 ,70 ,70 , 0x130802);
-  const questMaterial = quest1st.material;
   const quest2nd = quest1st.clone();
   quest1st.translateX(-80).translateY(260).rotateX(0/RAD).rotateY(0/RAD);
   quest2nd.translateX( 80).translateY(260).rotateX(0/RAD).rotateY(90/RAD);
-  scene.add(quest1st);
-  scene.add(quest2nd);
+  root.add(quest1st);
+  root.add(quest2nd);
 
   const [width, height] = [4, 4];
+  const selectables = new THREE.Group();
+  root.add(selectables);
 
   const shadows = Array(width * height).fill(0).map((_, i) => {    
     const shadow = makeShape(shapes[irnd(shapes.length)], 45, 45, 45, 0xAA5522, 1 , 0xFFAA77);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
     rotate(shadow,45,0,90);
-    scene.add(shadow);
+    selectables.add(shadow);
     return shadow;
   });
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
-    const intersects = ray.intersectObjects( scene.children );
+    const intersects = ray.intersectObjects( selectables.children );    
     const [{object} = {}] = intersects;    
-
-    if (!object || object === quest1st || object === quest2nd) return;
-   
+    if (!object) return;
     object.material = object.material === selectMaterial
       ? normalMaterial 
       : selectMaterial;
@@ -47,8 +45,7 @@ export default ({playOver, gainScore, setChecking}) => studio => {
   let isAllFounded = false;
 
   const checkSelectionsResult = () => {
-    unFoundeds = scene.children
-      .filter(({material}) => material !== questMaterial)
+    unFoundeds = selectables.children
       .filter(({geometry, material}) => geometry && geometry.type == quest1st.geometry.type || material === selectMaterial)
 
     const {isSolved, score} = unFoundeds.reduce(
@@ -61,8 +58,9 @@ export default ({playOver, gainScore, setChecking}) => studio => {
       isAllFounded = true;
       gainScore(score);
       playOver(true);
-      global.removeEventListener( 'click', onMouseMove, false );      
+      global.removeEventListener('click', onMouseMove, false );      
     } else {
+      setTimeout(() => selectables.children.forEach(mesh => mesh.material = normalMaterial), 500);
       gainScore('Nem jó megoldás!'); 
     }
   }
@@ -78,15 +76,11 @@ export default ({playOver, gainScore, setChecking}) => studio => {
   global.addEventListener( 'click', onMouseMove, false );
 
   const animation = studio => {
-    const {scene, camera} = studio;    
+    const {root, scene, camera} = studio;    
     shadows
       .filter(shadow => shadow.geometry.type == quest1st.geometry.type)
-      // .forEach(shadow => rotate(shadow,-1,1,1));
     isAllFounded && unFoundeds.forEach(unf => rotate(unf, 1,1,.2))      
-    // rotate(quest1st, 1,1,.1)      
-    // camera.translateZ(1); // ortho camera distance dosn't count
   }
   
-  // TODO az event listenereket igy nem szedem le ! 
   return play3dContent(studio)(animation);
 }

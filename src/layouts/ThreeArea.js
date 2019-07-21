@@ -2,6 +2,7 @@ import React from 'react';
 import {useRef, useEffect, useState, useCallback} from 'react';
 import * as THREE from 'three';
 import showtime from '../utils/showtime';
+import { rotate } from './Geometries';
 
 const clearScene = scene => scene.children.map(mesh => {
   scene.remove(mesh);
@@ -61,7 +62,13 @@ const ThreeArea = ({
     scene.add(ambient);
     scene.add(camera);
 
-    const animate3DContent = add3DContent({...props, scene, camera});
+    // root of responsivity;
+    const root = new THREE.Group();    
+    const responsivity = .9;
+    root.scale.setScalar(responsivity);
+     scene.add(root);
+
+    const animate3DContent = add3DContent({...props, scene, camera, root});
     const unsubscribeAnimate3D = animate3DContent();
 
     let hasPlay = true;
