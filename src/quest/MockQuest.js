@@ -20,6 +20,16 @@ const JustMonolog = ({interaction:{questResultIs}}) => {
   return null;
 };
 
+const SendToEntrance = ({interaction}) => {
+  const {questResultIs, checkItem} = interaction;
+  useEffect(()=>{
+    questResultIs(true);    
+    console.log('--- enter to final quiz ---');
+    console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);
+  },[]);
+  return null;
+};
+
 const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  JustMonolog,
@@ -35,7 +45,7 @@ const questLookup = {
   I:  FindCubeUvForTime,
   J:  RomanNumbersTask,
   K:  EquipmentQuest,
-  L:  PipelineQuest,
+  L:  SendToEntrance, //PipelineQuest,
 };
 
 export default showtime(({position, level, interaction}) => {

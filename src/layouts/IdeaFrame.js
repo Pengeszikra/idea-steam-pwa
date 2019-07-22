@@ -24,7 +24,10 @@ import Teams from './Teams';
 import MockQuest from '../quest/MockQuest';
 
 export default ({setWay, storyStore}) => {
-  const [{score, saved, equipment, level, position, walk, underWalk, speakAbout, hasSocrates, caveLookUp, hasQuesting}, dispatch] = storyStore;
+  const [{
+    score, saved, equipment, level, position, walk, underWalk, 
+    speakAbout, hasSocrates, caveLookUp, hasQuesting
+  }, dispatch] = storyStore;
 
   const [mapVisible, setMapVisiblity] = useState(false); 
   const [inventoryVisible, setInventoryVisiblity] = useState(false);
@@ -76,6 +79,7 @@ export default ({setWay, storyStore}) => {
     },
     startQuest: () => dispatch(beginQuest()),
     questResultIs,
+    checkItem: (itemId, pos = position) => caveLookUp[pos].items.indexOf(itemId) !== -1,
   };
 
   const CollectedItems = showtime(Inventory);
