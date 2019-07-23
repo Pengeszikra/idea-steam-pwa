@@ -20,6 +20,7 @@ export const [STOP_TALK, stopTalk] = actionCreator('stop-talk');
 export const [CONTINUE_TALK, continueTalk] = actionCreator('continue-talk');
 export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset');
 export const [PUT_DOWN_ITEM, putDownItem] = actionCreator('put-down-item');
+export const [ALTERNATE_QUEST, alternateQuest] = actionCreator('alternate-quest');
 
 export const storyInitial = {
   level: 1,  
@@ -131,6 +132,12 @@ export const storyReducer = (state, {type, payload}) => {
       hasSocrates: false, 
       caveLookUp: {...caveLookUp,  [position]:{...area, readed: true} },
     };
+
+    case ALTERNATE_QUEST: 
+      return {
+        ...state,   
+        caveLookUp: {...caveLookUp,  ['Y']:{...(caveLookUp.Y), solved: false, alternateQuest: payload} },
+      }
 
     case SOCRATES_TALK: 
       const speakAbout = payload(avatarNames(level));

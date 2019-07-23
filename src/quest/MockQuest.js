@@ -49,7 +49,7 @@ const questLookup = {
 };
 
 export default showtime(({position, level, interaction}) => {
-  const {questResultIs} = interaction;
+  const {questResultIs, makeAlternateQuest} = interaction;
   const handleQuestResult = (result, position) => e => questResultIs(result, position);
   const Quest = questLookup[position];
   if (!Quest) return null;

@@ -15,7 +15,8 @@ import MapWithHero from './MapWithHero';
 import { areaData } from '../engine/applicationData';
 import { 
   moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, 
-  savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest, putDownItem 
+  savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest, putDownItem,
+  alternateQuest
 } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
@@ -80,6 +81,7 @@ export default ({setWay, storyStore}) => {
     startQuest: () => dispatch(beginQuest()),
     questResultIs,
     checkItem: (itemId, pos = position) => caveLookUp[pos].items.indexOf(itemId) !== -1,
+    makeAlternateQuest: Quest => dispatch(alternateQuest(Quest)),
   };
 
   const CollectedItems = showtime(Inventory);
