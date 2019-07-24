@@ -68,6 +68,7 @@ export default showtime(({position, level, interaction}) => {
           RomanNumbersTask,
           FindCubeUvForTime,
           PairProjectionForTime,
+          EnterAndFinalQuest,
         ].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>
