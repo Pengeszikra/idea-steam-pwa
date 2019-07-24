@@ -13,6 +13,7 @@ import SolidByPorjectionQuestGame from './quest/SolidByPorjectionQuestGame';
 import PairProjectionQuestGame from './quest/PairProjectionQuestGame';
 import PipeDrawGame from './quest/PipeDrawGame';
 import PointShadowGame from './quest/PointShadowGame';
+import Victory from './story/Victory';
 
 // for single game development TODO remove
 const mockGameCommunication = {questResultIs: result => console.log(`--------\ngame result is: ${result}`)};
@@ -26,3 +27,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<PairProjectionQuestGame interaction={mockGameCommunication} />);
 //rootRender(<PipeDrawGame interaction={mockGameCommunication} />);
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
+//rootRender(<Victory level={1} />);

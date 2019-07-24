@@ -36,7 +36,7 @@ export const cave_1_1 = {
 
 export const cave_2_1 = {
   intro: karakter => `A barlangban tűz ég és a fogva tartottak csak a testek árnyait látják a barlang falazatán. Jól beszélsz ${karakter}, de hogy a barlangban élőkkel is szót érts szükségképpen tudnod kell az árnyak nyelvén! Tudnod kell melyik tárgy milyen árnyat vet, ezt fogják csak látni a vakságban tartottak.`
-  ,
+  ,  
   mission: _ => `
   Ami a térben van, árnya falra vetül.
 
@@ -205,7 +205,7 @@ export const itemNames = {
 
 export const areaData = {
   Q: {exits:[], walk:[ 14, 49], data:entrance },
-  Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1, onEnterMonolog: cave_1_1.intro },
+  Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1, onEnterMonolog: cave_1_1.intro, onSecretMonolog: cave_2_1_again.intro },
   A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },
   B: {exits:['B-D', 'B-X', 'B-Y'], walk:[ 32, 72], data:cave_2_2 },
   C: {exits:['C-A', 'C-X'], walk:[ 55, 24], data:cave_2_3 },

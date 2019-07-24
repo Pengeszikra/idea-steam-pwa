@@ -14,6 +14,7 @@ import SolidByPorjectionQuestGame from './SolidByPorjectionQuestGame';
 import PairProjectionQuestGame from './PairProjectionQuestGame';
 import PairProjectionForTime from './PairProjectionForTime';
 import FindCubeUvForTime from './FindCubeUvForTime';
+import EnterAndFinalQuest from './EnterAndFinalQuest';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -21,18 +22,19 @@ const JustMonolog = ({interaction:{questResultIs}}) => {
 };
 
 const SendToEntrance = ({interaction}) => {
-  const {questResultIs, checkItem} = interaction;
+  const {questResultIs, checkItem, makeAlternateQuest} = interaction;
   useEffect(()=>{
     questResultIs(true);    
     console.log('--- enter to final quiz ---');
     console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);
+    makeAlternateQuest('Y');
   },[]);
   return null;
 };
 
 const questLookup = {
   Q:  OpenCodeQuestGame,
-  Y:  JustMonolog,
+  Y:  EnterAndFinalQuest,
   A:  PairProjectionQuestGame,
   B:  SolidByPorjectionQuestGame,
   C:  PairProjectionToSolidQuest,
@@ -45,11 +47,11 @@ const questLookup = {
   I:  FindCubeUvForTime,
   J:  RomanNumbersTask,
   K:  EquipmentQuest,
-  L:  SendToEntrance, //PipelineQuest,
+  L:  SendToEntrance,
 };
 
 export default showtime(({position, level, interaction}) => {
-  const {questResultIs, makeAlternateQuest} = interaction;
+  const {questResultIs} = interaction;
   const handleQuestResult = (result, position) => e => questResultIs(result, position);
   const Quest = questLookup[position];
   if (!Quest) return null;

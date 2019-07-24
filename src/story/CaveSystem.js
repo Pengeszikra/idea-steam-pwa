@@ -46,9 +46,15 @@ export default ({position, level, interaction, currentArea}) => {
 
   const afterMonolog = data.onEnterMonolog ? currentArea.readed : true;
 
+  // select intro text - will be sofisticated
   useEffect(()=>{
-    if (data.onEnterMonolog && !currentArea.solved) {
-      setTimeout(()=>monologBeforeQuest(data.onEnterMonolog),1000);
+    if (!currentArea.solved) {
+      data.onEnterMonolog 
+        && !currentArea.secret
+        && setTimeout(()=>monologBeforeQuest(data.onEnterMonolog), 500);
+      data.onSecretMonolog 
+        && currentArea.secret
+        && setTimeout(()=>monologBeforeQuest(data.onSecretMonolog), 500);
     }
   }, [position]);
 

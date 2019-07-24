@@ -63,7 +63,7 @@ export const [
 'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest',
 'pair-solid-to-projection','pair-project-to-solid');
 
-export const [GreekCity] = divFactory('greek-city');
+export const [GreekCity] = divFactory('greek-city no-scroll');
 
 export const [CubeUv, CubeUvArea] = divFactory('cube-uv','cube-uv-area');
 

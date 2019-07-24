@@ -23,11 +23,12 @@ import Inventory from './Inventory';
 import showtime from '../utils/showtime';
 import Teams from './Teams';
 import MockQuest from '../quest/MockQuest';
+import Victory from '../story/Victory';
 
 export default ({setWay, storyStore}) => {
   const [{
     score, saved, equipment, level, position, walk, underWalk, 
-    speakAbout, hasSocrates, caveLookUp, hasQuesting
+    speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved
   }, dispatch] = storyStore;
 
   const [mapVisible, setMapVisiblity] = useState(false); 
@@ -81,11 +82,14 @@ export default ({setWay, storyStore}) => {
     startQuest: () => dispatch(beginQuest()),
     questResultIs,
     checkItem: (itemId, pos = position) => caveLookUp[pos].items.indexOf(itemId) !== -1,
-    makeAlternateQuest: Quest => dispatch(alternateQuest(Quest)),
+    makeAlternateQuest: pos => dispatch(alternateQuest(pos)),
+    checkSecret: (pos = position) => caveLookUp[pos].secret,
   };
 
   const CollectedItems = showtime(Inventory);
   const SavedPrisoners = showtime(Teams);
+
+  if (finalQuestSolved) return <Victory level={level} reset={()=>setWay(3)}/>;
 
   return (
     <main className="graph-frame">      

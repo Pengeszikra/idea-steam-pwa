@@ -50,10 +50,11 @@ export const storyInitial = {
   speakAbout: "",
   hasSocrates: false,
   hasQuesting: false,
+  finalQuestSolved: false,
 };
 
 export const storyReducer = (state, {type, payload}) => {
-  //console.log(type, payload, state)
+  // console.log(type, payload, state)
 
   const {caveLookUp, position, level} = state;
   const area = caveLookUp[position];
@@ -77,11 +78,14 @@ export const storyReducer = (state, {type, payload}) => {
     case SAVE_PRISONER:
       // After area solved, but prisoner didn't released.
       if (!area.solved) {
-        const {intro} = areaData[position].data;
+        const {intro, secretIntro} = areaData[position].data;
+        console.log(intro, secretIntro);
         return {          
           ...state, 
           speakAbout: intro 
-            ? intro(avatarNames(level)) 
+            ? area.secret 
+              ? secretIntro(avatarNames(level)) 
+              : intro(avatarNames(level)) 
             : `A -[${position}]- barlangban még hiányzik a bevezető szöveg!`, 
           hasSocrates: true, 
           hasQuesting: true,
@@ -109,10 +113,16 @@ export const storyReducer = (state, {type, payload}) => {
       if (state.equipment.indexOf(payload) === -1 || !area.solved) return state;
       const equipment = state.equipment.filter(item => item !== payload);
       const itemsPlusPutted = [...area.items, payload];
+      const finalQuestSolved = 
+        payload === 'E2' 
+        && caveLookUp.Y.secret 
+        && caveLookUp.Y.solved
+        && position === 'F';
       return {
         ...state,
         caveLookUp: {...caveLookUp, [position]:{...area, items: itemsPlusPutted}},
-        equipment
+        equipment,
+        finalQuestSolved
       };
 
     case QUEST_SOLVED:
@@ -136,7 +146,7 @@ export const storyReducer = (state, {type, payload}) => {
     case ALTERNATE_QUEST: 
       return {
         ...state,   
-        caveLookUp: {...caveLookUp,  ['Y']:{...(caveLookUp.Y), solved: false, alternateQuest: payload} },
+        caveLookUp: {...caveLookUp,  [payload]:{...(caveLookUp[payload]), solved:false, secret: true} },
       }
 
     case SOCRATES_TALK: 
