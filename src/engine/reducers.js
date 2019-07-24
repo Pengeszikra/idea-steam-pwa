@@ -46,10 +46,11 @@ export const storyInitial = {
     L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
   saved: [],
-  equipment: [],
+  equipment: ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
   speakAbout: "",
   hasSocrates: false,
   hasQuesting: false,
+  lightUp: false,
   finalQuestSolved: false,
 };
 
@@ -103,26 +104,37 @@ export const storyReducer = (state, {type, payload}) => {
     
     case GET_ITEM: 
       const items = area.items.filter(item => item !== payload);
-      return {
-        ...state, 
-        caveLookUp: {...caveLookUp,  [position]:{...area, items} },
-        equipment: [...state.equipment, payload]
-      };
-
-    case PUT_DOWN_ITEM:
-      if (state.equipment.indexOf(payload) === -1 || !area.solved) return state;
-      const equipment = state.equipment.filter(item => item !== payload);
-      const itemsPlusPutted = [...area.items, payload];
+      
       const finalQuestSolved = 
-        payload === 'E2' 
+        payload === 'E2'
         && caveLookUp.Y.secret 
         && caveLookUp.Y.solved
         && position === 'F';
+
+      const sett = area.items.sort().join('');
+      if(sett === 'D1E1G2H2' && position === 'K') {
+        return {
+          ...state,
+          caveLookUp: {...caveLookUp,  [position]:{...area, items:[]} },  
+          lightUp: true
+        }
+      };
+            
+      return {
+        ...state, 
+        caveLookUp: {...caveLookUp,  [position]:{...area, items} },
+        equipment: [...state.equipment, payload],
+        finalQuestSolved
+      };
+
+    case PUT_DOWN_ITEM:
+      if (state.equipment.indexOf(payload) === -1 || !area.solved) return state;      
+      const equipment = state.equipment.filter(item => item !== payload);
+      const itemsPlusPutted = [...area.items, payload];
       return {
         ...state,
         caveLookUp: {...caveLookUp, [position]:{...area, items: itemsPlusPutted}},
         equipment,
-        finalQuestSolved
       };
 
     case QUEST_SOLVED:

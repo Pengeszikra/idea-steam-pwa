@@ -28,7 +28,7 @@ import Victory from '../story/Victory';
 export default ({setWay, storyStore}) => {
   const [{
     score, saved, equipment, level, position, walk, underWalk, 
-    speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved
+    speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved, lightUp
   }, dispatch] = storyStore;
 
   const [mapVisible, setMapVisiblity] = useState(false); 
@@ -98,6 +98,7 @@ export default ({setWay, storyStore}) => {
         currentArea={caveLookUp[position]}
         level={level} 
         interaction={interaction}
+        lightUp={lightUp}
       />            
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 

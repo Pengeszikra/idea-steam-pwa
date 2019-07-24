@@ -35,7 +35,7 @@ const SendToEntrance = ({interaction}) => {
 const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  EnterAndFinalQuest,
-  A:  PairProjectionQuestGame,
+  A:  SendToEntrance,//PairProjectionQuestGame,
   B:  SolidByPorjectionQuestGame,
   C:  PairProjectionToSolidQuest,
   D:  SolidByPorjectionQuestGame,

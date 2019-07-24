@@ -26,7 +26,7 @@ const backroundLookup = {
   L:  ChainCave,
 };
 
-export default ({position, level, interaction, currentArea}) => {
+export default ({position, level, interaction, currentArea, lightUp}) => {
   const {handleRoute, handleSavePrisoner, handleGetItem, monologBeforeQuest} = interaction;
 
   const data = areaData[position];
@@ -58,9 +58,11 @@ export default ({position, level, interaction, currentArea}) => {
     }
   }, [position]);
 
+  const light = position !== 'K' || lightUp;
+
   return (    
-    <Background level={level} interaction={interaction} >
-      {afterMonolog && showExits}
+    <Background level={level} interaction={interaction} style={light ? {} : {filter:'brightness(.2)'}}>
+      {afterMonolog && light && showExits}
       {showItems}
       {showPrisoners}
     </Background>
