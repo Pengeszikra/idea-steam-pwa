@@ -530,3 +530,14 @@
   font-size: 1.8em;
   text-align: center;
 }
+
+.pipe-dot {
+  background: darkkhaki;
+  width: 8vmin;
+  height: 8vmin;
+  position: absolute;
+  border-radius: 50%;
+  color: black;
+  text-align: center;
+  line-height: 8vmin;
+}

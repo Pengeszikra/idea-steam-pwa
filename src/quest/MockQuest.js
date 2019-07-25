@@ -15,6 +15,7 @@ import PairProjectionQuestGame from './PairProjectionQuestGame';
 import PairProjectionForTime from './PairProjectionForTime';
 import FindCubeUvForTime from './FindCubeUvForTime';
 import EnterAndFinalQuest from './EnterAndFinalQuest';
+import PipeDraw2D from './PipeDraw2D';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -38,12 +39,12 @@ const questLookup = {
   A:  PairProjectionQuestGame,
   B:  SolidByPorjectionQuestGame,
   C:  PairProjectionToSolidQuest,
-  D:  SolidByPorjectionQuestGame,
+  D:  SolidByPorjectionQuestGame, 
   X:  FoundTetraederUvQuest,
   E:  PairProjectionForTime,
   F:  FindCubeUv,
   G:  PairSolidToProjectionQuest,
-  H:  ContinuosPathQuest,
+  H:  PipeDraw2D,
   I:  FindCubeUvForTime,
   J:  RomanNumbersTask,
   K:  EquipmentQuest,
@@ -69,6 +70,7 @@ export default showtime(({position, level, interaction}) => {
           FindCubeUvForTime,
           PairProjectionForTime,
           EnterAndFinalQuest,
+          PipeDraw2D,
         ].indexOf(Quest) === -1
         &&
         <IntroButtonHolder>
