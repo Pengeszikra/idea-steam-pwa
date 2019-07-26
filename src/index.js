@@ -19,7 +19,7 @@ import PipeDraw2D from './quest/PipeDraw2D';
 // for single game development TODO remove
 const mockGameCommunication = {questResultIs: result => console.log(`--------\ngame result is: ${result}`)};
 
-rootRender(<IdeaAdventuresBegin />);
+//rootRender(<IdeaAdventuresBegin />);
 
 //rootRender(<RomanNumbersTask level={2} />);
 //rootRender(<FindCubeUv interaction={mockGameCommunication}/>);
@@ -30,4 +30,5 @@ rootRender(<IdeaAdventuresBegin />);
 
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
 //rootRender(<Victory level={1} />);
-//rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
+rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
+//rootRender(<PipeDrawGame interaction={mockGameCommunication} />);

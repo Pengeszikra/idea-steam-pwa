@@ -9,33 +9,29 @@ import MultiRoundGameFrame from './multiRoundGameFrame';
 const pipeDraw3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
 
-  const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
-  const geom = shapes[irnd(shapes.length)];
+  //const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
+  //const geom = shapes[irnd(shapes.length)];
+  const geom =  GEOMS.dedocahedron
   const questItem = makeWireframe(geom, 200 ,200 ,200 , 0xFFAA77);
-  questItem.translateZ(-300).translateY(0).rotateX(0/RAD).rotateY(0/RAD);
+  questItem.translateZ(-300).translateY(0).rotateX(0/RAD).rotateY(30/RAD);
   scene.add(questItem);
 
   // pomtok a modelen
   // https://github.com/mrdoob/three.js/blob/master/examples/webgl_geometry_convex.html
   // console.log(new THREE.DodecahedronGeometry( 10 ).vertices);
-  console.log(GEOMS.dedocahedron(1,1,1).vertices);
+  console.log(GEOMS.dedocahedron(1,1,1).rotateY(30/RAD).vertices.map(({x,y}, i) => [ 
+    + (x*50+50+[]).slice(0,5)
+    , 
+    + (y*50+50+[]).slice(0,5)
+    ,
+    String.fromCharCode(65 + i)
+  ]));
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
     const intersects = ray.intersectObjects( scene.children );
     const [{object} = {}] = intersects;
-    // console.log(intersects, found, questItem.geometry.type == object.geometry.type);
-    /*
-    if (object && object !== questItem && questItem.geometry.type == object.geometry.type) {
-      scene.remove(object);
-      const {length} = scene.children.filter(({geometry}) => geometry && geometry.type == questItem.geometry.type);
-      if (length <= 1) {
-        gainScore(100);
-        playOver(true);
-      }
-    }
-    */
   }
 
   const mouse = new THREE.Vector2();
@@ -49,7 +45,7 @@ const pipeDraw3dContent = ({playOver, gainScore, setChecking}) => studio => {
 
   const animation = studio => {
     const {scene, camera} = studio;
-    //questItem.rotateY(.4/RAD);
+    // questItem.rotateY(.4/RAD);
     //shadows.filter(shadow => shadow.geometry.type == questItem.geometry.type)
       // .forEach(shadow => rotate(shadow,-1,1,1));
 
