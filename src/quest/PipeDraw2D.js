@@ -4,6 +4,7 @@ import MultiRoundGameFrame from './multiRoundGameFrame';
 import divFactory from '../utils/divFactory';
 import { cave_2_12 } from '../engine/applicationData';
 import { GEOMS, RAD } from '../layouts/Geometries';
+import { doIntersect } from './sectionsIntersection';
 
 const [PipeDot] = divFactory('pipe-dot no-sel');
 
@@ -35,11 +36,16 @@ const cube = {
 }
 
 const dedoka = {
-  dots : GEOMS.dedocahedron(1,1,1).rotateY(40/RAD).vertices.map(({x,y}, i) => [ 
-    + (x*zoom+zoom+[]).slice(0,6), 
-    + (y*zoom+zoom+[]).slice(0,6),
-    String.fromCharCode(65 + i)
-  ]),
+  dots : GEOMS
+    .dedocahedron(1,1,1)
+    .rotateX(11/RAD)
+    .rotateY(44/RAD)
+    .vertices
+    .map(({x,y}, i) => [ 
+      + (x*zoom+zoom+[]).slice(0,6), 
+      + (y*zoom+zoom+[]).slice(0,6),
+      String.fromCharCode(65 + i)
+    ]),
   lines : [
     'AB','AG','AF','FG','GB','BC','FE','GH','EH','HC','ED','HD','CD',
     'BA','GA','FA','GF','BG','CB','EF','HG','HE','CH','DE','DH','DC',
@@ -67,18 +73,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
   const [tryAmount, trying] = useState(0);
   const [draws, setDraws] = useState([]);
   const [rad, turn] = useState(0);
-  const [dots, setDots] = useState([]);
-
-  useEffect(() => {
-    turn(r => r + .05);
-    const d = GEOMS.dedocahedron(1,1,1).rotateX(13/RAD).rotateY(rad/RAD).vertices.map(({x,y}, i) => [ 
-      + (x*zoom+zoom+[]).slice(0,6), 
-      + (y*zoom+zoom+[]).slice(0,6),
-      String.fromCharCode(65 + i)
-    ])
-    setDots(d)
-  });
-
+  
   const reset = () => { setSelections(''); };  
   
   const checkEachOnceAndLastEqualFirst = () => {
@@ -87,13 +82,19 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       && selections.slice(-1) === selections.slice(0,1)
       && selections.slice(1).split('').sort().join('') === cave.all
     )    
+    
+    if (!isWorth) return false; // short check
+
+    /*
     const lines = [];
     for(let i = 2; i <= selections.length; i++) {
       lines.push(selections.slice(0,i).slice(-2));      
     }
-    const invalid = lines.filter(line => cave.lines.indexOf(line) === -1)
-    const badCombo = cave.wrongCombo.filter(([a,b]) => lines.indexOf(a) !== -1 && lines.indexOf(b) !== -1);    
+
+    const invalid = [] // lines.filter(line => cave.lines.indexOf(line) === -1)
+    const badCombo = [] // cave.wrongCombo.filter(([a,b]) => lines.indexOf(a) !== -1 && lines.indexOf(b) !== -1);    
     return isWorth && !invalid.length && !badCombo.length;
+    */
   }
 
   const checkResult = () => {
@@ -122,6 +123,14 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
     for(let i = 2; i <= selections.length; i++) {
       const [a, b] = selections.slice(0,i).slice(-2).split('');
       lines.push([cave.coords[a], cave.coords[b]]);
+    }    
+
+    const lp = lines.map(([[x,y],[u,v]]) => [{x,y}, {x:u,y:v}]) || []
+    console.log(lp)
+    if (lp.length >= 2) {
+      const [[p1,q1],[p2,q2]] = lp;
+      // console.log(p1, q1, p2, q2)
+      console.log(doIntersect(p1, q1, p2, q2));
     }
     setDraws(lines);
   }, [selections]);
@@ -143,9 +152,9 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       <ModalHolder>
         <svg height="100vh" width="100vw">
           {
-            draws.map(([[x1, y1],[x2, y2]]) => 
+            draws.map(([[x1, y1],[x2, y2]], i) => 
               <line 
-                key={`${x1}:${y1}-${x2}:${y2}`}
+                key={`${x1}:${y1}-${x2}:${y2}-${i}`}
                 x1={`${(x1 + 4)}vmin`}
                 y1={`${(y1 + VPOS + 4)}vmin`}
                 x2={`${(x2 + 4)}vmin`}
@@ -157,7 +166,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
           
         </svg>
         {
-          dots.map(([x, y, key]) => 
+          cave.dots.map(([x, y, key]) => 
             <PipeDot 
               onClick={draw(key)}
               key={key} 
