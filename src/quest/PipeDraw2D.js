@@ -18,21 +18,6 @@ const cube = {
     [20, 80, 'E'], [51, 80,  'H'], [80, 80, 'C'],
                    [51, 105, 'D'],
   ],
-  lines : [
-    'AB','AG','AF','FG','GB','BC','FE','GH','EH','HC','ED','HD','CD',
-    'BA','GA','FA','GF','BG','CB','EF','HG','HE','CH','DE','DH','DC',
-    'FH','HF','EG','GE','GC','CG','HB','BH'
-  ],  
-  wrongCombo : [
-    ['FH','EG'],
-    ['FH','GE'],
-    ['HF','EG'],
-    ['HF','GE'],
-    ['GC','HB'],
-    ['GC','BH'],
-    ['CG','HB'],
-    ['CG','BH'],
-  ],  
 }
 
 const dedoka = {
@@ -46,26 +31,21 @@ const dedoka = {
       + (y*zoom+zoom+[]).slice(0,6),
       String.fromCharCode(65 + i)
     ]),
-  lines : [
-    'AB','AG','AF','FG','GB','BC','FE','GH','EH','HC','ED','HD','CD',
-    'BA','GA','FA','GF','BG','CB','EF','HG','HE','CH','DE','DH','DC',
-    'FH','HF','EG','GE','GC','CG','HB','BH'
-  ],  
-  wrongCombo : [
-    ['FH','EG'],
-    ['FH','GE'],
-    ['HF','EG'],
-    ['HF','GE'],
-    ['GC','HB'],
-    ['GC','BH'],
-    ['CG','HB'],
-    ['CG','BH'],
-  ],  
 }
 
 const cave = dedoka;
-cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:[x,y]}) , {});
+cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:{x,y}}) , {});
 cave.all = cave.dots.map(([,,key]) => key).sort().join('');
+const pairs = ([f,...r]) => r.length ? r.map(e=>f+e).concat(pairs(r)) : r.map(e=>f+e);
+const points = s => s.split('').map(k=>cave.coords[k]);
+const isCrossed = (twoLine, [a,b,c,d] = twoLine.split('')) => 
+  !(a == c || a == d || b == c || b == d) 
+  && doIntersect(...points(twoLine));
+cave.wrongs = pairs(pairs(cave.all)).filter(cross => isCrossed(cross)).reduce(
+  (r, [a,b,c,d]) => [...r, a+b+c+d, b+a+c+d, a+b+d+c, c+d+a+b, d+c+a+b, c+d+b+a, d+c+b+a ]
+,[]);
+
+global.wr = cave.wrongs
 
 const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
   const [selections, setSelections] = useState('');
@@ -82,19 +62,17 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       && selections.slice(-1) === selections.slice(0,1)
       && selections.slice(1).split('').sort().join('') === cave.all
     )    
-    
     if (!isWorth) return false; // short check
 
-    /*
+    // found crossed lines 
     const lines = [];
     for(let i = 2; i <= selections.length; i++) {
-      lines.push(selections.slice(0,i).slice(-2));      
+      const [a, b] = selections.slice(0,i).slice(-2).split('');
+      lines.push(a+b);
     }
 
-    const invalid = [] // lines.filter(line => cave.lines.indexOf(line) === -1)
-    const badCombo = [] // cave.wrongCombo.filter(([a,b]) => lines.indexOf(a) !== -1 && lines.indexOf(b) !== -1);    
-    return isWorth && !invalid.length && !badCombo.length;
-    */
+    const crosses = pairs(lines);
+    return !crosses.find(line => cave.wrongs.indexOf(line) !== -1)
   }
 
   const checkResult = () => {
@@ -107,7 +85,6 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       gainScore('Rossz megoldás!');
     }
   };
-
 
   useEffect(() => { setChecking(() => () => trying(n => n+1)); }, []);
   useEffect(() => { tryAmount && checkResult(); }, [tryAmount]);
@@ -122,16 +99,12 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
     const lines = [];
     for(let i = 2; i <= selections.length; i++) {
       const [a, b] = selections.slice(0,i).slice(-2).split('');
-      lines.push([cave.coords[a], cave.coords[b]]);
-    }    
-
-    const lp = lines.map(([[x,y],[u,v]]) => [{x,y}, {x:u,y:v}]) || []
-    console.log(lp)
-    if (lp.length >= 2) {
-      const [[p1,q1],[p2,q2]] = lp;
-      // console.log(p1, q1, p2, q2)
-      console.log(doIntersect(p1, q1, p2, q2));
+      lines.push([cave.coords[a], cave.coords[b], a+b]);
     }
+
+
+
+
     setDraws(lines);
   }, [selections]);
 
@@ -152,7 +125,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       <ModalHolder>
         <svg height="100vh" width="100vw">
           {
-            draws.map(([[x1, y1],[x2, y2]], i) => 
+            draws.map(([{x:x1, y:y1},{x:x2, y:y2}], i) => 
               <line 
                 key={`${x1}:${y1}-${x2}:${y2}-${i}`}
                 x1={`${(x1 + 4)}vmin`}
