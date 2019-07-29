@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import { useGesture } from 'react-use-gesture';
-import { GameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest, TaskLabel, ItemHolder } from '../styles/divStore';
+import { OpenGameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest, TaskLabel, ItemHolder, LabelHolder } from '../styles/divStore';
 import doesOverlap from './../utils/doesOverlap';
 import { taskSetups } from './data/openCodeQuest';
 
@@ -37,7 +37,7 @@ const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
 
 const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
 
-export default  ({interaction:{questResultIs}, level = 1, position}) => {
+export default  ({interaction:{questResultIs}, level = 2, position}) => {
   const [attached, setAttached] = useState(["", "", "", ""]);
   const [solution, setSolution] = useState("Megoldás");
   const [task, setTask] = useState(...taskSetups[0]);
@@ -76,20 +76,31 @@ export default  ({interaction:{questResultIs}, level = 1, position}) => {
     }
     setSolution( isSolved ? "Jó!" : "Rossz!" );
   };
+
+  const [topOne, topTwo, leftOne, leftTwo] = task.labels;
   
   return (    
     <OpenCodeQuest>
-      {task.labels.map((label, key) => <TaskLabel key={key} data-label={key}>{label}</TaskLabel>)}
-      <GameHolder>        
+      <LabelHolder data-pos={'top'} >
+        <TaskLabel>{topOne}</TaskLabel>
+        <TaskLabel>{topTwo}</TaskLabel>
+      </LabelHolder>
+      <LabelHolder data-pos={'left'}>
+        <TaskLabel>{leftOne}</TaskLabel>
+        <TaskLabel>{leftTwo}</TaskLabel>
+      </LabelHolder>
+      <OpenGameHolder>        
         {targets.map((targetRef, key) => <GeomTarget key={key} fref={targetRef}></GeomTarget>)}
         <IntroButtonHolder>
           <IntroButton onClick={()=>questResultIs(true, position)}>simán kinyit</IntroButton>
           <IntroButton onClick={checkSolution}>{solution}</IntroButton>
         </IntroButtonHolder>        
-      </GameHolder>      
+      </OpenGameHolder>      
       <ItemHolder>
         {task.shapes.map(shape => <QuestItem targets={targets} key={shape} setHold={holdFactory} shapeId={shape} />)}  
       </ItemHolder>
     </OpenCodeQuest>
   );
 }
+
+// {task.labels.map((label, key) => <TaskLabel key={key} data-label={key}>{label}</TaskLabel>)}

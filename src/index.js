@@ -20,7 +20,7 @@ import IntersectionTest from './quest/test/IntersectionTest';
 // for single game development TODO remove
 const mockGameCommunication = {questResultIs: result => console.log(`--------\ngame result is: ${result}`)};
 
-//rootRender(<IdeaAdventuresBegin />);
+rootRender(<IdeaAdventuresBegin />);
 
 //rootRender(<RomanNumbersTask level={2} />);
 //rootRender(<FindCubeUv interaction={mockGameCommunication}/>);
@@ -31,6 +31,6 @@ const mockGameCommunication = {questResultIs: result => console.log(`--------\ng
 
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
 //rootRender(<Victory level={1} />);
-rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
 //rootRender(<IntersectionTest />);
 //rootRender(<PipeDrawGame interaction={mockGameCommunication} />);
+//rootRender(<PipeDraw2D interaction={mockGameCommunication} />);

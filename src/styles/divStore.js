@@ -30,7 +30,7 @@ export const [SimpleDarkBg, Island] = divFactory("simple-dark-bg", "island");
 export const [DarkGold, IntroButton, IntroHeader] = divFactory("dark-gold", "intro-button nosel", "intro-header no-sel");
 export const [Adeimantosz, Glaukon] = divFactory("adeimantosz", "glaukon");
 
-export const [GameHolder] = divFactory("game-holder");
+export const [GameHolder, OpenGameHolder] = divFactory("game-holder", "open-game-holder");
 
 export const [
   PrisonerOnScene, 
@@ -67,7 +67,7 @@ export const [GreekCity] = divFactory('greek-city no-scroll');
 
 export const [CubeUv, CubeUvArea] = divFactory('cube-uv','cube-uv-area');
 
-export const [GeomItem, TaskLabel, DropArea, ItemHolder] = divFactory('geom-item', 'task-label', 'drop-target', 'item-holder');
+export const [GeomItem, TaskLabel, DropArea, ItemHolder, LabelHolder] = divFactory('geom-item', 'task-label', 'drop-target', 'item-holder', 'label-holder');
 
 export const [ModalHolder, SmallTable] = divFactory('modal-holder no-scroll', 'small-table');
 

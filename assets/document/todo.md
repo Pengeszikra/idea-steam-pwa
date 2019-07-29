@@ -3,18 +3,18 @@
 ## main goals
   - [x] collect game types
   - [x] collect unique interaction / animation
-  - [ ] exact game flow without correct games
+  - [x] exact game flow without correct games
     - [x] draw new cave routes
     - [x] walk between caves and corssroads
     - [x] mock game types
-  - [ ] solve all game types
+  - [x] solve all game types
   - [ ] story flow
     - [x] story reducer
     - [ ] score system
     - [x] collect items
     - [x] release prisoners
   - [x] sparate document md show parts
-  - [ ] responsive ortho 3D view
+  - [..] responsive ortho 3D view
     - [x] size depend on root Group!
 
 ## minor goals
