@@ -22,7 +22,7 @@ export function makeShape( geomMaker, w , h , d , color, opacity = .7, lineColor
 
   if (lineColor) {
     const wmat = new THREE.LineBasicMaterial( { color: lineColor, linewidth } );
-    const  hardEdgesGeo = new THREE.EdgesGeometry( geom); 
+    const  hardEdgesGeo = new THREE.EdgesGeometry(geom); 
     const wireframe = new THREE.LineSegments( hardEdgesGeo, wmat );
     body.add(wireframe);  
   }

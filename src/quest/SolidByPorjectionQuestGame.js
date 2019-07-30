@@ -5,23 +5,33 @@ import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from
 import { irnd } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
+import GLTFLoader from 'three-gltf-loader';
+
+const loader = new GLTFLoader();
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
+  const shapes = [GEOMS.box,  GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron, ];
 
-  const shapes = [GEOMS.box, GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron];
-  
   const questItem = makeShape(shapes[irnd(shapes.length)],90,90,90, 0xAA5522, 1 , 0xFFAA77);
   questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
   scene.add(questItem);
+
+  loader.load('/solids/ship-fire.glb', gltf => {
+    /*
+    const loadedGeometry = gltf.scene.children[0].geometry;
+    console.log(loadedGeometry.vertices);
+    */
+   gltf.scene.scale.multiplyScalar(25);
+   questItem.add(gltf.scene);
+  });
 
   const [width, height] = [4, 4];
 
   const shadows = Array(width * height).fill(0).map((_, i) => {    
     const shadow = makeFlatColorShape(shapes[irnd(shapes.length)], 45, 45, 45, 0x130802);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
-    rotate(shadow,45,0,90);
-    scene.add(shadow);
+    rotate(shadow,45,0,90);    
     return shadow;
   });
 

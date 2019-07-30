@@ -1,6 +1,7 @@
 # IDEA - road to run
 
 ## main goals
+  - [ ] create 3D solids
   - [x] collect game types
   - [x] collect unique interaction / animation
   - [x] exact game flow without correct games

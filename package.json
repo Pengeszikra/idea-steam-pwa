@@ -54,6 +54,8 @@
     "react-spring": "^8.0.20",
     "react-use-gesture": "^5.0.0",
     "react-with-gesture": "^4.0.8",
-    "three": "^0.103.0"
+    "three": "^0.103.0",
+    "three-collada-loader": "^0.0.1",
+    "three-gltf-loader": "^1.106.0"
   }
 }
