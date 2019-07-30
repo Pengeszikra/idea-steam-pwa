@@ -17,12 +17,10 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
   scene.add(questItem);
 
-  loader.load('/solids/ship-fire.glb', gltf => {
-    /*
-    const loadedGeometry = gltf.scene.children[0].geometry;
-    console.log(loadedGeometry.vertices);
-    */
+  loader.load('/solids/idomok.glb', gltf => {
    gltf.scene.scale.multiplyScalar(25);
+   gltf.scene.translateY(-500);
+   gltf.scene.rotateY(20/RAD)
    questItem.add(gltf.scene);
   });
 
@@ -32,6 +30,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     const shadow = makeFlatColorShape(shapes[irnd(shapes.length)], 45, 45, 45, 0x130802);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
     rotate(shadow,45,0,90);    
+    scene.add(shadow);
     return shadow;
   });
 
