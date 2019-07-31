@@ -18,10 +18,15 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   scene.add(questItem);
 
   loader.load('/solids/idomok.glb', gltf => {
-   gltf.scene.scale.multiplyScalar(25);
-   gltf.scene.translateY(-500);
-   gltf.scene.rotateY(20/RAD)
-   questItem.add(gltf.scene);
+   // gltf.scene.scale.multiplyScalar(55);
+   const meshes = gltf.scene.children.filter(({type})=> type ==="Mesh");
+   const first = meshes[irnd(meshes.length)];
+   first.scale.multiplyScalar(55);
+   //first.translateY(-200)
+   first.translateX(200).translateY(-50);
+   first.material =  questItem.material;   
+   //questItem.add(gltf.scene);
+   questItem.add(first)
   });
 
   const [width, height] = [4, 4];
