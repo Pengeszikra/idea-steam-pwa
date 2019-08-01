@@ -30,6 +30,13 @@ export function makeShape( geomMaker, w , h , d , color, opacity = .7, lineColor
   return body;   
 }
 
+export function addWireframe( body, lineColor, linewidth = 1) {
+  const wmat = new THREE.LineBasicMaterial( { color: lineColor, linewidth } );
+  const  hardEdgesGeo = new THREE.EdgesGeometry(body.geometry); 
+  const wireframe = new THREE.LineSegments( hardEdgesGeo, wmat );
+  body.add(wireframe);
+  return body;
+}
 
 export function makeWireframe( geomMaker, w , h , d , lineColor, linewidth = 1 ) {
   const geom = geomMaker(w,h,d);
