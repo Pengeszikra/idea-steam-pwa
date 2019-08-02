@@ -5,41 +5,69 @@ import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate, addWi
 import { irnd } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
-import { getMeshes } from './blenderObjects';
+import { getMeshes, getMinimal } from './blenderObjects';
 
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
   const shapes = getMeshes().map(({geometry}) => ((w, h, d) => geometry));
-  //console.log(shapes)
-   //[GEOMS.box,  GEOMS.dedocahedron, GEOMS.icosahedron, GEOMS.octahedron, GEOMS.tetrahedron, ];
 
-  const questItem = makeShape(shapes[irnd(shapes.length)],90,90,90, 0xAA5522, 1 , 0xFFAA77);
+  const small = 1.5;
+  shapes.push(
+    () => GEOMS.box(small, small, small),
+    () => GEOMS.dedocahedron(small, small, small),
+    () => GEOMS.octahedron(small, small, small),
+    () => GEOMS.tetrahedron(small, small, small),
+    () => GEOMS.icosahedron(small, small, small),
+  ); 
+
+  const questChoice = irnd(shapes.length)
+  const questItem = makeShape(shapes[questChoice],90,90,90, 0xAA5522, 1 , 0xFFAA77);  
   questItem.scale.multiplyScalar(55);
   questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
   scene.add(questItem);
 
   const [width, height] = [4, 4];
+  const questCopyPos = irnd(width * height);
+  console.log('questCopyPos : ', questCopyPos);
 
+  const rotations = [
+    [45,0,90],
+    [45,0,45],
+    [90,0,45],
+    [15,15,15],
+    [0,0,0],
+    [0,90,0],
+    [25,45,75],
+  ]
+
+  let amount = 0;
   const shadows = Array(width * height).fill(0).map((_, i) => {    
-    const shadow = makeFlatColorShape(shapes[irnd(shapes.length)], 45, 45, 45, 0x130802);
+    const isSameShape = i === questCopyPos || Math.random() < .2;
+    if (isSameShape) {
+      amount ++
+      console.log(i)
+    };
+    const shadow = makeFlatColorShape(shapes[isSameShape ? questChoice : irnd(shapes.length)], 45, 45, 45, 0x130802);
     shadow.scale.multiplyScalar(25);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
-    rotate(shadow,45,0,90);    
+    rotate(shadow, ...rotations[irnd(rotations.length)] );    
     scene.add(shadow);
     return shadow;
   });
+
+  console.log('same shape : ', amount)
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
     const intersects = ray.intersectObjects( scene.children );
     const [{object} = {}] = intersects;
-     //console.log(intersects, found, questItem.geometry.type, object.geometry.type);
+    // console.log(intersects, questItem.geometry.uuid, object.geometry.uuid);
 
-    if (object && object !== questItem && questItem.geometry.type == object.geometry.type) {
+    if (object && object !== questItem && questItem.geometry.uuid == object.geometry.uuid) {
       scene.remove(object);
-      const {length} = scene.children.filter(({geometry}) => geometry && geometry.type == questItem.geometry.type);
+      const {length} = scene.children.filter(({geometry}) => geometry && geometry.uuid == questItem.geometry.uuid);
       if (length <= 1) {
         gainScore(100);
         playOver(true);

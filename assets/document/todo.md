@@ -1,7 +1,30 @@
 # IDEA - road to run
 
+## gyors befejezes
+
+Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
+
+  - [ ] Middle game information
+  - [ ] figure out all game type cave bye cave
+  - [ ] fix setTimeOut of OpenDoor game
+  - [ ] 3D open door animation - maybe 
+  - [ ] fix item list with description
+  - [ ] fix modal displays, prevent more than one revealed same time.
+  - [ ] maybe blocked way on map.
+  - [ ] fix on cave hints
+  - [ ] fix score system
+  - [ ] under time quests fixing
+  - [ ] redraw items
+  - [ ] redraw prisoners
+  - [ ] redraw caves
+  - [ ] improve history reader
+  - [ ] improve avatar selection
+  - [ ] write mail to Imo about final of game
+  - [ ] maybe better method instead reset game 2x , 3x 
+  
 ## main goals
-  - [ ] create 3D solids
+  - [x] create 3D solids
+    - [x] combine perfect solids by THREE.js with blender bodies
   - [x] collect game types
   - [x] collect unique interaction / animation
   - [x] exact game flow without correct games
@@ -9,7 +32,7 @@
     - [x] walk between caves and corssroads
     - [x] mock game types
   - [x] solve all game types
-  - [ ] story flow
+  - [x] story flow
     - [x] story reducer
     - [ ] score system
     - [x] collect items
@@ -49,8 +72,7 @@
   - [ ] link of routes :: 2.12
   - [ ] rain of caves :: 3  
 
-## unique interaction / animation
-  - [ ] history reader
+## unique interaction / animation  
   - [x] level selector
   - [x] open cave gate
   - [x] show regular solids

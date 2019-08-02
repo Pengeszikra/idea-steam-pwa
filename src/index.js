@@ -17,6 +17,7 @@ import Victory from './story/Victory';
 import PipeDraw2D from './quest/PipeDraw2D';
 import IntersectionTest from './quest/test/IntersectionTest';
 import { getMeshes } from './quest/blenderObjects';
+import Minimal3DGame from './quest/Minimal3DGame';
 
 getMeshes(); // preload blender files
 
@@ -29,7 +30,7 @@ const mockGameCommunication = {questResultIs: result => console.log(`--------\ng
 //rootRender(<FindCubeUv interaction={mockGameCommunication}/>);
 //rootRender(<RomanNumbersTask level={2} interaction={mockGameCommunication}/>);
 //rootRender(<OpenCodeQuestGame interaction={mockGameCommunication} />);
-rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
+
 //rootRender(<PairProjectionQuestGame interaction={mockGameCommunication} />);
 
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
@@ -37,3 +38,6 @@ rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
 //rootRender(<IntersectionTest />);
 //rootRender(<PipeDrawGame interaction={mockGameCommunication} />);
 //rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
+
+rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
+//rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
