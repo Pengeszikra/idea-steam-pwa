@@ -314,18 +314,20 @@
 }
 
 .prisoner {
-  &[data-prisoner="A1"] { @include bimage('/img/mobs/prisoner-01.png', 33vmin, 33vmin, 83vmin, 15vmin) }
-  &[data-prisoner="B1"] { @include bimage('/img/mobs/prisoner-02.png', 33vmin, 33vmin, 34vmin, 56vmin) }
-  &[data-prisoner="B2"] { @include bimage('/img/mobs/prisoner-03.png', 33vmin, 33vmin, 82vmin, 30vmin) }
-  &[data-prisoner="C1"] { @include bimage('/img/gui/prisoner-on-scene.png', 55vmin, 60vmin, 96vmin, 30vmin)  }
-  &[data-prisoner="D1"] { @include bimage('/img/mobs/prisoner-05.png', 43vmin, 43vmin, 83vmin, 50vmin) }
-  &[data-prisoner="E1"] { @include bimage('/img/mobs/prisoner-06.png', 33vmin, 33vmin, 33vmin, 65vmin) }
-  &[data-prisoner="E2"] { @include bimage('/img/mobs/prisoner-07.png', 33vmin, 33vmin, 44vmin,  5vmin) }
-  &[data-prisoner="F1"] { @include bimage('/img/mobs/prisoner-08.png', 33vmin, 33vmin, 33vmin, 50vmin) }
-  &[data-prisoner="F2"] { @include bimage('/img/mobs/prisoner-09.png', 33vmin, 33vmin, 33vmin, -4vmin); transform: scaleX(-1); transform-origin: center center }
-  &[data-prisoner="G1"] { @include bimage('/img/mobs/prisoner-10.png', 33vmin, 33vmin, 33vmin,  5vmin) }
-  &[data-prisoner="H1"] { @include bimage('/img/mobs/prisoner-11.png', 33vmin, 53vmin, 103vmin, 5vmin) }
-  &[data-prisoner="I1"] { @include bimage('/img/mobs/prisoner-12.png', 40vmin, 40vmin, 66vmin, 56vmin); transform: scaleX(-1); transform-origin: center center }
+  &[data-prisoner="A1"] { @include bimage('/img/mobs/caver-01.png', 33vmin, 33vmin, 83vmin, 15vmin) }
+  &[data-prisoner="B1"] { @include bimage('/img/mobs/caver-02.png', 33vmin, 33vmin, 34vmin, 56vmin) }
+  &[data-prisoner="B2"] { @include bimage('/img/mobs/caver-03.png', 33vmin, 33vmin, 82vmin, 30vmin) }
+  &[data-prisoner="C1"] { @include bimage('/img/mobs/caver-04.png', 33vmin, 33vmin, 96vmin, 30vmin) }
+  &[data-prisoner="D1"] { @include bimage('/img/mobs/caver-05.png', 33vmin, 33vmin, 83vmin, 50vmin) }
+  &[data-prisoner="E1"] { @include bimage('/img/mobs/caver-06.png', 33vmin, 33vmin, 33vmin, 65vmin) }
+  &[data-prisoner="E2"] { @include bimage('/img/mobs/caver-07.png', 33vmin, 33vmin, 44vmin,  5vmin) }
+  &[data-prisoner="F1"] { @include bimage('/img/mobs/caver-08.png', 33vmin, 33vmin, 33vmin, 50vmin) }
+  &[data-prisoner="F2"] { @include bimage('/img/mobs/caver-09.png', 33vmin, 33vmin, 33vmin, -4vmin) }
+  &[data-prisoner="G1"] { @include bimage('/img/mobs/caver-10.png', 33vmin, 33vmin, 33vmin,  5vmin) }
+  &[data-prisoner="H1"] { @include bimage('/img/mobs/caver-11.png', 33vmin, 33vmin, 103vmin, 5vmin) }
+  &[data-prisoner="I1"] { @include bimage('/img/mobs/caver-12.png', 33vmin, 33vmin, 66vmin, 56vmin) }
+
+  // transform: scaleX(-1); transform-origin: center center
 
   &[data-released="true"] { filter: drop-shadow(0px 0px 2vmin #AFA); }
 }

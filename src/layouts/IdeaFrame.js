@@ -100,6 +100,8 @@ export default ({setWay, storyStore}) => {
         interaction={interaction}
         lightUp={lightUp}
       />            
+      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
+      <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 
         handleMap={handleMap} 
@@ -117,8 +119,6 @@ export default ({setWay, storyStore}) => {
         walk={walk}
         underWalk={underWalk}
       />
-      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
-      <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <MockQuest show={hasQuesting && !hasSocrates} position={position} interaction={interaction} level={level} />
     </main>
   );

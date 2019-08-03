@@ -35,8 +35,6 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
   const together = actorOnField(); root.add(together);
   const other = actorOnField(0x442222); root.add(other);
-  //other.position.z = -800;
-  //other.position.y = 700;
   other.position.set(50, 700, -800)
 
   const distance = d => t => t * d;

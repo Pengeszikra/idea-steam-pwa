@@ -23,6 +23,12 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [ ] maybe better method instead reset game 2x , 3x 
   - [ ] score modal with button space
   - [ ]  ortho responsive scale settings
+  - [ ] remove avatar click reset game ( or not so direct )
+
+  - [ ] clear unwantaed parts
+
+  // egy kicsit tul sok felesleges kod van a proramba, nem beszelve arrol, hogy  ugyanazt a dolgot 
+  // tobbfele technikaval is megoldom
   
 ## main goals
   - [x] create 3D solids

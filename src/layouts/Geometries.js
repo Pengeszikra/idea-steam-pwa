@@ -95,3 +95,4 @@ export const rotate = (mesh, ...xyz ) => {
   const [x = 0, y = 0, z = 0] = xyz;
   mesh.rotateX(x/RAD).rotateY(y/RAD).rotateZ(z/RAD)
 };
+
