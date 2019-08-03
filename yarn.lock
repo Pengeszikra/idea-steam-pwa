@@ -1731,6 +1731,11 @@ callbag-pipe@1.1.x:
   resolved "https://registry.yarnpkg.com/callbag-pipe/-/callbag-pipe-1.1.1.tgz#f9d9f651f0bb64bc78d91f7132d738f066e3a4cf"
   integrity sha512-gPTHExrElPAOu/s91aySM1dCGCuQhbTLvvHwrqI/2aMW0qOda2nCZpmE0ML94l2tDy6Y4fqlI1SyAxqgLkZl6w==
 
+callbag-pull-when@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/callbag-pull-when/-/callbag-pull-when-1.0.1.tgz#9d9fce7f469b3a105d40cbc50052566c200d9a58"
+  integrity sha512-oSRgz+wyzJFFhUvbNjyb1vC11L0szh2gpVbL2enzD8E8JITnoQRWcGhXOJ5wc/fbKbY1qebtQqZANhfwX3n+GA==
+
 callbag-sample@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/callbag-sample/-/callbag-sample-2.0.0.tgz#0a7aa0c0f8605d8d61b15be6cff4f680440eac2a"

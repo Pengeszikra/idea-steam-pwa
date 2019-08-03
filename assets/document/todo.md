@@ -21,6 +21,7 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [ ] improve avatar selection
   - [ ] write mail to Imo about final of game
   - [ ] maybe better method instead reset game 2x , 3x 
+  - [ ] score modal with button space
   
 ## main goals
   - [x] create 3D solids
