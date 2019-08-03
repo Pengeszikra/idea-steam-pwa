@@ -6,20 +6,7 @@ import { irnd } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import { getMeshes, getMinimal } from './blenderObjects';
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take } from 'callbag-basics';
-import pullWhen from 'callbag-pull-when';
 
-// really nice example for controlled fromIter
-
-function * randomIter () { for(let i=0; i < 22; i++) yield irnd(150) }
-const shuffle = (...arr) => arr.sort(() => Math.random() > .5 ? -1 : 1);
-
-pipe (
-  fromIter(shuffle(1,2,3,4,5,6,7)),
-  pullWhen(interval(200)),
-  // take(5),
-  forEach(console.log),
-)
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
@@ -56,7 +43,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   let amount = 0;
   const shadows = Array(width * height).fill(0).map((_, i) => {    
     const isSameShape = i === questCopyPos || Math.random() < .2;
-    if (isSameShape) { amount ++; console.log(i) }; // TODO
+    // if (isSameShape) { amount ++; console.log(i) }; // TODO
     const shadow = makeFlatColorShape(shapes[isSameShape ? questChoice : irnd(shapes.length)], 45, 45, 45, 0x130802);
     shadow.scale.multiplyScalar(25);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
@@ -115,23 +102,3 @@ const Game = ({show, playOver, gainScore, setChecking}) => (
 );
 const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);
 export default props => <GameWithBackground {...props} />;
-
-
-  
-   /*
-   loader.load('/solids/idomok.glb', gltf => {
-    //loader.load('/solids/tree.glb', gltf => {
-   // gltf.scene.scale.multiplyScalar(55);
-   const meshes = gltf.scene.children.filter(({type})=> type ==="Mesh");
-   const first = meshes[irnd(meshes.length)];
-   first.scale.multiplyScalar(55);
-   //first.translateY(-200)
-   //first.translateX(200).translateY(-50);
-   first.material =  questItem.material;
-   //questItem.add(gltf.scene);
-   questItem.add(first)
-   questItem.translateY(500); // hide
-   first.translateY(-500); // show
-   addWireframe(first, 0xFFAA77);   
-  });
-  */

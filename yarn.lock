@@ -1671,10 +1671,46 @@ callbag-combine@1.0.x:
   resolved "https://registry.yarnpkg.com/callbag-combine/-/callbag-combine-1.0.2.tgz#7a340b8113bd481dd82e8aa7ed83af27f4b90db5"
   integrity sha512-1o1EgkhQcxG/SUWCCk4EgGuIVcVbC0znLXmAm/+XedX/mk4/+QkZLzs4Xyh8RpXhtGRO8EunXxaJT20L4gGTSQ==
 
+callbag-concat-with@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/callbag-concat-with/-/callbag-concat-with-1.2.0.tgz#35638f042debf92373e5d953c9301ae7137433bc"
+  integrity sha512-F2BHaSHMdKHsdQ01dtgUzcGWOEzE5MxpneN5TVlcVleVZb3BUnTcIuI40mLdd8xfYAADYhDGk+SaoRsq8VH1Kw==
+  dependencies:
+    callbag "^1.1.0"
+    callbag-concat "^1.2.0"
+    callbag-of "^2.0.0"
+
 callbag-concat@1.0.x:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/callbag-concat/-/callbag-concat-1.0.1.tgz#9023732ab2a3c5b98e06628e6eb603da2e696280"
   integrity sha512-dwJA0aU/xE8eeoQ5I/lXQQM/7fKIJm0dRXGzLfx1LPo+EJaJIKPxqH12qgLIsAyQ3R1vtlg171iUMK4q8uy2jA==
+
+callbag-concat@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/callbag-concat/-/callbag-concat-1.2.1.tgz#3b10bcc5a7cbbcba3bdf1c46136e5d16f36291bd"
+  integrity sha512-iIC4FCUF7sKnt4gDKHNjMRHekebdaA1/udjON/mCLg31EzzTO/dE9nfxpcj+G/63KopFXVQdZKQDsu7UOYGpPg==
+  dependencies:
+    callbag "^1.2.0"
+
+callbag-defer@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/callbag-defer/-/callbag-defer-1.1.0.tgz#2e03f1217f8b8e60ce2279b88f92edf517fda792"
+  integrity sha512-hRW/2CiLZjaKy5IOT1htcZOgwQut+E2gwjVRXDdoLgTrzce9WNK5PUmNhG/oZDEo2DFASiKU3tPBJ6A4iDzjXQ==
+  dependencies:
+    callbag "^1.2.0"
+    callbag-flatten "^1.4.0"
+    callbag-lazy "^2.0.1"
+
+callbag-duration-progress@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/callbag-duration-progress/-/callbag-duration-progress-2.0.0.tgz#d91cf76859be4ae71dd6b3ae8300e4b498a4e52a"
+  integrity sha512-DqgzOXYttMYBTSv1KJmK6RROqxjUH00k+2eCoBfpk3nFF6ABHvr5QdvE4hJgH7eoG4psuoBvuKgGXYt3fU1QBg==
+  dependencies:
+    callbag "^1.2.0"
+    callbag-concat-with "^1.2.0"
+    callbag-map "^1.1.0"
+    callbag-ms-elapsed "^2.0.1"
+    callbag-take-while "^2.0.0"
 
 callbag-filter@1.0.x:
   version "1.0.1"
@@ -1685,6 +1721,13 @@ callbag-flatten@1.0.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/callbag-flatten/-/callbag-flatten-1.0.0.tgz#d9f85adab0fb7f79084f5d6e42cd9e5f5bd0979a"
   integrity sha512-hhll0EXt6Hz5cMEcS7Y7rysfldNr2aBCo3ALIBoCyTWtEGpYjaHBQiWaiGBEizHBtTbrbl3HHGAeIt2RRtmrPg==
+
+callbag-flatten@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/callbag-flatten/-/callbag-flatten-1.4.0.tgz#2857c5efe39bc519bc4f245f206a0beee81a50b0"
+  integrity sha512-2JM/jA0Ijnuu15kqcdepVd8Iv/L3VytTFOjP0rk/BKc4/yvUUPkQfR3U2QM6Uq+DO/roOWMfrVKaMAxsZ8ciww==
+  dependencies:
+    callbag "^1.1.0"
 
 callbag-for-each@1.0.x:
   version "1.0.1"
@@ -1716,15 +1759,44 @@ callbag-interval@1.0.x:
   resolved "https://registry.yarnpkg.com/callbag-interval/-/callbag-interval-1.0.0.tgz#a88063300b835b594afc2793c08b4df2e0d4e058"
   integrity sha512-8wlAZwqX4qKuIbRuqj5aIZmVhNepf61bildMfGROYLyzefTmaoKxag/xf4FHQk0kfVDKfz9x4nZYkLVgHuRdJA==
 
+callbag-lazy@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/callbag-lazy/-/callbag-lazy-2.0.1.tgz#7dfbf04973ce511a4265abf1e31eaadf14d90eba"
+  integrity sha512-NGusLZnRL6F26wxi6ydJl1kPB2zXU+s3f3u8dYW/8SFq9Z0WZVYrkMfnWbvX3hJLMf9I+XSL1RCj504Re1m0Vg==
+  dependencies:
+    callbag "^1.1.0"
+
 callbag-map@1.0.x:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/callbag-map/-/callbag-map-1.0.1.tgz#a5bcd41cde60c226cdd22f5868beb7b2ecd6c167"
   integrity sha512-JotprLfl5D/DqArAUlygHOBVkTi2VKfueU71EtbEs2N5dUKlcjkZzSf6BkAWN/EHmgwaaCbVQIhsgvRKYYl1iw==
 
+callbag-map@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/callbag-map/-/callbag-map-1.1.0.tgz#6ddd28a3f634fbd2394ef136a181b4ba5e3b062c"
+  integrity sha512-/xFzvJCtx1xulZpFeI4wq+ZD7tkg417XOeJ3wS9v8bHLLpt+fHKXgbZ8TBnnIxywJN6Uu/ZhL+c1DzUG6KXYFQ==
+  dependencies:
+    callbag "^1.1.0"
+
 callbag-merge@2.0.x:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/callbag-merge/-/callbag-merge-2.0.1.tgz#69c2c031fdb40964fe766399fb5af21f50d3270e"
   integrity sha512-Kl6JQ8Swc7DBuIL+Yjkgm92l82vrD2yQCNZHO8M8o6zVI+a0/RAAPLD5qrnGA1WwHLOOD6xAYsm0gzfzAJ3hkA==
+
+callbag-ms-elapsed@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/callbag-ms-elapsed/-/callbag-ms-elapsed-2.0.1.tgz#5ad525dfb7daafe55b12631ba30beab7ecbc80f0"
+  integrity sha512-d8AVcahgd+YyRgoZwp6hkGkcao3kJQXwRBWze00s3ZTi9ma1/c3xiEqwObWsHa34RO4zEmPBEtPPtT8hutlnrQ==
+  dependencies:
+    callbag "^1.2.0"
+    callbag-animation-frames "^2.1.0"
+    callbag-defer "^1.1.0"
+    callbag-map "^1.1.0"
+
+callbag-of@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/callbag-of/-/callbag-of-2.0.0.tgz#645552ddba17d398124f4e31273af35d91d25823"
+  integrity sha512-eqOUTQn2P/gzlPlRKo/PY/bVRASDFiFNI2+kfjyd5YHJERET4u6WP4xHNmKJlWcDaFQtaJdigzryu+Ja+W6L9A==
 
 callbag-pipe@1.1.x:
   version "1.1.1"
@@ -1763,17 +1835,31 @@ callbag-skip@1.0.x:
   resolved "https://registry.yarnpkg.com/callbag-skip/-/callbag-skip-1.0.0.tgz#91f60c434d1a7aba02b8b7ef1aad82da0a805ceb"
   integrity sha512-XCvIT+mDa4K4HIbEoF6mhoM1YrXq7aLVDD0JvA/Px8MN//Nuxkp4bP3ivuD2u9vyYdubXHmAD4RwHJUm8azcjQ==
 
+callbag-take-while@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/callbag-take-while/-/callbag-take-while-2.0.0.tgz#2b6e4a69fab13862b9a067c01c9441ec66b1fc80"
+  integrity sha512-c6nnV14Xh/QEzkD6dgFSitMs0moh4ejF0zSf5SyHxNZdOjJtO+B9G9FKH7GCKPI9q485sjJ51/WcZLCloY1RdA==
+  dependencies:
+    callbag "^1.1.0"
+
 callbag-take@1.0.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/callbag-take/-/callbag-take-1.0.0.tgz#d3d3acf3f73ef9a7cda42958dfb4de37b9c0a2b8"
   integrity sha512-qQ220/N6gOJRS4JS/mEVzbsADCaet5QAYZimrvGjjzT87eclQugJOzsae6efaGMf2KejKlPu8LxWZzs+zZ/hBw==
+
+callbag-wait@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/callbag-wait/-/callbag-wait-2.1.0.tgz#deab72970c565d40f1a86051eb517cf469fa7100"
+  integrity sha512-r+4hRsycJpoDWQN5rFYLbWKDVafnHlcPbiJN2aqzpeFDS7ZdMOPK6pCs56UZjYN0fQkAff1PoDBbtAoaobO2Dg==
+  dependencies:
+    callbag "~1.2.0"
 
 callbag@1.0.x:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/callbag/-/callbag-1.0.3.tgz#d78c111107fbf02c01370084967645093ff8fd73"
   integrity sha512-1Tlt+Lxu+O+g86xaM1rnGuETRHpz96erCRZJgxGW2817+zbBiOmYr7rUVmM+sf+s88YEezFtIJRqvlr5tmv3ag==
 
-callbag@^1.1.0:
+callbag@^1.1.0, callbag@^1.2.0, callbag@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/callbag/-/callbag-1.2.0.tgz#45e73962a466056c6e5f86f5627b35cf0c4df101"
   integrity sha512-RMcVOk2oyA8CyCt/HsLEvnvvttKlaGVaG0uOo5IY7RpdiPLhStjxv5oYre33VJfT8kJE+cuKLSNHooz7yCUdhQ==
