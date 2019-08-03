@@ -137,7 +137,7 @@
   span {
     color: #222;
     display: block;
-    width: 85vmin;    
+    width: 85vmin;      
     margin: 40vmin 6vmin;
     font-weight: 700;
     line-height: 1.3em;    
@@ -152,7 +152,7 @@
   }
 }
 
-.history-papper { 
+.history-papper, .player-info-bg { 
   @include bimage('/img/gui/papper.png', 95vmin, 133vmin, 25vmin, 2vmin);  
   animation: zoom-in 200ms forwards ease-in;
   transform-origin: center bottom;
@@ -160,6 +160,28 @@
   span {
     margin: 9vmin 7vmin;
     font-size: 1.2em;
+  }
+}
+
+@keyframes slide-from-top { from { top: -80vmin;}  to { top: 0vmin; } }
+
+.player-info-bg {
+  transform-origin: top left;
+  animation: slide-from-top 200ms forwards ease-in;
+  position: relative;
+
+  .glaukon { bottom: 5vmin; }
+
+  .speak-text {
+    position: relative;
+    display: block;
+    width: 40vmin;
+    font-size: 1.3em;
+    white-space: pre;
+    color: black;
+    height: 50vmin;
+    top: 25vmin;
+    left: 29vmin;
   }
 }
 

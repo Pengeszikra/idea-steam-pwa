@@ -22,6 +22,16 @@ export const [DEBUG_RESET, debugReset] = actionCreator('debug-reset');
 export const [PUT_DOWN_ITEM, putDownItem] = actionCreator('put-down-item');
 export const [ALTERNATE_QUEST, alternateQuest] = actionCreator('alternate-quest');
 
+export const [SET_MODAL, setModal] = actionCreator('set-modal');
+
+const modalOff = {
+  hasSocrates: false,
+  mapVisible: false,
+  inventoryVisible: false,
+  teamVisible: false,
+  playerInfoVisible: false,
+}
+
 export const storyInitial = {
   level: 1,  
   score: 0,   
@@ -47,12 +57,22 @@ export const storyInitial = {
   },
   saved: [],
   equipment: [], //['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
-  speakAbout: "",
-  hasSocrates: false,
+  
   hasQuesting: false,
   lightUp: false,
   finalQuestSolved: false,
+
+  speakAbout: "",
+
+  ...modalOff,
+  /*
+  hasSocrates: false,
+  mapVisible: false,
+  inventoryVisible: false,
+  teamVisible: false,
+  */
 };
+
 
 export const storyReducer = (state, {type, payload}) => {
   // console.log(type, payload, state)
@@ -163,10 +183,17 @@ export const storyReducer = (state, {type, payload}) => {
 
     case SOCRATES_TALK: 
       const speakAbout = payload(avatarNames(level));
-      return {...state, speakAbout, hasSocrates: true };
+      return {...state, speakAbout, ...modalOff, hasSocrates: true};
 
-    case CONTINUE_TALK: return {...state, hasSocrates: true };
+    case CONTINUE_TALK: return {...state, ...modalOff, hasSocrates: true};
     case STOP_TALK: return {...state, hasSocrates: false };
+
+    case SET_MODAL: 
+      const {map, inventory, team, playerInfo} = payload;
+      if (map !== undefined) return {...state, ...modalOff, mapVisible: map};
+      if (inventory !== undefined) return {...state, ...modalOff, inventoryVisible: inventory};
+      if (team !== undefined) return {...state, ...modalOff, teamVisible: team};
+      if (playerInfo !== undefined) return {...state, ...modalOff, playerInfoVisible: playerInfo };
 
     default: return state;
   }

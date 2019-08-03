@@ -16,7 +16,7 @@ import { areaData } from '../engine/applicationData';
 import { 
   moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, 
   savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest, putDownItem,
-  alternateQuest
+  alternateQuest, showModal, setModal
 } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
 import Inventory from './Inventory';
@@ -24,21 +24,24 @@ import showtime from '../utils/showtime';
 import Teams from './Teams';
 import MockQuest from '../quest/MockQuest';
 import Victory from '../story/Victory';
+import PlayerInfo from './PlayerInfo';
 
 export default ({setWay, storyStore}) => {
   const [{
     score, saved, equipment, level, position, walk, underWalk, 
-    speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved, lightUp
+    speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved, lightUp,
+    mapVisible, inventoryVisible, teamVisible, playerInfoVisible
   }, dispatch] = storyStore;
 
-  const [mapVisible, setMapVisiblity] = useState(false); 
-  const [inventoryVisible, setInventoryVisiblity] = useState(false);
-  const [teamVisible, setTeamVisiblity] = useState(false);
+  const setMapVisiblity = visible => dispatch(setModal({map: visible}));
+  const setInventoryVisiblity = visible => dispatch(setModal({inventory: visible}));
+  const setTeamVisiblity = visible => dispatch(setModal({team: visible}));
   
-  const handleMap = () => setMapVisiblity(visible => !visible);
+  const handleMap = () => setMapVisiblity(!mapVisible);
   const handleCloseMap = () => setMapVisiblity(false);
-  const handleInventory = () => setInventoryVisiblity(visible => !visible);
-  const handlePrisoner = () => setTeamVisiblity(visible => !visible);
+  const handleInventory = () => setInventoryVisiblity(!inventoryVisible);
+  const handlePrisoner = () => setTeamVisiblity(!teamVisible);
+  const handlePlayerInfo = () => dispatch(setModal({playerInfo: !playerInfoVisible}));
  
   const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
   const handleStopSpeak = () => dispatch(stopTalk());
@@ -100,15 +103,24 @@ export default ({setWay, storyStore}) => {
       <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
+      <PlayerInfo levle={level} show={playerInfoVisible}></PlayerInfo>
       <BottomBar 
+        show={position !== 'Q'}
         handleMap={handleMap} 
         handlePrisoner={handlePrisoner} 
         handleInventory={handleInventory} 
         handleHistory={handleHistory}
         equipment={equipment}
         saved={saved}
+        position={position}
       />      
-      <HeaderBar score={score} saved={saved.length} setWay={setWay} Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } />
+      <HeaderBar 
+        score={score} 
+        saved={saved.length} 
+        setWay={setWay} 
+        Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } 
+        handlePlayerInfo={handlePlayerInfo}
+      />
       <MapWithHero 
         show={mapVisible}
         Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} 

@@ -77,7 +77,7 @@ export default  ({interaction:{questResultIs}, level = 2, position}) => {
     setSolution( isSolved ? "Jó!" : "Rossz!" );
   };
 
-  const [topOne, topTwo, leftOne, leftTwo] = task.labels;
+  const [topOne, topTwo, leftTwo, leftOne] = task.labels;
   
   return (    
     <OpenCodeQuest>

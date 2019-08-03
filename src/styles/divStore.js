@@ -3,8 +3,8 @@ import divFactory, {showFactory} from '../utils/divFactory';
 export const [HeaderBarSection, LevelOneAvatar, LevelTwoAvatar] = divFactory("header-bar", "lvl-1-char", "lvl-2-char");
 export const [AvatarOneOnMap, AvatarTwoOnMap] = divFactory("lvl-1-char avatar-on-map", "lvl-2-char avatar-on-map");
 
-export const [BottomBarSection, MapIcon, HistoryIcon] = divFactory("bottom-bar", "bottom-map", "bottom-history");
-export const [InventoryIcon, SavedIcon] = showFactory("bottom-inventory", "bottom-saved");
+export const [BottomBarSection, HistoryIcon] = divFactory("bottom-bar", "bottom-history");
+export const [InventoryIcon, SavedIcon, MapIcon] = showFactory("bottom-inventory", "bottom-saved", "bottom-map");
 
 export const [PlayCity, SmallLogo, HistorycalPapper]= divFactory("play-city", "small-logo", "history-papper");
 export const [Socrates, SocratesAvatar, SpeakText, SocratesHolder]= divFactory("socrates-speaking", "socrates-avatar", "speak-text", "socrates-holder");
@@ -74,3 +74,5 @@ export const [ModalHolder, SmallTable] = divFactory('modal-holder no-scroll', 's
 export const [RnHolder] = divFactory('rn-holder'); 
 
 export const [InventoryBg, TeamsBg] = divFactory('inventory-bg', 'teams-bg');
+
+export const [PlayerInfoBackground] = showFactory('player-info-bg');

@@ -9,20 +9,20 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [ ] fix setTimeOut of OpenDoor game
   - [ ] 3D open door animation - maybe 
   - [ ] fix item list with description
-  - [ ] fix modal displays, prevent more than one revealed same time.
+  - [x] fix modal displays, prevent more than one revealed same time.
   - [ ] maybe blocked way on map.
   - [ ] fix on cave hints
   - [ ] fix score system
   - [ ] under time quests fixing
   - [ ] redraw items
-  - [ ] redraw prisoners
+  - [x] redraw prisoners
   - [ ] redraw caves
   - [ ] improve history reader
   - [ ] improve avatar selection
   - [ ] write mail to Imo about final of game
   - [ ] maybe better method instead reset game 2x , 3x 
   - [ ] score modal with button space
-  - [ ]  ortho responsive scale settings
+  - [ ] ortho responsive scale settings
   - [ ] remove avatar click reset game ( or not so direct )
 
   - [ ] clear unwantaed parts
