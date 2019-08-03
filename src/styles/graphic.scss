@@ -222,11 +222,32 @@
   transform-origin: center center;
 }
 
+
 .interactive-map-close {
   @include bimage('/img/gui/map-close.png', 14vmin, 14vmin, 14vmin, 80vmin); 
   transition: filter 300ms;
-  &:hover { filter: brightness(1.4); }
+  &:hover { filter: brightness(1.4); }  
 }
+
+.inventory-bg, .teams-bg {
+  @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); 
+  background-size: cover;
+  position: relative;
+  animation: zoom-in 200ms forwards ease-in;
+  transform-origin: center center;
+  opacity: 0;
+  left: -40vmin;
+  animation: slide-from-left 200ms forwards ease-in;
+}
+
+.teams-bg {
+  left: unset;
+  right: -40vmin;  
+  animation: slide-from-right 200ms forwards ease-in;
+}
+
+@keyframes slide-from-left { from { left: -40vmin; opacity: 0;}  to { left:   0vmin; opacity: 1;} }
+@keyframes slide-from-right { from { right: -40vmin; opacity: 0;}  to   { right:   0vmin; opacity: 1;} }
 
 .actual-score, .saved-prisoner {
   position: absolute;

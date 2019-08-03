@@ -86,9 +86,6 @@ export default ({setWay, storyStore}) => {
     checkSecret: (pos = position) => caveLookUp[pos].secret,
   };
 
-  const CollectedItems = showtime(Inventory);
-  const SavedPrisoners = showtime(Teams);
-
   if (finalQuestSolved) return <Victory level={level} reset={()=>setWay(3)}/>;
 
   return (
@@ -100,8 +97,8 @@ export default ({setWay, storyStore}) => {
         interaction={interaction}
         lightUp={lightUp}
       />            
-      <CollectedItems show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
-      <SavedPrisoners show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
+      <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
+      <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
       <BottomBar 
         handleMap={handleMap} 

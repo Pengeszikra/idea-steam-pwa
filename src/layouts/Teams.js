@@ -1,13 +1,15 @@
 import React from 'react';
-import { Prisoner, HistorycalPapper, MapCloseButton } from '../styles/divStore';
+import { Prisoner, TeamsBg, MapCloseButton } from '../styles/divStore';
+import showtime from '../utils/showtime';
 
 
-export default ({handleClose, saved}) => {
+ const Teams = ({handleClose, saved}) => {
   const showSaved = saved.map(prisonerId => <Prisoner data-prisoner={prisonerId} key={`prs-${prisonerId}`} />);
   return (
-    <HistorycalPapper data-teams>
-      <MapCloseButton onClick={handleClose}/>
+    <TeamsBg data-teams onClick={handleClose}>      
       {showSaved}
-    </HistorycalPapper>
+    </TeamsBg>
   );
 }
+
+export default showtime(Teams);

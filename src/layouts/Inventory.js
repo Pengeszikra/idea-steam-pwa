@@ -1,8 +1,9 @@
 import React from 'react';
-import { HistorycalPapper, MapCloseButton, Item } from '../styles/divStore';
+import { InventoryBg, MapCloseButton, Item } from '../styles/divStore';
 import noprop from '../utils/noprop';
+import showtime from '../utils/showtime';
 
-export default ({handleClose, equipment, interaction}) => {
+const Inventory = ({handleClose, equipment, interaction}) => {
   const {handlePutItem} = interaction;
   const showItems = equipment.map(itemId => 
     <Item 
@@ -12,9 +13,12 @@ export default ({handleClose, equipment, interaction}) => {
     />
   );
   return (
-    <HistorycalPapper data-equipment>
-      <MapCloseButton onClick={handleClose}/>
+    <InventoryBg data-equipment onClick={handleClose} >      
       {showItems}
-    </HistorycalPapper>
+    </InventoryBg>
   );
 }
+
+export default showtime(Inventory);
+
+// <MapCloseButton onClick={handleClose}/>

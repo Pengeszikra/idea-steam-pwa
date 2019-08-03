@@ -72,3 +72,5 @@ export const [GeomItem, TaskLabel, DropArea, ItemHolder, LabelHolder] = divFacto
 export const [ModalHolder, SmallTable] = divFactory('modal-holder no-scroll', 'small-table');
 
 export const [RnHolder] = divFactory('rn-holder'); 
+
+export const [InventoryBg, TeamsBg] = divFactory('inventory-bg', 'teams-bg');

@@ -57,31 +57,31 @@
 
 [data-teams] .prisoner {
   transform: scale(.7);
-  &[data-prisoner="A1"] { top:   5vmin; left:   8vmin; }
-  &[data-prisoner="B1"] { top:  91vmin; left:  63vmin; }
-  &[data-prisoner="B2"] { top:  32vmin; left:  66vmin; }
-  &[data-prisoner="C1"] { top:  64vmin; left:   7vmin; }
-  &[data-prisoner="D1"] { top:   4vmin; left:  68vmin; }
-  &[data-prisoner="E1"] { top:  61vmin; left:  65vmin; }
-  &[data-prisoner="E2"] { top:  35vmin; left:   8vmin; }
-  &[data-prisoner="F1"] { top:  92vmin; left:  36vmin; }
-  &[data-prisoner="F2"] { top:  92vmin; left:  06vmin; }
-  &[data-prisoner="G1"] { top:  64vmin; left:  36vmin; }
-  &[data-prisoner="H1"] { top:   7vmin; left:  38vmin; }
-  &[data-prisoner="I1"] { top:  31vmin; left:  37vmin; }
+  &[data-prisoner="A1"] { top:  32vmin; left:   8vmin; }
+  &[data-prisoner="B1"] { top: 126vmin; left:  63vmin; }
+  &[data-prisoner="B2"] { top:  62vmin; left:  66vmin; }
+  &[data-prisoner="C1"] { top:  94vmin; left:   7vmin; }
+  &[data-prisoner="D1"] { top:  31vmin; left:  68vmin; }
+  &[data-prisoner="E1"] { top:  91vmin; left:  65vmin; }
+  &[data-prisoner="E2"] { top:  65vmin; left:   8vmin; }
+  &[data-prisoner="F1"] { top: 127vmin; left:  36vmin; }
+  &[data-prisoner="F2"] { top: 127vmin; left:  06vmin; }
+  &[data-prisoner="G1"] { top:  94vmin; left:  36vmin; }
+  &[data-prisoner="H1"] { top:  33vmin; left:  38vmin; }
+  &[data-prisoner="I1"] { top:  61vmin; left:  37vmin; }
 }
 
 [data-equipment] .item{
-  &[data-item="C1"] { top:   7vmin; left:  40vmin; }
-  &[data-item="C2"] { top:   3vmin; left:   3vmin; }
-  &[data-item="D1"] { top:  33vmin; left:   3vmin; }
-  &[data-item="D2"] { top:  33vmin; left:  20vmin; }
-  &[data-item="E1"] { top:  63vmin; left:   4vmin; }
-  &[data-item="E2"] { top:  63vmin; left:  43vmin; }
-  &[data-item="F1"] { top:  33vmin; left:  47vmin; }
-  &[data-item="F2"] { top:  83vmin; left:   7vmin; }
-  &[data-item="G1"] { top:  93vmin; left:  40vmin; }
-  &[data-item="G2"] { top:  67vmin; left:  63vmin; }
-  &[data-item="H1"] { top:  33vmin; left:  73vmin; }
-  &[data-item="H2"] { top:  90vmin; left:  70vmin; }
+  &[data-item="C1"] { top:  49vmin; left:  20vmin; }
+  &[data-item="C2"] { top:  20vmin; left:  31vmin; }
+  &[data-item="D1"] { top:  78vmin; left:   6vmin; }
+  &[data-item="D2"] { top:  26vmin; left:  56vmin; }
+  &[data-item="E1"] { top: 106vmin; left:  22vmin; }
+  &[data-item="E2"] { top:  83vmin; left:  43vmin; }
+  &[data-item="F1"] { top:  53vmin; left:  47vmin; }
+  &[data-item="F2"] { top: 126vmin; left:   7vmin; }
+  &[data-item="G1"] { top: 126vmin; left:  40vmin; }
+  &[data-item="G2"] { top:  87vmin; left:  63vmin; }
+  &[data-item="H1"] { top:  53vmin; left:  73vmin; }
+  &[data-item="H2"] { top: 126vmin; left:  70vmin; }
 }
