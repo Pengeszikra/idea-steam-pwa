@@ -2,7 +2,7 @@ import React from 'react';
 import showtime from '../utils/showtime';
 import { InteractiveMap, MapCloseButton } from '../styles/divStore';
 
-export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk}) => {    
+export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk, handlePlayerInfo}) => {    
   const [y,x] = walk;
   const avatarStyle = {
     top: `${y}vmin`,
@@ -14,7 +14,7 @@ export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk}) => 
       <InteractiveMap>
         {!underWalk && <MapCloseButton onClick={handleCloseMap}/>}
       </InteractiveMap>
-      <Avatar style={avatarStyle}/>
+      <Avatar style={avatarStyle} onClick={() =>!underWalk && handlePlayerInfo()} />
     </>
   )
 });

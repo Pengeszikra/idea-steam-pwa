@@ -1,5 +1,6 @@
 import React from 'react';
 import { PlayerInfoBackground, IntroButton, Glaukon, Adeimantosz, SpeakText, MapCloseButton } from '../styles/divStore';
+import { avatarNames } from './../engine/applicationData';
 
 export default ({level = 1, setWay, ...props}) => {
 
@@ -8,7 +9,7 @@ export default ({level = 1, setWay, ...props}) => {
       { level === 1 && <Glaukon></Glaukon>}
       { level === 2 && <Adeimantosz></Adeimantosz>}      
       <SpeakText>{`
-        ${level}. szint 
+        ${avatarNames(level)} :: ${level}. szint 
         
         Megoldott feladatok: 2       
         Megmentett emberek száma:  3

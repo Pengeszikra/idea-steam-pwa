@@ -89,7 +89,7 @@ export default ({setWay, storyStore}) => {
     makeAlternateQuest: pos => dispatch(alternateQuest(pos)),
     checkSecret: (pos = position) => caveLookUp[pos].secret,
     instruction: areaData[position].data.mission 
-      ? areaData[position].data.mission(avatarNames[level])
+      ? areaData[position].data.mission(avatarNames(level))
       : `mission text is empty cave: [${position}]`,
   };
 
@@ -128,6 +128,7 @@ export default ({setWay, storyStore}) => {
         show={mapVisible}
         Avatar={level === 1 ? AvatarOneOnMap : AvatarTwoOnMap} 
         handleCloseMap={handleCloseMap} 
+        handlePlayerInfo={handlePlayerInfo}
         walk={walk}
         underWalk={underWalk}
       />
