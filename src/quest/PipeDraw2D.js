@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import { QuestSketch, IntroHeader, ModalHolder } from '../styles/divStore';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import divFactory from '../utils/divFactory';
@@ -12,49 +12,57 @@ const [PipeDot] = divFactory('pipe-dot no-sel');
 const VPOS = 40;
 const zoom = 44;
 
-const makeCaveDots = (geomFactory, turnX = 11,  turnY = 44) => ({
-  dots : geomFactory
-    .rotateX(turnX/RAD)
-    .rotateY(turnY/RAD)
-    .vertices
-    .map(({x,y}, i) => [ 
-      + (x*zoom+zoom+[]).slice(0,6), 
-      + (y*zoom+zoom+[]).slice(0,6),
-      String.fromCharCode(65 + i)
-    ]),
-});
-
-const cave = makeCaveDots( 
-  [
-    GEOMS.box(1,1,1),
-    GEOMS.icosahedron(1,1,1),
-    GEOMS.dedocahedron(1,1,1),
-  ][irnd(3)]  // TODO in order
-);
-
-cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:{x,y}}) , {});
-cave.all = cave.dots.map(([,,key]) => key).sort().join('');
 const pairs = ([f,...r]) => r.length ? r.map(e=>f+e).concat(pairs(r)) : r.map(e=>f+e);
-const points = s => s.split('').map(k=>cave.coords[k]);
-const isCrossed = (twoLine, [a,b,c,d] = twoLine.split('')) => 
-  !(a == c || a == d || b == c || b == d) 
-  && doIntersect(...points(twoLine));
-cave.wrongs = pairs(pairs(cave.all)).filter(cross => isCrossed(cross)).reduce(
-  (r, [a,b,c,d]) => [...r, a+b+c+d, b+a+c+d, a+b+d+c, c+d+a+b, d+c+a+b, c+d+b+a, d+c+b+a ]
-,[]);
 
-global.wr = cave.wrongs
+function createCaveNodes(phase = 0) {
+  console.log('createCaveNodes --- !!!')
+  const makeCaveDots = (geomFactory, turnX = 11,  turnY = 44) => ({
+    dots : geomFactory
+      .rotateX(turnX/RAD)
+      .rotateY(turnY/RAD)
+      .vertices
+      .map(({x,y}, i) => [ 
+        + (x*zoom+zoom+[]).slice(0,6), 
+        + (y*zoom+zoom+[]).slice(0,6),
+        String.fromCharCode(65 + i)
+      ]),
+  });
+  
+  const cave = makeCaveDots( 
+    [
+      GEOMS.box(1,1,1),
+      GEOMS.icosahedron(1,1,1),
+      GEOMS.dedocahedron(1,1,1),
+    ][phase]
+  );
+  
+  cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:{x,y}}) , {});
+  cave.all = cave.dots.map(([,,key]) => key).sort().join('');
+  
+  const points = s => s.split('').map(k=>cave.coords[k]);
+  const isCrossed = (twoLine, [a,b,c,d] = twoLine.split('')) => 
+    !(a == c || a == d || b == c || b == d) 
+    && doIntersect(...points(twoLine));
+  cave.wrongs = pairs(pairs(cave.all)).filter(cross => isCrossed(cross)).reduce(
+    (r, [a,b,c,d]) => [...r, a+b+c+d, b+a+c+d, a+b+d+c, c+d+a+b, d+c+a+b, c+d+b+a, d+c+b+a ]
+  ,[]);
 
-const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
+  return cave;
+}
+
+const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
   const [selections, setSelections] = useState('');
   const [hasWin, setWin] = useState(false);
   const [tryAmount, trying] = useState(0);
   const [draws, setDraws] = useState([]);
-  const [rad, turn] = useState(0);
+  const [cave, setCave] = useState({dots:[]});
   
-  const reset = () => { setSelections(''); };  
+  const reset = () => { 
+    setSelections(''); 
+  };  
   
-  const checkEachOnceAndLastEqualFirst = () => {
+  const checkEachOnceAndLastEqualFirst = () => {    
+    console.log('--- check!! --- ')
     const isWorth = (
       selections.length === cave.dots.length + 1
       && selections.slice(-1) === selections.slice(0,1)
@@ -100,9 +108,6 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
       lines.push([cave.coords[a], cave.coords[b], a+b]);
     }
 
-
-
-
     setDraws(lines);
   }, [selections]);
 
@@ -112,6 +117,10 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
   }
 
   const lineStyle = {stroke:'white', strokeWidth:2};
+
+  useEffect(() => {
+    setCave(createCaveNodes(phase));
+  }, [phase]);
 
   return (
     <>
@@ -142,7 +151,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
               onClick={draw(key)}
               key={key} 
               style={{left:`${x}vmin`, top:`${(y + VPOS)}vmin`}}
-            >{key}</PipeDot>
+            ></PipeDot>
           )
         }
       </ModalHolder>

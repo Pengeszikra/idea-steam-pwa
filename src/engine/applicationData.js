@@ -97,7 +97,7 @@ export const cave_2_4 = {
 export const cave_2_5 = {
   intro: karakter => `Zeuszra ${karakter}, te mindent ismersz a geometria világában! Ha így áll a helyzet mutasd meg a barlangban élőknek az igazságot, hogy mi is az valójában, amit ők látnak.`
   ,
-  mission: ``
+  mission: _ => ``
   ,
   info: `` 
   ,
@@ -107,7 +107,7 @@ export const cave_2_5 = {
 export const cave_2_6 = {
   intro: ``
   ,
-  mission: ``
+  mission: _ => ``
   ,
   info: ``  
 }
@@ -115,7 +115,7 @@ export const cave_2_6 = {
 export const cave_2_7 = {
   intro: ``
   ,
-  mission: ``
+  mission: _ => ``
   ,
   info: `` 
 }
@@ -123,7 +123,7 @@ export const cave_2_7 = {
 export const cave_2_8 = {
   intro: ``
   ,
-  mission: ``
+  mission: _ => ``
   ,
   info: `` 
   ,
@@ -155,13 +155,16 @@ export const cave_2_10 = {
 export const cave_2_11 = {
   intro: karakter => `Meg kell lelned a barlangrendszerből a kiutat, ne késlekedj karakter!`
   ,
-  mission: [
+  mission: karakter => `${karakter}! Válassz ki a zsákodból négy tárgyat, melyek használatával világosság lesz a barlangban.`
+  /*
+  [
     karakter => `${karakter}! Válassz ki a zsákodból négy tárgyat, melyek használatával világosság lesz a barlangban.`
     ,
     _ => `Zeuszra mondom, ezt a ládát kulcs nélkül felnyitni lehetetlen!`
     ,
     _ =>  `Zeuszra mondom, itt ez az átjáró beomlott!`
   ]
+  */
   ,
   info: `` 
 }
@@ -177,6 +180,8 @@ export const cave_2_12 = {
 export const cave_2_1_again = {
   intro: karakter => `Jól figyelj a szavaimra ${karakter}! Sokáig időztél a fogságba esettek kiszabadításával a barlangrendszerben és az égiek most nem kegyesek hozzád! Zápor zúdul a fellegekből és a beömlő víz biztosan elárasztja a barlangokat. Felelj hát helyesen, hogy végleg kijuss a felszabadítottakkal a vakság béklyójából.`
   ,
+  mission: _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
+  /*
   mission: [
     _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
     ,
@@ -184,6 +189,7 @@ export const cave_2_1_again = {
     ,
     _ => `Hány barlangnyi vízre lenne szükség, hogy a felhajtóerő segítségével kijuss a barlangrends?`
   ]
+  */
   ,
   info: ``  
 }
