@@ -1,25 +1,16 @@
 import React from 'react';
 import * as THREE from 'three';
 import { QuestSketch } from '../styles/divStore';
-import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate, addWireframe } from '../layouts/Geometries';
+import { makeShape, RAD, play3dContent, makeFlatColorShape, rotate, addWireframe } from '../layouts/Geometries';
 import { irnd } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
-import { getMeshes, getMinimal } from './blenderObjects';
-
+import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;
-  const shapes = getMeshes().map(({geometry}) => ((w, h, d) => geometry));
 
-  const small = 1.5;
-  shapes.push(
-    () => GEOMS.box(small, small, small),
-    () => GEOMS.dedocahedron(small, small, small),
-    () => GEOMS.octahedron(small, small, small),
-    () => GEOMS.tetrahedron(small, small, small),
-    () => GEOMS.icosahedron(small, small, small),
-  ); 
+  const shapes = blenderPlusPerfectSet(1.5);
 
   const questChoice = irnd(shapes.length)
   const questItem = makeShape(shapes[questChoice],90,90,90, 0xAA5522, 1 , 0xFFAA77);  
@@ -52,15 +43,12 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     return shadow;
   });
 
-  console.log('same shape : ', amount)
-
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
     const intersects = ray.intersectObjects( scene.children );
     const [{object} = {}] = intersects;
-    // console.log(intersects, questItem.geometry.uuid, object.geometry.uuid);
-
+    
     if (object && object !== questItem && questItem.geometry.uuid == object.geometry.uuid) {
       scene.remove(object);
       const {length} = scene.children.filter(({geometry}) => geometry && geometry.uuid == questItem.geometry.uuid);
@@ -97,7 +85,7 @@ const Game = ({show, playOver, gainScore, setChecking}) => (
   <ThreeInteraction 
     show={show} 
     add3DContent={solidProjection3dContent({playOver, gainScore, setChecking})} 
-    orthographic        
+    orthographic
   />
 );
 const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);

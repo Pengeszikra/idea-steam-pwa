@@ -16,7 +16,7 @@ import PairProjectionForTime from './PairProjectionForTime';
 import FindCubeUvForTime from './FindCubeUvForTime';
 import EnterAndFinalQuest from './EnterAndFinalQuest';
 import PipeDraw2D from './PipeDraw2D';
-import Minimal3DGame from './Minimal3DGame';
+import Minimal3DGame from './test/Minimal3DGame';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
