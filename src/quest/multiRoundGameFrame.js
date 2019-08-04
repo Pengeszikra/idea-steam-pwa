@@ -15,11 +15,11 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
   const { 
     flow, isSpeak, talking, score, gain, gainScore, 
     itsOver, playOver, checkResult, setChecking,
-    handleGameReset, handleRounds,
+    handleGameReset, handleRounds, roundLeft
   } = useMulitRoundsGameScore({level, position, questResultIs});
 
   const timeLeft = isTimer ? useTimer(gainScore, questResultIs, gain, itsOver) : false;
-  
+
   return (    
     <Background>
       <Game 
@@ -28,6 +28,7 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
         gainScore = {gainScore}
         setChecking = {setChecking}
         level = {level}
+        phase = {level - roundLeft}
       />      
       <ModalScore position={position} score={gain} show={isNaN(gain)} onClick={noprop(() => gainScore(0))} />
       <ModalScore position={position} score={score} show={itsOver} onClick={noprop(handleRounds)} />

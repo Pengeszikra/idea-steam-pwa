@@ -12,10 +12,15 @@ const [PipeDot] = divFactory('pipe-dot no-sel');
 const VPOS = 40;
 const zoom = 44;
 
+const caves3dLup = [
+  GEOMS.box(1,1,1),
+  GEOMS.icosahedron(1,1,1),
+  GEOMS.dedocahedron(1,1,1),
+];
+
 const pairs = ([f,...r]) => r.length ? r.map(e=>f+e).concat(pairs(r)) : r.map(e=>f+e);
 
-function createCaveNodes(phase = 0) {
-  console.log('createCaveNodes --- !!!')
+function createCaveNodes(phase) {  
   const makeCaveDots = (geomFactory, turnX = 11,  turnY = 44) => ({
     dots : geomFactory
       .rotateX(turnX/RAD)
@@ -28,13 +33,7 @@ function createCaveNodes(phase = 0) {
       ]),
   });
   
-  const cave = makeCaveDots( 
-    [
-      GEOMS.box(1,1,1),
-      GEOMS.icosahedron(1,1,1),
-      GEOMS.dedocahedron(1,1,1),
-    ][phase]
-  );
+  const cave = makeCaveDots( caves3dLup[phase]);
   
   cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:{x,y}}) , {});
   cave.all = cave.dots.map(([,,key]) => key).sort().join('');
@@ -50,7 +49,7 @@ function createCaveNodes(phase = 0) {
   return cave;
 }
 
-const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
+const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 0}) => {
   const [selections, setSelections] = useState('');
   const [hasWin, setWin] = useState(false);
   const [tryAmount, trying] = useState(0);
@@ -62,7 +61,6 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
   };  
   
   const checkEachOnceAndLastEqualFirst = () => {    
-    console.log('--- check!! --- ')
     const isWorth = (
       selections.length === cave.dots.length + 1
       && selections.slice(-1) === selections.slice(0,1)
@@ -89,6 +87,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
       playOver(isWin);
     } else {
       gainScore('Rossz megoldás!');
+      setSelections('');
     }
   };
 
@@ -112,15 +111,18 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
   }, [selections]);
 
   const draw = (key) => e => {
-    // console.log(`${key} --- clicked! `);
     setSelections( sel => sel.slice(-1) === key ? sel.slice(0, sel.length - 1) : sel + key);
   }
 
   const lineStyle = {stroke:'white', strokeWidth:2};
 
   useEffect(() => {
-    setCave(createCaveNodes(phase));
+    setCave(createCaveNodes(Math.min(phase, caves3dLup.length - 1)));
   }, [phase]);
+
+  const clickedStyle = key => selections.slice(-1) === key 
+    ? { backgroundColor: '#e0dcaf', boxShadow: 'inset 0px 0px 4px 4px white' }
+    : {};
 
   return (
     <>
@@ -150,7 +152,11 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 2}) => {
             <PipeDot 
               onClick={draw(key)}
               key={key} 
-              style={{left:`${x}vmin`, top:`${(y + VPOS)}vmin`}}
+              style={{
+                left:`${x}vmin`, 
+                top:`${(y + VPOS)}vmin`, 
+                ...clickedStyle(key),
+              }}
             ></PipeDot>
           )
         }

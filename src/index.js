@@ -40,7 +40,7 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
 //rootRender(<Victory level={1} />);
 //rootRender(<IntersectionTest />);
-rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
+//rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
 
 //rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);

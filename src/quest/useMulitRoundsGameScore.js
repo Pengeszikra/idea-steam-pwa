@@ -41,7 +41,7 @@ export default ({level, position, questResultIs}) => {
   return {
     flow, setFlow, isSpeak, talking, score, setScore, gain, gainScore, 
     itsOver, playOver, checkResult, setChecking, roundLeft, setRounds,
-    handleGameReset, handleRounds
+    handleGameReset, handleRounds, 
   };  
 } 
 
