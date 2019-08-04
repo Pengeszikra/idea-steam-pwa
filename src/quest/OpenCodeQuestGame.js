@@ -1,8 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import { useGesture } from 'react-use-gesture';
-import { OpenGameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest, TaskLabel, ItemHolder, LabelHolder } from '../styles/divStore';
+import { OpenGameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest, TaskLabel, ItemHolder, LabelHolder, IngameHistory } from '../styles/divStore';
 import doesOverlap from './../utils/doesOverlap';
 import { taskSetups } from './data/openCodeQuest';
+import SocratesSpeaking from '../layouts/SocratesSpeaking';
 
 const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
   const [clearHold, setDrop] = setHold(shapeId);
@@ -37,7 +38,9 @@ const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
 
 const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
 
-export default  ({interaction:{questResultIs}, level = 2, position}) => {
+export default  ({interaction, level = 2, position}) => {
+  const {questResultIs, instruction} = interaction;
+  const [isSpeak, setSpeak] = useState(false)
   const [attached, setAttached] = useState(["", "", "", ""]);
   const [solution, setSolution] = useState("Megoldás");
   const [task, setTask] = useState(...taskSetups[0]);
@@ -99,6 +102,13 @@ export default  ({interaction:{questResultIs}, level = 2, position}) => {
       <ItemHolder>
         {task.shapes.map(shape => <QuestItem targets={targets} key={shape} setHold={holdFactory} shapeId={shape} />)}  
       </ItemHolder>
+      <IngameHistory show={true} onClick={() => setSpeak(talk => !talk)} />
+      <SocratesSpeaking
+        show={isSpeak}
+        speakAbout={instruction}
+        level={level}
+        handleStopSpeak={()=> setSpeak(false)}
+      />
     </OpenCodeQuest>
   );
 }

@@ -37,6 +37,13 @@
   background: #000;
 }
 
+.open-code {
+  .ingame-history {
+    top: 88vmin;
+    left: 45vmin;
+  }
+}
+
 .simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); background-size: cover; }
 .island { @include bimage('/img/caves/island.png', 100vmin, 100vh); }
 .dark-gold { @include bimage('/img/gui/dark-gold-intro.png', 100vmin, 100vh); }
@@ -170,7 +177,16 @@
   animation: slide-from-top 200ms forwards ease-in;
   position: relative;
 
-  .glaukon { bottom: 5vmin; }
+  .glaukon { 
+    bottom: 1vmin; 
+    transform: translateX(-2vmin) scale(.9);
+  }
+
+  .adeimantosz { 
+    bottom: 1vmin; 
+    transform: scaleX(-1) translateX(-2vmin) scale(.9);
+    transform-origin: center;    
+  }
 
   .speak-text {
     position: relative;
@@ -227,6 +243,11 @@
 
 .lvl-1-char { @include bimage('/img/gui/lvl-1-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
 .lvl-2-char { @include bimage('/img/gui/lvl-2-char.png', 18vmin, 18vmin, 2vmin, 4vmin); }
+
+.ingame-history { 
+  @include bimage('/img/gui/pergamen.png', 18vmin, 18vmin, 2vmin, 80vmin);
+  &:hover { filter: brightness(1.4); }
+}
 
 .avatar-on-map {
   transform: scale(0);
@@ -360,7 +381,7 @@
   &[data-prisoner="A1"] { @include bimage('/img/mobs/caver-02.png', 40vmin, 40vmin, 73vmin, 11vmin) }
   &[data-prisoner="B1"] { @include bimage('/img/mobs/caver-01.png', 40vmin, 40vmin, 34vmin, 56vmin) }
   &[data-prisoner="B2"] { @include bimage('/img/mobs/caver-06.png', 40vmin, 40vmin, 72vmin, 30vmin) }
-  &[data-prisoner="C1"] { @include bimage('/img/mobs/caver-05.png', 40vmin, 40vmin, 116vmin,30vmin) }
+  &[data-prisoner="C1"] { @include bimage('/img/mobs/caver-05.png', 40vmin, 40vmin, 76vmin,  5vmin) }
   &[data-prisoner="D1"] { @include bimage('/img/mobs/caver-04.png', 40vmin, 40vmin, 83vmin, 50vmin) }
   &[data-prisoner="E1"] { @include bimage('/img/mobs/caver-10.png', 40vmin, 40vmin, 40vmin, 55vmin) }
   &[data-prisoner="E2"] { @include bimage('/img/mobs/caver-07.png', 40vmin, 40vmin, 44vmin,  5vmin) }

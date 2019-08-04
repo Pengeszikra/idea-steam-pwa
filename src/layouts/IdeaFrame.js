@@ -25,6 +25,7 @@ import Teams from './Teams';
 import MockQuest from '../quest/MockQuest';
 import Victory from '../story/Victory';
 import PlayerInfo from './PlayerInfo';
+import { avatarNames } from './../engine/applicationData';
 
 export default ({setWay, storyStore}) => {
   const [{
@@ -84,9 +85,12 @@ export default ({setWay, storyStore}) => {
     },
     startQuest: () => dispatch(beginQuest()),
     questResultIs,
-    checkItem: (itemId, pos = position) => caveLookUp[pos].items.indexOf(itemId) !== -1,
+    checkItem: (itemId, pos = posiFinstion) => caveLookUp[pos].items.indexOf(itemId) !== -1,
     makeAlternateQuest: pos => dispatch(alternateQuest(pos)),
     checkSecret: (pos = position) => caveLookUp[pos].secret,
+    instruction: areaData[position].data.mission 
+      ? areaData[position].data.mission(avatarNames[level])
+      : `mission text is empty cave: [${position}]`,
   };
 
   if (finalQuestSolved) return <Victory level={level} reset={()=>setWay(3)}/>;
@@ -103,7 +107,7 @@ export default ({setWay, storyStore}) => {
       <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
-      <PlayerInfo levle={level} show={playerInfoVisible}></PlayerInfo>
+      <PlayerInfo level={level} show={playerInfoVisible} setWay={setWay}></PlayerInfo>
       <BottomBar 
         show={position !== 'Q'}
         handleMap={handleMap} 
@@ -116,8 +120,7 @@ export default ({setWay, storyStore}) => {
       />      
       <HeaderBar 
         score={score} 
-        saved={saved.length} 
-        setWay={setWay} 
+        saved={saved.length}         
         Avatar={level === 1 ? LevelOneAvatar : LevelTwoAvatar } 
         handlePlayerInfo={handlePlayerInfo}
       />

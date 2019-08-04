@@ -62,15 +62,8 @@ export const storyInitial = {
   lightUp: false,
   finalQuestSolved: false,
 
-  speakAbout: "",
-
+  speakAbout: "",  
   ...modalOff,
-  /*
-  hasSocrates: false,
-  mapVisible: false,
-  inventoryVisible: false,
-  teamVisible: false,
-  */
 };
 
 

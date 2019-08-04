@@ -171,7 +171,7 @@ export const cave_2_12 = {
   ,
   mission: _ => `A pontok barlangokat jelölnek: Rajzolj be a barlangok között folyamatos utat úgy, hogy a kiinduló pontba érkezz vissza és minden barlangon csak egyszer menj keresztül!`
   ,
-  info: `` 
+  info: _ => `A pontok barlangokat jelölnek: Rajzolj be a barlangok között folyamatos utat úgy, hogy a kiinduló pontba érkezz vissza és minden barlangon csak egyszer menj keresztül!`
 }
 
 export const cave_2_1_again = {
