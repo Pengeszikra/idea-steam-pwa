@@ -377,6 +377,38 @@
   &[data-path="C-X"] { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
 }
 
+
+.small-table-talker {
+  &[data-cave="A"] { @include bimage('/img/mobs/talk-01.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="B"] { @include bimage('/img/mobs/talk-02.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="C"] { @include bimage('/img/mobs/talk-03.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="D"] { @include bimage('/img/mobs/talk-04.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="E"] { @include bimage('/img/mobs/talk-05.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="F"] { @include bimage('/img/mobs/talk-06.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="G"] { @include bimage('/img/mobs/talk-07.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="H"] { @include bimage('/img/mobs/talk-08.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="I"] { @include bimage('/img/mobs/talk-09.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="J"] { @include bimage('/img/mobs/talk-10.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="K"] { @include bimage('/img/mobs/talk-11.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+  &[data-cave="L"] { @include bimage('/img/mobs/talk-12.png', 37vmin, 37vmin, 45vmin, 40vmin) }
+
+  transform-origin: bottom center;
+  animation: slide-from-bottom 200ms forwards ease-in 300ms;
+  transform: translateY(20vmin);
+  opacity: 0;
+}
+
+@keyframes slide-from-bottom { 
+  from { 
+    transform: translateY(20vmin);
+    opacity: 0;
+  }  
+  to { 
+    transform: translateY(0); 
+    opacity: 1;
+  } 
+}
+
 .prisoner {  
   &[data-prisoner="A1"] { @include bimage('/img/mobs/caver-02.png', 40vmin, 40vmin, 73vmin, 11vmin) }
   &[data-prisoner="B1"] { @include bimage('/img/mobs/caver-01.png', 40vmin, 40vmin, 34vmin, 56vmin) }
@@ -576,6 +608,29 @@
   top: 0;
   left: 0;
   align-content: center;
+}
+
+.small-button {
+  @include bimage('/img/gui/small-button.png', 35vmin, 17vmin, 22vmin, 27vmin);
+  color: black;
+  line-height: 16vmin;
+  text-align: center;
+  font-size: .9em;
+  transform-origin: top left;
+  animation: small-button-anim 200ms forwards ease-in 500ms;
+  transform: translateX(-10vmin);
+  opacity: 0;
+}
+
+@keyframes small-button-anim { 
+  from { 
+    transform: translateX(-10vmin);
+    opacity: 0;
+  }  
+  to { 
+    transform: translateX(0); 
+    opacity: 1;
+  } 
 }
 
 .small-table {

@@ -4,7 +4,7 @@ import { QuestSketch } from '../styles/divStore';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate, makeWireframe } from '../layouts/Geometries';
 import { irnd } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
-import MultiRoundGameFrame from './multiRoundGameFrame';
+import MultiRoundGameFrame from '../quest/multiRoundGameFrame';
 
 const pipeDraw3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {scene, camera} = studio;

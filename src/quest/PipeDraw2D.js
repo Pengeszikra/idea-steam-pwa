@@ -5,35 +5,33 @@ import divFactory from '../utils/divFactory';
 import { cave_2_12 } from '../engine/applicationData';
 import { GEOMS, RAD } from '../layouts/Geometries';
 import { doIntersect } from './sectionsIntersection';
+import { irnd } from '../utils/randoms';
 
 const [PipeDot] = divFactory('pipe-dot no-sel');
 
 const VPOS = 40;
 const zoom = 44;
 
-const cube = {
-  dots : [
-                   [51, 30,  'A'],
-    [20, 55, 'F'], [51, 55,  'G'], [80, 55, 'B'],
-    [20, 80, 'E'], [51, 80,  'H'], [80, 80, 'C'],
-                   [51, 105, 'D'],
-  ],
-}
-
-const dedoka = {
-  dots : GEOMS
-    .dedocahedron(1,1,1)
-    .rotateX(11/RAD)
-    .rotateY(44/RAD)
+const makeCaveDots = (geomFactory, turnX = 11,  turnY = 44) => ({
+  dots : geomFactory
+    .rotateX(turnX/RAD)
+    .rotateY(turnY/RAD)
     .vertices
     .map(({x,y}, i) => [ 
       + (x*zoom+zoom+[]).slice(0,6), 
       + (y*zoom+zoom+[]).slice(0,6),
       String.fromCharCode(65 + i)
     ]),
-}
+});
 
-const cave = dedoka;
+const cave = makeCaveDots( 
+  [
+    GEOMS.box(1,1,1),
+    GEOMS.icosahedron(1,1,1),
+    GEOMS.dedocahedron(1,1,1),
+  ][irnd(3)]  // TODO in order
+);
+
 cave.coords = cave.dots.reduce((r,[x,y,k]) => ({...r, [k]:{x,y}}) , {});
 cave.all = cave.dots.map(([,,key]) => key).sort().join('');
 const pairs = ([f,...r]) => r.length ? r.map(e=>f+e).concat(pairs(r)) : r.map(e=>f+e);
@@ -118,9 +116,9 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking}) => {
   return (
     <>
       <IntroHeader>
-        {cave_2_12.mission()}
-        <br/><br/>
-        {selections}
+        { /* cave_2_12.mission() */ }
+        {/* <br/><br/> */}
+        {/* {selections} */}
       </IntroHeader>
       <ModalHolder>
         <svg height="100vh" width="100vw">
