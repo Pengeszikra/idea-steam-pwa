@@ -4,6 +4,7 @@ import { OpenGameHolder, IntroButton, IntroButtonHolder, GeomItem, OpenCodeQuest
 import doesOverlap from './../utils/doesOverlap';
 import { taskSetups } from './data/openCodeQuest';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
+import { shuffle } from '../utils/randoms';
 
 const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
   const [clearHold, setDrop] = setHold(shapeId);
@@ -54,7 +55,7 @@ export default  ({interaction, level = 2, position}) => {
   useEffect(() => {
     const choised = Math.random() * 3 | 0;
     const selectedTask = {...taskSetups[level][choised]};
-    const shapes = selectedTask.shapes.sort((a, b) => Math.random() > .5 ? -1 : 1);
+    const shapes = selectedTask.shapes.sort(shuffle);
     setTask({...selectedTask, shapes});
   }, []);
   

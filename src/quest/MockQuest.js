@@ -17,6 +17,7 @@ import FindCubeUvForTime from './FindCubeUvForTime';
 import EnterAndFinalQuest from './EnterAndFinalQuest';
 import PipeDraw2D from './PipeDraw2D';
 import Minimal3DGame from './test/Minimal3DGame';
+import SpeedPairs3DGame from './SpeedPairs3DGame';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -44,7 +45,7 @@ const questLookup = {
   X:  FoundTetraederUvQuest,
   E:  PairProjectionForTime,
   F:  FindCubeUv,
-  G:  PairSolidToProjectionQuest,
+  G:  SpeedPairs3DGame,
   H:  PipeDraw2D,
   I:  FindCubeUvForTime,
   J:  RomanNumbersTask,

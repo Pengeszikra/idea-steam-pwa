@@ -73,7 +73,7 @@ export const [ModalHolder, SmallTable, SmallButton] = divFactory('modal-holder n
 
 export const [RnHolder] = divFactory('rn-holder'); 
 
-export const [InventoryBg, TeamsBg, SmallTableTalker] = divFactory('inventory-bg', 'teams-bg', 'small-table-talker');
+export const [InventoryBg, TeamsBg, SmallTableTalker ] = divFactory('inventory-bg', 'teams-bg', 'small-table-talker');
 
-export const [PlayerInfoBackground, IngameHistory] = showFactory('player-info-bg', 'ingame-history');
+export const [PlayerInfoBackground, IngameHistory, RockFormation, TopRock] = showFactory('player-info-bg', 'ingame-history', 'rock-formation', 'top-rock-formation');
 

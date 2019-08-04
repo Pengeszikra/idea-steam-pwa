@@ -683,3 +683,17 @@
   text-align: center;
   line-height: 8vmin;
 }
+
+.rock-formation, .top-rock-formation {
+  @include bimage('/img/quest/rock-formation.png', 100vmin, 55.8vmin, 130vmin); 
+  position: absolute;
+  top: unset;
+  bottom: -13vmin;
+}
+
+.top-rock-formation {
+  bottom: unset;
+  top: -20vmin;
+  transform-origin: center center;
+  transform: rotate(180deg);
+}

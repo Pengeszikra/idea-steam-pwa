@@ -2,80 +2,96 @@ import React from 'react';
 import * as THREE from 'three';
 import { QuestSketch } from '../styles/divStore';
 import { makeShape, RAD, play3dContent, makeFlatColorShape, rotate, addWireframe } from '../layouts/Geometries';
-import { irnd } from '../utils/randoms';
+import { irnd, shuffle } from '../utils/randoms';
 import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
+import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map } from 'callbag-basics';
+import duration from 'callbag-duration-progress';
+import wait from 'callbag-wait';
+import pullWhen from 'callbag-pull-when';
+
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
-  const {scene, camera} = studio;
+  const {root, camera} = studio;
 
   const shapes = blenderPlusPerfectSet(1.5);
 
-  const questChoice = irnd(shapes.length)
-  const questItem = makeShape(shapes[questChoice],90,90,90, 0xAA5522, 1 , 0xFFAA77);  
-  questItem.scale.multiplyScalar(55);
-  questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
-  scene.add(questItem);
+  const shadows = [...shapes].sort(shuffle);
+  const solids  = [...shapes].sort(shuffle);
 
-  const [width, height] = [4, 4];
-  const questCopyPos = irnd(width * height);
-  
-  const rotations = [
-    [45,0,90],
-    [45,0,45],
-    [90,0,45],
-    [15,15,15],
-    [0,0,0],
-    [0,90,0],
-    [25,45,75],
-  ]
+  const render = root => item => root.add(item);
+  const takeN = n => (_,i) => i < n;
 
-  let amount = 0;
-  const shadows = Array(width * height).fill(0).map((_, i) => {    
-    const isSameShape = i === questCopyPos || Math.random() < .2;
-    // if (isSameShape) { amount ++; console.log(i) }; // TODO
-    const shadow = makeFlatColorShape(shapes[isSameShape ? questChoice : irnd(shapes.length)], 45, 45, 45, 0x130802);
-    shadow.scale.multiplyScalar(25);
-    shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
-    rotate(shadow, ...rotations[irnd(rotations.length)] );    
-    scene.add(shadow);
-    return shadow;
-  });
+  const solidRoot = new THREE.Group();
+  const shadowRoot = new THREE.Group();
+  solidRoot.translateX(-130);
+  shadowRoot.translateX(130);
+
+  root.add(solidRoot, shadowRoot);
+
+  solids
+    //.filter(takeN(6))
+    .map(shape => makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77))
+    .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
+    .map((mesh, i) => {mesh.translateY(330 - i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
+    .map(render(solidRoot))
+
+  shadows
+    //.filter(takeN(6))
+    .map(shape => makeFlatColorShape(shape, 1,1,1, 0x130802))
+    .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
+    .map((mesh, i) => {mesh.translateY(1800 - i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
+    .map(render(shadowRoot))
+
+  let solid, shadow    
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
-    const intersects = ray.intersectObjects( scene.children );
+    const intersects = ray.intersectObjects( [...solidRoot.children, ...shadowRoot.children] );
     const [{object} = {}] = intersects;
     
-    if (object && object !== questItem && questItem.geometry.uuid == object.geometry.uuid) {
-      scene.remove(object);
-      const {length} = scene.children.filter(({geometry}) => geometry && geometry.uuid == questItem.geometry.uuid);
-      if (length <= 1) {
+    if (!object) return;
+    const isSolid = (object.parent === solidRoot );
+    if (isSolid && solid) root.remove(solid);
+    if (isSolid) solid = object;
+    if (!isSolid && shadow) root.remove(shadow);
+    if (!isSolid) shadow = object;
+
+    root.add(object)    
+    object.position.sub(!isSolid ? solidRoot.position : shadowRoot.position);
+    object.position.sub(object.position)
+    object.translateY(isSolid ? -100 : 100)
+
+    if (solid && shadow) {      
+      if (solid.geometry.uuid === shadow.geometry.uuid) {
         gainScore(100);
         playOver(true);
       }
     }
-  }
 
+  }
+  
   const mouse = new THREE.Vector2();
   const onMouseMove = event => {
     mouse.x = ( event.clientX / global.innerWidth ) * 2 - 1;
     mouse.y = - ( event.clientY / global.innerHeight ) * 2 + 1;  
     click3d(mouse);
   }
+
   global.addEventListener( 'click', onMouseMove, false );
-
-
+  
   const animation = studio => {
-    const {scene, camera} = studio;
-    questItem.rotateY(.4/RAD);
-    shadows
-      .filter(shadow => shadow.geometry.type == questItem.geometry.type)
-      // .forEach(shadow => rotate(shadow,-1,1,1));
+    const {root, camera} = studio;
 
-    //camera.translateZ(1);
+    const speed = .5;
+    solidRoot.rotateY(1/RAD);
+    solidRoot.translateY(speed);
+    shadowRoot.translateY(-speed);
+
+    // TODO solve some unsubscribe call
+    return () => console.log('--- destructure --- speed pairs ---');
   }
   
   return play3dContent(studio)(animation);
