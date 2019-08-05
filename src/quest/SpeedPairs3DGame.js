@@ -7,10 +7,11 @@ import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map } from 'callbag-basics';
+import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, filter } from 'callbag-basics';
 import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
+import { mousePosition, clickSource } from './callbagUtils';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {root, camera} = studio;
@@ -44,15 +45,9 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     .map((mesh, i) => {mesh.translateY(1800 - i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
     .map(render(shadowRoot))
 
-  let solid, shadow    
-
-  const click3d = mouse => {
-    const ray = new THREE.Raycaster();
-    ray.setFromCamera( mouse, camera );
-    const intersects = ray.intersectObjects( [...solidRoot.children, ...shadowRoot.children] );
-    const [{object} = {}] = intersects;
-    
-    if (!object) return;
+  let solid, shadow
+ 
+  const handleClick = object => {
     const isSolid = (object.parent === solidRoot );
     if (isSolid && solid) root.remove(solid);
     if (isSolid) solid = object;
@@ -70,17 +65,12 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
         playOver(true);
       }
     }
+  };
 
-  }
-  
-  const mouse = new THREE.Vector2();
-  const onMouseMove = event => {
-    mouse.x = ( event.clientX / global.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / global.innerHeight ) * 2 + 1;  
-    click3d(mouse);
-  }
-
-  global.addEventListener( 'click', onMouseMove, false );
+  pipe (
+    clickSource(camera, [...solidRoot.children, ...shadowRoot.children]),    
+    forEach(handleClick)
+  )
   
   const animation = studio => {
     const {root, camera} = studio;

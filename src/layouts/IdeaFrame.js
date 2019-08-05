@@ -42,7 +42,9 @@ export default ({setWay, storyStore}) => {
   const handleCloseMap = () => setMapVisiblity(false);
   const handleInventory = () => setInventoryVisiblity(!inventoryVisible);
   const handlePrisoner = () => setTeamVisiblity(!teamVisible);
-  const handlePlayerInfo = () => dispatch(setModal({playerInfo: !playerInfoVisible}));
+  
+  // position dependency injected ! 
+  const handlePlayerInfo = () => position !== 'Q' && dispatch(setModal({playerInfo: !playerInfoVisible}));
  
   const handleHistory = () => dispatch(hasSocrates ? stopTalk() : continueTalk());
   const handleStopSpeak = () => dispatch(stopTalk());

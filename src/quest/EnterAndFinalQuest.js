@@ -19,7 +19,7 @@ export default ({interaction, position}) => {
   return isSecret 
     ? (
         <PipelineQuest>
-          <p>{cave_2_1_again.mission[0]()}<br/><br/>{'Siess! Tedd le a lantot az adott helyen!'}</p>
+          <p>{cave_2_1_again.mission()}<br/><br/>{'Siess! Tedd le a lantot az adott helyen!'}</p>
           <IntroButtonHolder>
             <IntroButton onClick={handleGoOut}>Indulok</IntroButton>
           </IntroButtonHolder>          

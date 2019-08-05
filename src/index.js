@@ -20,6 +20,7 @@ import { getMeshes } from './quest/blenderObjects';
 import Minimal3DGame from './quest/test/Minimal3DGame';
 import { cave_1_1 } from './engine/applicationData';
 import SpeedPairs3DGame from './quest/SpeedPairs3DGame';
+import { SimpleDarkBg } from './styles/divStore';
 
 getMeshes(); // preload blender files
 
@@ -44,6 +45,6 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
 
 //rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
-//rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'E'} />);
+rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'E'} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
-
+//rootRender(<SimpleDarkBg />)
