@@ -1,10 +1,11 @@
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, merge, from, filter } from 'callbag-basics';
+import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, merge, from } from 'callbag-basics';
 import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
 import sample from 'callbag-sample';
 
 import * as THREE from 'three';
+import { SourceNode } from 'C:/Users/Vívó Péter/AppData/Local/Microsoft/TypeScript/3.5/node_modules/source-map/source-map';
 
 export const distance = d => t => t * d;
 export const easeOut = p => 1 - (1 - p) * (1 - p);
@@ -37,6 +38,43 @@ export const clickSource = (camera, objects)  => pipe (
   filter(object => object),    
 )
 
+// callbag-filter --------------------------- original
+const filter_original = condition => source => (start, sink) => {
+  if (start !== 0) return;
+  let talkback;
+  source(0, (t, d) => {
+    if (t === 0) {
+      talkback = d;
+      sink(t, d);
+    } else if (t === 1) {
+      if (condition(d)) sink(t, d);
+      else talkback(1);
+    }
+    else sink(t, d);
+  });
+};
+
+// callbag-filter --------------------------- reworking test 
+const filter_01 = condition => source => (start, sink) => {
+  if (start !== 0) return;
+  let talkback;
+  const handshake = (type, data) => {
+    if (type === 1 && !condition(data)) return talkback(1);
+    if (type === 0) talkback = data;
+    sink(type, data);
+  };
+  source(0 , handshake);
+};
+
+// callbag-filter minimal style
+export const filter = condition => source => (start, sink) => { 
+  let talkback;
+  start === 0 && source(0, (type, data) => {
+    if (type === 1 && !condition(data)) return talkback(1);
+    if (type === 0) talkback = data;
+    sink(type, data);
+  });
+}
 
 
 // distancedMove( console.log )

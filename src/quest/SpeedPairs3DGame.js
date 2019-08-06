@@ -7,11 +7,11 @@ import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, filter } from 'callbag-basics';
+import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent } from 'callbag-basics';
 import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
-import { mousePosition, clickSource } from './callbagUtils';
+import { mousePosition, clickSource, filter } from './callbagUtils';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {root, camera} = studio;
@@ -49,6 +49,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
  
   const handleClick = object => {
     const isSolid = (object.parent === solidRoot );
+    object.selected = true;
     if (isSolid && solid) root.remove(solid);
     if (isSolid) solid = object;
     if (!isSolid && shadow) root.remove(shadow);
@@ -69,6 +70,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
   pipe (
     clickSource(camera, [...solidRoot.children, ...shadowRoot.children]),    
+    filter(object => !object.selected),
     forEach(handleClick)
   )
   
