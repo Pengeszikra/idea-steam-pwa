@@ -11,16 +11,18 @@ import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fro
 import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
-import { mousePosition, clickSource, filter } from './callbagUtils';
+import { mousePosition, clickSource, filter, distancedMove, moveAndDone } from './callbagUtils';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {root, camera} = studio;
 
   const shapes = blenderPlusPerfectSet(1.5);
 
-  const shadows = [...shapes].sort(shuffle);
-  const solids  = [...shapes].sort(shuffle);
+  const double = arr => [...arr, ...arr];
 
+  const shadows = double([...shapes].sort(shuffle));
+  const solids  = double([...shapes].sort(shuffle));
+  
   const render = root => item => root.add(item);
   const takeN = n => (_,i) => i < n;
 
@@ -35,35 +37,61 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     //.filter(takeN(6))
     .map(shape => makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77))
     .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
-    .map((mesh, i) => {mesh.translateY(330 - i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
+    .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
     .map(render(solidRoot))
 
   shadows
     //.filter(takeN(6))
     .map(shape => makeFlatColorShape(shape, 1,1,1, 0x130802))
     .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
-    .map((mesh, i) => {mesh.translateY(1800 - i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
+    .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
     .map(render(shadowRoot))
 
+  const measure = new THREE.Box3().setFromObject( solidRoot );
+  const lineHeight = measure.getSize().y;
+  console.log(lineHeight);
+  const halfScreen = 500;
+  solidRoot.translateY(-lineHeight + halfScreen);
+  shadowRoot.translateY(-halfScreen);
+  const [solidStart, shadowStart] = [solidRoot.position.y, shadowRoot.position.y];
   let solid, shadow
+  let pairFound = 0;
  
-  const handleClick = object => {
-    const isSolid = (object.parent === solidRoot );
+  const handleClick = target => {
+    const isSolid = (target.parent === solidRoot );
+    const object = target.clone();
+    
     object.selected = true;
-    if (isSolid && solid) root.remove(solid);
+
     if (isSolid) solid = object;
-    if (!isSolid && shadow) root.remove(shadow);
     if (!isSolid) shadow = object;
 
-    root.add(object)    
-    object.position.sub(!isSolid ? solidRoot.position : shadowRoot.position);
-    object.position.sub(object.position)
-    object.translateY(isSolid ? -100 : 100)
+    root.add(object);
 
-    if (solid && shadow) {      
+    object.position.y = isSolid
+      ? - ( - solidRoot.position.y - target.position.y )
+      : - ( - shadowRoot.position.y - target.position.y )
+    ;
+    object.position.x = isSolid ? -130 : 130;
+    const [x, y] = [object.position.x , object.position.y];
+
+    distancedMove( xc => object.position.x = x - xc, 300, x );
+    distancedMove( yc => object.position.y = y - yc, 300, y );
+
+    if (solid && shadow) {
       if (solid.geometry.uuid === shadow.geometry.uuid) {
-        gainScore(100);
-        playOver(true);
+        pairFound ++
+        distancedMove( y =>  solid.position.y = - y, 800, 200, 250);
+        distancedMove( y => shadow.position.y = + y, 800, 200, 250);
+
+        if(pairFound >= 5){
+          gainScore(100);
+          playOver(true);  
+        }
+      }
+      else {
+        distancedMove( y =>  solid.position.y = - y, 400, 400, 250);
+        distancedMove( y => shadow.position.y = + y, 400, 400, 250);
       }
     }
   };
@@ -77,10 +105,16 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const animation = studio => {
     const {root, camera} = studio;
 
-    const speed = .5;
+    const speed = 2.5;
     solidRoot.rotateY(1/RAD);
     solidRoot.translateY(speed);
     shadowRoot.translateY(-speed);
+    
+    // endless scroll
+    if (solidRoot.position.y - halfScreen - speed > - lineHeight / 2) {
+      solidRoot.position.y = solidStart;
+      shadowRoot.position.y = shadowStart;
+    }
 
     // TODO solve some unsubscribe call
     return () => console.log('--- destructure --- speed pairs ---');

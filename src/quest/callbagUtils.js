@@ -18,6 +18,11 @@ export const distancedMove = ( move = () => {}, dur = 200, dist = 100, waitFor =
   forEach(move)
 );
 
+export const moveAndDone = done => (move, dur, dist, waitFor = 0 ) => {
+  distancedMove(move, dur, dist, waitFor);
+  console.log('-->')
+}
+
 export const mousePosition = event => ({
   x: ( event.clientX / global.innerWidth ) * 2 - 1,
   y: - ( event.clientY / global.innerHeight ) * 2 + 1,
@@ -30,6 +35,8 @@ const intersects = (camera, objects) => mouse => {
   const [{object} = {}] = intersects;    
   return object;
 };
+
+export const middleLog = map(data => {console.log(data); return data});
 
 export const clickSource = (camera, objects)  => pipe (
   fromEvent(document, 'click'),
