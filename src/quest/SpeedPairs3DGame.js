@@ -47,8 +47,8 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
     .map(render(shadowRoot))
 
-  const measure = new THREE.Box3().setFromObject( solidRoot );
-  const lineHeight = measure.getSize().y;
+  const measure = new THREE.Box3().setFromObject( solidRoot ).getSize();
+  const lineHeight = measure.y;
   console.log(lineHeight);
   const halfScreen = 500;
   solidRoot.translateY(-lineHeight + halfScreen);
@@ -56,6 +56,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const [solidStart, shadowStart] = [solidRoot.position.y, shadowRoot.position.y];
   let solid, shadow
   let pairFound = 0;
+  const maxPairFound = 2;
  
   const handleClick = target => {
     const isSolid = (target.parent === solidRoot );
@@ -84,7 +85,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
         distancedMove( y =>  solid.position.y = - y, 800, 200, 250);
         distancedMove( y => shadow.position.y = + y, 800, 200, 250);
 
-        if(pairFound >= 5){
+        if(pairFound >= maxPairFound){
           gainScore(100);
           playOver(true);  
         }

@@ -63,7 +63,10 @@ export const play3dContent = ({scene, camera, root}) => animation => {
 
   return () => {
     const animRef = requestAnimationFrame(meshMoving);
-    return () => {cancelAnimationFrame(animRef)};
+    return () => {
+      console.log(animation+[], '<----- over');
+      cancelAnimationFrame(animRef)
+    };
   };  
 }
 

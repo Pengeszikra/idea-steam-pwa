@@ -45,6 +45,6 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
 
 //rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
-//rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'E'} />);
+rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'E'} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
 //rootRender(<SimpleDarkBg />)
