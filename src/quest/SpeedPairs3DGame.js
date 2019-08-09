@@ -54,18 +54,26 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   solidRoot.translateY(-lineHeight + halfScreen);
   shadowRoot.translateY(-halfScreen);
   const [solidStart, shadowStart] = [solidRoot.position.y, shadowRoot.position.y];
+
   let solid, shadow
   let pairFound = 0;
   const maxPairFound = 2;
- 
+  let center = null;
+  let underCheck = false
+
+  // too much happen there !! 
   const handleClick = target => {
+    if (underCheck) return; 
+
     const isSolid = (target.parent === solidRoot );
     const object = target.clone();
     
     object.selected = true;
 
+    /*
     if (isSolid) solid = object;
     if (!isSolid) shadow = object;
+    */
 
     root.add(object);
 
@@ -79,6 +87,31 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     distancedMove( xc => object.position.x = x - xc, 300, x );
     distancedMove( yc => object.position.y = y - yc, 300, y );
 
+    if (!center) return center = object;
+
+    const isPair = center.geometry.uuid ===  object.geometry.uuid && center.material !== object.material;
+
+    underCheck = isPair;
+
+    setTimeout(() => {
+      console.log(`<-- ${isPair} -->`);
+      const up = object.clone();
+      const down = center.clone();
+      root.add(up, down);
+      distancedMove( y =>  up.position.y = - y, 800, 200, 250);
+      distancedMove( y => down.position.y = + y, 800, 200, 250);
+
+      setTimeout(() => root.remove(up, down), 250);
+
+      root.remove(object);
+      root.remove(center)
+      center = null;
+      underCheck = false;
+    }, 250);
+      
+     
+
+    /*
     if (solid && shadow) {
       if (solid.geometry.uuid === shadow.geometry.uuid) {
         pairFound ++
@@ -95,6 +128,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
         distancedMove( y => shadow.position.y = + y, 400, 400, 250);
       }
     }
+    */
   };
 
   pipe (
@@ -106,7 +140,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const animation = studio => {
     const {root, camera} = studio;
 
-    const speed = 2.5;
+    const speed = 1;
     solidRoot.rotateY(1/RAD);
     solidRoot.translateY(speed);
     shadowRoot.translateY(-speed);

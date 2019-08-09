@@ -32,8 +32,8 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
       />      
       <ModalScore position={position} score={gain} show={isNaN(gain)} onClick={noprop(() => gainScore(0))} />
       <ModalScore position={position} score={score} show={itsOver} onClick={noprop(handleRounds)} />
-      <TopRock show= {position === 'E'}/>
-      <RockFormation show = {position === 'E'}/>
+      <TopRock show= {position === 'G'}/>
+      <RockFormation show = {position === 'G'}/>
       
       <IntroButtonHolder>        
         {/* <IntroButton onClick={handleGameReset}>reset</IntroButton> */}
