@@ -8,7 +8,7 @@ import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
-  const {scene, camera} = studio;
+  const {root, camera} = studio;
 
   const shapes = blenderPlusPerfectSet(1.5);
 
@@ -16,7 +16,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const questItem = makeShape(shapes[questChoice],90,90,90, 0xAA5522, 1 , 0xFFAA77);  
   questItem.scale.multiplyScalar(55);
   questItem.translateZ(-300).translateY(260).rotateX(-12/RAD).rotateY(45/RAD);
-  scene.add(questItem);
+  root.add(questItem);
 
   const [width, height] = [4, 4];
   const questCopyPos = irnd(width * height);
@@ -39,19 +39,19 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     shadow.scale.multiplyScalar(25);
     shadow.position.set(i % width * 100 - 148, (i / width | 0) * 100 - 200, 0);    
     rotate(shadow, ...rotations[irnd(rotations.length)] );    
-    scene.add(shadow);
+    root.add(shadow);
     return shadow;
   });
 
   const click3d = mouse => {
     const ray = new THREE.Raycaster();
     ray.setFromCamera( mouse, camera );
-    const intersects = ray.intersectObjects( scene.children );
+    const intersects = ray.intersectObjects( root.children );
     const [{object} = {}] = intersects;
     
     if (object && object !== questItem && questItem.geometry.uuid == object.geometry.uuid) {
-      scene.remove(object);
-      const {length} = scene.children.filter(({geometry}) => geometry && geometry.uuid == questItem.geometry.uuid);
+      root.remove(object);
+      const {length} = root.children.filter(({geometry}) => geometry && geometry.uuid == questItem.geometry.uuid);
       if (length <= 1) {
         gainScore(100);
         playOver(true);
@@ -69,7 +69,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
 
   const animation = studio => {
-    const {scene, camera} = studio;
+    const {root, camera} = studio;
     questItem.rotateY(.4/RAD);
     shadows
       .filter(shadow => shadow.geometry.type == questItem.geometry.type)

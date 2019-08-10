@@ -83,8 +83,6 @@
   &:hover { filter: brightness(1.4); }
 }
 
-.game-1 { @include bimage('/img/gui/game-1.png', 100vmin, 100vh, 7vmin); }
-
 .small-logo { 
   @include bimage('/img/gui/small-logo.png', 63vmin, 36vmin, 102vmin, 19vmin); 
 }

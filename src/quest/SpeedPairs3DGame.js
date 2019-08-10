@@ -7,7 +7,7 @@ import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent } from 'callbag-basics';
+import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, merge } from 'callbag-basics';
 import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
@@ -167,3 +167,16 @@ const Game = ({show, playOver, gainScore, setChecking}) => (
 );
 const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);
 export default props => <GameWithBackground {...props} />;
+
+
+  // resize by callbag, almost fine 
+  /*
+  pipe (    
+    merge (
+      fromIter([1]),
+      fromEvent(global, 'resize'),
+    ),    
+    map(() => global.innerWidth),
+    forEach(width => root.scale.setScalar(width / 500))
+  )
+  */

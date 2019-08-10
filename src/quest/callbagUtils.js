@@ -3,9 +3,7 @@ import duration from 'callbag-duration-progress';
 import wait from 'callbag-wait';
 import pullWhen from 'callbag-pull-when';
 import sample from 'callbag-sample';
-
 import * as THREE from 'three';
-import { SourceNode } from 'C:/Users/Vívó Péter/AppData/Local/Microsoft/TypeScript/3.5/node_modules/source-map/source-map';
 
 export const distance = d => t => t * d;
 export const easeOut = p => 1 - (1 - p) * (1 - p);

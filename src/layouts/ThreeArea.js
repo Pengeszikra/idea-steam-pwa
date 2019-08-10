@@ -64,7 +64,7 @@ const ThreeArea = ({
 
     // root of responsivity;
     const root = new THREE.Group();    
-    const responsivity = .9;
+    const responsivity = global.innerWidth/500;
     root.scale.setScalar(responsivity);
      scene.add(root);
 
