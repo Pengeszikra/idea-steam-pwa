@@ -47,4 +47,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
 //rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'G'} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
-//rootRender(<SimpleDarkBg />)
+rootRender(<SimpleDarkBg />)

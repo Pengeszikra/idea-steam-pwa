@@ -91,26 +91,12 @@ export const filter = condition => source => (start, sink) => {
 // definition of callbag 
 // (type: 0|1|2, payload?: any) => void 
 
-/*
 
 const originalMap = mapping => source => (start, sink) => {
   if (start !== 0) return;
   source(0, (t, data) => {
     sink(t, t === 1 ? mapping(data) : data)
   });
-};
-
-const basicOperator = source => (start, sink) => {
-  if (start !== 0) return;
-  source(
-    0, 
-    (t, data) => sink(
-      t, 
-      t === 1 
-        ? [...data] 
-        : t === 2 ? '--- its over ---' : data
-    )
-  );
 };
 
 const pausableInterval = period => (start, sink) => {
@@ -122,12 +108,54 @@ const pausableInterval = period => (start, sink) => {
   resume();
 };
 
-// fromIter( (function * (){ yield 1; yield "hoppa"})() ),
+const terminateAlert = source => (start, sink) => {
+  if (start !== 0) return;  
+
+  let sourceTalk;
+  
+  const talkback = (type, data) => {
+    if (type == 2) return console.log('<- source are terminated me ->');
+  };
+
+  const handshake = (type, data) => {
+    if (type === 0) {
+      sourceTalk = data;
+      return sink(0, talkback);
+    }
+    if (type === 2) {
+      sourceTalk(2)
+      return console.log('-> sink are terminated me <-');
+    };
+    sink(type, data);
+  } 
+
+  source(0, handshake);
+};
+
+const terminateWhen = condition => source => (start, sink) => {
+  if (start !== 0) return;  
+  let isTerminated = false;
+
+  const handshake = (type, data) => {
+    if (type === 1 && condition(data)) {
+      console.log('terminate -->')
+      sink(2);
+      source(2);
+      isTerminated = true;
+    }
+    !isTerminated && sink(type, data);
+  }
+
+  source(0, handshake);
+};
+
 
 pipe(
-  fromIter('hello callbag'.split(' ')),
-  basicOperator,
+  interval(20),
+  terminateAlert,
+  terminateWhen(p => p === 7),
+  map(p => p * 10),
+  terminateAlert,
   forEach(console.log)
 )
 
-*/
