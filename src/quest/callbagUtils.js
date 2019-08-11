@@ -149,7 +149,8 @@ const terminateWhen = condition => source => (start, sink) => {
   source(0, handshake);
 };
 
-
+// seems nice solution
+/*
 pipe(
   interval(20),
   terminateAlert,
@@ -158,4 +159,4 @@ pipe(
   terminateAlert,
   forEach(console.log)
 )
-
+*/

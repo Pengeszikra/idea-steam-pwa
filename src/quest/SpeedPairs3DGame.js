@@ -34,7 +34,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   root.add(solidRoot, shadowRoot);
 
   solids
-    //.filter(takeN(6))
+    //.filter(takeN(6))F
     .map(shape => makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77))
     .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
     .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
@@ -57,7 +57,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
   let solid, shadow
   let pairFound = 0;
-  const maxPairFound = 2;
+  const maxPairFound = 4;
   let center = null;
   let underCheck = false
 
@@ -70,11 +70,6 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     
     object.selected = true;
 
-    /*
-    if (isSolid) solid = object;
-    if (!isSolid) shadow = object;
-    */
-
     root.add(object);
 
     object.position.y = isSolid
@@ -84,51 +79,50 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     object.position.x = isSolid ? -130 : 130;
     const [x, y] = [object.position.x , object.position.y];
 
-    distancedMove( xc => object.position.x = x - xc, 300, x );
-    distancedMove( yc => object.position.y = y - yc, 300, y );
+    distancedMove( xc => object.position.x = x - xc, 250, x );
+    distancedMove( yc => object.position.y = y - yc, 250, y );
 
     if (!center) return center = object;
 
     const isPair = center.geometry.uuid ===  object.geometry.uuid && center.material !== object.material;
 
-    underCheck = isPair;
+    underCheck = true;
 
     setTimeout(() => {
       console.log(`<-- ${isPair} -->`);
-      const up = object.clone();
-      const down = center.clone();
-      root.add(up, down);
-      distancedMove( y =>  up.position.y = - y, 800, 200, 250);
-      distancedMove( y => down.position.y = + y, 800, 200, 250);
 
-      setTimeout(() => root.remove(up, down), 250);
+      const one = object.clone();
+      const two = center.clone();
+      root.add(one, two);
+      
+      distancedMove( y => one.position.y = - y, 500, isPair ? 200 : 400);
+      distancedMove( y => two.position.y = + y, 500, isPair ? 200 : 400);
 
-      root.remove(object);
-      root.remove(center)
+      if (isPair) {
+        one.position.z = 100;
+        two.position.z = 100;
+        distancedMove( z => {
+          one.scale.setScalar(z);
+          two.scale.setScalar(z);
+        }, 500, 100);
+      }
+      
+      setTimeout(() => root.remove(one, two), 700);
+
+      root.remove(object, center);
       center = null;
       underCheck = false;
-    }, 250);
-      
-     
 
-    /*
-    if (solid && shadow) {
-      if (solid.geometry.uuid === shadow.geometry.uuid) {
-        pairFound ++
-        distancedMove( y =>  solid.position.y = - y, 800, 200, 250);
-        distancedMove( y => shadow.position.y = + y, 800, 200, 250);
-
-        if(pairFound >= maxPairFound){
+      if (isPair) {
+        pairFound ++;
+        if (pairFound >= maxPairFound) {
           gainScore(100);
           playOver(true);  
         }
       }
-      else {
-        distancedMove( y =>  solid.position.y = - y, 400, 400, 250);
-        distancedMove( y => shadow.position.y = + y, 400, 400, 250);
-      }
-    }
-    */
+
+    }, 260);
+
   };
 
   pipe (
@@ -140,7 +134,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const animation = studio => {
     const {root, camera} = studio;
 
-    const speed = 1;
+    const speed = 3;
     solidRoot.rotateY(1/RAD);
     solidRoot.translateY(speed);
     shadowRoot.translateY(-speed);
