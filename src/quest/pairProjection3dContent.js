@@ -27,8 +27,7 @@ export default ({playOver, gainScore, setChecking}) => studio => {
 
   const sample = [questShape, ...shapes]
     .slice(0, width * height)
-    .sort(shuffle);
-  
+    .sort(shuffle);  
 
   const shadows = sample.map((shape, i) => {    
     const shadow = makeShape(shape, 1, 1, 1, 0xAA5522, 1 , 0xFFAA77);
