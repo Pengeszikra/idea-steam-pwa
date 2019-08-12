@@ -7,7 +7,7 @@ import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
-import { pipe, forEach } from 'callbag-basics';
+import { pipe, forEach, interval, take } from 'callbag-basics';
 import { mousePosition, clickSource, filter, distancedMove, moveAndDone } from './callbagUtils';
 import * as R from 'ramda';
 
@@ -24,7 +24,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const height = 8;
   const numberOfTypes = 5;
 
-  const matrix  = Array.from({length: width * height}, _ => shapes[irnd(numberOfTypes)] );
+  const getRandomShape = () => shapes[irnd(numberOfTypes)];
   const render = root => item => root.add(item);
 
   const matrixRoot = new THREE.Group();
@@ -35,31 +35,23 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
   const isNext = (x1, y1, x2, y2) => Math.abs(x1 - x2) + Math.abs(y1 - y2) === 1
 
-  matrix
-    .map(shape => makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77))
-    .map(mesh => {mesh.scale.multiplyScalar(20); return mesh})
-    .map((mesh, i) => {
+  const createGem = (x, y, shape) => {
+    const mesh = makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77);
+    mesh.scale.multiplyScalar(20);
+    mesh.translateX(x * 80 - 200).translateY(y * 80 - 270);
+    rotate(mesh,...([45,0,45].sort(shuffle)));
+    mesh.userData = {x, y, uuid : mesh.geometry.uuid };
+    return mesh;
+  };
+
+  Array
+    .from({length: width * height}, getRandomShape)
+    .map((shape, i) => {
       const x = i % width;
       const y = i / width | 0;
-      mesh
-        .translateX(x * 80 - 200)
-        .translateY(y * 80 - 270)
-      // rotate(mesh,...([45,0,45].sort(shuffle)));
-      mesh.userData = {i, x, y, uuid : mesh.geometry.uuid }
-      return mesh
+      return createGem(x, y, shape);    
     })
-    .map(render(matrixRoot))
-
-  /*
-  // ramda solution for this problem !! 
-  // https://ramdajs.com/repl/?v=0.26.1#?filter%28%28%7Blength%7D%29%20%3D%3Elength%20%3E%202%2C%0AgroupWith%28%28a%2Cb%29%20%3D%3E%20a%20%3D%3D%20b-1%2C%20%5B0%2C0%2C0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C8%2C9%2C10%2C10%2C11%2C12%5D%29%0A%29%0A%0A%0A%0A
-  console.table(
-    R.filter(
-      ({length}) =>length > 2, 
-      R.groupWith((a,b) => a == b-1, [0,0,0,1,2,3,5,6,7,8,8,9,10,10,11,12])
-    )
-  );
-  */
+    .map(render(matrixRoot));
 
   // too much happen there !! 
   const handleClick = target => {
@@ -89,6 +81,10 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     
     clicked = target;
 
+    foundGems();
+  };
+
+  const foundGems = () => {
     const logUserData = ({userData}) => console.log(userData);
     const atLeastThree = ({length}) => length > 2;
     // check columns
@@ -96,7 +92,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     const vertGroups = R.filter( atLeastThree , R.groupWith( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => ax == bx && ay == by - 1, verticals) );
     vertGroups.map(group => group.map(e => e.userData.vs = group.length));
     //vertGroups.map(group => group.map(logUserData));
-    console.log('-----------------');
+    // console.log('-----------------');
     const horizontals = matrixRoot.children.sort(({userData:{uuid:a, x:ax, y:ay}}, {userData:{uuid:b, x:bx, y:by}}) => `${a}:${ay}:${ax}` < `${b}:${by}:${bx}` ? -1 : 1 );
     const horGroups = R.filter( atLeastThree , R.groupWith( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => ay == by && ax == bx - 1, horizontals) );
     horGroups.map(group => group.map(e => e.userData.hs = group.length));
@@ -104,14 +100,35 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
     const founds = R.flatten([vertGroups, horGroups])
     founds.map(mesh => mesh.material = selectMaterial);
-    founds.map(logUserData);
-    console.log(
-      'score:',
-      R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs ))
-    )
+    // founds.map(logUserData);
+    console.log( 'score:',  R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs )) );
+
+    const clearFounds = () => founds.map(m => matrixRoot.remove(m));
+    const refill = () => {
+      console.log('-- refill --');
+      const verts = R.groupWith(
+        ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
+        , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${ay}` < `${bx}:${by}` ? -1 : 1 )
+      );
+      
+      // verts.map(group => {group.map(logUserData); console.log('-'.repeat(11))});
+
+      verts.map(group => {
+        const extra = height - group.length;
+        Array.from({length:extra}, (_, i) => {
+          const [first] = group;          
+          const {x} = first.userData;
+          const y = height + i;
+          // console.log(`${x}::${y}`);
+          const gem = createGem(x, y, getRandomShape());
+          matrixRoot.add(gem);
+        });
+      });
+    }
     
-    
-  };
+    setTimeout( clearFounds, 200);
+    setTimeout( refill, 400);
+  }
 
   pipe (
     clickSource(camera, matrixRoot.children),    

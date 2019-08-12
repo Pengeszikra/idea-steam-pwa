@@ -186,3 +186,14 @@ img.match(/\/img\/[^\.]*\..../g).map(pic => `<link rel="preload" href="${pic}" a
 ```jsx
 const {timer, pauseTimer, playTimer, itsOver, setPeriod} = useTimer();
 ```
+
+## ramada solution for 3 gems game 
+<https://ramdajs.com/repl/?v=0.26.1#?filter%28%28%7Blength%7D%29%20%3D%3Elength%20%3E%202%2C%0AgroupWith%28%28a%2Cb%29%20%3D%3E%20a%20%3D%3D%20b-1%2C%20%5B0%2C0%2C0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C8%2C9%2C10%2C10%2C11%2C12%5D%29%0A%29%0A%0A%0A%0A>
+```jsx
+  console.table(
+    R.filter(
+      ({length}) =>length > 2, 
+      R.groupWith((a,b) => a == b-1, [0,0,0,1,2,3,5,6,7,8,8,9,10,10,11,12])
+    )
+  );
+```
