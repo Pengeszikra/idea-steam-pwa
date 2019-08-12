@@ -22,7 +22,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const shapes = blenderPlusPerfectSet(1.5);
   const width  = 6;
   const height = 8;
-  const numberOfTypes = 5;
+  const numberOfTypes = 4;
 
   const getRandomShape = () => shapes[irnd(numberOfTypes)];
   const render = root => item => root.add(item);
@@ -105,12 +105,12 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
     const clearFounds = () => founds.map(m => matrixRoot.remove(m));
     const refill = () => {
-      console.log('-- refill --');
-      const verts = R.groupWith(
+      const getVerts = () => R.groupWith(
         ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
         , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${ay}` < `${bx}:${by}` ? -1 : 1 )
       );
-      
+
+      const verts = getVerts();
       // verts.map(group => {group.map(logUserData); console.log('-'.repeat(11))});
 
       verts.map(group => {
@@ -121,9 +121,22 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
           const y = height + i;
           // console.log(`${x}::${y}`);
           const gem = createGem(x, y, getRandomShape());
-          matrixRoot.add(gem);
+          matrixRoot.add(gem);          
         });
       });
+
+      const filled = getVerts();
+      // filled.map(group => {group.map(logUserData); console.log('-'.repeat(11))});
+
+      filled.map(group => group
+        .map( (gem, i) => {
+          gem.userData.y = i;
+          const targetY = i * 80 - 270;
+          const dist = gem.position.y - targetY;
+          const y = gem.position.y;
+          distancedMove(ym => gem.position.y = y - ym, 250 + ( i * 10 ) , dist );
+        })
+      );
     }
     
     setTimeout( clearFounds, 200);
