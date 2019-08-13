@@ -28,7 +28,8 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const render = root => item => root.add(item);
 
   const matrixRoot = new THREE.Group();
- 
+
+  matrixRoot.translateX(-200).translateY(-270); 
   root.add(matrixRoot);
 
   let clicked = null
@@ -38,8 +39,8 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const createGem = (x, y, shape) => {
     const mesh = makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77);
     mesh.scale.multiplyScalar(20);
-    mesh.translateX(x * 80 - 200).translateY(y * 80 - 270);
-    rotate(mesh,...([45,0,45].sort(shuffle)));
+    mesh.translateX(x * 80).translateY(y * 80);
+    rotate(mesh,...([90,0,45].sort(shuffle)));
     mesh.userData = {x, y, uuid : mesh.geometry.uuid };
     return mesh;
   };
@@ -74,7 +75,6 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
         clicked.position.y = tpos.y;
         target.userData = {...cud};
         clicked.userData = {...tud};
-
         return clicked = false;
       }
     }
@@ -84,10 +84,17 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     foundGems();
   };
 
+  const getVerts = () => R.groupWith(
+    ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
+    , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${('00'+ay).slice(-2)}` < `${bx}:${('00'+by).slice(-2)}` ? -1 : 1 )
+  );
+
   const foundGems = () => {
     const logUserData = ({userData}) => console.log(userData);
+    const logUserDataWithPosition = ({userData, position}) => console.log(userData, position);
     const atLeastThree = ({length}) => length > 2;
     // check columns
+    //  this shorts works only x,y 0->9!
     const verticals = matrixRoot.children.sort(({userData:{uuid:a, x:ax, y:ay}}, {userData:{uuid:b, x:bx, y:by}}) => `${a}:${ax}:${ay}` < `${b}:${bx}:${by}` ? -1 : 1 );
     const vertGroups = R.filter( atLeastThree , R.groupWith( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => ax == bx && ay == by - 1, verticals) );
     vertGroups.map(group => group.map(e => e.userData.vs = group.length));
@@ -101,46 +108,50 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     const founds = R.flatten([vertGroups, horGroups])
     founds.map(mesh => mesh.material = selectMaterial);
     // founds.map(logUserData);
-    console.log( 'score:',  R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs )) );
-
+    const scoreOfGems = R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs ));
+    console.log( 'score:', scoreOfGems );
+    if (!founds.length) return console.log('--- dont found any matching ---');
+  
     const clearFounds = () => founds.map(m => matrixRoot.remove(m));
+    
     const refill = () => {
-      const getVerts = () => R.groupWith(
-        ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
-        , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${ay}` < `${bx}:${by}` ? -1 : 1 )
-      );
+      const filled = getVerts();
+      //filled.map(group => {group.map(logUserDataWithPosition); console.log('-'.repeat(11))});
+      //console.log('---- create extras ------')
 
-      const verts = getVerts();
-      // verts.map(group => {group.map(logUserData); console.log('-'.repeat(11))});
-
-      verts.map(group => {
-        const extra = height - group.length;
-        Array.from({length:extra}, (_, i) => {
-          const [first] = group;          
-          const {x} = first.userData;
-          const y = height + i;
-          // console.log(`${x}::${y}`);
+      filled.map(group => {
+        const extra = group.filter( ({userData:{hs, vs}}) => hs || vs );
+        const [first] = group;
+        const {x} = first.userData;
+        Array.from({length:extra.length}, (_, i) => {          
+          const y = height + i;          
           const gem = createGem(x, y, getRandomShape());
-          matrixRoot.add(gem);          
+          matrixRoot.add(gem); 
         });
       });
 
-      const filled = getVerts();
-      // filled.map(group => {group.map(logUserData); console.log('-'.repeat(11))});
+      const extras = getVerts();
+      //extras.map(group => {group.map(logUserDataWithPosition); console.log('-'.repeat(11))});
 
-      filled.map(group => group
+      clearFounds();
+
+      // down animation
+      extras.map(group => group
+        .filter( ({userData:{hs, vs}}) => !(hs || vs) )
         .map( (gem, i) => {
+          // console.log(gem.userData.y, i)
           gem.userData.y = i;
-          const targetY = i * 80 - 270;
+          const targetY = i * 80;
           const dist = gem.position.y - targetY;
           const y = gem.position.y;
-          distancedMove(ym => gem.position.y = y - ym, 250 + ( i * 10 ) , dist );
+          distancedMove(ym => gem.position.y = y - ym, 250 , dist );
         })
       );
     }
     
-    setTimeout( clearFounds, 200);
+    // setTimeout( clearFounds, 200);
     setTimeout( refill, 400);
+    setTimeout( foundGems, 800);
   }
 
   pipe (
@@ -152,9 +163,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const animation = studio => {
     const {root, camera} = studio;
 
-    if (clicked) {
-      clicked.rotateX(3/RAD);
-    }
+    // if (clicked) { clicked.rotateX(3/RAD); }
   }
   
   return play3dContent(studio)(animation);
