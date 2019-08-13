@@ -18,6 +18,7 @@ import EnterAndFinalQuest from './EnterAndFinalQuest';
 import PipeDraw2D from './PipeDraw2D';
 import Minimal3DGame from './test/Minimal3DGame';
 import SpeedPairs3DGame from './SpeedPairs3DGame';
+import ThreeGemGames from './ThreeGemGames';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -40,7 +41,7 @@ const questLookup = {
   Y:  EnterAndFinalQuest,
   A:  PairProjectionQuestGame,
   B:  SolidByPorjectionQuestGame,
-  C:  Minimal3DGame,
+  C:  ThreeGemGames,
   D:  SolidByPorjectionQuestGame, 
   X:  FoundTetraederUvQuest,
   E:  PairProjectionForTime,

@@ -11,10 +11,13 @@ import { pipe, forEach, interval, take } from 'callbag-basics';
 import { mousePosition, clickSource, filter, distancedMove, moveAndDone } from './callbagUtils';
 import * as R from 'ramda';
 
-const flatten = (r, e) =>  e.length ? [...r, ...e] : [...r, e];
-const lastOf = arr => (arr || []).slice(-1)[0];
-
 const selectMaterial = new THREE.MeshLambertMaterial( {color: 0x130802, flatShading:THREE.FlatShading, opacity:1 } );
+
+const logUserData = ({userData}) => console.log(userData);
+const logUserDataWithPosition = ({userData, position}) => console.log(userData, position);
+
+let totalScore = 0;
+const maxPoint = 300;
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {root, camera} = studio;
@@ -54,6 +57,11 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     })
     .map(render(matrixRoot));
 
+  const getVerts = () => R.groupWith(
+    ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
+    , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${('00'+ay).slice(-2)}` < `${bx}:${('00'+by).slice(-2)}` ? -1 : 1 )
+  );
+  
   // too much happen there !! 
   const handleClick = target => {
     const {x,y} = target.userData;
@@ -61,37 +69,39 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     if (clicked && clicked !== target) {
       const {x:x1, y:y1} = target.userData;
       const {x:x2, y:y2} = clicked.userData;
-      const tud = target.userData;
-      const cud = clicked.userData;
-      //console.log(`${x1}:${y1} -- ${x2}:${y2}`)
 
-      // change element
       if (isNext(x1,y1, x2,y2)) {
         const tpos = target.position.clone();
         const cpos = clicked.position.clone();
+        const tud = {...target.userData};
+        const cud = {...clicked.userData};
+        // console.log(cud, tud)
         target.position.x = cpos.x;
         target.position.y = cpos.y;
         clicked.position.x = tpos.x;
         clicked.position.y = tpos.y;
-        target.userData = {...cud};
-        clicked.userData = {...tud};
-        return clicked = false;
-      }
+        target.userData.x = cud.x;
+        target.userData.y = cud.y;
+        clicked.userData.x = tud.x;
+        clicked.userData.y = tud.y;
+
+        //getVerts().map( g => g.map(logUserDataWithPosition))
+        //console.log('-'.repeat(11));
+
+        clicked = false;
+        foundGems()
+        return;
+      }     
     }
     
     clicked = target;
-
+    // getVerts()[0].map(logUserDataWithPosition)
     foundGems();
   };
 
-  const getVerts = () => R.groupWith(
-    ({userData:{x:ax}}, {userData:{x:bx}}) => ax == bx
-    , matrixRoot.children.sort( ({userData:{x:ax, y:ay}}, {userData:{x:bx, y:by}}) => `${ax}:${('00'+ay).slice(-2)}` < `${bx}:${('00'+by).slice(-2)}` ? -1 : 1 )
-  );
-
   const foundGems = () => {
-    const logUserData = ({userData}) => console.log(userData);
-    const logUserDataWithPosition = ({userData, position}) => console.log(userData, position);
+    if (totalScore > maxPoint) return;
+    // console.log(+Date.now(), ' <- found gems')
     const atLeastThree = ({length}) => length > 2;
     // check columns
     //  this shorts works only x,y 0->9!
@@ -107,10 +117,19 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
     const founds = R.flatten([vertGroups, horGroups])
     founds.map(mesh => mesh.material = selectMaterial);
+
+    if (!founds.length) return;
     // founds.map(logUserData);
     const scoreOfGems = R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs ));
-    console.log( 'score:', scoreOfGems );
-    if (!founds.length) return console.log('--- dont found any matching ---');
+    if (scoreOfGems) {
+      totalScore += scoreOfGems;
+      gainScore(scoreOfGems);
+      console.log( 'score:', totalScore );  
+      if (totalScore > maxPoint) {
+        playOver(true)
+      }
+    }
+    // if (!founds.length) return console.log('--- dont found any matching ---');
   
     const clearFounds = () => founds.map(m => matrixRoot.remove(m));
     
@@ -134,7 +153,6 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
       //extras.map(group => {group.map(logUserDataWithPosition); console.log('-'.repeat(11))});
 
       clearFounds();
-
       // down animation
       extras.map(group => group
         .filter( ({userData:{hs, vs}}) => !(hs || vs) )
@@ -149,9 +167,9 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
       );
     }
     
-    // setTimeout( clearFounds, 200);
+    console.log('- - - ')
     setTimeout( refill, 400);
-    setTimeout( foundGems, 800);
+    setTimeout( foundGems, 800);  
   }
 
   pipe (
@@ -163,7 +181,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   const animation = studio => {
     const {root, camera} = studio;
 
-    // if (clicked) { clicked.rotateX(3/RAD); }
+    if (clicked) { clicked.rotateX(3/RAD); }
   }
   
   return play3dContent(studio)(animation);
