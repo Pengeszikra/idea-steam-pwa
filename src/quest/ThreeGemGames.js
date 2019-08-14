@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as THREE from 'three';
 import { QuestSketch } from '../styles/divStore';
 import { makeShape, RAD, play3dContent, makeFlatColorShape, rotate, addWireframe } from '../layouts/Geometries';
@@ -11,16 +11,19 @@ import { pipe, forEach, interval, take } from 'callbag-basics';
 import { mousePosition, clickSource, filter, distancedMove, moveAndDone } from './callbagUtils';
 import * as R from 'ramda';
 
+let totalScore = 0;
+const maxPoint = 300;
+
 const selectMaterial = new THREE.MeshLambertMaterial( {color: 0x130802, flatShading:THREE.FlatShading, opacity:1 } );
 
 const logUserData = ({userData}) => console.log(userData);
 const logUserDataWithPosition = ({userData, position}) => console.log(userData, position);
 
-let totalScore = 0;
-const maxPoint = 300;
 
-const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
+const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalScore}) => studio => {
   const {root, camera} = studio;
+
+  totalScore = 0;
 
   const shapes = blenderPlusPerfectSet(1.5);
   const width  = 6;
@@ -122,10 +125,11 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     // founds.map(logUserData);
     const scoreOfGems = R.sum(founds.map( ({userData:{hs = 0, vs = 0}}) => hs + vs ));
     if (scoreOfGems) {
-      totalScore += scoreOfGems;
-      gainScore(scoreOfGems);
-      console.log( 'score:', totalScore );  
+      totalScore += scoreOfGems;      
+      // console.log( 'score:', totalScore );
+      setLocalScore(totalScore);
       if (totalScore > maxPoint) {
+        gainScore(totalScore);
         playOver(true)
       }
     }
@@ -167,9 +171,8 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
       );
     }
     
-    console.log('- - - ')
-    setTimeout( refill, 400);
-    setTimeout( foundGems, 800);  
+    setTimeout( refill, 200);
+    setTimeout( foundGems, 450);
   }
 
   pipe (
@@ -183,16 +186,26 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
 
     if (clicked) { clicked.rotateX(3/RAD); }
   }
+
+  //console.log('---> start <---')
+  foundGems();
   
   return play3dContent(studio)(animation);
 }
 
-const Game = ({show, playOver, gainScore, setChecking}) => (
-  <ThreeInteraction 
-    show={show} 
-    add3DContent={solidProjection3dContent({playOver, gainScore, setChecking})} 
-    orthographic
-  />
-);
+const Game = ({show, playOver, gainScore, setChecking}) => {
+  const [localScore, setLocalScore] = useState(0);
+
+  return (
+    <>
+      <h1 style={{textAlign:'center'}}>Pontszám: {localScore}</h1>
+      <ThreeInteraction 
+        show={show} 
+        add3DContent={solidProjection3dContent({playOver, gainScore, setChecking, setLocalScore})} 
+        orthographic
+      />
+    </>
+  );
+}
 const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);
 export default props => <GameWithBackground {...props} />;

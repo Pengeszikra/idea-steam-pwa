@@ -49,4 +49,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'G'} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
 //rootRender(<SimpleDarkBg />)
-rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
+//rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
