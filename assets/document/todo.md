@@ -7,7 +7,7 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [ ] Middle game information
   - [ ] figure out all game type cave bye cave
   - [ ] fix setTimeOut of OpenDoor game
-  - [ ] 3D open door animation - maybe 
+  - [ ] 3D open door animation - maybe
   - [ ] fix item list with description
   - [x] fix modal displays, prevent more than one revealed same time.
   - [ ] maybe blocked way on map.
