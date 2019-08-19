@@ -340,21 +340,32 @@
 
 .glaukon  { 
   @include bimage('/img/gui/glaukon.png', 44vmin, 103vmin, unset, 4vmin); 
-  bottom: 45vmin;
+  bottom: 16vmin;
+  &[data-hidden="true"] { opacity: .1; }
 }
 .adeimantosz  { 
   @include bimage('/img/gui/adeimantosz.png', 53vmin, 103vmin, unset, -6vmin);
-  bottom: 45vmin;
+  bottom: 18vmin;
+  &[data-hidden="true"] { opacity: .1; }
  }
+
+ .glaukon[data-hidden="true"] span { display: none; }
 
  .glaukon span, .adeimantosz span {
   color: #77777F;
   line-height: 6vmin;
   font-size: 4vmin;
   position: absolute;
-  left: 0;
-  top: 97vmin;
+  left: 27vmin;
+  top: 17vmin;
   padding: 0 4vmin;
+  width: 50vmin;
+  z-index: 11;  
+ }
+
+ .adeimantosz span {
+  left: -37vmin;
+  top: 17vmin;
  }
 
  // 53 103 -6 15

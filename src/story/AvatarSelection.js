@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder, GreekCity, QuestSketch } from '../styles/divStore';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../engine/reducers';
 
 export default ({setWay, storyStore}) => {
+  const [glaukonHide, glaukonGoingToShadow] = useState(false);
+  const [adeimantoszHide, adeimantoszGoingToShadow] = useState(false);
 
   const [{}, dispatch] = storyStore;
 
@@ -17,11 +19,11 @@ return (
       <IntroHeader>{whoIsTheHero}</IntroHeader>
       <IntroButtonHolder>
         <IntroButton onClick={handleLevelSelection(1)}>
-          <Glaukon><span>{avatarDescripts[0]}</span></Glaukon>
+          <Glaukon data-hidden="false"><span>{avatarDescripts[0]}</span></Glaukon>
           {avatarNames(1)}
         </IntroButton>
         <IntroButton onClick={handleLevelSelection(2)}>
-          <Adeimantosz><span>{avatarDescripts[1]}</span></Adeimantosz>
+          <Adeimantosz data-hidden="false"><span>{avatarDescripts[1]}</span></Adeimantosz>
           {avatarNames(2)}
         </IntroButton>
       </IntroButtonHolder>
