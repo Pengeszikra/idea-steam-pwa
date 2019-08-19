@@ -2,25 +2,27 @@
 
 ## minimal stepps to finalize
   - [ ] games positions
-    - [ ] Y :
-    - [ ] A :
-    - [ ] B :
-    - [ ] C :
-    - [ ] D :
+    - [ ] Q : Open Door, Run away from water
+    - [ ] Y : Welcome / Run Away from Water
+    - [ ] A : Found perfect bodies
+    - [ ] B : Pair shadow to solid
+    - [ ] C : Pair solid to shadow
+    - [ ] D : Cube Uv
     - [ ] X : just crossroad - no game
-    - [ ] E :
-    - [ ] F :
-    - [ ] G :
-    - [ ] H :
-    - [ ] I :
-    - [ ] J :
-    - [ ] K :
-    - [ ] L :
+    - [ ] E : Pair shadow to solid for time
+    - [ ] F : Pair solid to shadow for time
+    - [ ] G : Cube uv for time
+    - [ ] H : Fallen Pairs
+    - [ ] I : Three Gems
+    - [ ] J : Roman Numbers
+    - [ ] K : Link Path
+    - [ ] L : Quest of Items, Walk to door 
+  - [x] game for caves
   - [ ] games versions
   - [ ] monologs
   - [ ] redraw items
   - [ ] rework multiRounds game framework
-  - [ ] create branch to keep old stuff
+  - [x] create branch to keep old stuff : oldest
 
 ## rapid way to finish
 

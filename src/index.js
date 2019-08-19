@@ -22,6 +22,7 @@ import { cave_1_1 } from './engine/applicationData';
 import SpeedPairs3DGame from './quest/SpeedPairs3DGame';
 import { SimpleDarkBg } from './styles/divStore';
 import ThreeGemGames from './quest/ThreeGemGames';
+import PerfectShapesGame from './quest/PerfectShapesGame';
 
 getMeshes(); // preload blender files
 
@@ -48,5 +49,6 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SolidByPorjectionQuestGame interaction={mockGameCommunication} />);
 //rootRender(<SpeedPairs3DGame interaction={mockGameCommunication} position={'G'} />);
 //rootRender(<Minimal3DGame interaction={mockGameCommunication} />);
-//rootRender(<SimpleDarkBg />)
+//rootRender(<SimpleDarkBg/>)
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
+rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)

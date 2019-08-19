@@ -61,10 +61,10 @@ export default ({playOver, gainScore, setChecking}) => studio => {
       playOver(true);
       global.removeEventListener('click', onMouseMove, false );      
     } else {
-      setTimeout(() => selectables.children.forEach(mesh => mesh.material = normalMaterial), 500);
+      selectables.children.forEach(mesh => mesh.material = normalMaterial);
       gainScore('Nem jó megoldás!'); 
     }
-  }
+  };
 
   setChecking(() => checkSelectionsResult);
 
@@ -80,7 +80,7 @@ export default ({playOver, gainScore, setChecking}) => studio => {
     const {root, scene, camera} = studio;    
     shadows
       .filter(shadow => shadow.geometry.type == quest1st.geometry.type)
-    isAllFounded && unFoundeds.forEach(unf => rotate(unf, 1,1,.2))      
+    isAllFounded && unFoundeds.forEach(unf => rotate(unf, 1,1,.2))
   }
   
   return play3dContent(studio)(animation);
