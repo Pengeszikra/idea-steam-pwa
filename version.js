@@ -1,1 +1,1 @@
-module.exports = '0.727';
+module.exports = '0.741';

@@ -1,24 +1,18 @@
 import React, {useEffect} from 'react';
-import { 
-  IntroButton, IntroButtonHolder, SolidByProjectionQuest,  
-  FoundTetraederUvQuest, PointProjectionQuest,
-  EquipmentQuest, RomanNumbers,
-  ContinuosPathQuest, PipelineQuest,
-  PairSolidToProjectionQuest, PairProjectionToSolidQuest
-} from '../styles/divStore';
+import { FoundTetraederUvQuest, EquipmentQuest } from '../styles/divStore';
 import showtime from '../utils/showtime';
 import RomanNumbersTask from './RomanNumbersTask';
 import FindCubeUv from './FindCubeUv';
 import OpenCodeQuestGame from './OpenCodeQuestGame';
-import SolidByPorjectionQuestGame from './SolidByPorjectionQuestGame';
+import SolidByPorjectionQuestGame, { SolidProjectionGameForTime } from './SolidByPorjectionQuestGame';
 import PairProjectionQuestGame from './PairProjectionQuestGame';
 import PairProjectionForTime from './PairProjectionForTime';
 import FindCubeUvForTime from './FindCubeUvForTime';
 import EnterAndFinalQuest from './EnterAndFinalQuest';
 import PipeDraw2D from './PipeDraw2D';
-import Minimal3DGame from './test/Minimal3DGame';
 import SpeedPairs3DGame from './SpeedPairs3DGame';
 import ThreeGemGames from './ThreeGemGames';
+import PerfectShapesGame from './PerfectShapesGame';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
@@ -39,19 +33,19 @@ const SendToEntrance = ({interaction}) => {
 const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  EnterAndFinalQuest,
-  A:  PairProjectionQuestGame,
-  B:  SolidByPorjectionQuestGame,
-  C:  ThreeGemGames,
-  D:  SolidByPorjectionQuestGame, 
-  X:  FoundTetraederUvQuest,
+  A:  PerfectShapesGame,
+  B:  PairProjectionQuestGame,
+  C:  SolidByPorjectionQuestGame,
+  D:  FindCubeUv, 
+  X:  JustMonolog,
   E:  PairProjectionForTime,
-  F:  FindCubeUv,
-  G:  SpeedPairs3DGame,
-  H:  PipeDraw2D,
-  I:  FindCubeUvForTime,
+  F:  SolidProjectionGameForTime,
+  G:  FindCubeUvForTime,
+  H:  SpeedPairs3DGame,
+  I:  ThreeGemGames,
   J:  RomanNumbersTask,
-  K:  EquipmentQuest,
-  L:  SendToEntrance,
+  K:  PipeDraw2D,
+  L:  JustMonolog,
 };
 
 export default showtime(({position, level, interaction}) => {
@@ -59,28 +53,5 @@ export default showtime(({position, level, interaction}) => {
   const handleQuestResult = (result, position) => e => questResultIs(result, position);
   const Quest = questLookup[position];
   if (!Quest) return null;
-  return (
-    <>
-      <Quest level={level} interaction={interaction} position={position}/>
-      {
-        [
-          PairProjectionQuestGame, 
-          JustMonolog, 
-          FindCubeUv, 
-          OpenCodeQuestGame,
-          SolidByPorjectionQuestGame,
-          RomanNumbersTask,
-          FindCubeUvForTime,
-          PairProjectionForTime,
-          EnterAndFinalQuest,
-          PipeDraw2D,
-        ].indexOf(Quest) === -1
-        &&
-        <IntroButtonHolder>
-          <IntroButton onClick={handleQuestResult(false, position)}>Balsiker</IntroButton>
-          <IntroButton onClick={handleQuestResult(true, position)}>Győzelem</IntroButton>
-        </IntroButtonHolder>
-      }
-    </>
-  );
+  return <Quest level={level} interaction={interaction} position={position}/>;
 });

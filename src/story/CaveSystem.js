@@ -58,7 +58,7 @@ export default ({position, level, interaction, currentArea, lightUp}) => {
     }
   }, [position]);
 
-  const light = position !== 'K' || lightUp;
+  const light = position !== 'L' || lightUp;
 
   return (    
     <Background level={level} interaction={interaction} style={light ? {} : {filter:'brightness(.2)'}}>

@@ -7,11 +7,8 @@ import {ThreeInteraction} from '../layouts/ThreeArea';
 import MultiRoundGameFrame from './multiRoundGameFrame';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
 
-import { interval, pipe, forEach, flatten, fromPromise, fromIter, take, map, fromEvent, merge } from 'callbag-basics';
-import duration from 'callbag-duration-progress';
-import wait from 'callbag-wait';
-import pullWhen from 'callbag-pull-when';
-import { mousePosition, clickSource, filter, distancedMove, moveAndDone } from './callbagUtils';
+import { pipe, forEach } from 'callbag-basics';
+import { clickSource, filter, distancedMove } from './callbagUtils';
 
 const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio => {
   const {root, camera} = studio;
@@ -34,14 +31,12 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
   root.add(solidRoot, shadowRoot);
 
   solids
-    //.filter(takeN(6))F
     .map(shape => makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77))
     .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
     .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
     .map(render(solidRoot))
 
   shadows
-    //.filter(takeN(6))
     .map(shape => makeFlatColorShape(shape, 1,1,1, 0x130802))
     .map(mesh => {mesh.scale.multiplyScalar(35); return mesh})
     .map((mesh, i) => {mesh.translateY(i * 120).rotateX(-12/RAD).rotateY(45/RAD); return mesh})
@@ -89,8 +84,6 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking}) => studio 
     underCheck = true;
 
     setTimeout(() => {
-      console.log(`<-- ${isPair} -->`);
-
       const one = object.clone();
       const two = center.clone();
       root.add(one, two);
@@ -161,16 +154,3 @@ const Game = ({show, playOver, gainScore, setChecking}) => (
 );
 const GameWithBackground = MultiRoundGameFrame(Game, QuestSketch);
 export default props => <GameWithBackground {...props} />;
-
-
-  // resize by callbag, almost fine 
-  /*
-  pipe (    
-    merge (
-      fromIter([1]),
-      fromEvent(global, 'resize'),
-    ),    
-    map(() => global.innerWidth),
-    forEach(width => root.scale.setScalar(width / 500))
-  )
-  */

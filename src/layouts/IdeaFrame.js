@@ -31,7 +31,7 @@ export default ({setWay, storyStore}) => {
   const [{
     score, saved, equipment, level, position, walk, underWalk, 
     speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved, lightUp,
-    mapVisible, inventoryVisible, teamVisible, playerInfoVisible
+    mapVisible, inventoryVisible, teamVisible, playerInfoVisible, startOfPlay
   }, dispatch] = storyStore;
 
   const setMapVisiblity = visible => dispatch(setModal({map: visible}));
@@ -109,7 +109,15 @@ export default ({setWay, storyStore}) => {
       <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
-      <PlayerInfo level={level} show={playerInfoVisible} setWay={setWay}></PlayerInfo>
+      <PlayerInfo 
+        level={level} 
+        score={score}
+        saved={saved.length}
+        startOfPlay={startOfPlay}
+        solved={Object.keys(caveLookUp).reduce((acc, key) => acc = caveLookUp[key].solved ? acc + 1 : acc , -3)}
+        show={playerInfoVisible} 
+        setWay={setWay}
+      />
       <BottomBar 
         show={position !== 'Q'}
         handleMap={handleMap} 

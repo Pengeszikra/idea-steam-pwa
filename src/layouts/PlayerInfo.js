@@ -2,7 +2,9 @@ import React from 'react';
 import { PlayerInfoBackground, IntroButton, Glaukon, Adeimantosz, SpeakText, MapCloseButton } from '../styles/divStore';
 import { avatarNames } from './../engine/applicationData';
 
-export default ({level = 1, setWay, ...props}) => {
+export default ({level = 1, setWay, solved, saved, score, startOfPlay, ...props}) => {
+
+  const time = (Date.now() - startOfPlay) / 60000 | 0;
 
   return (
     <PlayerInfoBackground {...props}>
@@ -11,10 +13,10 @@ export default ({level = 1, setWay, ...props}) => {
       <SpeakText>{`
         ${avatarNames(level)} :: ${level}. szint 
         
-        Megoldott feladatok: 2       
-        Megmentett emberek száma:  3
-        A barlangban eltöltött idő: 14 perc
-        Elért pontok száma: 3232
+        Megoldott feladatok: ${solved}
+        Pontok száma: ${score}
+        Követők száma:  ${saved}/12
+        Eltöltött idő: ${time} perc
       `}      
       </SpeakText>
       <MapCloseButton onClick={() => setWay(3)} style={{top: '20vmin'}} />

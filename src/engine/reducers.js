@@ -56,13 +56,14 @@ export const storyInitial = {
     L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
   saved: [],
-  equipment: [], //['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
+  equipment: [],
   
   hasQuesting: false,
   lightUp: false,
   finalQuestSolved: false,
 
-  speakAbout: "",  
+  speakAbout: "",
+  startOfPlay: Date.now(),
   ...modalOff,
 };
 
@@ -125,7 +126,7 @@ export const storyReducer = (state, {type, payload}) => {
         && position === 'F';
 
       const sett = area.items.sort().join('');
-      if(sett === 'D1E1G2H2' && position === 'K') {
+      if(sett === 'D1E1G2H2' && position === 'L') {
         return {
           ...state,
           caveLookUp: {...caveLookUp,  [position]:{...area, items:[]} },  
