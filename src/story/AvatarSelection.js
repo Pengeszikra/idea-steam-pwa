@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder, GreekCity, QuestSketch, BayPort, IntroButtonBar } from '../styles/divStore';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../engine/reducers';
@@ -7,7 +7,7 @@ import SocratesSpeaking from '../layouts/SocratesSpeaking';
 export default ({setWay, storyStore}) => {
   const [glaukonHide, glaukonGoingToShadow] = useState(false);
   const [adeimantoszHide, adeimantoszGoingToShadow] = useState(false);
-  const [phase, setPhase] = useState(0);
+  const [phase, setPhase] = useState(-1);
 
   const [{}, dispatch] = storyStore;
 
@@ -24,6 +24,11 @@ export default ({setWay, storyStore}) => {
     adeimantoszGoingToShadow(level === 1);
     glaukonGoingToShadow(level === 2);
   };
+
+  useEffect(() => {
+    setTimeout(() => setPhase(0), 1000 );
+    return () => {};
+  }, []);
 
 return (
     <BayPort>

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Adeimantosz, Glaukon, Island } from '../styles/divStore';
+import { Adeimantosz, Glaukon, Island, BayPort } from '../styles/divStore';
 import { entrance } from '../engine/applicationData';
 
 export default ({level, children, interaction}) => {
@@ -12,10 +12,10 @@ export default ({level, children, interaction}) => {
   }, []);
   
   return (
-    <Island>
+    <BayPort>
       {children}
       { level === 1 && <Glaukon style={{left:'-4vmin', bottom: '4vmin'}}/>}
       { level === 2 && <Adeimantosz style={{left:'48vmin', bottom: '4vmin', transform:'scaleX(-1)'}}/> }
-    </Island>
+    </BayPort>
   );
 }

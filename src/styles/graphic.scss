@@ -190,12 +190,13 @@
     position: relative;
     display: block;
     width: 40vmin;
-    font-size: 1.3em;
+    font-size: 1.6em;
     white-space: pre;
     color: black;
     height: 50vmin;
     top: 25vmin;
     left: 29vmin;
+    // user-select: none;
   }
 }
 
@@ -212,7 +213,6 @@
     height: auto;
     display: block;
     position: absolute;
-    bottom: 20vmin;
     right: 10vmin;
     color: black;
     font-size: 1.5em;
@@ -220,6 +220,9 @@
     padding: 1em;
     border-radius: .3em;
     max-width: 85vmin;
+    bottom: 2vmin;
+
+    &[data-on-frame="true"] { bottom: 20vmin; }
 
     .socrates-avatar {
       @include bimage('/img/gui/speak.png', 100vmin, 111vmin, -40vmin, -5vmin);

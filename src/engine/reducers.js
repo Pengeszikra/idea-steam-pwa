@@ -75,7 +75,7 @@ export const storyReducer = (state, {type, payload}) => {
   const area = caveLookUp[position];
   
   switch(type) {
-    case DEBUG_RESET: return {...storyInitial};
+    case DEBUG_RESET: return {...storyInitial, startOfPlay: Date.now() };
 
     case ACHIVE_SCORE: return { ...state, score: state.score + payload };
     

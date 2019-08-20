@@ -13,7 +13,7 @@ export default ({level = 1, setWay, solved, saved, score, startOfPlay, ...props}
       <SpeakText>{`
         ${avatarNames(level)} :: ${level}. szint 
         
-        Megoldott feladatok: ${solved}
+        Megoldott feladatok: ${solved}/12
         Pontok száma: ${score}
         Követők száma:  ${saved}/12
         Eltöltött idő: ${time} perc

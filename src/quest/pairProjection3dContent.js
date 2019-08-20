@@ -56,6 +56,9 @@ export default ({playOver, gainScore, setChecking}) => studio => {
     unFoundeds = selectables.children
       .filter(({geometry, material}) => geometry && geometry.uuid == quest1st.geometry.uuid || material === selectMaterial)
 
+    const missing = selectables.children
+    .filter(({geometry, material}) => geometry && geometry.uuid == quest1st.geometry.uuid && material === normalMaterial);
+
     const {isSolved, score} = unFoundeds.reduce(
       ({isSolved, score},{geometry, material}) => ({
         isSolved: isSolved && geometry && geometry.uuid == quest1st.geometry.uuid  && material === selectMaterial,
@@ -69,7 +72,7 @@ export default ({playOver, gainScore, setChecking}) => studio => {
       global.removeEventListener('click', onMouseMove, false );      
     } else {
       setTimeout(() => selectables.children.forEach(mesh => mesh.material = normalMaterial), 500);
-      gainScore('Nem jó megoldás!'); 
+      gainScore(`${missing.length} tárgyat kerss!`);
     }
   }
 

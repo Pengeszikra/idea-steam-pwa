@@ -9,7 +9,7 @@ export default ({level, position, questResultIs}) => {
   const [gain, gainScore] = useState(0);
   const [itsOver, playOver] = useState(false);
   const [checkResult, setChecking] = useState(() => () => {});
-  const [roundLeft, setRounds] = useState(level);
+  const [roundLeft, setRounds] = useState(level - 1);  // at second level each quest need for play twice
   
   usePipeWhen (itsOver) ( 
     interval(20), 

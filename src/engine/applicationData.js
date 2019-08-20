@@ -34,6 +34,15 @@ export const cave_1_1 = {
   whichRoad: _ => `Melyik úton indulsz tovább?`
 }
 
+export const cave_A = {
+  intro: _ => `Utad során találkozni fogsz a tér ékköveivel, a szabályos testekkel! "Szabályos sokszögekkel határolt Szabályos, vagy platóni testek. A Demiurgosz úgy rendelte, Hogy csak öten lettek. Platón az őselemekkel azonosította őket, Kepler kozmikus szférákkal kötötte össze.
+  Szögeik megegyeznek, S minden élnek egyenlő a hossza. Tetra, oktaéder, ikoza, dodeka, És a hexaéder, más néven a kocka.
+  `  
+  ,
+  mission: _ => `Válaszd ki a testek közül az összes szabályos testet, ha mindet kiválasztottad nyomd meg a megoldást!`
+}
+
+
 export const cave_2_1 = {
   intro: karakter => `A barlangban tűz ég és a fogva tartottak csak a testek árnyait látják a barlang falazatán. Jól beszélsz ${karakter}, de hogy a barlangban élőkkel is szót érts szükségképpen tudnod kell az árnyak nyelvén! Tudnod kell melyik tárgy milyen árnyat vet, ezt fogják csak látni a vakságban tartottak.`
   ,  
@@ -212,7 +221,7 @@ export const itemNames = {
 export const areaData = {
   Q: {exits:[], walk:[ 14, 49], data:entrance },
   Y: {exits:['Y-A', 'Y-B'], walk:[ 28, 49], data:cave_1_1, onEnterMonolog: cave_1_1.intro, onSecretMonolog: cave_2_1_again.intro },
-  A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_2_1 },
+  A: {exits:['A-C', 'A-X', 'A-Y'], walk:[ 34, 27], data:cave_A },
   B: {exits:['B-D', 'B-X', 'B-Y'], walk:[ 32, 72], data:cave_2_2 },
   C: {exits:['C-A', 'C-X'], walk:[ 55, 24], data:cave_2_3 },
   D: {exits:['D-B', 'D-X'], walk:[ 58, 69], data:cave_2_4 },

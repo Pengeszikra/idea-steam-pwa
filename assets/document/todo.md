@@ -1,28 +1,29 @@
 # IDEA - road to run
 
 ## minimal stepps to finalize
+  - [x] avatar selection reworked
   - [x] games positions
-    - [ ] Q : Open Door, Run away from water
-    - [ ] Y : Welcome / Run Away from Water
-    - [ ] A : Found perfect bodies
-    - [ ] B : Pair shadow to solid
-    - [ ] C : Pair solid to shadow
-    - [ ] D : Cube Uv
-    - [ ] X : just crossroad - no game
-    - [ ] E : Pair shadow to solid for time
-    - [ ] F : Pair solid to shadow for time
-    - [ ] G : Cube uv for time
-    - [ ] H : Fallen Pairs
-    - [ ] I : Three Gems
-    - [ ] J : Roman Numbers
-    - [ ] K : Link Path
-    - [ ] L : Quest of Items, Walk to door 
+    - [x] Q : Open Door, Run away from water
+    - [x] Y : Welcome / Run Away from Water
+    - [x] A : Found perfect bodies
+    - [x] B : Pair shadow to solid
+    - [x] C : Pair solid to shadow
+    - [x] D : Cube Uv
+    - [x] X : just crossroad - no game
+    - [x] E : Pair shadow to solid for time
+    - [x] F : Pair solid to shadow for time
+    - [x] G : Cube uv for time
+    - [x] H : Fallen Pairs
+    - [x] I : Three Gems
+    - [x] J : Roman Numbers
+    - [x] K : Link Path
+    - [x] L : Quest of Items, Walk to door 
   - [x] game for caves
   - [x] PerfectShapeGame
   - [ ] games versions
   - [ ] monologs
   - [ ] redraw items
-  - [ ] rework multiRounds game framework
+  - [x] rework multiRounds game framework each quest repeat twice at level 2
   - [x] create branch to keep old stuff : oldest
 
 ## rapid way to finish
@@ -44,7 +45,7 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [x] redraw prisoners
   - [ ] redraw caves
   - [ ] improve history reader
-  - [ ] improve avatar selection
+  - [x] improve avatar selection
   - [ ] write mail to Imo about final of game
   - [ ] maybe better method instead reset game 2x , 3x 
   - [ ] score modal with button space

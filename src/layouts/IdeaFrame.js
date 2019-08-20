@@ -108,7 +108,7 @@ export default ({setWay, storyStore}) => {
       />            
       <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
-      <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} />
+      <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} onFrame={position !== 'Q'} />
       <PlayerInfo 
         level={level} 
         score={score}
