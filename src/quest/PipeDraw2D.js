@@ -12,15 +12,16 @@ const [PipeDot] = divFactory('pipe-dot no-sel');
 const VPOS = 40;
 const zoom = 44;
 
-const caves3dLup = [
-  GEOMS.box(1,1,1),
-  GEOMS.icosahedron(1,1,1),
+const caves3dLup = [  
   GEOMS.dedocahedron(1,1,1),
+  GEOMS.icosahedron(1,1,1),
+  GEOMS.box(1,1,1),  
 ];
 
 const pairs = ([f,...r]) => r.length ? r.map(e=>f+e).concat(pairs(r)) : r.map(e=>f+e);
 
-function createCaveNodes(phase) {  
+function createCaveNodes(phase) {
+  console.log(`phase ::: ${phase}`)
   const makeCaveDots = (geomFactory, turnX = 11,  turnY = 44) => ({
     dots : geomFactory
       .rotateX(turnX/RAD)
@@ -117,7 +118,7 @@ const DrawPipeGame = ({show, playOver, gainScore, setChecking, phase = 0}) => {
   const lineStyle = {stroke:'white', strokeWidth:2};
 
   useEffect(() => {
-    setCave(createCaveNodes(Math.min(phase, caves3dLup.length - 1)));
+    setCave(createCaveNodes(phase));
   }, [phase]);
 
   const clickedStyle = key => selections.slice(-1) === key 

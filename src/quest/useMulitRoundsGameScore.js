@@ -51,5 +51,4 @@ export default ({level, position, questResultIs}) => {
     itsOver, playOver, checkResult, setChecking, roundLeft, setRounds,
     handleGameReset, handleRounds, 
   };  
-} 
-
+}

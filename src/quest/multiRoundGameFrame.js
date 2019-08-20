@@ -28,7 +28,7 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
         gainScore = {gainScore}
         setChecking = {setChecking}
         level = {level}
-        phase = {level - roundLeft}
+        phase = {roundLeft}
       />      
       <ModalScore position={position} score={gain} show={isNaN(gain)} onClick={noprop(() => gainScore(0))} />
       <ModalScore position={position} score={score} show={itsOver} onClick={noprop(handleRounds)} />
