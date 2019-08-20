@@ -349,10 +349,15 @@
   &[data-hidden="true"] { opacity: .1; }
  }
 
- .glaukon[data-hidden="true"] span { display: none; }
-
+ .glaukon[data-speak="true"] span, .adeimantosz[data-speak="true"] span { 
+    display: block; 
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1em;
+    border-radius: 1.9em;
+  }
+ 
  .glaukon span, .adeimantosz span {
-  color: #77777F;
+  color: #d8ceb5;
   line-height: 6vmin;
   font-size: 4vmin;
   position: absolute;
@@ -360,8 +365,15 @@
   top: 17vmin;
   padding: 0 4vmin;
   width: 50vmin;
-  z-index: 11;  
+  z-index: 11;
+  display: none;
  }
+
+ .bay-port .intro-header {
+  color: #d8ceb5;
+ }
+
+
 
  .adeimantosz span {
   left: -37vmin;
@@ -453,11 +465,8 @@
 
 }
 
-.quest-sketch { 
-  @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh);
-  // animation: speak-in 400ms forwards ease-in;
-  // transform-origin: center bottom;
-}
+.quest-sketch { @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh)}
+.bay-port { @include bimage('/img/gui/bay.jpg', 100vmin, 100vh)}
 .quest-found-cube-uv { @include bimage('/img/quest/found-cube-uv.jpg', 100vmin, 100vh) }
 .open-code { @include bimage('/img/quest/open-code.jpg', 100vmin, 100vh) }
 .found-all-projection { @include bimage('/img/quest/found-all-projection.jpg', 100vmin, 100vh) }

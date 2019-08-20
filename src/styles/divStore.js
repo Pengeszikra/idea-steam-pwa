@@ -42,6 +42,7 @@ export const [
 export const [RouteArrow] = divFactory('route-arrow');
 
 export const [Version, IntroButtonHolder] = divFactory('version', 'intro-button-holder');
+export const [IntroButtonBar] = showFactory('intro-button-holder');
 
 export const [Prisoner, Item] = divFactory('prisoner', 'item');
 
@@ -59,9 +60,10 @@ export const [
   PipelineQuest,
   PairSolidToProjectionQuest,
   PairProjectionToSolidQuest,
+  BayPort,
 ] = divFactory('quest-sketch no-scroll', 'quest-found-cube-uv', 'open-code no-scroll', 'found-all-projection', 'solid-by-projectio',
 'found-tetraeder-uv', 'point-projection', 'equipment-quest', 'roman-numbers', 'continuos-path', 'pipeline-quest',
-'pair-solid-to-projection','pair-project-to-solid');
+'pair-solid-to-projection','pair-project-to-solid', 'bay-port no-scroll');
 
 export const [GreekCity] = divFactory('greek-city no-scroll');
 

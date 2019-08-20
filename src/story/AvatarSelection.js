@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder, GreekCity, QuestSketch } from '../styles/divStore';
+import { IntroButton, SimpleDarkBg, Adeimantosz, Glaukon, IntroHeader, IntroButtonHolder, GreekCity, QuestSketch, BayPort, IntroButtonBar } from '../styles/divStore';
 import { avatarNames, whoIsTheHero, avatarDescripts } from '../engine/applicationData';
 import { selectLevel } from '../engine/reducers';
+import SocratesSpeaking from '../layouts/SocratesSpeaking';
 
 export default ({setWay, storyStore}) => {
   const [glaukonHide, glaukonGoingToShadow] = useState(false);
   const [adeimantoszHide, adeimantoszGoingToShadow] = useState(false);
+  const [phase, setPhase] = useState(0);
 
   const [{}, dispatch] = storyStore;
 
@@ -14,19 +16,32 @@ export default ({setWay, storyStore}) => {
     dispatch(selectLevel(level))
   };
 
+  const handleSpeakWhoAmI = level => () => {
+    if ( level === 1 && adeimantoszHide || level === 2 && glaukonHide ) {
+      setWay(2);
+      dispatch(selectLevel(level));  
+    }
+    adeimantoszGoingToShadow(level === 1);
+    glaukonGoingToShadow(level === 2);
+  };
+
 return (
-    <QuestSketch>
-      <IntroHeader>{whoIsTheHero}</IntroHeader>
-      <IntroButtonHolder>
-        <IntroButton onClick={handleLevelSelection(1)}>
-          <Glaukon data-hidden="false"><span>{avatarDescripts[0]}</span></Glaukon>
+    <BayPort>
+      <SocratesSpeaking 
+        show={phase === 0}
+        speakAbout={whoIsTheHero}  
+        handleStopSpeak={() => setPhase(1)}
+      />
+      <IntroButtonBar show={phase === 1}>
+        <IntroButton onClick={handleSpeakWhoAmI(1)}>
+          <Glaukon data-hidden={glaukonHide} data-speak={adeimantoszHide}><span>{avatarDescripts[0]}</span></Glaukon>
           {avatarNames(1)}
         </IntroButton>
-        <IntroButton onClick={handleLevelSelection(2)}>
-          <Adeimantosz data-hidden="false"><span>{avatarDescripts[1]}</span></Adeimantosz>
+        <IntroButton onClick={handleSpeakWhoAmI(2)}>
+          <Adeimantosz data-hidden={adeimantoszHide} data-speak={glaukonHide}><span>{avatarDescripts[1]}</span></Adeimantosz>
           {avatarNames(2)}
         </IntroButton>
-      </IntroButtonHolder>
-    </QuestSketch>
+      </IntroButtonBar>
+    </BayPort>
   );
 }
