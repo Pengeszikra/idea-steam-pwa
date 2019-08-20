@@ -230,6 +230,7 @@
 
     .speak-text {
       position: relative;
+      min-width: 80vmin;
     }
   }
 }
@@ -282,6 +283,13 @@
   opacity: 0;
   left: -40vmin;
   animation: slide-from-left 200ms forwards ease-in;
+
+  h1 {
+    margin-top: 17vmin;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .teams-bg {

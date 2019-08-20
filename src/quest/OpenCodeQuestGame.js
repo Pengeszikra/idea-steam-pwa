@@ -5,6 +5,7 @@ import doesOverlap from './../utils/doesOverlap';
 import { taskSetups } from './data/openCodeQuest';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import { shuffle } from '../utils/randoms';
+import { entrance, avatarNames } from '../engine/applicationData';
 
 const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
   const [clearHold, setDrop] = setHold(shapeId);
@@ -43,7 +44,7 @@ export default  ({interaction, level = 2, position}) => {
   const {questResultIs, instruction} = interaction;
   const [isSpeak, setSpeak] = useState(false)
   const [attached, setAttached] = useState(["", "", "", ""]);
-  const [solution, setSolution] = useState("Megoldás");
+  const [isOpen, openDoor] = useState(0);  
   const [task, setTask] = useState(...taskSetups[0]);
   const t1 = useRef(null);
   const t2 = useRef(null);
@@ -57,6 +58,7 @@ export default  ({interaction, level = 2, position}) => {
     const selectedTask = {...taskSetups[level][choised]};
     const shapes = selectedTask.shapes.sort(shuffle);
     setTask({...selectedTask, shapes});
+    return ()=>{};
   }, []);
   
   const holdFactory = (shape) => [
@@ -75,10 +77,7 @@ export default  ({interaction, level = 2, position}) => {
 
   const checkSolution = () => {
     const isSolved = attached.length === attached.filter((shape, i) => shape === task.solution[i]).length;
-    if (isSolved) {
-      setTimeout(()=>questResultIs(isSolved, position), 1000);
-    }
-    setSolution( isSolved ? "Jó!" : "Rossz!" );
+    openDoor(isSolved ? 1 : -1);
   };
 
   const [topOne, topTwo, leftTwo, leftOne] = task.labels;
@@ -97,7 +96,7 @@ export default  ({interaction, level = 2, position}) => {
         {targets.map((targetRef, key) => <GeomTarget key={key} fref={targetRef}></GeomTarget>)}
         <IntroButtonHolder>
           <IntroButton onClick={()=>questResultIs(true, position)}>simán kinyit</IntroButton>
-          <IntroButton onClick={checkSolution}>{solution}</IntroButton>
+          <IntroButton onClick={checkSolution}>Megoldás</IntroButton>
         </IntroButtonHolder>        
       </OpenGameHolder>      
       <ItemHolder>
@@ -105,13 +104,11 @@ export default  ({interaction, level = 2, position}) => {
       </ItemHolder>
       <IngameHistory show={true} onClick={() => setSpeak(talk => !talk)} />
       <SocratesSpeaking
-        show={isSpeak}
-        speakAbout={instruction}
+        show={isSpeak || isOpen === 1 || isOpen === -1}
+        speakAbout={isOpen === 1 ? entrance.gratulation(avatarNames(level)) : isOpen === -1 ? entrance.fail(avatarNames(level)) :  instruction}
         level={level}
-        handleStopSpeak={()=> setSpeak(false)}
+        handleStopSpeak={isOpen === 1 ? ()=>questResultIs(true, position) : isOpen === -1 ? () => openDoor(0) : () => setSpeak(false)}
       />
     </OpenCodeQuest>
   );
 }
-
-// {task.labels.map((label, key) => <TaskLabel key={key} data-label={key}>{label}</TaskLabel>)}

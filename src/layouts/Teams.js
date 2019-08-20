@@ -7,6 +7,7 @@ import showtime from '../utils/showtime';
   const showSaved = saved.map(prisonerId => <Prisoner data-prisoner={prisonerId} key={`prs-${prisonerId}`} />);
   return (
     <TeamsBg data-teams onClick={handleClose}>      
+      <h1>Követők</h1>
       {showSaved}
     </TeamsBg>
   );

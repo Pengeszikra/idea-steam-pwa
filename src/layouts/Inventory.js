@@ -14,6 +14,7 @@ const Inventory = ({handleClose, equipment, interaction}) => {
   );
   return (
     <InventoryBg data-equipment onClick={handleClose} >      
+      <h1>Tárgyak</h1>
       {showItems}
     </InventoryBg>
   );

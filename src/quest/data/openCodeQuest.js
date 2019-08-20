@@ -22,17 +22,20 @@ export const taskSetups = [
   ], 
   [   // level 1
     {
-      labels   : ['Csúcsok száma: 3', 'Csúcsok száma: 4', 'Van derékszöge', 'Nincs derékszöge'],
+      labels   : ['Csúcsok száma: III.', 'Csúcsok száma: IV.', 
+                  'Van derékszöge', 'Nincs derékszöge'],
       shapes   : [figures.box, figures.conerTrinagle, figures.fineTrinagle, figures.paralelogramma],
       solution : [figures.conerTrinagle, figures.box, figures.fineTrinagle, figures.paralelogramma],
     },
     {
-      labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
+      labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 
+                  'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
       shapes   : [figures.box, figures.paralelogramma, figures.brick, figures.rombusz],
       solution : [figures.box, figures.brick, figures.paralelogramma, figures.rombusz],
     },
     {
-      labels   : ['Van párhuzamos oldala', 'Nincs párhuzamos oldala', 'Van derékszöge', 'Nincs derékszöge'],
+      labels   : ['Van párhuzamos oldala', 'Nincs párhuzamos oldala', 
+                  'Van derékszöge', 'Nincs derékszöge'],
       shapes   : [figures.rombusz, figures.fineTrinagle, figures.conerTrinagle, figures.brick],
       solution : [figures.brick, figures.conerTrinagle, figures.rombusz, figures.fineTrinagle],
     },
@@ -40,19 +43,22 @@ export const taskSetups = [
   ,
   [   // level 2
     {
-      labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
-      shapes   : [figures.box, figures.circle, figures.deltoid, figures.brick],
-      solution : [],
+      labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 
+                  'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
+      shapes   : [figures.fineTrinagle, figures.paralelogramma, figures, figures],
+      solution : [figures, figures, figures, figures],
     },
     {
-      labels   : ['Van 2 egyenlő oldala', 'Nincs 2 egyenlő oldala', 'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
-      shapes   : [figures.box, figures.circle, figures.deltoid, figures.brick],
-      solution : [],
+      labels   : ['Van II. egyenlő oldala', 'Nincs II. egyenlő oldala', 
+                  'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
+      shapes   : [figures, figures, figures, figures],
+      solution : [figures, figures, figures, figures],
     },
     {
-      labels   : ['Van 2 práhuzamos oldala', 'Nincs 2 práhuzamos oldala', 'Van 2 párhuzamos oldala', 'Nincs 2 párhuzamos oldala'],
-      shapes   : [figures.box, figures.circle, figures.deltoid, figures.brick],
-      solution : [],
+      labels   : ['Van II. egyenlő szöge', 'Nincs II. egyenlő szöge', 
+                  'Van II. párhuzamos oldala', 'Nincs II. párhuzamos oldala'],
+      shapes   : [figures, figures, figures, figures],
+      solution : [figures, figures, figures, figures],
     },
   ]
 ]

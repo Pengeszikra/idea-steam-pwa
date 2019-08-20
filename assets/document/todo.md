@@ -2,6 +2,10 @@
 
 ## minimal stepps to finalize
   - [x] avatar selection reworked
+  - [ ] fix game mechanism
+    - [ ] Q : Open Door, Run away from water
+    - [ ] Y : Run Away from Water
+    - [x] L : Quest of Items / Walk to door 
   - [x] games positions
     - [x] Q : Open Door, Run away from water
     - [x] Y : Welcome / Run Away from Water
@@ -17,12 +21,13 @@
     - [x] I : Three Gems
     - [x] J : Roman Numbers
     - [x] K : Link Path
-    - [x] L : Quest of Items, Walk to door 
+    - [x] L : Quest of Items / Walk to door 
   - [x] game for caves
   - [x] PerfectShapeGame
   - [ ] games versions
   - [ ] monologs
   - [ ] redraw items
+  - [ ] arrows or drawed ways - just keep consistent
   - [x] rework multiRounds game framework each quest repeat twice at level 2
   - [x] create branch to keep old stuff : oldest
 
@@ -47,9 +52,9 @@ Tenyleg ossze kellene szednem, hogy mi kellene az igazan gyors befejezeshez,
   - [ ] improve history reader
   - [x] improve avatar selection
   - [ ] write mail to Imo about final of game
-  - [ ] maybe better method instead reset game 2x , 3x 
+  - [x] maybe better method instead reset game 2x , 3x 
   - [ ] score modal with button space
-  - [ ] ortho responsive scale settings
+  - [x] ortho responsive scale settings
   - [ ] remove avatar click reset game ( or not so direct )
 
   - [ ] clear unwantaed parts

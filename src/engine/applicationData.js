@@ -15,6 +15,8 @@ export const entrance = {
   mission: _ => `Helyezd el a barlang bejáratán látható alakzatokat a megadott szempontok szerint.`
   ,
   gratulation: karakter => `Jól feleltél ${karakter}! Indulj hát a fogságban tartottak felszabadítására.`
+  ,
+  fail: karakter => `Nem jó az elgondolásod ${karakter}, próbáld meg máshogy elhelyezni az alakzatokat!`
 };  
 
 export const cave_1_1 = {
