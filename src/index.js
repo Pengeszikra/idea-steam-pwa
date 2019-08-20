@@ -39,7 +39,7 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<RomanNumbersTask level={2} interaction={mockGameCommunication}/>);
 //rootRender(<OpenCodeQuestGame interaction={mockGameCommunication} />);
 
-//rootRender(<PairProjectionQuestGame interaction={mockGameCommunication} />);
+rootRender(<PairProjectionQuestGame interaction={mockGameCommunication} />);
 
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
 //rootRender(<Victory level={1} />);

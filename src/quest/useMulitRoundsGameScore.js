@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePipeWhen } from '../utils/usePipe';
 import {forEach, interval, take, pipe} from 'callbag-basics';
+import * as R from 'ramda';
 
 export default ({level, position, questResultIs}) => {
   const [flow, setFlow] = useState(true);
@@ -37,6 +38,13 @@ export default ({level, position, questResultIs}) => {
       questResultIs(true, position);
     } 
   };
+
+  useEffect(() => {
+    const repeats = R.includes(position, ['J', 'K', 'D']) ? 2 : level - 1;
+    setRounds( repeats );  
+    console.log(`---> ${repeats} at position ${position}`);
+    return () => {};
+  } ,[position]);
   
   return {
     flow, setFlow, isSpeak, talking, score, setScore, gain, gainScore, 

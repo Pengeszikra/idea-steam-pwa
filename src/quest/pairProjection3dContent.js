@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { makeShape, GEOMS, RAD, play3dContent, makeFlatColorShape, rotate } from '../layouts/Geometries';
 import { irnd, shuffle } from '../utils/randoms';
 import blenderPlusPerfectSet from './data/blenderPlusPerfectSet';
+import { pipe, forEach } from 'callbag-basics';
+import { clickSource, filter } from './callbagUtils';
 
 export default ({playOver, gainScore, setChecking}) => studio => {
   const {camera, root} = studio;
@@ -15,82 +17,66 @@ export default ({playOver, gainScore, setChecking}) => studio => {
   const quest1st = makeFlatColorShape(questShape, 1, 1, 1, 0x130802);
   const quest2nd = quest1st.clone();  
   quest1st.translateX(-80).translateY(300).rotateX(0/RAD).rotateY(0/RAD);
-  quest2nd.translateX( 80).translateY(300).rotateX(0/RAD).rotateY(90/RAD);
+  quest2nd.translateX( 80).translateY(300).rotateX(90/RAD).rotateY(0/RAD);
   quest1st.scale.setScalar(50);
   quest2nd.scale.setScalar(50);
   root.add(quest1st);
   root.add(quest2nd);
 
   const [width, height] = [4, 4];
-  const selectables = new THREE.Group();
-  root.add(selectables);
+  const itemsRoot = new THREE.Group();
+  itemsRoot.translateX(-180).translateY(-200);
+  root.add(itemsRoot);
 
   const sample = [questShape, ...shapes]
     .slice(0, width * height)
     .sort(shuffle);  
 
-  const shadows = sample.map((shape, i) => {    
-    const shadow = makeShape(shape, 1, 1, 1, 0xAA5522, 1 , 0xFFAA77);
-    shadow.scale.setScalar(32);
-    shadow.position.set(i % width * 120 - 180, (i / width | 0) * 120 - 200, 0);    
-    rotate(shadow,...([45,0,90].sort(shuffle)));
-    selectables.add(shadow);
-    return shadow;
+  sample.map((shape, i) => {    
+    const item = makeShape(shape, 1, 1, 1, 0xAA5522, 1 , 0xFFAA77);
+    item.scale.setScalar(32);
+    item.position.set(i % width * 120, (i / width | 0) * 120, 0);    
+    rotate(item,...([45,0,90].sort(shuffle)));
+    itemsRoot.add(item);
+    return item;
   });
 
-  const click3d = mouse => {
-    const ray = new THREE.Raycaster();
-    ray.setFromCamera( mouse, camera );
-    const intersects = ray.intersectObjects( selectables.children );    
-    const [{object} = {}] = intersects;    
-    if (!object) return;
+  const handleClick = object => {
     object.material = object.material === selectMaterial
       ? normalMaterial 
       : selectMaterial;
-  }
+  } 
 
-  let unFoundeds = [];
+  let foundeds = [];
   let isAllFounded = false;
 
   const checkSelectionsResult = () => {
-    unFoundeds = selectables.children
-      .filter(({geometry, material}) => geometry && geometry.uuid == quest1st.geometry.uuid || material === selectMaterial)
-
-    const missing = selectables.children
-    .filter(({geometry, material}) => geometry && geometry.uuid == quest1st.geometry.uuid && material === normalMaterial);
-
-    const {isSolved, score} = unFoundeds.reduce(
-      ({isSolved, score},{geometry, material}) => ({
-        isSolved: isSolved && geometry && geometry.uuid == quest1st.geometry.uuid  && material === selectMaterial,
-        score: geometry && geometry.uuid == quest1st.geometry.uuid ? score + 10 : score      
-      }), {isSolved:true, score:0});
+   const rightOnes = mesh => mesh.geometry.uuid === quest1st.geometry.uuid;
+   const perfects = itemsRoot.children.filter(rightOnes);
+   foundeds = itemsRoot.children.filter( mesh => mesh.material === selectMaterial);
+   const foundedPerfect = foundeds.filter(rightOnes);
      
-    if (isSolved && score) {
-      isAllFounded = true;
-      gainScore(score);
+   if (perfects.length === foundeds.length && perfects.length === foundedPerfect.length) {
+      gainScore(perfects.length * 10);
       playOver(true);
-      global.removeEventListener('click', onMouseMove, false );      
+      isAllFounded = true;
     } else {
-      setTimeout(() => selectables.children.forEach(mesh => mesh.material = normalMaterial), 500);
-      gainScore(`${missing.length} tárgyat kerss!`);
+      itemsRoot.children.forEach( mesh => mesh.material = normalMaterial );
+      gainScore(`${perfects.length} testet kerss!`);
     }
   }
 
-  setChecking(() => checkSelectionsResult);
+  pipe (
+    clickSource(camera, itemsRoot.children),    
+    filter(object => !object.selected),
+    forEach(handleClick)
+  )
 
-  const mouse = new THREE.Vector2();
-  const onMouseMove = event => {
-    mouse.x = ( event.clientX / global.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / global.innerHeight ) * 2 + 1;  
-    click3d(mouse);
-  }
-  global.addEventListener( 'click', onMouseMove, false );
+  setChecking(() => checkSelectionsResult);
 
   const animation = studio => {
     const {root, scene, camera} = studio;    
-    shadows
-      .filter(shadow => shadow.geometry.uuid == quest1st.geometry.uuid)
-    isAllFounded && unFoundeds.forEach(unf => rotate(unf, 1,1,.2))      
+    isAllFounded && foundeds.forEach(unf => rotate(unf, 1,1,.2));
   }
   
   return play3dContent(studio)(animation);

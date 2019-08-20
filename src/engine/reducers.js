@@ -94,7 +94,6 @@ export const storyReducer = (state, {type, payload}) => {
       // After area solved, but prisoner didn't released.
       if (!area.solved) {
         const {intro, secretIntro} = areaData[position].data;
-        console.log(intro, secretIntro);
         return {          
           ...state, 
           speakAbout: intro 
