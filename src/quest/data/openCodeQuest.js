@@ -45,20 +45,20 @@ export const taskSetups = [
     {
       labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 
                   'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
-      shapes   : [figures.fineTrinagle, figures.paralelogramma, figures, figures],
-      solution : [figures, figures, figures, figures],
+      shapes   : [figures.fineTrinagle, figures.paralelogramma, figures.brick, figures.fourCorner],
+      solution : [figures.fineTrinagle, figures.paralelogramma, figures.brick, figures.fourCorner],
     },
     {
       labels   : ['Van II. egyenlő oldala', 'Nincs II. egyenlő oldala', 
                   'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
-      shapes   : [figures, figures, figures, figures],
-      solution : [figures, figures, figures, figures],
+      shapes   : [figures.paralelogramma, figures.fineTrinagle, figures.twoTrinagle, figures.deltoid],
+      solution : [figures.paralelogramma, figures.fineTrinagle, figures.twoTrinagle, figures.deltoid],
     },
     {
       labels   : ['Van II. egyenlő szöge', 'Nincs II. egyenlő szöge', 
                   'Van II. párhuzamos oldala', 'Nincs II. párhuzamos oldala'],
-      shapes   : [figures, figures, figures, figures],
-      solution : [figures, figures, figures, figures],
+      shapes   : [figures.fineRombusz, figures.fourCorner, figures.box, figures.deltoid],
+      solution : [figures.box, figures.fineRombusz, figures.deltoid,  figures.fourCorner],
     },
   ]
 ]
