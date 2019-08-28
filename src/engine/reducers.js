@@ -64,6 +64,7 @@ export const storyInitial = {
 
   speakAbout: "",
   startOfPlay: Date.now(),
+  scoreLog: [],
   ...modalOff,
 };
 
@@ -77,7 +78,12 @@ export const storyReducer = (state, {type, payload}) => {
   switch(type) {
     case DEBUG_RESET: return {...storyInitial, startOfPlay: Date.now() };
 
-    case ACHIVE_SCORE: return { ...state, score: state.score + payload };
+    case ACHIVE_SCORE:   
+      const score = state.score + payload;
+      const scoreLog = [...state.scoreLog, { position, score: payload, stamp: Date.now() }];
+      console.log('---- score ----');
+      console.table(scoreLog);
+      return { ...state, score, scoreLog };
     
     case SELECT_LEVEL: return {...state, level: payload };
 

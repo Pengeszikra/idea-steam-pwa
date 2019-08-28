@@ -1,3 +1,5 @@
+// http://szamtan.eu/szabalyok/szabalyok_n/negyszogek.htm
+
 const figures = {
   paralelogramma : "paralelogramma",
   circle : "circle",
@@ -46,13 +48,13 @@ export const taskSetups = [
       labels   : ['Minden oldala egyenlő', 'Nem minden oldala egyenlő', 
                   'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
       shapes   : [figures.fineTrinagle, figures.paralelogramma, figures.brick, figures.fourCorner],
-      solution : [figures.fineTrinagle, figures.paralelogramma, figures.brick, figures.fourCorner],
+      solution : [figures.fineTrinagle, figures.brick, figures.paralelogramma, figures.fourCorner],
     },
     {
-      labels   : ['Van II. egyenlő oldala', 'Nincs II. egyenlő oldala', 
+      labels   : ['Van II. egyenlő oldala', 'Nincs III. egyenlő oldala', 
                   'Minden szöge egyenlő', 'Nem minden szöge egyenlő'],
-      shapes   : [figures.paralelogramma, figures.fineTrinagle, figures.twoTrinagle, figures.deltoid],
-      solution : [figures.paralelogramma, figures.fineTrinagle, figures.twoTrinagle, figures.deltoid],
+      shapes   : [figures.brick, figures.fineTrinagle, figures.twoTrinagle, figures.deltoid],
+      solution : [figures.fineTrinagle, figures.brick, figures.twoTrinagle, figures.deltoid],
     },
     {
       labels   : ['Van II. egyenlő szöge', 'Nincs II. egyenlő szöge', 
