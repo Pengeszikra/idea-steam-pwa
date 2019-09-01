@@ -35,7 +35,8 @@ export default ({level, position, questResultIs}) => {
       );
     }  else {
       setFlow(false);
-      questResultIs(true, position);
+      console.log('--- handle rounds ---:', score)
+      questResultIs(true, position, score);
     } 
   };
 

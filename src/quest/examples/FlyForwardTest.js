@@ -1,7 +1,5 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { QuestSketch, IntroButtonHolder, IntroButton } from '../../styles/divStore';
-import { makeShape, GEOMS, RAD, play3dContent } from '../../layouts/Geometries';
-import ThreeArea from '../../layouts/ThreeArea';
 import { animationFlyRandomSolid } from './threeDimensionExample';
 import ThreeStudio from '../../layouts/ThreeStudio';
 

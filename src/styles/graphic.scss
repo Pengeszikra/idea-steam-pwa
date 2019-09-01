@@ -726,3 +726,23 @@
   transform-origin: center center;
   transform: rotate(180deg);
 }
+
+.cave-letter {
+  position: absolute;
+  color: gold;
+  font-size: 2em;
+  font-weight: 800;
+
+  &[data-cave="A"] { top:  40vmin; left: 26vmin; }
+  &[data-cave="B"] { top:  36vmin; left: 75vmin; }
+  &[data-cave="C"] { top:  63vmin; left: 24vmin; }
+  &[data-cave="D"] { top:  65vmin; left: 72vmin; }
+  &[data-cave="E"] { top:  79vmin; left: 49vmin; }
+  &[data-cave="F"] { top:  92vmin; left: 16vmin; }
+  &[data-cave="G"] { top:  92vmin; left: 77vmin; }
+  &[data-cave="H"] { top: 103vmin; left: 48vmin; }
+  &[data-cave="I"] { top: 125vmin; left: 25vmin; }
+  &[data-cave="J"] { top: 148vmin; left: 30vmin; }
+  &[data-cave="K"] { top: 124vmin; left: 61vmin; }
+  &[data-cave="L"] { top: 145vmin; left: 72vmin; }
+}

@@ -56,7 +56,7 @@ export const storyInitial = {
     L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
   saved: [],
-  equipment: [],
+  equipment: ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'], // [],
   
   hasQuesting: false,
   lightUp: false,
@@ -81,7 +81,6 @@ export const storyReducer = (state, {type, payload}) => {
     case ACHIVE_SCORE:   
       const score = state.score + payload;
       const scoreLog = [...state.scoreLog, { position, score: payload, stamp: Date.now() }];
-      console.log('---- score ----');
       console.table(scoreLog);
       return { ...state, score, scoreLog };
     

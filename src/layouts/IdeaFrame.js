@@ -62,10 +62,10 @@ export default ({setWay, storyStore}) => {
     }, 1300);       
   };
 
-  const questResultIs = (isSucces, currentPosition) => {
+  const questResultIs = (isSucces, currentPosition, score = 0) => {
     if (isSucces) {
       dispatch(questSolved());
-      dispatch(achiveScore(100 * level));
+      dispatch(achiveScore(score));
     } 
     dispatch(outOfQuest());    
     if (currentPosition === 'Q') {
@@ -116,7 +116,7 @@ export default ({setWay, storyStore}) => {
         startOfPlay={startOfPlay}
         solved={Object.keys(caveLookUp).reduce((acc, key) => acc = caveLookUp[key].solved ? acc + 1 : acc , -3)}
         show={playerInfoVisible} 
-        setWay={setWay}
+      setWay={setWay}
       />
       <BottomBar 
         show={position !== 'Q'}
@@ -141,6 +141,7 @@ export default ({setWay, storyStore}) => {
         handlePlayerInfo={handlePlayerInfo}
         walk={walk}
         underWalk={underWalk}
+        solvedCaves={Object.keys(caveLookUp).filter(key => caveLookUp[key].solved)}
       />
       <MockQuest show={hasQuesting && !hasSocrates} position={position} interaction={interaction} level={level} />
     </main>

@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import { FoundTetraederUvQuest, EquipmentQuest } from '../styles/divStore';
 import showtime from '../utils/showtime';
 import RomanNumbersTask from './RomanNumbersTask';
 import FindCubeUv from './FindCubeUv';
@@ -13,20 +12,10 @@ import PipeDraw2D from './PipeDraw2D';
 import SpeedPairs3DGame from './SpeedPairs3DGame';
 import ThreeGemGames from './ThreeGemGames';
 import PerfectShapesGame from './PerfectShapesGame';
+import SendToEntrance from './SendToEntrance';
 
 const JustMonolog = ({interaction:{questResultIs}}) => {
   useEffect(()=>questResultIs(true),[]);
-  return null;
-};
-
-const SendToEntrance = ({interaction}) => {
-  const {questResultIs, checkItem, makeAlternateQuest} = interaction;
-  useEffect(()=>{
-    questResultIs(true);    
-    console.log('--- enter to final quiz ---');
-    console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);
-    makeAlternateQuest('Y');
-  },[]);
   return null;
 };
 
@@ -45,7 +34,7 @@ const questLookup = {
   I:  ThreeGemGames,
   J:  RomanNumbersTask,
   K:  PipeDraw2D,
-  L:  JustMonolog,
+  L:  SendToEntrance,
 };
 
 export default showtime(({position, level, interaction}) => {

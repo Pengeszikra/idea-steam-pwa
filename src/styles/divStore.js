@@ -16,7 +16,7 @@ export const [ChainCave, BuildingCave] = divFactory("chain-cave", "building-cave
 export const [WheelCave, EnginerCave] = divFactory("wheel-cave", "enginer-cave");
 export const [RoadCave, BehindTheDoor] = divFactory("road-cave", "door-closed");
 
-export const [InteractiveMap, MapCloseButton] = divFactory("interactive-map", "interactive-map-close");
+export const [InteractiveMap, MapCloseButton, CaveLetter] = divFactory("interactive-map", "interactive-map-close", "cave-letter no-sel");
 
 export const [ActualScore, SavedPrisoner] = divFactory("actual-score", "saved-prisoner");
 

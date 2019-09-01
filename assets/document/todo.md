@@ -30,6 +30,13 @@
   - [ ] arrows or drawed ways - just keep consistent
   - [x] rework multiRounds game framework each quest repeat twice at level 2
   - [x] create branch to keep old stuff : oldest
+  - [ ] fix score system
+    - [x] score value at end of minigame
+    - [x] score log
+
+## item quest and run of water game
+
+
 
 ## rapid way to finish
 
