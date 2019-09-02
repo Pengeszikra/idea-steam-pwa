@@ -4,7 +4,7 @@ import { Socrates, SocratesHolder, SocratesAvatar, SpeakText } from '../styles/d
 
 export default showtime(({speakAbout, handleStopSpeak, onFrame = false}) => {
   return (
-    <Socrates onClick={handleStopSpeak} >
+    <Socrates onClick={handleStopSpeak}>
       <SocratesHolder data-on-frame={onFrame} >
         <SocratesAvatar />
         <SpeakText>{speakAbout}</SpeakText>

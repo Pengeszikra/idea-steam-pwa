@@ -23,13 +23,14 @@ import SpeedPairs3DGame from './quest/SpeedPairs3DGame';
 import { SimpleDarkBg } from './styles/divStore';
 import ThreeGemGames from './quest/ThreeGemGames';
 import PerfectShapesGame from './quest/PerfectShapesGame';
+import SendToEntrance from './quest/SendToEntrance';
 
 getMeshes(); // preload blender files
 
 // for single game development TODO remove
 const mockGameCommunication = {
   questResultIs: result => console.log(`--------\ngame result is: ${result}`),
-  instruction: cave_1_1.intro_2('Mr. Foo')
+  instruction: cave_1_1.intro_2('Mr. Foo'),  
 };
 
 rootRender(<IdeaAdventuresBegin />);
@@ -52,3 +53,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SimpleDarkBg/>)
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
 //rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)
+rootRender(<SendToEntrance interaction={mockGameCommunication}/>)

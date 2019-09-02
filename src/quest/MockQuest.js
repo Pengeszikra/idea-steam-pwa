@@ -22,7 +22,7 @@ const JustMonolog = ({interaction:{questResultIs}}) => {
 const questLookup = {
   Q:  OpenCodeQuestGame,
   Y:  EnterAndFinalQuest,
-  A:  PerfectShapesGame,
+  A:  SendToEntrance, // PerfectShapesGame,
   B:  PairProjectionQuestGame,
   C:  SolidByPorjectionQuestGame,
   D:  FindCubeUv, 

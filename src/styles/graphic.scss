@@ -473,7 +473,6 @@
   &[data-item="G2"] { @include bimage('/img/mobs/item-10.png', 25vmin, 25vmin, 100vmin, 2vmin) }
   &[data-item="H1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
   &[data-item="H2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
-
 }
 
 .quest-sketch { @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh)}

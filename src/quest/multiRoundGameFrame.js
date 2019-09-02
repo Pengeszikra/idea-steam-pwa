@@ -7,6 +7,7 @@ import noprop from '../utils/noprop';
 import { showFactory } from '../utils/divFactory';
 import useInterval from '../utils/useInterval';
 import useTimer from './useTimer';
+import { includes } from 'ramda';
 
 const [Timer, Bar] = showFactory('game-timer', 'timer-bar'); 
 
@@ -32,8 +33,8 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
       />      
       <ModalScore position={position} score={gain} show={isNaN(gain)} onClick={noprop(() => gainScore(0))} />
       <ModalScore position={position} score={score} show={itsOver} onClick={noprop(handleRounds)} />
-      <TopRock show= {position === 'H'}/>
-      <RockFormation show = {position === 'H'}/>
+      <TopRock show= {['H'].includes(position)}/>
+      <RockFormation show = {['H'].includes(position)}/>
       
       <IntroButtonHolder>        
         {/* <IntroButton onClick={handleGameReset}>reset</IntroButton> */}
