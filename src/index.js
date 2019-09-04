@@ -30,7 +30,9 @@ getMeshes(); // preload blender files
 // for single game development TODO remove
 const mockGameCommunication = {
   questResultIs: result => console.log(`--------\ngame result is: ${result}`),
-  instruction: cave_1_1.intro_2('Mr. Foo'),  
+  instruction: cave_1_1.intro_2('Mr. Foo'),
+  itemList: () => ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
+  handleRoute: path => e => console.log(`walk to ${path}`)
 };
 
 rootRender(<IdeaAdventuresBegin />);
@@ -53,4 +55,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SimpleDarkBg/>)
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
 //rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)
-rootRender(<SendToEntrance interaction={mockGameCommunication}/>)
+//rootRender(<SendToEntrance interaction={mockGameCommunication}/>)

@@ -164,7 +164,7 @@ export const cave_2_10 = {
 }
 
 export const cave_2_11 = {
-  intro: karakter => `Meg kell lelned a barlangrendszerből a kiutat, ne késlekedj karakter!`
+  intro: karakter => `Meg kell lelned a barlangrendszerből a kiutat, ne késlekedj ${karakter}!`
   ,
   mission: karakter => `${karakter}! Válassz ki a zsákodból négy tárgyat, melyek használatával világosság lesz a barlangban.`
   /*

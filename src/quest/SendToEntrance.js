@@ -1,30 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex } from '../styles/divStore';
+import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import { includes, equals } from 'ramda';
 import { cave_2_11, itemNamesLup } from '../engine/applicationData';
-
-
-
-const equipment = ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'];
+import { avatarNames } from './../engine/applicationData';
 
 export default ({interaction, level = 1}) => {
-  const {questResultIs, checkItem, makeAlternateQuest} = interaction;
-  const [isSpeak, talking] = useState(true);
+  const {itemList, handleRoute} = interaction;
+  const [phase, setPhase] = useState(0);
   const [selected, setSelect] = useState({});
-  useEffect(()=>{
-    // questResultIs(true);
-    // makeAlternateQuest('Y');
-    
-    console.log('--- enter to the dark room ---');
-    
-    // console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);
-    
-  },[]);
+  const [equipment] = useState(itemList());
 
-  const handlePutItem = itemId => e => {
-    console.log(itemId)
+  const handlePutItem = itemId => e => {    
     let list = {...selected};
     if (selected[itemId]) {
       delete list[itemId];
@@ -50,7 +38,7 @@ export default ({interaction, level = 1}) => {
         top: 0,
         left: 0,
         margin: '1em 1em 3em 1em',
-        opacity: selected[itemId] ? 1 : .3,
+        opacity: selected[itemId] ? 1 : .4,
       }}
       onClick={noprop(handlePutItem(itemId))} 
     ><span>{itemNamesLup[itemId]}</span></Item>
@@ -61,20 +49,22 @@ export default ({interaction, level = 1}) => {
       <BlueCave style = {{filter:'brightness(.1)'}}/>
       <TopRock show={true} style = {{filter:'brightness(.5)'}}/>
       <RockFormation show={true} style = {{filter:'brightness(.5)'}}/>
-      <SocratesSpeaking 
-        show={isSpeak} 
-        speakAbout={cave_2_11.mission('Mr. Foo')} 
+      <SocratesSpeaking        
+        show={phase === 0} 
+        speakAbout={cave_2_11.mission(avatarNames(level))} 
         level={level} 
-        handleStopSpeak={()=> talking(false)}
+        handleStopSpeak={()=> setPhase(1)}
+        style={{filter:'brightness(0.3) hue-rotate(190deg)'}}
       />
 
-      {!isSpeak && (
+      {phase === 1 && (
         <>
           <ItemMatrix>{Equipment}</ItemMatrix>
-          <CenterFlex style={{margin: '2em'}}>
+          <IntroButtonHolder>
+            <IntroButton onClick={handleRoute('L-K')}>Visszalépés</IntroButton>
             <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
-          </CenterFlex>
-          <h1>{cave_2_11.mission('Mr. Foo')}</h1>
+          </IntroButtonHolder>
+          <h1>{cave_2_11.mission(avatarNames(level))}</h1>
         </>
       )}
       
@@ -82,3 +72,13 @@ export default ({interaction, level = 1}) => {
   );
 };
 
+/*
+
+  useEffect(()=>{
+    // questResultIs(true);
+    // makeAlternateQuest('Y');
+    console.log('--- enter to the dark room ---');
+    // console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);    
+  },[]);
+
+*/

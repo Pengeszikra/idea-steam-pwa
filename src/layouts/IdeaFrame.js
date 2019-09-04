@@ -93,6 +93,7 @@ export default ({setWay, storyStore}) => {
     instruction: areaData[position].data.mission 
       ? areaData[position].data.mission(avatarNames(level))
       : `mission text is empty cave: [${position}]`,
+    itemList: () => equipment,
   };
 
   if (finalQuestSolved) return <Victory level={level} reset={()=>setWay(3)}/>;
