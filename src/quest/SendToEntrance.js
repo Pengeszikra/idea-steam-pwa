@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item } from '../styles/divStore';
+import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
+import noprop from '../utils/noprop';
+import { includes, equals } from 'ramda';
+
+
 
 const equipment = ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'];
 
 export default ({interaction, level = 1}) => {
   const {questResultIs, checkItem, makeAlternateQuest} = interaction;
   const [isSpeak, talking] = useState(true);
+  const [selected, setSelect] = useState({});
   useEffect(()=>{
     // questResultIs(true);
     // makeAlternateQuest('Y');
@@ -16,6 +21,23 @@ export default ({interaction, level = 1}) => {
     // console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);
     
   },[]);
+
+  const handlePutItem = itemId => e => {
+    console.log(itemId)
+    let list = {...selected};
+    if (selected[itemId]) {
+      delete list[itemId];
+      setSelect(list);
+    } else {
+      list[itemId] = true;
+      setSelect(list);
+    }    
+  }
+
+  const checkFireInitiated = () => {
+    const isFireInitiated = equals(selected, {D1: true, E1: true, G2: true, H2: true});
+    console.log( `isFireInitiated :: ${isFireInitiated}`  )
+  }
 
   const Equipment = equipment.map(itemId => 
     <Item 
@@ -27,8 +49,9 @@ export default ({interaction, level = 1}) => {
         top: 0,
         left: 0,
         margin: '1em',
+        opacity: selected[itemId] ? 1 : .3,
       }}
-      // onClick={noprop(handlePutItem(itemId))} 
+      onClick={noprop(handlePutItem(itemId))} 
     />
   );
 
@@ -44,6 +67,7 @@ export default ({interaction, level = 1}) => {
         handleStopSpeak={()=> talking(false)}
       />
       {!isSpeak && Equipment}
+      {!isSpeak && <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>}
     </main>
   );
 };
