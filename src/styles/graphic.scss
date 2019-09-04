@@ -460,6 +460,18 @@
   &[data-released="true"] { filter: drop-shadow(0px 0px 2vmin #AFA); }
 }
 
+.item-matrix {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .item {
   &[data-item="C1"] { @include bimage('/img/mobs/item-01.png', 25vmin, 25vmin, 125vmin, 20vmin) }  
   &[data-item="C2"] { @include bimage('/img/mobs/item-02.png', 25vmin, 25vmin, 129vmin, 74vmin) }
@@ -473,6 +485,16 @@
   &[data-item="G2"] { @include bimage('/img/mobs/item-10.png', 25vmin, 25vmin, 100vmin, 2vmin) }
   &[data-item="H1"] { @include bimage('/img/mobs/item-11.png', 25vmin, 25vmin, 130vmin, 70vmin) }
   &[data-item="H2"] { @include bimage('/img/mobs/item-12.png', 25vmin, 25vmin, 100vmin, 80vmin) }
+
+  span {
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 26vmin;
+    left: 0;
+    user-select: none;
+  }
 }
 
 .quest-sketch { @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh)}

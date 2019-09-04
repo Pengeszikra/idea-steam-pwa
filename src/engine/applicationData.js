@@ -211,13 +211,19 @@ export const finale = {
   PlatonMerit: karakter => `${karakter} discső felszabadító (pecsét)`
 }
 
-export const itemNames = {
-  C: ['tűzpattintó', 'amfóra'],
-  D: ['szárított taplógomba', 'kovakő'],
-  E: ['kulcs', 'érme'],
-  F: ['tóga', 'saru'],
-  G: ['hárfa', 'fáklya test'],
-  H: ['körző', 'stílus'],
+export const itemNamesLup = {
+  C1: 'amfóra',
+  C2: 'érme',
+  D1: 'fáklya test',
+  D2: 'körző',
+  E1: 'kovakő',
+  E2: 'hárfa',
+  F1: 'kulcs',
+  F2: 'saru',
+  G1: 'stílus',
+  G2: 'szárított taplógomba', 
+  H1: 'tóga',
+  H2: 'tűzpattintó',  
 }
 
 export const areaData = {

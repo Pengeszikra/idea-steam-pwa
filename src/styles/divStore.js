@@ -44,7 +44,7 @@ export const [RouteArrow] = divFactory('route-arrow');
 export const [Version, IntroButtonHolder] = divFactory('version', 'intro-button-holder');
 export const [IntroButtonBar] = showFactory('intro-button-holder');
 
-export const [Prisoner, Item] = divFactory('prisoner', 'item');
+export const [Prisoner, Item, ItemMatrix, CenterFlex] = divFactory('prisoner', 'item nosel', 'item-matrix', 'center-flex');
 
 export const [
   QuestSketch,

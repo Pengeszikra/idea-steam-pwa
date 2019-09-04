@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton } from '../styles/divStore';
+import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import { includes, equals } from 'ramda';
+import { cave_2_11, itemNamesLup } from '../engine/applicationData';
 
 
 
@@ -48,11 +49,11 @@ export default ({interaction, level = 1}) => {
         display: 'inline-block',
         top: 0,
         left: 0,
-        margin: '1em',
+        margin: '1em 1em 3em 1em',
         opacity: selected[itemId] ? 1 : .3,
       }}
       onClick={noprop(handlePutItem(itemId))} 
-    />
+    ><span>{itemNamesLup[itemId]}</span></Item>
   );
 
   return (
@@ -62,12 +63,21 @@ export default ({interaction, level = 1}) => {
       <RockFormation show={true} style = {{filter:'brightness(.5)'}}/>
       <SocratesSpeaking 
         show={isSpeak} 
-        speakAbout={'--- itt a szobaban minden sotet ---'} 
+        speakAbout={cave_2_11.mission('Mr. Foo')} 
         level={level} 
         handleStopSpeak={()=> talking(false)}
       />
-      {!isSpeak && Equipment}
-      {!isSpeak && <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>}
+
+      {!isSpeak && (
+        <>
+          <ItemMatrix>{Equipment}</ItemMatrix>
+          <CenterFlex style={{margin: '2em'}}>
+            <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
+          </CenterFlex>
+          <h1>{cave_2_11.mission('Mr. Foo')}</h1>
+        </>
+      )}
+      
     </main>
   );
 };
