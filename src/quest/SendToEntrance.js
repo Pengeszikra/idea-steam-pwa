@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder } from '../styles/divStore';
+import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import { includes, equals } from 'ramda';
-import { cave_2_11, itemNamesLup } from '../engine/applicationData';
+import { cave_2_11, itemNamesLup, cave_2_1_again } from '../engine/applicationData';
 import { avatarNames } from './../engine/applicationData';
 
 export default ({interaction, level = 1}) => {
-  const {itemList, handleRoute} = interaction;
+
+  const {itemList, handleRoute, questResultIs} = interaction;
   const [phase, setPhase] = useState(0);
   const [selected, setSelect] = useState({});
   const [equipment] = useState(itemList());
+  const [speak, talk] = useState(cave_2_11.mission(avatarNames(level)));
 
   const handlePutItem = itemId => e => {    
     let list = {...selected};
@@ -26,6 +28,11 @@ export default ({interaction, level = 1}) => {
   const checkFireInitiated = () => {
     const isFireInitiated = equals(selected, {D1: true, E1: true, G2: true, H2: true});
     console.log( `isFireInitiated :: ${isFireInitiated}`  )
+
+    if (!isFireInitiated) return setSelect({});
+
+    setPhase(2)
+    
   }
 
   const Equipment = equipment.map(itemId => 
@@ -46,16 +53,9 @@ export default ({interaction, level = 1}) => {
 
   return (
     <main className="graph-frame">
-      <BlueCave style = {{filter:'brightness(.1)'}}/>
-      <TopRock show={true} style = {{filter:'brightness(.5)'}}/>
-      <RockFormation show={true} style = {{filter:'brightness(.5)'}}/>
-      <SocratesSpeaking        
-        show={phase === 0} 
-        speakAbout={cave_2_11.mission(avatarNames(level))} 
-        level={level} 
-        handleStopSpeak={()=> setPhase(1)}
-        style={{filter:'brightness(0.3) hue-rotate(190deg)'}}
-      />
+      <BlueCave style = {{filter:`brightness(${phase < 2 ? .1 : 1})`}}/>
+      <TopRock show={true} style = {{filter:`brightness(${phase < 2 ? .5 : 1})`}}/>
+      <RockFormation show={true} style = {{filter:`brightness(${phase < 2 ? .5 : 1})`}}/>
 
       {phase === 1 && (
         <>
@@ -67,6 +67,44 @@ export default ({interaction, level = 1}) => {
           <h1>{cave_2_11.mission(avatarNames(level))}</h1>
         </>
       )}
+
+      {phase === 2 && (
+        <div>
+          <IntroButton onClick={() => talk(cave_2_11.justWithKey())}>Láda</IntroButton>
+          <IntroButton onClick={() => talk(cave_2_11.crashedDoor())}>Járat</IntroButton>
+          <IntroButton onClick={() => setPhase(3)}>Átjut</IntroButton>
+        </div>
+      )}
+
+      {phase === 3 && (
+        <PipelineQuest>
+          <p>{cave_2_1_again.mission()}<br/><br/>{'Siess! Tedd le a lantot az adott helyen!'}</p>
+          <IntroButtonHolder>
+            <IntroButton onClick={() => {
+              questResultIs(true);    
+              handleRoute('E-X')();
+            }}>Indulok</IntroButton>
+          </IntroButtonHolder>          
+        </PipelineQuest>
+      )}
+
+      <SocratesSpeaking        
+        show={!!speak} 
+        speakAbout={speak} 
+        level={level} 
+        handleStopSpeak={()=> {
+          if (phase === 0) {
+            setPhase(1); 
+            talk('');
+          }
+
+          if (phase === 2) {
+            talk('')
+          }
+          
+        }}
+        style={phase === 0 ? {filter:'brightness(0.3) hue-rotate(190deg)'} : {}}
+      />
       
     </main>
   );
