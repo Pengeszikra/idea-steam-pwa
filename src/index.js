@@ -55,4 +55,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SimpleDarkBg/>)
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
 //rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)
-//rootRender(<SendToEntrance interaction={mockGameCommunication}/>)
+rootRender(<SendToEntrance interaction={mockGameCommunication}/>)

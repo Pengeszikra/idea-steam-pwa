@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest } from '../styles/divStore';
+import { SimpleDarkBg, TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest, ItemMatrixHolder } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import { includes, equals } from 'ramda';
@@ -44,7 +44,8 @@ export default ({interaction, level = 1}) => {
         display: 'inline-block',
         top: 0,
         left: 0,
-        margin: '1em 1em 3em 1em',
+        flex: '1 0 auto',
+        // margin: '1em 1em 3em 1em',
         opacity: selected[itemId] ? 1 : .4,
       }}
       onClick={noprop(handlePutItem(itemId))} 
@@ -59,7 +60,9 @@ export default ({interaction, level = 1}) => {
 
       {phase === 1 && (
         <>
-          <ItemMatrix>{Equipment}</ItemMatrix>
+          <ItemMatrixHolder>
+            <ItemMatrix>{Equipment}</ItemMatrix>
+          </ItemMatrixHolder>
           <IntroButtonHolder>
             <IntroButton onClick={handleRoute('L-K')}>Visszalépés</IntroButton>
             <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
@@ -118,5 +121,23 @@ export default ({interaction, level = 1}) => {
     console.log('--- enter to the dark room ---');
     // console.log(`found K : C1 :: ${checkItem('C1', 'K')}`);    
   },[]);
+
+*/
+
+/*
+
+  const holder = {
+    display: 'flex',
+    position: 'relative',
+    width: '100vw',
+    overflow: 'scroll',
+  };
+
+  const animal = {
+    fontSize: '7em',
+    position: 'relative',
+    userSelect: 'none',
+    marginLeft: '.2em',    
+  };
 
 */

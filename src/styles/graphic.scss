@@ -462,8 +462,18 @@
 
 .item-matrix {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-wrap: nowrap;
+  width: 100vw;
+  overflow: scroll hidden;
+  height: 45vmin;
+}
+
+.item-matrix-holder {
+  position: absolute;
+  top: 40vmin;
+  left: 0;
+  overflow: hidden;
+  height: 40vmin;
 }
 
 .center-flex {
