@@ -470,10 +470,16 @@
 
 .item-matrix-holder {
   position: absolute;
-  top: 40vmin;
+  top: 118vmin;
   left: 0;
   overflow: hidden;
   height: 40vmin;
+}
+
+.final-quest {
+  .play-blue-cave {  transition: 800ms filter;  }
+  .top-rock-formation { transition: 300ms filter; }
+  .rock-formation { transition: 500ms filter; }
 }
 
 .center-flex {
@@ -693,6 +699,7 @@
   } 
 }
 
+.large-table,
 .small-table {
   @include bimage('/img/quest/small-table.png', 70vmin, 33vmin);
   font-size: 2em;
@@ -703,6 +710,32 @@
   justify-content: center;
   transform-origin: center;
   animation: zoom-in 200ms forwards ease-in;
+}
+
+.large-table {
+  @include bimage('/img/quest/large-table.png', 90vmin, 33vmin);
+}
+
+.chest {
+  @include bimage('/img/quest/chest.png', 32vmin, 32vmin, 85vmin, 40vmin);
+}
+
+.red-button {
+  @include bimage('/img/quest/red-button.png', 22vmin, 22vmin);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2em;
+  position: relative;
+}
+
+.red-answer {
+  position: absolute;
+  bottom: 5vmin;
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
 }
 
 .game-timer {

@@ -166,7 +166,7 @@ export const cave_2_10 = {
 export const cave_2_11 = {
   intro: karakter => `Meg kell lelned a barlangrendszerből a kiutat, ne késlekedj ${karakter}!`
   ,
-  mission: karakter => `${karakter}! Válassz ki a zsákodból négy tárgyat, melyek használatával világosság lesz a barlangban.`
+  mission: karakter => `${karakter}! Válassz ki a zsákodból tárgyakat, melyek használatával világosság lesz a barlangban.`
   ,
   justWithKey: _ => `Zeuszra mondom, ezt a ládát kulcs nélkül felnyitni lehetetlen!`
   ,
@@ -188,11 +188,11 @@ export const cave_2_1_again = {
   ,
   mission: _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
   ,
-  question1: _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
-  ,
-  question2: _ => `Melyik barlang telik meg először vízzel?`
+  question1: _ => `Melyik barlang telik meg először vízzel?`
    ,
-  question3: _ => `Hány barlangnyi vízre lenne szükség, hogy a felhajtóerő segítségével kijuss a barlangrends?`
+  question2: _ => `Hány barlangnyi vízre lenne szükség, hogy a felhajtóerő segítségével kijuss a barlangrends?`
+  ,
+  question3: _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
   ,
   info: ``  
 }

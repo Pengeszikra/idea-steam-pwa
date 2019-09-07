@@ -71,7 +71,7 @@ export const [CubeUv, CubeUvArea] = divFactory('cube-uv','cube-uv-area');
 
 export const [GeomItem, TaskLabel, DropArea, ItemHolder, LabelHolder] = divFactory('geom-item', 'task-label', 'drop-target', 'item-holder', 'label-holder');
 
-export const [ModalHolder, SmallTable, SmallButton] = divFactory('modal-holder no-scroll', 'small-table no-sel', 'small-button no-sel');
+export const [ModalHolder, SmallTable, SmallButton, LargeTable] = divFactory('modal-holder no-scroll', 'small-table no-sel', 'small-button no-sel', 'large-table no-sel');
 
 export const [RnHolder] = divFactory('rn-holder'); 
 
@@ -79,3 +79,4 @@ export const [InventoryBg, TeamsBg, SmallTableTalker ] = divFactory('inventory-b
 
 export const [PlayerInfoBackground, IngameHistory, RockFormation, TopRock] = showFactory('player-info-bg', 'ingame-history', 'rock-formation', 'top-rock-formation');
 
+export const [Chest, RedButton, RedAnswer] = showFactory('chest', 'red-button no-sel', 'red-answer'); 
