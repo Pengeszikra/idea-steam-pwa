@@ -55,8 +55,9 @@ export const storyInitial = {
     K: { explored: false , prisoners: [], items: [], solved: false, readed: false },
     L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
-  saved: [],
+  //saved: [],
   //equipment: [],
+  saved:     ['A1','B1','B2','C1','D1','E1','E2','F1','F2','G1','H1','I1'],
   equipment: ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
   
   hasQuesting: false,

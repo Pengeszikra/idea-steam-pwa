@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest, ItemMatrixHolder, Chest, RedButton, RedAnswer } from '../styles/divStore';
+import { TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest, ItemMatrixHolder, Chest, RedButton, RedAnswer, EquipmentMatrixHolder } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import * as R from 'ramda';
@@ -17,6 +17,8 @@ export default ({interaction, level = 1}) => {
   const [equipment, useEquipment] = useState(itemList());
   const [speak, talk] = useState(cave_2_11.mission(avatarNames(level)));
 
+  const underPhase = R.includes(phase);
+
   const handlePutItem = itemId => e => {    
     let list = {...selected};
     if (selected[itemId]) {
@@ -30,7 +32,6 @@ export default ({interaction, level = 1}) => {
 
   const checkFireInitiated = () => {
     const isFireInitiated = R.equals(selected, fireEquipment);
-    console.log( `isFireInitiated :: ${isFireInitiated}`  )
 
     if (!isFireInitiated) return setSelect({});
 
@@ -44,18 +45,12 @@ export default ({interaction, level = 1}) => {
     <Item 
       data-item={itemId} 
       key={`itm-${itemId}`} 
-      style={{
-        position: 'relative',
-        display: 'inline-block',
-        top: 0,
-        left: 0,
-        flex: '1 0 auto',
-        // margin: '1em 1em 3em 1em',
-        opacity: selected[itemId] ? 1 : .4,
-      }}
+      style={{ opacity: selected[itemId] ? 1 : .4 }}
       onClick={noprop(handlePutItem(itemId))} 
     ><span>{itemNamesLup[itemId]}</span></Item>
   );
+
+  const Selected = R.keys(selected).map(itemId => <Item data-item={itemId} key={`itm-${itemId}`}></Item> );  
 
   return (
     <main className="graph-frame final-quest">
@@ -63,24 +58,25 @@ export default ({interaction, level = 1}) => {
       <TopRock show={true} style = {{filter:`brightness(${phase < 2 ? .5 : 1})`}}/>
       <RockFormation show={true} style = {{filter:`brightness(${phase < 2 ? .5 : 1})`}}/>
 
-      {R.includes(phase, [1,1.5]) && (
+      {underPhase([1,1.5]) && (
         <>
-          <ItemMatrixHolder>
-            <ItemMatrix>{Equipment}</ItemMatrix>
-          </ItemMatrixHolder>
+          <ItemMatrixHolder style={{top: 90}}><ItemMatrix>{Selected}</ItemMatrix></ItemMatrixHolder>
           {phase === 1 && (
-            <IntroButtonHolder>
-              <IntroButton onClick={handleRoute('L-K')}>Visszalépés</IntroButton>
-              <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
-            </IntroButtonHolder>
+            <>
+              <ItemMatrixHolder><ItemMatrix>{Equipment}</ItemMatrix></ItemMatrixHolder>
+              <IntroButtonHolder>
+                <IntroButton onClick={handleRoute('L-K')}>Visszalépés</IntroButton>
+                <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
+              </IntroButtonHolder>
+            </>
           )}          
         </>
       )}
 
-      {R.includes(phase, [2,3,4,5]) && (
+      {underPhase([2,3,4,5]) && (
         <div>          
           <Chest show={phase < 5} onClick={() => {
-            if (!R.includes(phase, [2,3,4])) return;
+            if (!underPhase([2,3,4])) return;
             if (R.equals(selected, {F1: true})) {
               talk("Sikerült kinyitnod a ládát, remélem megtalálod a kiutat!");
               setPhase(5);
@@ -93,15 +89,13 @@ export default ({interaction, level = 1}) => {
               setPhase(3);  
             }
           }} />
-          {phase === 4 && (
-            <ItemMatrixHolder>
-              <ItemMatrix>{Equipment}</ItemMatrix>
-            </ItemMatrixHolder>
-          )}
+          <EquipmentMatrixHolder show={phase === 4}>
+            <ItemMatrix>{Equipment}</ItemMatrix>
+          </EquipmentMatrixHolder>
         </div>
       )}
 
-      {R.includes(phase, [10, 11, 12, 13, 15]) && (
+      {underPhase([10, 11, 12, 13, 15]) && (
         <PipelineQuest>
           <RedAnswer show={phase == 11}>
             <p>{cave_2_1_again.question1()}</p>
@@ -132,7 +126,7 @@ export default ({interaction, level = 1}) => {
         level={level} 
         handleStopSpeak={()=> {
           if (phase === 0) { talk(''); setPhase(1); }
-          if (R.includes(phase, [2, 10])) { talk('') }
+          if (underPhase([2, 10])) { talk('') }
           if (phase === 3) { talk(''); setPhase(4) }
           if (phase === 5) { 
             talk(''); 

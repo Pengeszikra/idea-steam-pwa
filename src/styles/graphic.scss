@@ -468,12 +468,26 @@
   height: 45vmin;
 }
 
+.equipment-matrix-holder,
 .item-matrix-holder {
   position: absolute;
   top: 118vmin;
   left: 0;
   overflow: hidden;
   height: 40vmin;
+
+  .item-matrix .item {
+    position: relative;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    flex: 1 0 auto;
+  }
+}
+
+.equipment-matrix-holder {
+  background-image: url('/img/gui/simple-textured-bg.png');
+  background-size: cover; 
 }
 
 .final-quest {
