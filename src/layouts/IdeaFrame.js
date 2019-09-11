@@ -26,6 +26,7 @@ import MockQuest from '../quest/MockQuest';
 import Victory from '../story/Victory';
 import PlayerInfo from './PlayerInfo';
 import { avatarNames } from './../engine/applicationData';
+import InventorySwiper from './InventorySwiper';
 
 export default ({setWay, storyStore}) => {
   const [{
@@ -107,7 +108,7 @@ export default ({setWay, storyStore}) => {
         interaction={interaction}
         lightUp={lightUp}
       />            
-      <Inventory show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
+      <InventorySwiper show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
       <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} onFrame={position !== 'Q'} />
       <PlayerInfo 

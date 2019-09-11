@@ -466,6 +466,8 @@
   width: 100vw;
   overflow: scroll hidden;
   height: 45vmin;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .equipment-matrix-holder,
@@ -487,7 +489,7 @@
 
 .equipment-matrix-holder {
   background-image: url('/img/gui/simple-textured-bg.png');
-  background-size: cover; 
+  background-size: cover;
 }
 
 .final-quest {
@@ -525,6 +527,16 @@
     left: 0;
     user-select: none;
   }
+}
+
+.equipment-item {
+  position: relative;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  flex: 1 0 auto;
+  max-width: 24%;
+  margin-bottom: 8vmin;
 }
 
 .quest-sketch { @include bimage('/img/quest/quest-bg.jpg', 100vmin, 100vh)}
@@ -746,7 +758,7 @@
 
 .red-answer {
   position: absolute;
-  bottom: 5vmin;
+  bottom: 11vmin;
   display: flex;
   width: 100vw;
   justify-content: space-around;
@@ -773,7 +785,7 @@
 
 .pipeline-quest p {
   position: absolute;
-  bottom: 20vmin;
+  top: -47vmin;
   padding: 1em;
   color: darkkhaki;
   font-size: 1.8em;
@@ -823,4 +835,9 @@
   &[data-cave="J"] { top: 148vmin; left: 30vmin; }
   &[data-cave="K"] { top: 124vmin; left: 61vmin; }
   &[data-cave="L"] { top: 145vmin; left: 72vmin; }
+}
+
+.inventory-top { 
+  @include bimage('/img/gui/inventory-top.png', 100vmin, 13vmin); 
+  top: -13vmin;
 }

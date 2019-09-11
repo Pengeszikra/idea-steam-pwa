@@ -79,4 +79,6 @@ export const [InventoryBg, TeamsBg, SmallTableTalker ] = divFactory('inventory-b
 
 export const [PlayerInfoBackground, IngameHistory, RockFormation, TopRock] = showFactory('player-info-bg', 'ingame-history', 'rock-formation', 'top-rock-formation');
 
-export const [Chest, RedButton, RedAnswer, EquipmentMatrixHolder] = showFactory('chest', 'red-button no-sel', 'red-answer', '.equipment-matrix-holder'); 
+export const [Chest, RedButton, RedAnswer] = showFactory('chest', 'red-button no-sel', 'red-answer'); 
+
+export const [EquipmentMatrixHolder, EquipmentItem, InventoryTop ] = divFactory('equipment-matrix-holder', 'item equipment-item', 'inventory-top');

@@ -213,7 +213,7 @@ export const itemNamesLup = {
   F1: 'kulcs',
   F2: 'saru',
   G1: 'stílus',
-  G2: 'szárított taplógomba', 
+  G2: 'szárított', 
   H1: 'tóga',
   H2: 'tűzpattintó',  
 }

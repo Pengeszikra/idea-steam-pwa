@@ -21,5 +21,3 @@ const Inventory = ({handleClose, equipment, interaction}) => {
 }
 
 export default showtime(Inventory);
-
-// <MapCloseButton onClick={handleClose}/>

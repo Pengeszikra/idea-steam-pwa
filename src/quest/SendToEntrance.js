@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest, ItemMatrixHolder, Chest, RedButton, RedAnswer, EquipmentMatrixHolder } from '../styles/divStore';
+import { TopRock, RockFormation, BlueCave, Item, IntroButton, ItemMatrix, CenterFlex, IntroButtonHolder, PipelineQuest, 
+  ItemMatrixHolder, Chest, RedButton, RedAnswer, EquipmentMatrixHolder, EquipmentItem } from '../styles/divStore';
 import SocratesSpeaking from '../layouts/SocratesSpeaking';
 import noprop from '../utils/noprop';
 import * as R from 'ramda';
@@ -42,15 +43,15 @@ export default ({interaction, level = 1}) => {
   }
 
   const Equipment = equipment.map(itemId => 
-    <Item 
+    <EquipmentItem 
       data-item={itemId} 
       key={`itm-${itemId}`} 
       style={{ opacity: selected[itemId] ? 1 : .4 }}
       onClick={noprop(handlePutItem(itemId))} 
-    ><span>{itemNamesLup[itemId]}</span></Item>
+    ><span>{itemNamesLup[itemId]}</span></EquipmentItem>
   );
 
-  const Selected = R.keys(selected).map(itemId => <Item data-item={itemId} key={`itm-${itemId}`}></Item> );  
+  const Selected = R.keys(selected).map(itemId => <EquipmentItem data-item={itemId} key={`itm-${itemId}`}><span>{itemNamesLup[itemId]}</span></EquipmentItem> );  
 
   return (
     <main className="graph-frame final-quest">
@@ -60,10 +61,10 @@ export default ({interaction, level = 1}) => {
 
       {underPhase([1,1.5]) && (
         <>
-          <ItemMatrixHolder style={{top: 90}}><ItemMatrix>{Selected}</ItemMatrix></ItemMatrixHolder>
+          <EquipmentMatrixHolder style={{top: '90vmin'}}><ItemMatrix>{Selected}</ItemMatrix></EquipmentMatrixHolder>
           {phase === 1 && (
             <>
-              <ItemMatrixHolder><ItemMatrix>{Equipment}</ItemMatrix></ItemMatrixHolder>
+              <ItemMatrixHolder><ItemMatrix style={{justifyContent: 'flex-start'}}>{Equipment}</ItemMatrix></ItemMatrixHolder>
               <IntroButtonHolder>
                 <IntroButton onClick={handleRoute('L-K')}>Visszalépés</IntroButton>
                 <IntroButton onClick={checkFireInitiated}>Tűzgyújtás</IntroButton>
@@ -89,9 +90,7 @@ export default ({interaction, level = 1}) => {
               setPhase(3);  
             }
           }} />
-          <EquipmentMatrixHolder show={phase === 4}>
-            <ItemMatrix>{Equipment}</ItemMatrix>
-          </EquipmentMatrixHolder>
+          { phase === 4 && <EquipmentMatrixHolder><ItemMatrix>{Equipment}</ItemMatrix></EquipmentMatrixHolder>}
         </div>
       )}
 
