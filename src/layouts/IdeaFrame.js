@@ -16,23 +16,21 @@ import { areaData } from '../engine/applicationData';
 import { 
   moveToArea, walkOnMap, startWalk, stopWalk, stopTalk, continueTalk, socratesTalk, 
   savePrisoner, getItem, questSolved, outOfQuest, achiveScore, beginQuest, putDownItem,
-  alternateQuest, showModal, setModal
+  alternateQuest, showModal, setModal, setEscape, finale
 } from '../engine/reducers';
 import CaveSystem from '../story/CaveSystem';
-import Inventory from './Inventory';
-import showtime from '../utils/showtime';
-import Teams from './Teams';
 import MockQuest from '../quest/MockQuest';
 import Victory from '../story/Victory';
 import PlayerInfo from './PlayerInfo';
 import { avatarNames } from './../engine/applicationData';
 import InventorySwiper from './InventorySwiper';
+import TeamSwiper from './TeamSwiper';
 
 export default ({setWay, storyStore}) => {
   const [{
     score, saved, equipment, level, position, walk, underWalk, 
     speakAbout, hasSocrates, caveLookUp, hasQuesting, finalQuestSolved, lightUp,
-    mapVisible, inventoryVisible, teamVisible, playerInfoVisible, startOfPlay
+    mapVisible, inventoryVisible, teamVisible, playerInfoVisible, startOfPlay, escape
   }, dispatch] = storyStore;
 
   const setMapVisiblity = visible => dispatch(setModal({map: visible}));
@@ -95,21 +93,27 @@ export default ({setWay, storyStore}) => {
       ? areaData[position].data.mission(avatarNames(level))
       : `mission text is empty cave: [${position}]`,
     itemList: () => equipment,
+    getEscape: () => escape,
+    setEscape: cave => dispatch(setEscape(cave)),
+    escapeFromCaveSystem: () => dispatch(finale()),
+
+    DEBUG: false,
   };
 
-  if (finalQuestSolved) return <Victory level={level} reset={()=>setWay(3)}/>;
+  if (finalQuestSolved) return <Victory level={level} escape={escape} reset={()=>setWay(3)}/>;
 
   return (
     <main className="graph-frame">      
-      <CaveSystem 
+      <CaveSystem
         position={position}
         currentArea={caveLookUp[position]}
         level={level} 
         interaction={interaction}
         lightUp={lightUp}
+        escape={escape}
       />            
       <InventorySwiper show={inventoryVisible} handleClose={() => setInventoryVisiblity(false)} equipment={equipment} interaction={interaction} />
-      <Teams show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />      
+      <TeamSwiper show={teamVisible} handleClose={() => setTeamVisiblity(false)} saved={saved} />
       <SocratesSpeaking show={hasSocrates} speakAbout={speakAbout} level={level} handleStopSpeak={handleStopSpeak} onFrame={position !== 'Q'} />
       <PlayerInfo 
         level={level} 
@@ -118,7 +122,8 @@ export default ({setWay, storyStore}) => {
         startOfPlay={startOfPlay}
         solved={Object.keys(caveLookUp).reduce((acc, key) => acc = caveLookUp[key].solved ? acc + 1 : acc , -3)}
         show={playerInfoVisible} 
-      setWay={setWay}
+        setWay={setWay}
+        interaction={interaction}
       />
       <BottomBar 
         show={position !== 'Q'}
@@ -143,7 +148,7 @@ export default ({setWay, storyStore}) => {
         handlePlayerInfo={handlePlayerInfo}
         walk={walk}
         underWalk={underWalk}
-        solvedCaves={Object.keys(caveLookUp).filter(key => caveLookUp[key].solved)}
+        solvedCaves={Object.keys(caveLookUp).filter(key => caveLookUp[key].solved)}        
       />
       <MockQuest show={hasQuesting && !hasSocrates} position={position} interaction={interaction} level={level} />
     </main>

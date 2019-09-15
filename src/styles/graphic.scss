@@ -65,6 +65,7 @@
 .road-cave { @include bimage('/img/caves/road-cave.png', 100vmin, 100vh); }
 .door-closed { @include bimage('/img/caves/door-closed.png', 100vmin, 100vh); }
 .greek-city { @include bimage('/img/caves/greek-city.jpg', 100vmin, 100vh); }
+.under-water { @include bimage('/img/caves/under-water.jpg', 100vmin, 100vh); }
 
 
 .prisoner-cave { @include bimage('/img/caves/prisoner-place.png', 100vmin, 100vh); }
@@ -233,6 +234,11 @@
       min-width: 80vmin;
     }
   }
+}
+
+.greek-city .socrates-speaking,
+.under-water .socrates-speaking {
+  bottom: 22vmin;
 }
 
 .header-bar { @include bimage('/img/gui/top-gui.png', 100vmin, 23vmin); }
@@ -428,6 +434,28 @@
   animation: slide-from-bottom 200ms forwards ease-in 300ms;
   transform: translateY(20vmin);
   opacity: 0;
+}
+
+.team-member {
+  &[data-prisoner="A1"] { @include bimage('/img/mobs/talk-01.png') }
+  &[data-prisoner="B1"] { @include bimage('/img/mobs/talk-02.png') }
+  &[data-prisoner="B2"] { @include bimage('/img/mobs/talk-03.png') }
+  &[data-prisoner="C1"] { @include bimage('/img/mobs/talk-04.png') }
+  &[data-prisoner="D1"] { @include bimage('/img/mobs/talk-05.png') }
+  &[data-prisoner="E1"] { @include bimage('/img/mobs/talk-06.png') }
+  &[data-prisoner="E2"] { @include bimage('/img/mobs/talk-07.png') }
+  &[data-prisoner="F1"] { @include bimage('/img/mobs/talk-08.png') }
+  &[data-prisoner="F2"] { @include bimage('/img/mobs/talk-09.png') }
+  &[data-prisoner="G1"] { @include bimage('/img/mobs/talk-10.png') }
+  &[data-prisoner="H1"] { @include bimage('/img/mobs/talk-11.png') }
+  &[data-prisoner="I1"] { @include bimage('/img/mobs/talk-12.png') }
+
+  position: relative!important;
+  width: 30vmin!important;
+  height: 30vmin!important;
+  display: inline-block!important;
+  margin-top: 7vmin;
+
 }
 
 @keyframes slide-from-bottom { 
@@ -754,6 +782,11 @@
   color: white;
   font-size: 2em;
   position: relative;
+
+  &[data-escape="D"] { top: 30vmin;  left: 20vmin;  position: absolute; }
+  &[data-escape="E"] { top: 30vmin;  left: 120vmin;  position: absolute; }
+  &[data-escape="F"] { top: 130vmin;  left: 20vmin;  position: absolute; }
+  &[data-escape="J"] { top: 130vmin;  left: 120vmin;  position: absolute; }
 }
 
 .red-answer {

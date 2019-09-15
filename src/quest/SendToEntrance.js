@@ -7,16 +7,19 @@ import * as R from 'ramda';
 import { cave_2_11, itemNamesLup, cave_2_1_again } from '../engine/applicationData';
 import { avatarNames } from './../engine/applicationData';
 import { shuffle } from './../utils/randoms';
+import ModalScore from '../layouts/ModalScore';
 
 const fireEquipment = {D1: true, E1: true, G2: true, H2: true};
 
 export default ({interaction, level = 1}) => {
 
-  const {itemList, handleRoute, questResultIs} = interaction;
+  const {itemList, handleRoute, questResultIs, getEscape, setEscape} = interaction;
   const [phase, setPhase] = useState(0);
   const [selected, setSelect] = useState({});
   const [equipment, useEquipment] = useState(itemList());
   const [speak, talk] = useState(cave_2_11.mission(avatarNames(level)));
+  const [reflectWrong, setWrong] = useState(false);
+  //const [escape, setEscape] = useState(false);
 
   const underPhase = R.includes(phase);
 
@@ -53,6 +56,18 @@ export default ({interaction, level = 1}) => {
 
   const Selected = R.keys(selected).map(itemId => <EquipmentItem data-item={itemId} key={`itm-${itemId}`}><span>{itemNamesLup[itemId]}</span></EquipmentItem> );  
 
+  const possibleResult = {
+    bad: 'Nem jó megoldás!', 
+    good: 'Helyes válasz!', 
+    run: 'Menekülj!'
+  };
+
+  const answerIs = (goodAnswer, answer) => event => {
+    if ( goodAnswer !== 'run') return setWrong(goodAnswer === answer ? 'good' : 'bad');
+    setEscape(answer);
+    setWrong('run');
+  }
+
   return (
     <main className="graph-frame final-quest">
       <BlueCave style = {{filter:`brightness(${phase < 2 ? .1 : 1})`}}/>
@@ -61,7 +76,7 @@ export default ({interaction, level = 1}) => {
 
       {underPhase([1,1.5]) && (
         <>
-          <EquipmentMatrixHolder style={{top: '90vmin'}}><ItemMatrix>{Selected}</ItemMatrix></EquipmentMatrixHolder>
+          <EquipmentMatrixHolder style={{top: '60vmin'}}><ItemMatrix>{Selected}</ItemMatrix></EquipmentMatrixHolder>
           {phase === 1 && (
             <>
               <ItemMatrixHolder><ItemMatrix style={{justifyContent: 'flex-start'}}>{Equipment}</ItemMatrix></ItemMatrixHolder>
@@ -98,24 +113,24 @@ export default ({interaction, level = 1}) => {
         <PipelineQuest>
           <RedAnswer show={phase == 11}>
             <p>{cave_2_1_again.question1()}</p>
-            {['K','H','G','J'].map(answer => <RedButton key={answer} show={true} onClick={answer === 'G' ? ()=>setPhase(12) : ()=>{}}>{answer}</RedButton>)}
+            {['K','H','G','J'].map(answer => <RedButton key={answer} show={true} onClick={answerIs('G', answer)}>{answer}</RedButton>)}
           </RedAnswer>
           <RedAnswer show={phase == 12}>
             <p>{cave_2_1_again.question2()}</p>
-            {[12,11,10,9,1].map(answer => <RedButton key={answer} show={true} onClick={answer === 12 ? ()=>setPhase(13) : ()=>{}}>{answer}</RedButton>)}
+            {[12,11,10,9,1].map(answer => <RedButton key={answer} show={true} onClick={answerIs(12, answer)}>{answer}</RedButton>)}
           </RedAnswer>
           <RedAnswer show={phase == 13}>
             <p>{cave_2_1_again.question3()}</p>
-            {['D','E','F','J'].map(answer => <RedButton key={answer} show={true} onClick={answer === 'F' ? ()=>setPhase(15) : ()=>{}}>{answer}</RedButton>)}
+            {['D','E','F','J'].map(answer => <RedButton key={answer} show={true} onClick={answerIs('run', answer)}>{answer}</RedButton>)}
           </RedAnswer>          
-          {phase === 15 && (
-            <IntroButtonHolder>
-              <IntroButton onClick={() => {
-                questResultIs(true);
-                handleRoute('E-X')();
-              }}>Indulok</IntroButton>
-            </IntroButtonHolder>
-          )}
+          <ModalScore score={possibleResult[reflectWrong]} show={reflectWrong} onClick={() => {
+            if (reflectWrong === 'good') setPhase(p => p + 1);
+            if (reflectWrong === 'run') {
+              setPhase(15);
+              talk(`Vidd biztos helyre a felszabadítottakat, úgy gondolod ${avatarNames(level)}, hogy a ${getEscape()} barlangon keresztül visz az út a szabadba`);              
+            }
+            setWrong(false);            
+          }} /> 
         </PipelineQuest>
       )}
 
@@ -130,13 +145,17 @@ export default ({interaction, level = 1}) => {
           if (phase === 5) { 
             talk(''); 
             setPhase(10);
-            setTimeout(() => talk(cave_2_1_again.intro(avatarNames(level))), 500);
+            setTimeout(() => talk(cave_2_1_again.intro(avatarNames(level))), 300);
           }
           if (phase === 10) { talk(''); setPhase(11) }
+          if (phase === 15) {
+            talk('');
+            questResultIs(true);
+            handleRoute('L-K')();
+          }
         }}
         style={phase === 0 ? {filter:'brightness(0.3) hue-rotate(190deg)'} : {}}
-      />
-      
+      />      
     </main>
   );
 };

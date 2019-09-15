@@ -2,8 +2,9 @@ import React from 'react';
 import { PlayerInfoBackground, IntroButton, Glaukon, Adeimantosz, SpeakText, MapCloseButton } from '../styles/divStore';
 import { avatarNames } from './../engine/applicationData';
 
-export default ({level = 1, setWay, solved, saved, score, startOfPlay, ...props}) => {
+export default ({level = 1, setWay, solved, saved, score, startOfPlay, interaction, ...props}) => {
 
+  const {DEBUG} = interaction;
   const time = (Date.now() - startOfPlay) / 60000 | 0;
 
   return (
@@ -19,7 +20,7 @@ export default ({level = 1, setWay, solved, saved, score, startOfPlay, ...props}
         Eltöltött idő: ${time} perc
       `}      
       </SpeakText>
-      <MapCloseButton onClick={() => setWay(3)} style={{top: '20vmin'}} />
+      {DEBUG && <MapCloseButton onClick={() => setWay(3)} style={{top: '20vmin'}} />}
     </PlayerInfoBackground>
   );
 };

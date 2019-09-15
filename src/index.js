@@ -45,7 +45,7 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<PairProjectionQuestGame interaction={mockGameCommunication} />);
 
 //rootRender(<PointShadowGame interaction={mockGameCommunication} />);
-//rootRender(<Victory level={1} />);
+
 //rootRender(<IntersectionTest />);
 //rootRender(<PipeDraw2D interaction={mockGameCommunication} />);
 
@@ -56,3 +56,4 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
 //rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)
 //rootRender(<SendToEntrance interaction={mockGameCommunication}/>)
+//rootRender(<Victory level={1} reset={() => console.log('again !')}/>);

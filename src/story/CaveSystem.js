@@ -3,7 +3,7 @@ import {
   RouteArrow, Prisoner, Item, PrisonerCave,
   BlueCave, LongCave, WaterFallCave, BehindTheDoor,
   LightCave, FangCave, NeedleCave, StairCaseCave,
-  ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave,   
+  ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave, RedButton,   
 } from '../styles/divStore';
 import DownToDeep from './DownToDeep';
 import { areaData } from '../engine/applicationData';
@@ -26,9 +26,8 @@ const backroundLookup = {
   L:  ChainCave,
 };
 
-export default ({position, level, interaction, currentArea, lightUp}) => {
-  const {handleRoute, handleSavePrisoner, handleGetItem, monologBeforeQuest} = interaction;
-
+export default ({position, level, interaction, currentArea, lightUp, escape}) => {  
+  const {handleRoute, handleSavePrisoner, handleGetItem, monologBeforeQuest, escapeFromCaveSystem} = interaction;
   const data = areaData[position];
   const showItems = currentArea.solved 
     ? currentArea.items.map(itemId => <Item data-item={itemId} onClick={handleGetItem(itemId)} key={`itm-${itemId}`} />) 
@@ -43,7 +42,6 @@ export default ({position, level, interaction, currentArea, lightUp}) => {
     />
   );
   const Background = backroundLookup[position];
-
   const afterMonolog = data.onEnterMonolog ? currentArea.readed : true;
 
   // select intro text - will be sofisticated
@@ -65,6 +63,7 @@ export default ({position, level, interaction, currentArea, lightUp}) => {
       {afterMonolog && light && showExits}
       {showItems}
       {showPrisoners}
+      <RedButton show={escape && position === escape} data-escape={escape} onClick={escapeFromCaveSystem}>{escape}</RedButton>;
     </Background>
   );
 }

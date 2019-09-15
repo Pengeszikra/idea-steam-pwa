@@ -50,7 +50,7 @@ export default (Game, Background, isTimer = false) => ({interaction, level = 1, 
       <Timer show={timeLeft}>
         <Bar show={true} style={{width:`calc(${timeLeft}vmin * 98)`}} />
       </Timer>
-      <IngameHistory show={true} onClick={() => talking(!isSpeak)} />      
+      <IngameHistory show={true} onClick={() => talking(!isSpeak)} />
     </Background>
   );
 };

@@ -13,12 +13,12 @@ export default showtime( ({Avatar, handleCloseMap, underWalk = false, walk, hand
     left: `${x}vmin`,
   };
 
-  console.log(solvedCaves)
+  // console.log(solvedCaves)
 
   return (
     <>
       <InteractiveMap>
-        <LetterOfCaves solvedCaves={solvedCaves} />
+        <LetterOfCaves solvedCaves={solvedCaves} escape={escape} />
         {!underWalk && <MapCloseButton onClick={handleCloseMap}/>}
       </InteractiveMap>
       <Avatar style={avatarStyle} onClick={() =>!underWalk && handlePlayerInfo()} />

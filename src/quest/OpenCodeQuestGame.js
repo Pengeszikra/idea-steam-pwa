@@ -41,7 +41,7 @@ const QuestItem = ({targets, setHold, shapeId, level=1, ...props}) => {
 const  GeomTarget = ({fref, children, ...props}) => <div className="drop-target" ref={fref} {...props}>{children}</div>;
 
 export default  ({interaction, level = 2, position}) => {
-  const {questResultIs, instruction} = interaction;
+  const {questResultIs, instruction, DEBUG} = interaction;
   const [isSpeak, setSpeak] = useState(false)
   const [attached, setAttached] = useState(["", "", "", ""]);
   const [isOpen, openDoor] = useState(0);  
@@ -95,7 +95,7 @@ export default  ({interaction, level = 2, position}) => {
       <OpenGameHolder>        
         {targets.map((targetRef, key) => <GeomTarget key={key} fref={targetRef}></GeomTarget>)}
         <IntroButtonHolder>
-          <IntroButton onClick={()=>questResultIs(true, position)}>simán kinyit</IntroButton>
+          {DEBUG  && <IntroButton onClick={()=>questResultIs(true, position)}>simán kinyit</IntroButton>}
           <IntroButton onClick={checkSolution}>Megoldás</IntroButton>
         </IntroButtonHolder>        
       </OpenGameHolder>      

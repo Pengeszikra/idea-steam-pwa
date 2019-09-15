@@ -23,6 +23,9 @@ export const [PUT_DOWN_ITEM, putDownItem] = actionCreator('put-down-item');
 export const [ALTERNATE_QUEST, alternateQuest] = actionCreator('alternate-quest');
 
 export const [SET_MODAL, setModal] = actionCreator('set-modal');
+export const [SET_ESCAPE, setEscape] = actionCreator('set-escape');
+export const [FINALE, finale] = actionCreator('finale');
+
 
 const modalOff = {
   hasSocrates: false,
@@ -55,18 +58,20 @@ export const storyInitial = {
     K: { explored: false , prisoners: [], items: [], solved: false, readed: false },
     L: { explored: false , prisoners: [], items: [], solved: false, readed: false },
   },
-  //saved: [],
-  //equipment: [],
-  saved:     ['A1','B1','B2','C1','D1','E1','E2','F1','F2','G1','H1','I1'],
-  equipment: ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
+  saved: [],
+  equipment: [],
+  //saved:     ['A1','B1','B2','C1','D1','E1','E2','F1','F2','G1','H1','I1'],
+  //equipment: ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
   
   hasQuesting: false,
   lightUp: false,
   finalQuestSolved: false,
+  escape: false,
 
   speakAbout: "",
   startOfPlay: Date.now(),
   scoreLog: [],
+  
   ...modalOff,
 };
 
@@ -83,7 +88,7 @@ export const storyReducer = (state, {type, payload}) => {
     case ACHIVE_SCORE:   
       const score = state.score + payload;
       const scoreLog = [...state.scoreLog, { position, score: payload, stamp: Date.now() }];
-      console.table(scoreLog);
+      // console.table(scoreLog);
       return { ...state, score, scoreLog };
     
     case SELECT_LEVEL: return {...state, level: payload };
@@ -196,5 +201,10 @@ export const storyReducer = (state, {type, payload}) => {
       if (playerInfo !== undefined) return {...state, ...modalOff, playerInfoVisible: playerInfo };
 
     default: return state;
+
+    case SET_ESCAPE: return {...state, escape: payload}
+
+    case FINALE: return {...state, finalQuestSolved: true}
+
   }
 }
