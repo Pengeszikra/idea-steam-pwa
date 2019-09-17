@@ -97,7 +97,7 @@ export default ({setWay, storyStore}) => {
     setEscape: cave => dispatch(setEscape(cave)),
     escapeFromCaveSystem: () => dispatch(finale()),
 
-    DEBUG: false,
+    DEBUG: true,
   };
 
   if (finalQuestSolved) return <Victory level={level} escape={escape} reset={()=>setWay(3)}/>;

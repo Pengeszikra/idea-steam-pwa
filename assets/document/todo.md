@@ -1,35 +1,39 @@
 # IDEA - road to run
 
 ## minimal stepps to finalize
+  - [ ] check on iPhone / iPad
   - [x] avatar selection reworked
-  - [ ] fix game mechanism
-    - [ ] Q : Open Door, Run away from water
-    - [ ] Y : Run Away from Water
-    - [x] L : Quest of Items / Walk to door 
-  - [x] games positions
+  - [x] fix game mechanism
     - [x] Q : Open Door, Run away from water
-    - [x] Y : Welcome / Run Away from Water
-    - [x] A : Found perfect bodies
-    - [x] B : Pair shadow to solid
-    - [x] C : Pair solid to shadow
-    - [x] D : Cube Uv
-    - [x] X : just crossroad - no game
-    - [x] E : Pair shadow to solid for time
-    - [x] F : Pair solid to shadow for time
-    - [x] G : Cube uv for time
-    - [x] H : Fallen Pairs
-    - [x] I : Three Gems
-    - [x] J : Roman Numbers
-    - [x] K : Link Path
+    - [x] Y : Run Away from Water
     - [x] L : Quest of Items / Walk to door 
+  - [ ] monologs    
+  - [x] games positions
+    - [x] Q : Open Door, Run away from water   [x] monolog
+    - [x] Y : Welcome / Run Away from Water    [x] monolog
+    - [x] A : Found perfect bodies             [x] monolog
+    - [x] B : Pair shadow to solid             [x] monolog
+    - [x] C : Pair solid to shadow             [-C-] monolog
+    - [x] D : Cube Uv                          [-D-] monolog
+    - [x] X : just crossroad - no game         
+    - [x] E : Pair shadow to solid for time    [x] monolog
+    - [x] F : Pair solid to shadow for time    [-F-] monolog
+    - [x] G : Cube uv for time                 [-G-] monolog
+    - [x] H : Fallen Pairs                     [-H-] monolog
+    - [x] I : Three Gems                       [x] monolog
+    - [x] J : Roman Numbers                    [x] monolog
+    - [x] K : Link Path                        [x] monolog
+    - [x] L : Quest of Items / Walk to door    [-L-] monolog // csak az első barlangból lehet kijutni!
   - [x] game for caves
   - [x] PerfectShapeGame
   - [ ] games versions
-  - [ ] monologs
+
+
   - [ ] redraw items
   - [ ] arrows or drawed ways - just keep consistent
   - [x] rework multiRounds game framework each quest repeat twice at level 2
   - [x] create branch to keep old stuff : oldest
+  - [x] heal icon
   - [ ] fix score system
     - [x] score value at end of minigame
     - [x] score log

@@ -78,7 +78,7 @@ export const cave_2_2 = {
 }
 
 export const cave_2_3 = {
-  intro: ``
+  intro: `Találd meg a forgó test összes árnyékát!`
   ,
   mission: _ => `Jelöld ki azokat az egymás melletti mezőket, melyek a test hálóját adják!`
   ,
@@ -176,7 +176,8 @@ export const cave_2_11 = {
 }
 
 export const cave_2_12 = {
-  intro: karakter => `Közelinek tűnik, de messze már a nap mikor útnak indultál ${karakter}. Barlangról barlangra, a sötétséggel dacolva haladtál, soha el nem tévesztve a célt: hogy egy napon újra a felszínen érjen a napsugár. Itt vagy hát, és itt vannak mind kiket felszabadítottál. Az utolsó barlangban vagytok, azonban a felszínre csak a legelső bralangból lehet kijutni!`
+  intro: karakter => `Közelinek tűnik, de messze már a nap mikor útnak indultál ${karakter}. Barlangról barlangra, a sötétséggel dacolva haladtál, soha el nem tévesztve a célt: hogy egy napon újra a felszínen érjen a napsugár. Itt vagy hát, és itt vannak mind kiket felszabadítottál. Az utolsó barlangban vagytok, de itt minden sötét!`
+  // intro: karakter => `Közelinek tűnik, de messze már a nap mikor útnak indultál ${karakter}. Barlangról barlangra, a sötétséggel dacolva haladtál, soha el nem tévesztve a célt: hogy egy napon újra a felszínen érjen a napsugár. Itt vagy hát, és itt vannak mind kiket felszabadítottál. Az utolsó barlangban vagytok, azonban a felszínre csak a legelső bralangból lehet kijutni!`
   ,
   mission: _ => `A pontok barlangokat jelölnek: Rajzolj be a barlangok között folyamatos utat úgy, hogy a kiinduló pontba érkezz vissza és minden barlangon csak egyszer menj keresztül!`
   ,
