@@ -411,8 +411,8 @@
   &:hover { opacity: 1;}
   transform-origin: center center;
   
-  &[data-path="C-A"] { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
-  &[data-path="C-X"] { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
+  // &[data-path="C-A"] { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
+  // &[data-path="C-X"] { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
 }
 
 

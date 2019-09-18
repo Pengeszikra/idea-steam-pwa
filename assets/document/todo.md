@@ -13,11 +13,11 @@
     - [x] Y : Welcome / Run Away from Water    [x] monolog
     - [x] A : Found perfect bodies             [x] monolog
     - [x] B : Pair shadow to solid             [x] monolog
-    - [x] C : Pair solid to shadow             [-C-] monolog
-    - [x] D : Cube Uv                          [-D-] monolog
+    - [x] C : Pair solid to shadow             [x] monolog
+    - [x] D : Cube Uv                          [x] monolog
     - [x] X : just crossroad - no game         
     - [x] E : Pair shadow to solid for time    [x] monolog
-    - [x] F : Pair solid to shadow for time    [-F-] monolog
+    - [x] F : Pair solid to shadow for time    [x] monolog
     - [x] G : Cube uv for time                 [-G-] monolog
     - [x] H : Fallen Pairs                     [-H-] monolog
     - [x] I : Three Gems                       [x] monolog
@@ -30,7 +30,7 @@
 
 
   - [ ] redraw items
-  - [ ] arrows or drawed ways - just keep consistent
+  - [x] [arrows] or drawed ways - just keep consistent
   - [x] rework multiRounds game framework each quest repeat twice at level 2
   - [x] create branch to keep old stuff : oldest
   - [x] heal icon

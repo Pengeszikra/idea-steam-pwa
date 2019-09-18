@@ -78,9 +78,9 @@ export const cave_2_2 = {
 }
 
 export const cave_2_3 = {
-  intro: `Találd meg a forgó test összes árnyékát!`
+  intro: _ => `Találd meg a forgó test összes árnyékát!`
   ,
-  mission: _ => `Jelöld ki azokat az egymás melletti mezőket, melyek a test hálóját adják!`
+  mission: _ => `Jelöld ki azokat az árnyakat, melyek a fent forgó testhez tartoznak!`
   ,
   info: _ => `Így már nem határol testet: Fala síkba kiterítve Szétnyílt élekben őrződik A térbeliség emléke.
 
@@ -92,9 +92,9 @@ export const cave_2_3 = {
 }
 
 export const cave_2_4 = {
-  intro: ``
+  intro: _ => `Így már nem határol testet: Fala síkba kiterítve Szétnyílt élekben őrződik A térbeliség emléke. Fala síkba kilapítva Alig felismerhető, De a lapot meghajlítva Egy térrész körülkeríthető. Ha a hálóját látod, Őt magát kell megtalálnod. Ha őt magát látod, Hálóját kell megtalálnod. Jelöld ki a kocka hálóját!`
   ,
-  mission: _ => `Forgasd el a mezőket úgy, hogy a test hálóját adják!`
+  mission: _ => `Jelöld ki a mezőket úgy, hogy a test hálóját adják!`
   ,
   info: _ => `Így már nem határol testet: Fala síkba kiterítve Szétnyílt élekben őrződik A térbeliség emléke.
 
@@ -116,25 +116,25 @@ export const cave_2_5 = {
 }
 
 export const cave_2_6 = {
-  intro: ``
+  intro: karakter => `${karakter} meg kell találnod az összes árnyat, de jól vigyázz, mert szűkös a rendelkezésre álló idő!`
   ,
-  mission: _ => ``
+  mission: _ => `Siess! Találd meg a testhez tartozó árnyakat! Bizonyítsd be a hitetlenkedőknek, hogy nem csak a falakon látható árnyképekből áll világuk.`
   ,
   info: ``  
 }
 
 export const cave_2_7 = {
-  intro: ``
+  intro: karakter => `${karakter} ezzel a feladattal már találkoztál, de most nem lesz sok időd gondolkodni. Gyorsan találd meg a kocka hálóját!`
   ,
-  mission: _ => ``
+  mission: karakter => `Siess ${karakter} fogytán az időd! Jelöld ki a mezőket úgy, hogy a test hálóját adják!`
   ,
   info: `` 
 }
 
 export const cave_2_8 = {
-  intro: ``
+  intro: _ => `A barlang fura megvilágításának köszönhetően az árnyak látszólag ellentétes irányba mozognak, a feladatod annyi hogy megtaláld a párokat.`
   ,
-  mission: _ => ``
+  mission: _ => `Jelölj ki egy árnyat és a hozzá tartozó testet!`
   ,
   info: `` 
   ,
@@ -146,7 +146,7 @@ export const cave_2_9 = {
 
   Még van előttetek akadály, vezesd el a felszabadított embereket a barlangrendszer kijáratához!`
   ,
-  mission: _ =>  `Ismerd fel a pontszerű forrásból érkező fény által vetett árnyakat`
+  mission: _ =>  `Egy egy szomszédos testet kicserélve juttass egymás mellé három egyforma testet. Nincs könnyű dolgod, mert különböző módon elforgatva látod őket!`
   ,
   info: _ => `Ha az izzó fénye, egy pontból kivetül, a keret körülötte padlóra vetül.
 
@@ -194,6 +194,8 @@ export const cave_2_1_again = {
   question2: _ => `Hány barlangnyi vízre lenne szükség, hogy a felhajtóerő segítségével kijuss a barlangrends?`
   ,
   question3: _ => `Kezdetben csak egy barlangnyi víz zúdul be. Melyik barlangba helyezkednél az alábbiak közül, hogy a víz biztosan ne érjen téged és a felszabadítottakat?`
+  ,
+  letsgo: karakter => `${karakter}! Emberek felszabadítója! Sikeresen felszabadítottad a fogságból az embereket! Most menj, a te vezetéseddel lehet esély, hogy mindenki épségben kijusson a barlangrendszerből!`
   ,
   info: ``  
 }
