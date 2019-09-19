@@ -20,7 +20,7 @@ const logUserData = ({userData}) => console.log(userData);
 const logUserDataWithPosition = ({userData, position}) => console.log(userData, position);
 
 
-const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalScore}) => studio => {
+const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalScore, level}) => studio => {
   const {root, camera} = studio;
 
   totalScore = 0;
@@ -30,7 +30,13 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalSco
   const height = 8;
   const numberOfTypes = 4;
 
-  const getRandomShape = () => shapes[irnd(numberOfTypes)];
+  const setByLevel = [
+    [0, 1, 2, 3],
+    [0, 1, 2, 3],
+    [0, 4, 5, 8],
+  ][level];
+
+  const getRandomShape = () => shapes[setByLevel[irnd(numberOfTypes)]];
   const render = root => item => root.add(item);
 
   const matrixRoot = new THREE.Group();
@@ -43,7 +49,8 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalSco
   const isNext = (x1, y1, x2, y2) => Math.abs(x1 - x2) + Math.abs(y1 - y2) === 1
 
   const createGem = (x, y, shape) => {
-    const mesh = makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77);
+    // const mesh = makeShape(shape, 1,1,1, 0xAA5522, 1 , 0xFFAA77);
+    const mesh = makeShape(shape, 1,1,1, 0xAA5522);
     mesh.scale.multiplyScalar(20);
     mesh.translateX(x * 80).translateY(y * 80);
     rotate(mesh,...([90,0,45].sort(shuffle)));
@@ -193,7 +200,7 @@ const solidProjection3dContent = ({playOver, gainScore, setChecking, setLocalSco
   return play3dContent(studio)(animation);
 }
 
-const Game = ({show, playOver, gainScore, setChecking}) => {
+const Game = ({show, playOver, gainScore, setChecking, level}) => {
   const [localScore, setLocalScore] = useState(0);
 
   return (
@@ -201,7 +208,7 @@ const Game = ({show, playOver, gainScore, setChecking}) => {
       <h1 style={{textAlign:'center'}}>Pontszám: {localScore}</h1>
       <ThreeInteraction 
         show={show} 
-        add3DContent={solidProjection3dContent({playOver, gainScore, setChecking, setLocalScore})} 
+        add3DContent={solidProjection3dContent({playOver, gainScore, setChecking, setLocalScore, level})} 
         orthographic
       />
     </>

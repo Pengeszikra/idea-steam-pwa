@@ -2,6 +2,11 @@
 
 ## minimal stepps to finalize
   - [ ] check on iPhone / iPad
+  - [ ] three match game optimize
+  - [ ] redesign
+    - [ ] history page
+    - [ ] items
+    - [ ] cave
   - [x] avatar selection reworked
   - [x] fix game mechanism
     - [x] Q : Open Door, Run away from water
@@ -18,14 +23,15 @@
     - [x] X : just crossroad - no game         
     - [x] E : Pair shadow to solid for time    [x] monolog
     - [x] F : Pair solid to shadow for time    [x] monolog
-    - [x] G : Cube uv for time                 [-G-] monolog
-    - [x] H : Fallen Pairs                     [-H-] monolog
+    - [x] G : Cube uv for time                 [x] monolog
+    - [x] H : Fallen Pairs                     [x] monolog
     - [x] I : Three Gems                       [x] monolog
     - [x] J : Roman Numbers                    [x] monolog
     - [x] K : Link Path                        [x] monolog
-    - [x] L : Quest of Items / Walk to door    [-L-] monolog // csak az első barlangból lehet kijutni!
+    - [x] L : Quest of Items / Walk to door    [x] monolog
   - [x] game for caves
   - [x] PerfectShapeGame
+  - [x] Stem Welcome
   - [ ] games versions
 
 
