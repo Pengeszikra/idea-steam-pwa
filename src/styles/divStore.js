@@ -82,3 +82,5 @@ export const [PlayerInfoBackground, IngameHistory, RockFormation, TopRock] = sho
 export const [Chest, RedButton, RedAnswer] = showFactory('chest', 'red-button no-sel', 'red-answer'); 
 
 export const [EquipmentMatrixHolder, EquipmentItem, InventoryTop, TeamMember ] = divFactory('equipment-matrix-holder', 'item equipment-item', 'inventory-top', 'team-member');
+
+export const [StemWelcome] = divFactory('stem-welcome')

@@ -874,3 +874,17 @@
   @include bimage('/img/gui/inventory-top.png', 100vmin, 13vmin); 
   top: -13vmin;
 }
+
+.stem-welcome {
+  p {
+    text-align: center;
+    font-size: 1.8em;  
+  }
+  margin: 2em;
+  overflow: hidden;
+
+  a, a:visited {
+    color: goldenrod;
+    text-decoration: none;
+  }
+}

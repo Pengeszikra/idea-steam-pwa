@@ -24,6 +24,7 @@ import { SimpleDarkBg } from './styles/divStore';
 import ThreeGemGames from './quest/ThreeGemGames';
 import PerfectShapesGame from './quest/PerfectShapesGame';
 import SendToEntrance from './quest/SendToEntrance';
+import Stem from './story/Stem';
 
 getMeshes(); // preload blender files
 
@@ -32,7 +33,9 @@ const mockGameCommunication = {
   questResultIs: result => console.log(`--------\ngame result is: ${result}`),
   instruction: cave_1_1.intro_2('Mr. Foo'),
   itemList: () => ['C1','C2','D1','D2','E1','E2','F1','F2','G1','G2','H1','H2'],
-  handleRoute: path => e => console.log(`walk to ${path}`)
+  handleRoute: path => e => console.log(`walk to ${path}`),
+  setEscape: console.log,
+  getEscape: console.table,
 };
 
 rootRender(<IdeaAdventuresBegin />);
@@ -55,5 +58,6 @@ rootRender(<IdeaAdventuresBegin />);
 //rootRender(<SimpleDarkBg/>)
 //rootRender(<ThreeGemGames interaction={mockGameCommunication} />);
 //rootRender(<PerfectShapesGame interaction={mockGameCommunication}/>)
-//rootRender(<SendToEntrance interaction={mockGameCommunication}/>)
-//rootRender(<Victory level={1} reset={() => console.log('again !')}/>);
+//rootRender(<SendToEntrance interaction={mockGameCommunication} />)
+//rootRender(<Victory level={1} reset={() => console.log('again !')} escape={'F'} />);
+//rootRender(<Stem />);
