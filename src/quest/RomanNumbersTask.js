@@ -43,7 +43,7 @@ const RomanNumbersGame = ({show, playOver, gainScore, setChecking, level}) => {
       
   return show && items.length ? (
     <>
-      <IntroHeader>{cave_2_10.mission()}</IntroHeader>
+      <IntroHeader style={{marginTop:'20vmin'}}>{cave_2_10.mission()}</IntroHeader>
       <RnHolder style={{marginLeft: `${50 - (6 * items.length)}vmin`}}>
         <DragRomanNumbers 
           items={items} 

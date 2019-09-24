@@ -46,7 +46,7 @@
 
 .simple-dark-bg { @include bimage('/img/gui/simple-textured-bg.png', 100vmin, 100vh); background-size: cover; }
 .island { @include bimage('/img/caves/island.png', 100vmin, 100vh); }
-.dark-gold { @include bimage('/img/gui/dark-gold-intro.png', 100vmin, 100vh); }
+.dark-gold { @include bimage('/img/gui/dark-gold-intro.png', 100vmin, 100vh);}
 .play-city { @include bimage('/img/caves/city.png', 100vmin, 100vh); }
 .entrance-cave { @include bimage('/img/caves/entrance.png', 100vmin, 100vh); }
 
@@ -611,6 +611,7 @@
   position: relative;
   width: 100%;
   height: 30vmin;
+  margin-top: 20vmin;
 }
 
 .cube-uv {
@@ -887,4 +888,42 @@
     color: goldenrod;
     text-decoration: none;
   }
+}
+
+.history-background {  
+  background: url('/img/gui/history-background.jpg');
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100vmin - 4em);
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 1em 2em;
+  color: #000;
+  
+  display: block;
+
+  p, li, i {
+    font-size: 1.5em;
+  }
+}
+
+.vertical-scroller {
+  width: 100vmin;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y:  auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.platon { @include bimage('/img/gui/platon.png', 69vmin, 69vmin); position: relative; }
+
+.area-3d-small {
+  position: relative;
+  width: 100vmin;
+  height: 70vmin;
+  overflow: hidden;
+  opacity: 0.7;
 }

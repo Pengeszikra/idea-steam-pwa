@@ -94,6 +94,8 @@ const showContent = (geom, d=100, w=100, h=100, color=0xBBCCDD, opacity=.7) => (
 
 export const Add3D = ({content}) => <ThreeArea canvasClasses={['area-3d-canvas']} add3DContent={turnContent(content)}/>;
 
+export const TurnSmallGeom = ({content}) => <ThreeArea canvasClasses={['area-3d-small']} add3DContent={turnContent(content)}/>;
+
 export const rotate = (mesh, ...xyz ) => {
   const [x = 0, y = 0, z = 0] = xyz;
   mesh.rotateX(x/RAD).rotateY(y/RAD).rotateZ(z/RAD)

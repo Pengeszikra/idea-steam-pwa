@@ -27,7 +27,7 @@ export const [PrisonerOne] = divFactory("prisoner-1");
 export const [ItemOne] = divFactory("item-1");
 export const [SimpleDarkBg, Island] = divFactory("simple-dark-bg", "island");
 
-export const [DarkGold, IntroButton, IntroHeader] = divFactory("dark-gold", "intro-button nosel", "intro-header no-sel");
+export const [IntroButton, IntroHeader] = divFactory("intro-button nosel", "intro-header no-sel");
 export const [Adeimantosz, Glaukon] = divFactory("adeimantosz", "glaukon");
 
 export const [GameHolder, OpenGameHolder] = divFactory("game-holder", "open-game-holder");
@@ -73,14 +73,14 @@ export const [GeomItem, TaskLabel, DropArea, ItemHolder, LabelHolder] = divFacto
 
 export const [ModalHolder, SmallTable, SmallButton, LargeTable] = divFactory('modal-holder no-scroll', 'small-table no-sel', 'small-button no-sel', 'large-table no-sel');
 
-export const [RnHolder, UnderWater] = divFactory('rn-holder','under-water no-scroll'); 
+export const [RnHolder, UnderWater, Platon] = divFactory('rn-holder','under-water no-scroll', 'platon'); 
 
 export const [InventoryBg, TeamsBg, SmallTableTalker ] = divFactory('inventory-bg', 'teams-bg', 'small-table-talker');
 
 export const [PlayerInfoBackground, IngameHistory, RockFormation, TopRock] = showFactory('player-info-bg', 'ingame-history', 'rock-formation', 'top-rock-formation');
 
-export const [Chest, RedButton, RedAnswer] = showFactory('chest', 'red-button no-sel', 'red-answer'); 
+export const [Chest, RedButton, RedAnswer, DarkGold] = showFactory('chest', 'red-button no-sel', 'red-answer', 'dark-gold no-scroll'); 
 
-export const [EquipmentMatrixHolder, EquipmentItem, InventoryTop, TeamMember ] = divFactory('equipment-matrix-holder', 'item equipment-item', 'inventory-top', 'team-member');
+export const [EquipmentMatrixHolder, EquipmentItem, InventoryTop, TeamMember, VertivalScroller ] = divFactory('equipment-matrix-holder', 'item equipment-item', 'inventory-top', 'team-member', 'vertical-scroller');
 
-export const [StemWelcome] = divFactory('stem-welcome')
+export const [StemWelcome, HistoryBackground] = divFactory('stem-welcome', 'history-background');
