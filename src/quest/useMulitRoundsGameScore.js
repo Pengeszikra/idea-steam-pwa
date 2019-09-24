@@ -35,7 +35,7 @@ export default ({level, position, questResultIs}) => {
       );
     }  else {
       setFlow(false);
-      console.log('--- handle rounds ---:', score)
+      // console.log('--- handle rounds ---:', score)
       questResultIs(true, position, score);
     } 
   };
@@ -43,7 +43,7 @@ export default ({level, position, questResultIs}) => {
   useEffect(() => {
     const repeats = R.includes(position, ['J', 'K', 'D']) ? 2 : level - 1;
     setRounds( repeats );  
-    console.log(`---> ${repeats} at position ${position}`);
+    // console.log(`---> ${repeats} at position ${position}`);
     return () => {};
   } ,[position]);
   

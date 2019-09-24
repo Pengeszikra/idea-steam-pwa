@@ -26,11 +26,11 @@ export default showtime(({toggleHistory}) => (
       <h1>Platoni testek</h1>
       <p>Utad során találkozni fogsz a tér ékköveivel, a szabályos testekkel! "Szabályos sokszögekkel határolt Szabályos, vagy platóni testek. A Demiurgosz úgy rendelte, Hogy csak öten lettek. Platón az őselemekkel azonosította őket, Kepler kozmikus szférákkal kötötte össze.</p>
       <p>Szögeik megegyeznek, S minden élnek egyenlő a hossza. Tetra, oktaéder, ikoza, dodeka, És a hexaéder, más néven a kocka.</p>
-      <i>Tetraéder</i>
+      <h2>Tetraéder</h2>
       <TurnSmallGeom content={GEOMS.tetrahedron} />
-      <i>dedokaéder</i>
+      <h2>Dedokaéder</h2>
       <TurnSmallGeom content={GEOMS.dedocahedron} />
-      <i>izokaéder</i>
+      <h2>Izokaéder</h2>
       <TurnSmallGeom content={GEOMS.icosahedron} />
             
       <ul>
