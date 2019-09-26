@@ -69,6 +69,8 @@
 
 
 .prisoner-cave { @include bimage('/img/caves/prisoner-place.png', 100vmin, 100vh); }
+.broken-road-cave { @include bimage('/img/caves/broken-road.jpg', 100vmin, 100vh); }
+.dual-light-cave { @include bimage('/img/caves/dual-light-cave.jpg', 100vmin, 100vh); }
 // .prisoner-cave-r1 { @include bimage('/img/caves/prisoner-route-1.png', 59vmin, 98vmin, 21vmin, 14vmin); }
 // .prisoner-cave-r2 { @include bimage('/img/caves/prisoner-route-2.png', 61vmin, 79vmin, 44vmin, 83vmin); }
 
@@ -437,18 +439,18 @@
 }
 
 .team-member {
-  &[data-prisoner="A1"] { @include bimage('/img/mobs/talk-01.png') }
-  &[data-prisoner="B1"] { @include bimage('/img/mobs/talk-02.png') }
-  &[data-prisoner="B2"] { @include bimage('/img/mobs/talk-03.png') }
-  &[data-prisoner="C1"] { @include bimage('/img/mobs/talk-04.png') }
-  &[data-prisoner="D1"] { @include bimage('/img/mobs/talk-05.png') }
-  &[data-prisoner="E1"] { @include bimage('/img/mobs/talk-06.png') }
-  &[data-prisoner="E2"] { @include bimage('/img/mobs/talk-07.png') }
-  &[data-prisoner="F1"] { @include bimage('/img/mobs/talk-08.png') }
-  &[data-prisoner="F2"] { @include bimage('/img/mobs/talk-09.png') }
-  &[data-prisoner="G1"] { @include bimage('/img/mobs/talk-10.png') }
-  &[data-prisoner="H1"] { @include bimage('/img/mobs/talk-11.png') }
-  &[data-prisoner="I1"] { @include bimage('/img/mobs/talk-12.png') }
+  &[data-prisoner="A1"] { @include bimage('/img/mobs/talk-11.png') }
+  &[data-prisoner="B1"] { @include bimage('/img/mobs/talk-12.png') }
+  &[data-prisoner="B2"] { @include bimage('/img/mobs/talk-07.png') }
+  &[data-prisoner="C1"] { @include bimage('/img/mobs/talk-08.png') }
+  &[data-prisoner="D1"] { @include bimage('/img/mobs/talk-09.png') }
+  &[data-prisoner="E1"] { @include bimage('/img/mobs/talk-03.png') }
+  &[data-prisoner="E2"] { @include bimage('/img/mobs/talk-06.png') }
+  &[data-prisoner="F1"] { @include bimage('/img/mobs/talk-02.png') }
+  &[data-prisoner="F2"] { @include bimage('/img/mobs/talk-10.png') }
+  &[data-prisoner="G1"] { @include bimage('/img/mobs/talk-05.png') }
+  &[data-prisoner="H1"] { @include bimage('/img/mobs/talk-04.png') }
+  &[data-prisoner="I1"] { @include bimage('/img/mobs/talk-01.png') }
 
   position: relative!important;
   width: 30vmin!important;

@@ -3,7 +3,7 @@ import {
   RouteArrow, Prisoner, Item, PrisonerCave,
   BlueCave, LongCave, WaterFallCave, BehindTheDoor,
   LightCave, FangCave, NeedleCave, StairCaseCave,
-  ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave, RedButton,   
+  ChainCave, BuildingCave, WheelCave, EnginerCave, RoadCave, RedButton, BrokenRoadCave, DualLightCave,   
 } from '../styles/divStore';
 import DownToDeep from './DownToDeep';
 import { areaData } from '../engine/applicationData';
@@ -11,19 +11,19 @@ import { areaData } from '../engine/applicationData';
 const backroundLookup = {
   Q:  DownToDeep,
   Y:  BehindTheDoor,
-  A:  BlueCave,
-  B:  BuildingCave,
+  A:  BrokenRoadCave,
+  B:  ChainCave,
   C:  PrisonerCave,
   D:  LongCave,
-  X:  StairCaseCave,
+  X:  DualLightCave,// StairCaseCave,
   E:  NeedleCave,
   F:  WaterFallCave,
   G:  RoadCave,
   H:  LightCave,
   I:  FangCave,
   J:  EnginerCave,
-  K:  WheelCave,
-  L:  ChainCave,
+  K:  StairCaseCave,
+  L:  BlueCave,
 };
 
 export default ({position, level, interaction, currentArea, lightUp, escape}) => {  

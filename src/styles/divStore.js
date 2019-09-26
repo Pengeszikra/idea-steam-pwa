@@ -84,3 +84,4 @@ export const [Chest, RedButton, RedAnswer, DarkGold] = showFactory('chest', 'red
 export const [EquipmentMatrixHolder, EquipmentItem, InventoryTop, TeamMember, VertivalScroller ] = divFactory('equipment-matrix-holder', 'item equipment-item', 'inventory-top', 'team-member', 'vertical-scroller');
 
 export const [StemWelcome, HistoryBackground] = divFactory('stem-welcome', 'history-background');
+export const [BrokenRoadCave, DualLightCave] = divFactory('broken-road-cave', 'dual-light-cave');
