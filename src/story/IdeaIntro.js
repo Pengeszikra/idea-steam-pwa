@@ -9,7 +9,7 @@ export default ({setWay}) => {
   return (
     <>
       <DarkGold show={!hasHistory}>
-        <Version>{version}</Version>
+        <Version onClick={() => setWay(777)}>{version}</Version>
         <IntroButtonHolder>
           <IntroButton onClick={toggleHistory}>Történet</IntroButton>
           <IntroButton onClick={()=>setWay(1)}>A barlang</IntroButton>

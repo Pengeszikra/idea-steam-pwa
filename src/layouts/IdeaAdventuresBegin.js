@@ -5,6 +5,8 @@ import showtime from '../utils/showtime';
 import IdeaIntro from '../story/IdeaIntro';
 import AvatarSelection from '../story/AvatarSelection';
 import { storyReducer, storyInitial, debugReset } from '../engine/reducers';
+import MarkdownReader from '../utils/MarkdownReader';
+import { IntroButton } from '../styles/divStore';
 
 const loaderOver = content => {postApplicationReady(); return content; };
 const rootRender = content => render(loaderOver(content), document.getElementById('root'));
@@ -28,6 +30,13 @@ export default () => {
       <IdeaIntroShow show={way==0} setWay={setWay} />
       <AvatarSelectionShow show={way==1} setWay={setWay} storyStore={storyStore} />
       <IdeaFrameShow show={way===2} setWay={handleReset} storyStore={storyStore} />
+      {way===777 && 
+        <div style={{width: '88%', color:'#EDE', margin:'auto'}}>
+          <MarkdownReader  url={'/document/eloadas2.md'}/>
+          <IntroButton onClick={() => setWay(0)}>to :: IDEA</IntroButton>
+          <MarkdownReader  url={'/document/eloadas.md'}/>
+        </div>
+      }
     </>
   );
 }
